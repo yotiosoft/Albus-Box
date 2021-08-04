@@ -598,8 +598,16 @@ namespace NeumorphismUI {
 				Cursor::RequestStyle(CursorStyle::Hand);
 			}
 			
+			if (mouseLPressed) {
+				mouseLPressed = false;
+			}
+			
 			// クリックされたら状態変更
 			if (knobCircle.leftPressed() || barRect.leftPressed() || innerSliderRect.leftPressed() || knobClicked) {
+				if (!mouseLPressed && MouseL.down()) {
+					mouseLPressed = true;
+				}
+				
 				if (knobCircle.leftPressed()) {
 					knobClicked = true;
 				}
@@ -681,6 +689,10 @@ namespace NeumorphismUI {
 			return sliding;
 		}
 		
+		bool isSliderPressed() {
+			return mouseLPressed;
+		}
+		
 	private:
 		RoundRect sliderRect;
 		RoundRect innerSliderRect;
@@ -688,6 +700,7 @@ namespace NeumorphismUI {
 		Circle knobCircle;
 		
 		bool knobClicked;
+		bool mouseLPressed;
 		bool sliding;
 		
 		double value;

@@ -15,7 +15,6 @@ void Main() {
 	
 	// スライダー
 	double play_pos = 0.0;		// スライダーの初期値
-	double play_pos_before = 0.0;
 	NeumorphismUI::Slider slider(play_pos, Vec2{50, Scene::Height()/2+50}, Scene::Width()-100, 30);
 	
 	bool playing = true;	// 再生中(false: 一時停止中)
@@ -47,6 +46,9 @@ void Main() {
 			slider.setValueNoAnimetion(audio_file.posSec()/audio_file.lengthSec());
 		}
 		play_pos = slider.draw();
+		if (slider.isSliderPressed()) {
+			audio_file.setPosSec(play_pos*audio_file.lengthSec());
+		}
 		
 		// トラック移動ボタン
 		NeumorphismUI::CircleButton(Scene::Width()/4-10, Scene::Height()-100, 30, prev_icon);
@@ -62,12 +64,6 @@ void Main() {
 		else {
 			audio_file.pause();
 		}
-		
-		// 再生位置変更
-		if (fabs(play_pos*audio_file.lengthSec() - play_pos_before*audio_file.lengthSec()) > 1) {
-			audio_file.setPosSec(play_pos*audio_file.lengthSec());
-		}
-		play_pos_before = play_pos;
 	}
 }
 
