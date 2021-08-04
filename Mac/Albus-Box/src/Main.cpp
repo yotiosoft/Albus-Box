@@ -11,6 +11,7 @@ void Main() {
 	bool slideSwitchVar = true;	// スライドスイッチの初期値
 	int count = 0;
 	
+	Font font12(12);
 	Font font24(24);
 	
 	// スライダーの宣言
@@ -34,8 +35,12 @@ void Main() {
 			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
 		}
 		
-		// 丸型スイッチ
-		NeumorphismUI::CircleSwitchEx(150, 320, 50, circleSwitchPushed, U"▶", U"II", font24);
+		// トラック移動ボタン
+		NeumorphismUI::CircleButton(Scene::Width()/4-10, Scene::Height()-100, 30, U"前", font12);
+		NeumorphismUI::CircleButton(Scene::Width()-Scene::Width()/4+10, Scene::Height()-100, 30, U"次", font12);
+		
+		// 再生/一時停止ボタン
+		NeumorphismUI::CircleSwitchEx(Scene::Width()/2, Scene::Height()-100, 40, circleSwitchPushed, U"▶", U"II", font24);
 	}
 }
 
