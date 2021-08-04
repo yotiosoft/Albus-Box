@@ -253,6 +253,70 @@ namespace NeumorphismUI {
 		CircleSwitch(argPosition.x, argPosition.y, argSize, argVar, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
+	void CircleSwitch(int argPositionX, int argPositionY,
+					  int argSize,
+					  bool& argVar,
+					  Texture& argTexture,
+					  Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
+					  Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
+					  int argBlurSize = 16, int argShadowSize = 2,
+					  Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
+	{
+		
+		Mat3x2 mat;
+		
+		Circle switchCircle(argPositionX, argPositionY, argSize);
+		
+		// マウスオーバー時にマウスポインタを変更
+		if (switchCircle.mouseOver()) {
+			Cursor::RequestStyle(CursorStyle::Hand);
+		}
+		// クリックされたら状態を切り替え
+		bool isClicked = switchCircle.leftClicked();
+		if (isClicked) {
+			argVar = !argVar;
+		}
+		
+		// ONの時の表示
+		if (argVar) {
+			switchCircle.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
+			mat = Mat3x2::Scale(0.9, Point(argPositionX, argPositionY));
+			
+			if (!argTexture.isEmpty()) {
+				{
+					// 座標変換行列を適用
+					const Transformer2D t(mat, false);
+					argTexture.drawAt(argPositionX, argPositionY, argPushedFontColor);
+				}
+			}
+		}
+		// OFFの時の表示
+		else {
+			switchCircle.drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
+			mat = Mat3x2::Identity();
+			
+			if (!argTexture.isEmpty()) {
+				{
+					// 座標変換行列を適用
+					const Transformer2D t(mat, false);
+					argTexture.drawAt(argPositionX, argPositionY, argFontColor);
+				}
+			}
+		}
+	}
+
+	void CircleSwitch(Vec2 argPosition,
+					  int argSize,
+					  bool& argVar,
+					  Texture& argTexture,
+					  Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
+					  Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
+					  int argBlurSize = 16, int argShadowSize = 2,
+					  Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
+	{
+		CircleSwitch(argPosition.x, argPosition.y, argSize, argVar, argTexture, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+	}
+
 	// 丸型ボタン
 	int CircleButton(int argPositionX, int argPositionY,
 					 int argSize,
@@ -312,6 +376,66 @@ namespace NeumorphismUI {
 					 Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
 	{
 		return CircleButton(argPosition.x, argPosition.y, argSize, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+	}
+
+	int CircleButton(int argPositionX, int argPositionY,
+					 int argSize,
+					 Texture& argTexture,
+					 Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
+					 Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
+					 int argBlurSize = 16, int argShadowSize = 2,
+					 Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
+	{
+		
+		Mat3x2 mat;
+		
+		Circle buttonCircle(argPositionX, argPositionY, argSize);
+		
+		// マウスオーバー時にマウスポインタを変更
+		if (buttonCircle.mouseOver()) {
+			Cursor::RequestStyle(CursorStyle::Hand);
+		}
+		bool clicked = buttonCircle.leftClicked();
+		
+		// 押下時の表示
+		if (buttonCircle.leftPressed()) {
+			buttonCircle.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
+			mat = Mat3x2::Scale(0.9, Point(argPositionX, argPositionY));
+			
+			if (!argTexture.isEmpty()) {
+				{
+					// 座標変換行列を適用
+					const Transformer2D t(mat, false);
+					argTexture.drawAt(argPositionX, argPositionY, argPushedFontColor);
+				}
+			}
+		}
+		// 押下時以外の表示
+		else {
+			buttonCircle.drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
+			mat = Mat3x2::Identity();
+			
+			if (!argTexture.isEmpty()) {
+				{
+					// 座標変換行列を適用
+					const Transformer2D t(mat, false);
+					argTexture.drawAt(argPositionX, argPositionY, argFontColor);
+				}
+			}
+		}
+		
+		return clicked;
+	}
+
+	int CircleButton(Vec2 argPosition,
+					 int argSize,
+					 Texture& argTexture,
+					 Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
+					 Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
+					 int argBlurSize = 16, int argShadowSize = 2,
+					 Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
+	{
+		return CircleButton(argPosition.x, argPosition.y, argSize, argTexture, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
 	// スライドスイッチ
@@ -522,6 +646,39 @@ namespace NeumorphismUI {
 			}
 			
 			return value;
+		}
+		
+		bool setValue(double arg_value) {
+			if (arg_value < 0.0 || arg_value > 1.0) {
+				return false;
+			}
+			
+			if (value == arg_value) {
+				return true;
+			}
+			
+			beforeX = knobX;
+			clickedX = arg_value*size.x;
+			sliding = true;
+			slidingCount = 0.0;
+			
+			value = arg_value;
+			return true;
+		}
+		
+		bool setValueNoAnimetion(double arg_value) {
+			if (arg_value < 0.0 || arg_value > 1.0) {
+				return false;
+			}
+			
+			value = arg_value;
+			knobX = arg_value * size.x;
+			
+			return true;
+		}
+		
+		bool isSliderMoving() {
+			return sliding;
 		}
 		
 	private:

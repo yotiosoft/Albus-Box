@@ -16,7 +16,7 @@ namespace NeumorphismUI {
 	void CircleSwitchEx(int argPositionX, int argPositionY,
 					  int argSize,
 					  bool& argVar,
-					  String argStr, String argPushedStr, Font& argFont,
+					  Texture& argTexture, Texture& argPushedTexture,
 					  Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					  Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					  int argBlurSize = 16, int argShadowSize = 2,
@@ -42,26 +42,18 @@ namespace NeumorphismUI {
 			switchCircle.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 			mat = Mat3x2::Scale(0.9, Point(argPositionX, argPositionY));
 			
-			if (!argFont.isEmpty()) {
-				{
-					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
-					argFont(argPushedStr).drawAt(argPositionX, argPositionY, argPushedFontColor);
-				}
-			}
+			// 座標変換行列を適用
+			const Transformer2D t(mat, false);
+			argPushedTexture.drawAt(argPositionX, argPositionY, argFontColor);
 		}
 		// OFFの時の表示
 		else {
 			switchCircle.drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 			mat = Mat3x2::Identity();
 			
-			if (!argFont.isEmpty()) {
-				{
-					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
-					argFont(argStr).drawAt(argPositionX, argPositionY, argFontColor);
-				}
-			}
+			// 座標変換行列を適用
+			const Transformer2D t(mat, false);
+			argTexture.drawAt(argPositionX, argPositionY, argFontColor);
 		}
 	}
 }

@@ -29,15 +29,3 @@ using namespace std;
 class CityMap;
 class Addon;
 class ImagesStruct;
-
-// 周囲4方向
-const pair<DirectionID::Type, CoordinateStruct> AroundTiles[AROUND_TILES] = {
-	{DirectionID::East, {1, 0}}, {DirectionID::South, {0, 1}}, {DirectionID::North, {0, -1}}, {DirectionID::West, {-1, 0}}
-};
-
-// LayerType::Typeのすべて
-const LayerType::Type AllLayerTypes[LAYER_TYPES] = {
-	LayerType::Normal, LayerType::OnSpring, LayerType::OnSummer, LayerType::OnAutumn, LayerType::OnWinter,
-	LayerType::Evening, LayerType::OnSpringEvening, LayerType::OnSummerEvening, LayerType::OnAutumnEvening, LayerType::OnWinterEvening,
-	LayerType::Night, LayerType::OnSpringNight, LayerType::OnSummerNight, LayerType::OnAutumnNight, LayerType::OnWinterNight
-};

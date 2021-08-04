@@ -32,31 +32,4 @@ void debugLog(String str);
 
 string replaceString(string beforeStr, string searchStr, string afterStr);
 
-RCOIFP::Type getRCOIFP(int number);
-School::Type getSchool(int number);
-
-string stringXOR(const std::string &data, const std::string &key);
-
-TypeID::Type typeNameToTypeID(String type_name);
-String typeIDToTypeName(TypeID::Type type_id);
-DirectionID::Type directionNameToDirectionID(String direction_name);
-String directionIDToDirectionName(DirectionID::Type direction_id);
-Array<DirectionID::Type> directionNameToDirectionID(Array<String> direction_name);
-
-DirectionID::Type getDirectionIDfromDifference(CoordinateStruct arg_before, CoordinateStruct arg_after);
-
-TypeID::Type directionIDToTyoeID(DirectionID::Type direction_id);
-
-LayerType::Type timeToLayerType(TimeStruct time);
-
-LayerType::Type layerNameToLayerType(String layer_name);
-String layerTypeToLayerName(LayerType::Type layer_type);
-
-RateID::Type rateNameToRateID(String rate_name);
-String rateIDToRateName(RateID::Type rate_id);
-
-void blendColorAndImage(Image& imageTemp, Color blendColor);
-
-void setAlphaColor(Image& imageTemp, Color transparentRGB);
-
 #endif /* OtherFunctions_hpp */
