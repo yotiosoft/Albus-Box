@@ -43,11 +43,12 @@ void Main() {
 		
 		// スライダー
 		if (!slider.isSliderMoving()) {
-			slider.setValueNoAnimetion(audio_file.posSec()/audio_file.lengthSec());
+			slider.setValueNoAnimetion((double)audio_file.posSample()/audio_file.samples());
+			cout << (double)audio_file.posSample()/audio_file.samples() << endl;
 		}
 		play_pos = slider.draw();
 		if (slider.isSliderPressed()) {
-			audio_file.setPosSec(play_pos*audio_file.lengthSec());
+			audio_file.setPosSample(play_pos*audio_file.samples());
 		}
 		
 		// トラック移動ボタン

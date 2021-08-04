@@ -620,7 +620,7 @@ namespace NeumorphismUI {
 					slidingCount = 0.0;
 				}
 				
-				value = (Cursor::Pos().x-position.x-10/2)/(size.x-10);
+				value = (Cursor::Pos().x-position.x-10/2)/innerSize.x;
 				
 				if (value > 1.0) {
 					value = 1.0;
@@ -642,15 +642,15 @@ namespace NeumorphismUI {
 				}
 				else {
 					if (beforeX > clickedX) {
-						knobX = beforeX - sin(slidingCount)*(beforeX-clickedX+(size.y-10)/2);
+						knobX = beforeX - sin(slidingCount)*(beforeX-clickedX+(innerSize.y-10)/2);
 					}
 					else {
-						knobX = beforeX + sin(slidingCount)*(clickedX-beforeX-(size.y-10)/2);
+						knobX = beforeX + sin(slidingCount)*(clickedX-beforeX-(innerSize.y-10)/2);
 					}
 				}
 			}
 			if (knobClicked) {
-				knobX = value*(size.x-10);
+				knobX = value*innerSize.x;
 			}
 			
 			return value;
@@ -666,7 +666,7 @@ namespace NeumorphismUI {
 			}
 			
 			beforeX = knobX;
-			clickedX = arg_value*size.x;
+			clickedX = arg_value*innerSize.x;
 			sliding = true;
 			slidingCount = 0.0;
 			
@@ -680,7 +680,7 @@ namespace NeumorphismUI {
 			}
 			
 			value = arg_value;
-			knobX = arg_value * size.x;
+			knobX = arg_value * innerSize.x;
 			
 			return true;
 		}
@@ -712,6 +712,7 @@ namespace NeumorphismUI {
 		
 		Vec2 position;
 		Size size;
+		Size innerSize;
 		
 		Color background;
 		Color darkShadow;
@@ -735,6 +736,8 @@ namespace NeumorphismUI {
 			position.y = argPositionY;
 			size.x = argSizeW;
 			size.y = argSizeH;
+			innerSize.x = size.x - 10;
+			innerSize.y = size.y - 10;
 			
 			background = Color(224, 229, 236);
 			darkShadow = Color(163, 177, 198);
