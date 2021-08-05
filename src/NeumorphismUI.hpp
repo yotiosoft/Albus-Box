@@ -7,8 +7,9 @@
 #ifndef NeumorphismUI_hpp
 #define NeumorphismUI_hpp
 
+#define _USE_MATH_DEFINES
 #include <stdio.h>
-#include <cmath>
+#include <math.h>
 #include <Siv3D.hpp>
 
 #define DEFAULT_BACKGROUND_COLOR	Color(224, 229, 236)

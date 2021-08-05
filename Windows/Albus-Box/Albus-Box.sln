@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cities-Box.cpp", "Cities-Box.cpp\Cities-Box.cpp.vcxproj", "{5049C830-14B3-4823-8F04-B3FF18CA707C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Albus-Box", "Albus-Box\Albus-Box.vcxproj", "{5049C830-14B3-4823-8F04-B3FF18CA707C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

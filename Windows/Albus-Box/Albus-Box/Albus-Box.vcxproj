@@ -110,27 +110,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\AbstractSetting.cpp" />
-    <ClCompile Include="..\..\..\src\Addon.cpp" />
-    <ClCompile Include="..\..\..\src\AddonLayer.cpp" />
-    <ClCompile Include="..\..\..\src\AddonMaker.cpp" />
-    <ClCompile Include="..\..\..\src\AddonType.cpp" />
-    <ClCompile Include="..\..\..\src\Button.cpp" />
-    <ClCompile Include="..\..\..\src\CitiesBox.cpp" />
-    <ClCompile Include="..\..\..\src\CityMap.cpp" />
-    <ClCompile Include="..\..\..\src\DetailsBar.cpp" />
-    <ClCompile Include="..\..\..\src\GeneralSetting.cpp" />
-    <ClCompile Include="..\..\..\src\Images.cpp" />
-    <ClCompile Include="..\..\..\src\Menu.cpp" />
-    <ClCompile Include="..\..\..\src\Object.cpp" />
     <ClCompile Include="..\..\..\src\OtherFunctions.cpp" />
-    <ClCompile Include="..\..\..\src\PulldownMenu.cpp" />
-    <ClCompile Include="..\..\..\src\RouteSolver.cpp" />
-    <ClCompile Include="..\..\..\src\Sound.cpp" />
-    <ClCompile Include="..\..\..\src\StartUp.cpp" />
-    <ClCompile Include="..\..\..\src\SubWindow.cpp" />
-    <ClCompile Include="..\..\..\src\Tile.cpp" />
-    <ClCompile Include="..\..\..\src\TitleMenu.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Specific.cpp" />
   </ItemGroup>
@@ -259,32 +239,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\AbstractSetting.hpp" />
-    <ClInclude Include="..\..\..\src\Addon.hpp" />
-    <ClInclude Include="..\..\..\src\AddonDirectionStruct.hpp" />
-    <ClInclude Include="..\..\..\src\AddonLayer.hpp" />
-    <ClInclude Include="..\..\..\src\AddonMaker.hpp" />
-    <ClInclude Include="..\..\..\src\AddonType.hpp" />
-    <ClInclude Include="..\..\..\src\Button.hpp" />
-    <ClInclude Include="..\..\..\src\CitiesBox.hpp" />
-    <ClInclude Include="..\..\..\src\CityMap.hpp" />
-    <ClInclude Include="..\..\..\src\DetailsBar.hpp" />
+    <ClInclude Include="..\..\..\src\ButtonEx.hpp" />
     <ClInclude Include="..\..\..\src\Enums.hpp" />
-    <ClInclude Include="..\..\..\src\GeneralSetting.hpp" />
     <ClInclude Include="..\..\..\src\Header.hpp" />
-    <ClInclude Include="..\..\..\src\Images.hpp" />
-    <ClInclude Include="..\..\..\src\ImagesStruct.hpp" />
-    <ClInclude Include="..\..\..\src\Menu.hpp" />
-    <ClInclude Include="..\..\..\src\Object.hpp" />
+    <ClInclude Include="..\..\..\src\NeumorphismUI.hpp" />
     <ClInclude Include="..\..\..\src\OtherFunctions.hpp" />
-    <ClInclude Include="..\..\..\src\PulldownMenu.hpp" />
-    <ClInclude Include="..\..\..\src\RouteSolver.hpp" />
-    <ClInclude Include="..\..\..\src\Sound.hpp" />
-    <ClInclude Include="..\..\..\src\StartUp.hpp" />
     <ClInclude Include="..\..\..\src\Structs.hpp" />
-    <ClInclude Include="..\..\..\src\SubWindow.hpp" />
-    <ClInclude Include="..\..\..\src\Tile.hpp" />
-    <ClInclude Include="..\..\..\src\TitleMenu.hpp" />
     <ClInclude Include="Specific.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
