@@ -3,6 +3,8 @@
 #include "ButtonEx.hpp"
 #include "Enums.hpp"
 
+#include <Cocoa/Cocoa.h>
+
 void Main() {
 	Scene::SetBackground(DEFAULT_BACKGROUND_COLOR);
 	Window::SetStyle(WindowStyle::Frameless);
