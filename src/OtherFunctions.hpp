@@ -15,11 +15,10 @@
 Array<string> splitUTF8(string str, string separator);
 Array<String> split(String str, String separator);
 
-void cMes(Font& font, String str, PositionStruct topLeft, PositionStruct bottomRight, Color& color);
-void cMes(Font& font, String str, PositionStruct topLeft, Size size, Color& color);
+void cMes(Font& font, String str, Point topLeft, Size size, Color& color);
 
-PositionStruct getStringTopLeft(Font& font, String str, PositionStruct topLeft, PositionStruct bottomRight);
-PositionStruct getStringTopLeft(Font& font, String str, PositionStruct topLeft, Size size);
+Point getStringTopLeft(Font& font, String str, Point topLeft, Point bottomRight);
+Point getStringTopLeft(Font& font, String str, Point topLeft, Size size);
 
 void saveTextFile(string filePath, string str);
 void addTextFile(string filePath, string str);

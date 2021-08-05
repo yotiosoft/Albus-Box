@@ -55,23 +55,19 @@ Array<String> split(String str, String separator) {
 	return list;
 }
 
-void cMes(Font& font, String str, PositionStruct topLeft, PositionStruct bottomRight, Color& color) {
-	PositionStruct str_long = getStringTopLeft(font, str, topLeft, bottomRight);
-	font(str).draw(str_long.x, str_long.y, color);
-}
-void cMes(Font& font, String str, PositionStruct topLeft, Size size, Color& color) {
-	PositionStruct str_long = getStringTopLeft(font, str, topLeft, size);
+void cMes(Font& font, String str, Point topLeft, Size size, Color& color) {
+	Point str_long = getStringTopLeft(font, str, topLeft, size);
 	font(str).draw(str_long.x, str_long.y, color);
 }
 
-PositionStruct getStringTopLeft(Font& font, String str, PositionStruct topLeft, PositionStruct bottomRight) {
-	PositionStruct retSize;
+Point getStringTopLeft(Font& font, String str, Point topLeft, PositionStruct bottomRight) {
+	Point retSize;
 	retSize.x = (bottomRight.x + topLeft.x) / 2 - font(str).region(Scene::Width() / 2, Scene::Height() / 2).w / 2;
 	retSize.y = (bottomRight.y + topLeft.y) / 2 - font(str).region(Scene::Width() / 2, Scene::Height() / 2).h / 2;
 	return retSize;
 }
-PositionStruct getStringTopLeft(Font& font, String str, PositionStruct topLeft, Size size) {
-	PositionStruct retSize;
+Point getStringTopLeft(Font& font, String str, Point topLeft, Size size) {
+	Point retSize;
 	retSize.x = (topLeft.x * 2 + size.x) / 2 - font(str).region(Scene::Width() / 2, Scene::Height() / 2).w / 2;
 	retSize.y = (topLeft.y * 2 + size.y) / 2 - font(str).region(Scene::Width() / 2, Scene::Height() / 2).h / 2;
 	return retSize;

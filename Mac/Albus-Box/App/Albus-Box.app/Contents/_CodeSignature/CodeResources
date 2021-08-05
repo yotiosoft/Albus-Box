@@ -4,6 +4,22 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Resources/assets/fonts/NotoSansCJKjp/LICENSE_OFL.txt</key>
+		<data>
+		7GYLF9/2kFjCu/EiyoWrg7kg/Oc=
+		</data>
+		<key>Resources/assets/fonts/NotoSansCJKjp/NotoSansCJKjp-Bold.otf</key>
+		<data>
+		T3aBtusgtOHRe/0n1hfFaenoo8I=
+		</data>
+		<key>Resources/assets/fonts/NotoSansCJKjp/NotoSansCJKjp-Regular.otf</key>
+		<data>
+		A9H5g5jaS6QTeqF31BmiJA6+F/4=
+		</data>
+		<key>Resources/assets/fonts/NotoSansCJKjp/README</key>
+		<data>
+		VRT6wH19OOIfkaF97VUEDlTwzXg=
+		</data>
 		<key>Resources/engine/emoji/noto7_dictionary.dat</key>
 		<data>
 		CFwksNqLAYvCiQA4tLERwIKXOS8=
@@ -171,6 +187,34 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Resources/assets/fonts/NotoSansCJKjp/LICENSE_OFL.txt</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			anP5VBwt50FYwOfPawpY73dPWngL8ZHy1+ycxT7+K/I=
+			</data>
+		</dict>
+		<key>Resources/assets/fonts/NotoSansCJKjp/NotoSansCJKjp-Bold.otf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			nKkR8DPGFhYrwtLx1hxnOd+Lx6m9An3w7VfJYCmzOno=
+			</data>
+		</dict>
+		<key>Resources/assets/fonts/NotoSansCJKjp/NotoSansCJKjp-Regular.otf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			8YJTr/2WjI6lktjfbYSx1MXTpG0mflOh9nSebE92oj0=
+			</data>
+		</dict>
+		<key>Resources/assets/fonts/NotoSansCJKjp/README</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			wnkfKJ++aOQHbt7k4VZdB1rTU6wtcRwGYfgNyZKYpyY=
+			</data>
+		</dict>
 		<key>Resources/engine/emoji/noto7_dictionary.dat</key>
 		<dict>
 			<key>hash2</key>

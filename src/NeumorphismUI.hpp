@@ -188,6 +188,23 @@ namespace NeumorphismUI {
 		return RectButton(argPosition.x, argPosition.y, argSize.x, argSize.y, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
+	// 丸型
+	void NeumorphismCircle(int argPositionX, int argPositionY, int argSize, bool isDented,
+				Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
+				int argBlurSize = 16, int argShadowSize = 2,
+				Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4})
+	{
+		Circle switchCircle(argPositionX, argPositionY, argSize);
+		
+		
+		if (isDented) {
+			switchCircle.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
+		}
+		else {
+			switchCircle.drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
+		}
+	}
+
 	// 丸型スイッチ
 	void CircleSwitch(int argPositionX, int argPositionY,
 					  int argSize,
