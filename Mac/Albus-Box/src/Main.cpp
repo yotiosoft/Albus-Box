@@ -42,7 +42,8 @@ void Main() {
 	Color button_close_color(Color(242, 38, 19));
 	
 	// サムネ用
-	Image thumbnail_image(110, 110, Palette::White);
+	const int thumbnail_size = 260;
+	Image thumbnail_image(thumbnail_size, thumbnail_size, Palette::White);
 	Color thumbnail_color1(Palette::Orangered);
 	Color thumbnail_color2(Palette::Mediumpurple);
 
@@ -52,8 +53,9 @@ void Main() {
 			thumbnail_image[y][x] = thumbnail_color1.lerp(thumbnail_color2, t);
 		}
 	}
-	Texture thumbnail_texture(thumbnail_image);
-	Circle thumbnail_circle(Scene::Width()/2, Scene::Height()/3, 110);
+	RenderTexture thumbnail_texture(thumbnail_image);
+	Texture thunbnail_image_texture(thumbnail_image);
+	Circle thumbnail_circle(Scene::Width()/2, Scene::Height()/3, thumbnail_size/2);
 	
 	Wave wave = audio_file.getWave();
 	cout << wave.size() << " " << audio_file.samples() << endl;
@@ -82,25 +84,35 @@ void Main() {
 		}
 		
 		// サムネイル
-		NeumorphismUI::NeumorphismCircle(Scene::Width()/2, Scene::Height()/3, 120, false);
-		thumbnail_circle(thumbnail_texture(0, 0, 110, 110)).draw();
+		NeumorphismUI::NeumorphismCircle(Scene::Width()/2, Scene::Height()/3, thumbnail_size/2+10, false);
 		
 		// 波形を表示
 		LineString fft_line;
 		if (playing) {
+			ScopedRenderTarget2D target(thumbnail_texture);
+			thunbnail_image_texture.draw(0, 0);
+			cout << thumbnail_texture.width() << endl;
 			FFT::Analyze(fft, audio_file);
-			for (int i = 0; i < fft.buffer.size(); i += fft.buffer.size() / 20) {
-				double size = Pow(fft.buffer[i], 0.6f) * 1000;
-				
-				int fft_box_count = 0;
-				for (int j = 0; j < size / 20; j++) {
-					
+			int fft_size = 800;
+			int box_size = 10;
+			int row_boxes = 20;
+			for (int i = 0; i < row_boxes; i++) {
+				double size = Pow(fft.buffer[i * (double)fft_size / row_boxes], 0.6f) * 1500;
+				cout << "A" << (double)fft_size / row_boxes << endl;
+				int fft_box_count = size / box_size;
+				for (int j = 0; j < fft_box_count; j++) {
+					Rect(Arg::center(i*thumbnail_texture.width()/row_boxes+box_size/2, thumbnail_texture.height()-j*box_size-box_size/2), box_size*3/4, box_size*3/4).draw(Color(200, 200, 200, 200));
 				}
-				fft_line << Vec2{i/(fft.buffer.size() / 20)*Scene::Width()/20, Scene::Height()/3+120-size};
+				//fft_line << Vec2{i/(fft.buffer.size() / 20)*Scene::Width()/20, Scene::Height()/3+120-size};
 			}
 			
-			fft_line.drawCatmullRom(1, Palette::Gray);
+			//fft_line.drawCatmullRom(1, Palette::Gray);
 		}
+		else {
+			ScopedRenderTarget2D target(thumbnail_texture);
+			thunbnail_image_texture.draw(0, 0);
+		}
+		/*
 		else {
 			for (int i = 0; i < fft.buffer.size(); i += fft.buffer.size() / 20) {
 				const double size = 0.0;
@@ -109,7 +121,9 @@ void Main() {
 			}
 			
 			fft_line.drawCatmullRom(1, Palette::Gray);
-		}
+		}*/
+		
+		thumbnail_circle(thumbnail_texture(0, 0, thumbnail_size, thumbnail_size)).draw();
 		
 		// タイトル
 		cMes(font16, U"シャイニングスター", Point(0, Scene::Height()/3+120), Size(Scene::Width(), 100), font_color);
