@@ -4,6 +4,8 @@
 //  		ver.0.1.0
 //
 
+#pragma once
+
 #ifndef NeumorphismUI_hpp
 #define NeumorphismUI_hpp
 

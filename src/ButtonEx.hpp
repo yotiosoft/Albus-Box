@@ -5,11 +5,12 @@
 //  Created by YotioSoft on 2021/08/04.
 //
 
+#pragma once
+
 #ifndef ButtonEx_hpp
 #define ButtonEx_hpp
 
 #include "Specific.hpp"
-#include <NeumorphismUI.hpp>
 
 namespace NeumorphismUI {
 	// 丸型スイッチ
