@@ -13,7 +13,9 @@ enum Type {
 	Play	= 0xf04b,
 	Pause	= 0xf04c,
 	Prev	= 0xf049,
-	Next	= 0xf050
+	Next	= 0xf050,
+	
+	FileOpen = 0xf07c,
 };
 }
 
