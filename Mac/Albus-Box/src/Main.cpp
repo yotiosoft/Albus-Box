@@ -128,7 +128,7 @@ void Main() {
 			int box_size = 10;
 			int row_boxes = 20;
 			for (int i = 0; i < row_boxes; i++) {
-				double size = Pow(fft.buffer[i * (double)fft_size / row_boxes], 0.6f) * 1500;
+				double size = Pow(fft.buffer[i * (double)fft_size / row_boxes], 0.6f) * 2000;
 				int fft_box_count = size / box_size;
 				for (int j = 0; j < fft_box_count; j++) {
 					Rect(Arg::center(i*thumbnail_texture.width()/row_boxes+box_size/2, thumbnail_texture.height()-j*box_size-box_size/2), box_size*3/4, box_size*3/4).draw(Color(200, 200, 200, 200));
