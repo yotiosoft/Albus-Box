@@ -7,7 +7,9 @@
 #pragma once
 
 #include <Siv3D.hpp> // OpenSiv3D v0.4.3
-#include <Siv3D/Windows.hpp>
+#if defined(_WIN32) || defined(_WIN64)
+	#include <Siv3D/Windows.hpp>
+#endif
 
 #include <stdio.h>
 #include <fstream>

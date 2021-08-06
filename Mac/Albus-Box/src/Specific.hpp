@@ -35,6 +35,8 @@ namespace specific {
 	bool openSaveData(String& arg_file_path);
 	
 	const String SaveDataFilePath = U"./data/maps/";
+
+	bool setWindowStyle(int x1, int y1, int x2, int y2, int w, int h);
 }
 
 #endif /* Specific_h */

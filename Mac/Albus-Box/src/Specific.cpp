@@ -82,3 +82,7 @@ bool specific::openSaveData(String& arg_file_path) {
 String specific::getFontsDir() {
 	return U"./Albus-Box.app/Contents/Resources/assets/fonts";
 }
+
+bool specific::setWindowStyle(int x1, int y1, int x2, int y2, int w, int h) {
+	return false;
+}
