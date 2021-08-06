@@ -4,6 +4,7 @@
 //
 //  Created by YotioSoft on 2021/03/19.
 //
+#pragma once
 
 #ifndef Enums_hpp
 #define Enums_hpp
