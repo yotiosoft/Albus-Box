@@ -110,8 +110,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\AlbusBox.cpp" />
-    <ClCompile Include="..\..\..\src\NeumorphismUI.cpp" />
     <ClCompile Include="..\..\..\src\OtherFunctions.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Specific.cpp" />
@@ -241,7 +239,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\AlbusBox.hpp" />
     <ClInclude Include="..\..\..\src\ButtonEx.hpp" />
     <ClInclude Include="..\..\..\src\Enums.hpp" />
     <ClInclude Include="..\..\..\src\Header.hpp" />

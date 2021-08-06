@@ -6,7 +6,6 @@
 //
 //  Created by YotioSoft on 2019/12/01.
 //
-#pragma once
 
 #ifndef Specific_h
 #define Specific_h
@@ -24,12 +23,16 @@
 #define	OS						"Mac"	// OS
 
 namespace specific {
+	Array<FileStruct> getAllFilesName(string folderPath, string extension);
+
 	void chdir(string dir);
 	void moveToCurrentDir();
 	String getFontsDir();
 
 	bool isCursorEntered(Vec2 before_cursor_pos);
 	void changeCursor();
+
+	bool openSaveData(String& arg_file_path);
 	
 	const String SaveDataFilePath = U"./data/maps/";
 }

@@ -6,13 +6,15 @@
 //
 #pragma once
 
+#include <stdio.h>
 #include <fstream>
 #include <algorithm>
 #include <random>
 
+#include <Siv3D.hpp> // OpenSiv3D v0.4.3
+
 #include "Enums.hpp"
 #include "Structs.hpp"
-#include <NeumorphismUI.hpp>
 
 #define CHIP_SIZE		64
 #define TITLE			U"Albus Player"
@@ -23,3 +25,7 @@
 #define LAYER_TYPES		15
 
 using namespace std;
+
+class CityMap;
+class Addon;
+class ImagesStruct;

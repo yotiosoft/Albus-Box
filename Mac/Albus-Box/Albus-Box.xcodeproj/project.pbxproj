@@ -38,8 +38,6 @@
 		2CEACB67233A61C900C6EE98 /* libgif.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEACB65233A61C900C6EE98 /* libgif.a */; };
 		2CEACB68233A61C900C6EE98 /* libutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEACB66233A61C900C6EE98 /* libutil.a */; };
 		4B98592426BA5B0400D5D18F /* OtherFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B98592226BA5B0400D5D18F /* OtherFunctions.cpp */; };
-		4B98593726BD3B1500D5D18F /* NeumorphismUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B98593626BD3B1500D5D18F /* NeumorphismUI.cpp */; };
-		4B98593E26BD5D2D00D5D18F /* AlbusBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B98593D26BD5D2D00D5D18F /* AlbusBox.cpp */; };
 		4BAAAEE526090DB6000B9E51 /* Specific.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BAAAEE426090DB6000B9E51 /* Specific.cpp */; };
 /* End PBXBuildFile section */
 
@@ -80,9 +78,7 @@
 		4B98592226BA5B0400D5D18F /* OtherFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OtherFunctions.cpp; path = ../../../src/OtherFunctions.cpp; sourceTree = "<group>"; };
 		4B98592326BA5B0400D5D18F /* OtherFunctions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = OtherFunctions.hpp; path = ../../../src/OtherFunctions.hpp; sourceTree = "<group>"; };
 		4B98592726BA5B9B00D5D18F /* NeumorphismUI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NeumorphismUI.hpp; path = ../../../src/NeumorphismUI.hpp; sourceTree = "<group>"; };
-		4B98593626BD3B1500D5D18F /* NeumorphismUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NeumorphismUI.cpp; path = ../../../src/NeumorphismUI.cpp; sourceTree = "<group>"; };
-		4B98593C26BD5D2C00D5D18F /* AlbusBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AlbusBox.hpp; path = ../../../src/AlbusBox.hpp; sourceTree = "<group>"; };
-		4B98593D26BD5D2D00D5D18F /* AlbusBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlbusBox.cpp; path = ../../../src/AlbusBox.cpp; sourceTree = "<group>"; };
+		4B98592A26BABCE900D5D18F /* ButtonEx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = ButtonEx.hpp; path = ../../../src/ButtonEx.hpp; sourceTree = "<group>"; };
 		4BAAAEE326090DB6000B9E51 /* Specific.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Specific.hpp; sourceTree = "<group>"; };
 		4BAAAEE426090DB6000B9E51 /* Specific.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Specific.cpp; sourceTree = "<group>"; };
 		4BEA956F26098CDB008B4F3A /* Enums.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Enums.hpp; path = ../../../src/Enums.hpp; sourceTree = "<group>"; };
@@ -151,9 +147,6 @@
 		2C1778981CE0AA7C00BB8AD0 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				4B98593D26BD5D2D00D5D18F /* AlbusBox.cpp */,
-				4B98593C26BD5D2C00D5D18F /* AlbusBox.hpp */,
-				4B98593626BD3B1500D5D18F /* NeumorphismUI.cpp */,
 				4B98592726BA5B9B00D5D18F /* NeumorphismUI.hpp */,
 				4BEA956F26098CDB008B4F3A /* Enums.hpp */,
 				4BEA957126098CDB008B4F3A /* Header.hpp */,
@@ -163,6 +156,7 @@
 				4B98592226BA5B0400D5D18F /* OtherFunctions.cpp */,
 				4B98592326BA5B0400D5D18F /* OtherFunctions.hpp */,
 				2C1778991CE0AA7C00BB8AD0 /* Main.cpp */,
+				4B98592A26BABCE900D5D18F /* ButtonEx.hpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -235,7 +229,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2C17787D1CE0A9D800BB8AD0 /* Build configuration list for PBXProject "Albus-Box" */;
+			buildConfigurationList = 2C17787D1CE0A9D800BB8AD0 /* Build configuration list for PBXProject "Albus-Player" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -270,9 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B98593E26BD5D2D00D5D18F /* AlbusBox.cpp in Sources */,
 				2C17789A1CE0AA7C00BB8AD0 /* Main.cpp in Sources */,
-				4B98593726BD3B1500D5D18F /* NeumorphismUI.cpp in Sources */,
 				4B98592426BA5B0400D5D18F /* OtherFunctions.cpp in Sources */,
 				4BAAAEE526090DB6000B9E51 /* Specific.cpp in Sources */,
 			);
@@ -525,7 +517,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2C17787D1CE0A9D800BB8AD0 /* Build configuration list for PBXProject "Albus-Box" */ = {
+		2C17787D1CE0A9D800BB8AD0 /* Build configuration list for PBXProject "Albus-Player" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2C17787E1CE0A9D800BB8AD0 /* Debug */,
