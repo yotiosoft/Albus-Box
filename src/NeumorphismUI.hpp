@@ -198,9 +198,9 @@ namespace NeumorphismUI {
 		Color darkShadow;
 		Color lightShadow;
 		
-		RoundRect switchRect;
-		RoundRect innerSliderRect;
-		RoundRect barRect;
+		s3d::RoundRect switchRect;
+		s3d::RoundRect innerSliderRect;
+		s3d::RoundRect barRect;
 		Circle knobCircle;
 		
 		int knobX;
@@ -230,9 +230,9 @@ namespace NeumorphismUI {
 		bool isSliderPressed();
 		
 	private:
-		RoundRect sliderRect;
-		RoundRect innerSliderRect;
-		RoundRect barRect;
+		s3d::RoundRect sliderRect;
+		s3d::RoundRect innerSliderRect;
+		s3d::RoundRect barRect;
 		Circle knobCircle;
 		
 		bool knobClicked;

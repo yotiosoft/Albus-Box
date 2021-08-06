@@ -6,12 +6,13 @@
 //
 #pragma once
 
+#include <Siv3D.hpp> // OpenSiv3D v0.4.3
+#include <Siv3D/Windows.hpp>
+
 #include <stdio.h>
 #include <fstream>
 #include <algorithm>
 #include <random>
-
-#include <Siv3D.hpp> // OpenSiv3D v0.4.3
 
 #include "Enums.hpp"
 #include "Structs.hpp"

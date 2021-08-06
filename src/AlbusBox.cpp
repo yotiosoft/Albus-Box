@@ -16,6 +16,8 @@ void AlbusBox() {
 	Window::SetStyle(WindowStyle::Frameless);
 	Window::Resize(400, 640);
 
+	specific::setWindowStyle(0, 0, 400, 640, 40, 40);
+
 	Font font13(13, U"{}/NotoSansCJKjp/NotoSansCJKjp-Regular.otf"_fmt(specific::getFontsDir()));
 	Font font16(16, U"{}/NotoSansCJKjp/NotoSansCJKjp-Regular.otf"_fmt(specific::getFontsDir()));
 

@@ -86,3 +86,13 @@ bool specific::openSaveData(String& arg_file_path) {
 String specific::getFontsDir() {
 	return U"example/font";
 }
+
+bool specific::setWindowStyle(int x1, int y1, int x2, int y2, int w, int h) {
+	// ウィンドウハンドルを取得
+	auto hWnd = static_cast<HWND>(s3d::Platform::Windows::Window::GetHWND());
+
+	auto hRegion = CreateRoundRectRgn(x1, y1, x2, y2, w, h);
+	SetWindowRgn(hWnd, hRegion, 1);
+
+	return true;
+}

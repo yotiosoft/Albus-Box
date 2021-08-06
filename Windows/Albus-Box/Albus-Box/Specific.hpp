@@ -1,6 +1,6 @@
 //
-//  SpecificHeader.hpp ( for Windows )
-//  Cities Box
+//  Specific.hpp ( for Windows )
+//  Albus Box
 //
 //  Created by YotioSoft on 2019/11/30.
 //
@@ -15,7 +15,6 @@
 #include "OtherFunctions.hpp"
 
 /* OS依存の定数など */
-#define LINE_FEED_CODE			0			// 改行コードに用いる文字数
 #define OS						"Windows"	// OS
 
 namespace specific {
@@ -29,6 +28,8 @@ namespace specific {
 	void changeCursor();
 
 	bool openSaveData(String& arg_file_path);
+
+	bool setWindowStyle(int x1, int y1, int x2, int y2, int w, int h);
 
 	const String SaveDataFilePath = U"";
 }
