@@ -22,7 +22,7 @@ void AlbusBox::init() {
 	fileopen_icon = Texture(Icon(IconFont::FileOpen, 20));
 	
 	track_in_list = 0;
-	audio_file_path_list << U"sample/魔王魂 シャイニンク゛スター.ogg";
+	audio_file_path_list << U"sample/シャイニングスター.ogg";
 	audio_files_list << Audio(audio_file_path_list[track_in_list]);
 	audio_files_list[track_in_list].setLoop(enabled_loop);
 
