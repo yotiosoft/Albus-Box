@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AlbusBox.hpp"
+#include <AlbusBox.hpp>
 
 void Main() {
 	Scene::SetBackground(DEFAULT_BACKGROUND_COLOR);
