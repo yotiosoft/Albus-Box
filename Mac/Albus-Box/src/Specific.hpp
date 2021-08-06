@@ -6,6 +6,7 @@
 //
 //  Created by YotioSoft on 2019/12/01.
 //
+#pragma once
 
 #ifndef Specific_h
 #define Specific_h
