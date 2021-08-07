@@ -191,6 +191,8 @@ void AlbusBox() {
 	Font font16(16, U"{}/NotoSansCJKjp/NotoSansCJKjp-Regular.otf"_fmt(specific::getFontsDir()));
 	Font font16B(16, U"{}/NotoSansCJKjp/NotoSansCJKjp-Bold.otf"_fmt(specific::getFontsDir()));
 	Font font36(36, U"{}/NotoSansCJKjp/NotoSansCJKjp-Regular.otf"_fmt(specific::getFontsDir()));
+	
+	specific::moveToCurrentDir();
 
 	// シークバー
 	double play_pos = 0.0;		// シークバーの初期値
