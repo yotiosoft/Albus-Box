@@ -16,6 +16,8 @@ enum Type {
 	Next	= 0xf050,
 	
 	FileOpen = 0xf07c,
+
+	Times	= 0xf00d
 };
 }
 

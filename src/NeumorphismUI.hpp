@@ -4,6 +4,8 @@
 //  		ver.0.2.0
 //
 
+#pragma once
+
 #ifndef NeumorphismUI_hpp
 #define NeumorphismUI_hpp
 
@@ -17,6 +19,8 @@
 #define DEFAULT_LIGHT_COLOR			Color(255, 255, 255)
 
 namespace NeumorphismUI {
+	static bool MousePressedOnAnyShape = false;
+
 	// 角丸長方形スイッチ
 	void RectSwitch(int argPositionX, int argPositionY,
 					int argSizeX, int argSizeY,

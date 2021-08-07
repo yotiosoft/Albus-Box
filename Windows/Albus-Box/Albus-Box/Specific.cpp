@@ -91,8 +91,17 @@ bool specific::setWindowStyle(int x1, int y1, int x2, int y2, int w, int h) {
 	// ウィンドウハンドルを取得
 	auto hWnd = static_cast<HWND>(s3d::Platform::Windows::Window::GetHWND());
 
+	//ShowWindow(hWnd, SW_HIDE);
 	auto hRegion = CreateRoundRectRgn(x1, y1, x2, y2, w, h);
 	SetWindowRgn(hWnd, hRegion, 1);
+
+	//GetWindowLongA(hWnd, -20);
+	//SetWindowLongA(hWnd, -20, GetWindowLong(hWnd, GWL_STYLE) | 0x00080000);
+	//SetLayeredWindowAttributes(hWnd, 0, 70*255/100, 2);
+	//GetClassLong(hWnd, GCL_STYLE); //クラススタイルの取得
+	//SetClassLong(hWnd, GCL_STYLE, GetClassLong(hWnd, GCL_STYLE) | CS_DROPSHADOW);
+	//SetLayeredWindowAttributes(hWnd, 0xe0e5ec, 0, LWA_COLORKEY);
+	//ShowWindow(hWnd, SW_SHOWNORMAL);
 
 	return true;
 }

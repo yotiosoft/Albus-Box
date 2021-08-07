@@ -39,6 +39,17 @@ void AlbusBox() {
 
 	Texture fileopen_icon(Icon(IconFont::FileOpen, 20));
 
+	Texture window_close_icon(Icon(IconFont::Times, 20));
+
+	// ボタンの位置
+	Point fileopen_button_pos;
+	if (OS == "Windows") {
+		fileopen_button_pos = Point(30, 30);
+	}
+	else if (OS == "Mac") {
+		fileopen_button_pos = Point(Scene::Width() - 30, 30);
+	}
+
 	// ファイル
 	Array<FilePath> audio_file_path_list;
 	int track_in_list = 0;
@@ -86,21 +97,31 @@ void AlbusBox() {
 
 	while (System::Update()) {
 		// ウィンドウの移動
-		if (MouseL.down()) {
+		if (MouseL.down() && !NeumorphismUI::MousePressedOnAnyShape) {
 			mouse_clicked = Cursor::Pos();
 		}
-		if (MouseL.pressed()) {
+		if (MouseL.pressed() && !NeumorphismUI::MousePressedOnAnyShape) {
 			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
 		}
 
+		NeumorphismUI::MousePressedOnAnyShape = false;
+
+		// 画面上部のボタン群
 		// ウィンドウを閉じる/最小化ボタン
-		if (NeumorphismUI::CircleButton(20, 20, 8, U"", font16, button_close_color)) {
-			break;
+		if (OS == "Windows") {
+			if (NeumorphismUI::CircleButton(Scene::Width()-30, 30, 15, window_close_icon)) {
+				break;
+			}
+		}
+		else if (OS == "Mac") {
+			if (NeumorphismUI::CircleButton(20, 20, 8, U"", font16, button_close_color)) {
+				break;
+			}
 		}
 
 		// 右上のボタン群
 		// ファイルを開く
-		if (NeumorphismUI::CircleButton(Scene::Width() - 30, 30, 20, fileopen_icon)) {
+		if (NeumorphismUI::CircleButton(fileopen_button_pos, 20, fileopen_icon)) {
 			auto file_open = FileOpen();
 			if (file_open.first) {
 				audio_files_list[track_in_list].stop();

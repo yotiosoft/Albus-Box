@@ -31,6 +31,10 @@ namespace NeumorphismUI {
 		if (isClicked) {
 			argVar = !argVar;
 		}
+
+		if (switchRect.leftPressed()) {
+			MousePressedOnAnyShape = true;
+		}
 		
 		// ONの時の表示
 		if (argVar) {
@@ -114,7 +118,11 @@ namespace NeumorphismUI {
 		if (buttonRect.mouseOver()) {
 			Cursor::RequestStyle(CursorStyle::Hand);
 		}
-		bool clicked = buttonRect.leftClicked();
+		bool clicked = buttonRect.leftReleased();
+
+		if (buttonRect.leftPressed()) {
+			MousePressedOnAnyShape = true;
+		}
 		
 		// 押下時の表示
 		if (buttonRect.leftPressed()) {
@@ -187,7 +195,6 @@ namespace NeumorphismUI {
 	{
 		Circle switchCircle(argPositionX, argPositionY, argSize);
 		
-		
 		if (isDented) {
 			switchCircle.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 		}
@@ -219,6 +226,10 @@ namespace NeumorphismUI {
 		bool isClicked = switchCircle.leftClicked();
 		if (isClicked) {
 			argVar = !argVar;
+		}
+
+		if (switchCircle.leftPressed()) {
+			MousePressedOnAnyShape = true;
 		}
 		
 		// ONの時の表示
@@ -284,6 +295,10 @@ namespace NeumorphismUI {
 		if (isClicked) {
 			argVar = !argVar;
 		}
+
+		if (switchCircle.leftPressed()) {
+			MousePressedOnAnyShape = true;
+		}
 		
 		// ONの時の表示
 		if (argVar) {
@@ -348,6 +363,10 @@ namespace NeumorphismUI {
 		if (isClicked) {
 			argVar = !argVar;
 		}
+
+		if (switchCircle.leftPressed()) {
+			MousePressedOnAnyShape = true;
+		}
 		
 		// ONの時の表示
 		if (argVar) {
@@ -387,7 +406,11 @@ namespace NeumorphismUI {
 		if (buttonCircle.mouseOver()) {
 			Cursor::RequestStyle(CursorStyle::Hand);
 		}
-		bool clicked = buttonCircle.leftClicked();
+		bool clicked = buttonCircle.leftReleased();
+
+		if (buttonCircle.leftPressed()) {
+			MousePressedOnAnyShape = true;
+		}
 		
 		// 押下時の表示
 		if (buttonCircle.leftPressed()) {
@@ -447,7 +470,11 @@ namespace NeumorphismUI {
 		if (buttonCircle.mouseOver()) {
 			Cursor::RequestStyle(CursorStyle::Hand);
 		}
-		bool clicked = buttonCircle.leftClicked();
+		bool clicked = buttonCircle.leftReleased();
+
+		if (buttonCircle.leftPressed()) {
+			MousePressedOnAnyShape = true;
+		}
 		
 		// 押下時の表示
 		if (buttonCircle.leftPressed()) {
@@ -525,6 +552,10 @@ namespace NeumorphismUI {
 		barRect.draw(Color(52, 152, 219));
 		
 		knobCircle.draw(background);
+
+		if (switchRect.leftPressed() || innerSliderRect.leftPressed() || knobCircle.leftPressed() || barRect.leftPressed()) {
+			MousePressedOnAnyShape = true;
+		}
 		
 		// マウスオーバー時にマウスポインタを変更
 		if (knobCircle.mouseOver() || barRect.mouseOver() || innerSliderRect.mouseOver()) {
@@ -619,6 +650,10 @@ namespace NeumorphismUI {
 		barRect.draw(Color(52, 152, 219));
 		
 		knobCircle.draw(background);
+
+		if (sliderRect.leftPressed() || innerSliderRect.leftPressed() || knobCircle.leftPressed() || barRect.leftPressed()) {
+			MousePressedOnAnyShape = true;
+		}
 		
 		// マウスオーバー時にマウスポインタを変更
 		if (knobCircle.mouseOver() || barRect.mouseOver() || innerSliderRect.mouseOver()) {
