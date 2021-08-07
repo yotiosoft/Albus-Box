@@ -29,6 +29,7 @@ void AlbusBox() {
 
 	// マウスクリックした地点の記録用
 	Point mouse_clicked;
+	bool window_moving = false;
 
 	// アイコン
 	Texture play_icon(Icon(IconFont::Play, 30));
@@ -96,16 +97,6 @@ void AlbusBox() {
 	FFTResult fft;
 
 	while (System::Update()) {
-		// ウィンドウの移動
-		if (MouseL.down() && !NeumorphismUI::MousePressedOnAnyShape) {
-			mouse_clicked = Cursor::Pos();
-		}
-		if (MouseL.pressed() && !NeumorphismUI::MousePressedOnAnyShape) {
-			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
-		}
-
-		NeumorphismUI::MousePressedOnAnyShape = false;
-
 		// 画面上部のボタン群
 		// ウィンドウを閉じる/最小化ボタン
 		if (OS == "Windows") {
@@ -171,7 +162,7 @@ void AlbusBox() {
 			//cout << (double)audio_file.posSample()/audio_file.samples() << endl;
 		}
 		play_pos = slider.draw();
-		if (slider.isSliderPressed()) {
+		if (slider.isSliderLeftReleased()) {
 			audio_files_list[track_in_list].setPosSample(play_pos * audio_files_list[track_in_list].samples());
 		}
 
@@ -237,6 +228,18 @@ void AlbusBox() {
 			}
 			audio_files_list[track_in_list].play();
 			playing = true;
+		}
+		
+		// ウィンドウの移動
+		if (MouseL.down()) {
+			mouse_clicked = Cursor::Pos();
+			window_moving = true;
+		}
+		else if (MouseL.pressed() && Cursor::GetRequestedStyle() != CursorStyle::Hand && window_moving) {
+			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
+		}
+		else {
+			window_moving = false;
 		}
 	}
 

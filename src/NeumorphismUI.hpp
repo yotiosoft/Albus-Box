@@ -19,8 +19,6 @@
 #define DEFAULT_LIGHT_COLOR			Color(255, 255, 255)
 
 namespace NeumorphismUI {
-	static bool MousePressedOnAnyShape = false;
-
 	// 角丸長方形スイッチ
 	void RectSwitch(int argPositionX, int argPositionY,
 					int argSizeX, int argSizeY,
@@ -231,7 +229,7 @@ namespace NeumorphismUI {
 		
 		bool isSliderMoving();
 		
-		bool isSliderPressed();
+		bool isSliderLeftReleased();
 		
 	private:
 		s3d::RoundRect sliderRect;

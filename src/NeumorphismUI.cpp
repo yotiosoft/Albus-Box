@@ -31,10 +31,6 @@ namespace NeumorphismUI {
 		if (isClicked) {
 			argVar = !argVar;
 		}
-
-		if (switchRect.leftPressed()) {
-			MousePressedOnAnyShape = true;
-		}
 		
 		// ONの時の表示
 		if (argVar) {
@@ -119,10 +115,6 @@ namespace NeumorphismUI {
 			Cursor::RequestStyle(CursorStyle::Hand);
 		}
 		bool clicked = buttonRect.leftReleased();
-
-		if (buttonRect.leftPressed()) {
-			MousePressedOnAnyShape = true;
-		}
 		
 		// 押下時の表示
 		if (buttonRect.leftPressed()) {
@@ -227,10 +219,6 @@ namespace NeumorphismUI {
 		if (isClicked) {
 			argVar = !argVar;
 		}
-
-		if (switchCircle.leftPressed()) {
-			MousePressedOnAnyShape = true;
-		}
 		
 		// ONの時の表示
 		if (argVar) {
@@ -294,10 +282,6 @@ namespace NeumorphismUI {
 		bool isClicked = switchCircle.leftClicked();
 		if (isClicked) {
 			argVar = !argVar;
-		}
-
-		if (switchCircle.leftPressed()) {
-			MousePressedOnAnyShape = true;
 		}
 		
 		// ONの時の表示
@@ -363,10 +347,6 @@ namespace NeumorphismUI {
 		if (isClicked) {
 			argVar = !argVar;
 		}
-
-		if (switchCircle.leftPressed()) {
-			MousePressedOnAnyShape = true;
-		}
 		
 		// ONの時の表示
 		if (argVar) {
@@ -407,10 +387,6 @@ namespace NeumorphismUI {
 			Cursor::RequestStyle(CursorStyle::Hand);
 		}
 		bool clicked = buttonCircle.leftReleased();
-
-		if (buttonCircle.leftPressed()) {
-			MousePressedOnAnyShape = true;
-		}
 		
 		// 押下時の表示
 		if (buttonCircle.leftPressed()) {
@@ -471,10 +447,6 @@ namespace NeumorphismUI {
 			Cursor::RequestStyle(CursorStyle::Hand);
 		}
 		bool clicked = buttonCircle.leftReleased();
-
-		if (buttonCircle.leftPressed()) {
-			MousePressedOnAnyShape = true;
-		}
 		
 		// 押下時の表示
 		if (buttonCircle.leftPressed()) {
@@ -552,10 +524,6 @@ namespace NeumorphismUI {
 		barRect.draw(Color(52, 152, 219));
 		
 		knobCircle.draw(background);
-
-		if (switchRect.leftPressed() || innerSliderRect.leftPressed() || knobCircle.leftPressed() || barRect.leftPressed()) {
-			MousePressedOnAnyShape = true;
-		}
 		
 		// マウスオーバー時にマウスポインタを変更
 		if (knobCircle.mouseOver() || barRect.mouseOver() || innerSliderRect.mouseOver()) {
@@ -651,10 +619,6 @@ namespace NeumorphismUI {
 		
 		knobCircle.draw(background);
 
-		if (sliderRect.leftPressed() || innerSliderRect.leftPressed() || knobCircle.leftPressed() || barRect.leftPressed()) {
-			MousePressedOnAnyShape = true;
-		}
-		
 		// マウスオーバー時にマウスポインタを変更
 		if (knobCircle.mouseOver() || barRect.mouseOver() || innerSliderRect.mouseOver()) {
 			Cursor::RequestStyle(CursorStyle::Hand);
@@ -751,8 +715,8 @@ namespace NeumorphismUI {
 		return sliding;
 	}
 	
-	bool Slider::isSliderPressed() {
-		return mouseLPressed;
+	bool Slider::isSliderLeftReleased() {
+		return sliderRect.leftReleased();
 	}
 	
 	// コンストラクタから呼び出す
