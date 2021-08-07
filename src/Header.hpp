@@ -19,13 +19,9 @@
 #include "Enums.hpp"
 #include "Structs.hpp"
 
-#define CHIP_SIZE		64
-#define TITLE			U"Albus Player"
-#define VERSION			U"2.0 alpha2"
-#define RELEASE_NUMBER	142
-#define AROUND_TILES	4
-#define DIRECTIONS		15
-#define LAYER_TYPES		15
+#define TITLE			U"Albus Box"
+#define VERSION			U"0.1"
+#define RELEASE_NUM		1
 
 using namespace std;
 

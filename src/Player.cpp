@@ -55,7 +55,7 @@ bool Player::playing() {
 		return false;
 	}
 	
-	if (audio_files[current_track]->posSample() >= audio_files[current_track]->samples()) {
+	if (status == PlayerStatus::Play && !audio_files[current_track]->isPlaying()) {
 		next();
 	}
 	
@@ -116,6 +116,7 @@ void Player::next() {
 	
 	if (current_track == 0 && audio_files.size() == 1) {	// 1曲しかリストに読み込まれていない場合
 		audio_files[current_track]->setPosSec(0.0);			// 0.0秒に戻る
+		play();
 		return;
 	}
 	
@@ -169,7 +170,10 @@ bool Player::changeVolumeTo(double volume_norm) {
 }
 
 String Player::getTitle() {
-	return U"";
+	if (!isOpened()) {
+		return U"";
+	}
+	return  FileSystem::BaseName(audio_files_path[current_track]);
 }
 
 int Player::getPlayPosSec() {

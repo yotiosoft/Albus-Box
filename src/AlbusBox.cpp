@@ -36,12 +36,79 @@ void exit(Array<Audio>& audio_files_list, int track_in_list) {
 	System::Exit();
 }
 
-bool AlbusBoxSetting(Player& player, Font& font16B, Color& button_close_color, Texture& window_close_icon, Color& font_color) {
+bool VersionInformation(Player& player, Font& font13, Font& font16B, Font& font16, Font& font36,
+	Color& button_close_color, Texture& window_close_icon, Color& font_color) {
+	// ボタン用アイコン
+	Texture return_button_icon(Icon(IconFont::Return, 20));		// 戻る
+
+	// 画像
+	Texture albus_box_icon(U"./data/img/icon.png");
+
+	// ボタンの位置
+	Point return_button_pos;
+	if (OS == "Windows") {
+		return_button_pos = Point(10, 10);
+	}
+	else if (OS == "Mac") {
+		return_button_pos = Point(45, 10);
+	}
+
+	// マウスクリックした地点の記録用
+	Point mouse_clicked;
+	bool window_moving = false;
+
+	while (System::Update()) {
+		// 画面上部のボタン群
+		// 閉じるボタン
+		if (ExitButton(font16B, button_close_color, window_close_icon)) {
+			return true;
+		}
+		// もどる
+		if (NeumorphismUI::RectButton(return_button_pos, Vec2(40, 40), return_button_icon)) {
+			return false;
+		}
+
+		// 画面タイトル
+		font16B(U"バージョン情報").draw(Arg::center(Scene::Width() / 2, 30), Color(font_color));
+
+		// バージョン情報
+		albus_box_icon.resized(200, 200).drawAt(Scene::Width() / 2, 200);
+
+		font36(U"Albus Box").drawAt(Scene::Width() / 2, 350, font_color);
+
+		font16(U"Version: {:>24}\nRelease Number: {:>8}"_fmt(VERSION, RELEASE_NUM)).drawAt(Scene::Width() / 2, 450, font_color);
+
+		font13(U"©YotioSoft 2021 | Powered by OpenSiv3D").drawAt(Scene::Width() / 2, Scene::Height()-50, font_color);
+
+		// 再生処理を継続
+		player.playing();
+
+		// ウィンドウの移動
+		if (MouseL.down()) {
+			mouse_clicked = Cursor::Pos();
+			window_moving = true;
+		}
+		else if (MouseL.pressed() && Cursor::GetRequestedStyle() != CursorStyle::Hand && window_moving) {
+			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
+		}
+		else {
+			window_moving = false;
+		}
+	}
+	return true;
+}
+
+bool AlbusBoxSetting(Player& player, Font& font13, Font& font16B, Font& font16, Font& font36,
+	Color& button_close_color, Texture& window_close_icon, Color& font_color) {
 	// ボタン用アイコン
 	Texture return_button_icon(Icon(IconFont::Return, 20));		// 戻る
 	
 	// アイコン
 	Texture volume_icon(Icon(IconFont::Volume, 30));
+	Texture info_icon(Icon(IconFont::Information, 30));
+
+	// 画像
+	Texture albus_box_icon(U"./data/img/icon.png");
 	
 	// アイコンの位置
 	const int icon_left_x = 50;
@@ -50,12 +117,12 @@ bool AlbusBoxSetting(Player& player, Font& font16B, Color& button_close_color, T
 	// 音量調整バー
 	double volume = player.getVolume();
 	double volume_before = volume;
-	NeumorphismUI::Slider volume_bar(volume, Vec2{ icon_left_x+100, icon_top_y }, Scene::Width()-icon_left_x-100, 30);
+	NeumorphismUI::Slider volume_bar(volume, Vec2{ icon_left_x+100, icon_top_y }, Scene::Width()-icon_left_x*2-100, 30);
 	
 	// ボタンの位置
 	Point return_button_pos;
 	if (OS == "Windows") {
-		return_button_pos = Point(30, 40);
+		return_button_pos = Point(10, 10);
 	}
 	else if (OS == "Mac") {
 		return_button_pos = Point(45, 10);
@@ -87,6 +154,16 @@ bool AlbusBoxSetting(Player& player, Font& font16B, Color& button_close_color, T
 			volume_before = volume;
 			player.changeVolumeTo(volume);
 		}
+
+		// バージョン情報
+		if (NeumorphismUI::RectButton(Vec2(Scene::Width() / 2 - 50/2, Scene::Height() - 100), Vec2(50, 50), info_icon)) {
+			if (VersionInformation(player, font13, font16B, font16, font36, button_close_color, window_close_icon, font_color)) {
+				return true;
+			}
+		}
+
+		// 再生処理を継続
+		player.playing();
 		
 		// ウィンドウの移動
 		if (MouseL.down()) {
@@ -113,6 +190,7 @@ void AlbusBox() {
 	Font font13(13, U"{}/NotoSansCJKjp/NotoSansCJKjp-Regular.otf"_fmt(specific::getFontsDir()));
 	Font font16(16, U"{}/NotoSansCJKjp/NotoSansCJKjp-Regular.otf"_fmt(specific::getFontsDir()));
 	Font font16B(16, U"{}/NotoSansCJKjp/NotoSansCJKjp-Bold.otf"_fmt(specific::getFontsDir()));
+	Font font36(36, U"{}/NotoSansCJKjp/NotoSansCJKjp-Regular.otf"_fmt(specific::getFontsDir()));
 
 	// シークバー
 	double play_pos = 0.0;		// シークバーの初期値
@@ -198,7 +276,7 @@ void AlbusBox() {
 		// 画面上部のボタン群
 		// 設定へ画面遷移
 		if (NeumorphismUI::CircleButton(setting_button_pos, 20, setting_icon)) {
-			if (AlbusBoxSetting(player, font16B, button_close_color, window_close_icon, font_color)) {
+			if (AlbusBoxSetting(player, font13, font16B, font16, font36, button_close_color, window_close_icon, font_color)) {
 				break;		// 閉じるボタンが押されたらループを抜ける
 			}
 		}

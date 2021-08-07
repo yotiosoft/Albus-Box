@@ -113,6 +113,7 @@
     <ClCompile Include="..\..\..\src\AlbusBox.cpp" />
     <ClCompile Include="..\..\..\src\NeumorphismUI.cpp" />
     <ClCompile Include="..\..\..\src\OtherFunctions.cpp" />
+    <ClCompile Include="..\..\..\src\Player.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Specific.cpp" />
   </ItemGroup>
@@ -247,6 +248,7 @@
     <ClInclude Include="..\..\..\src\Header.hpp" />
     <ClInclude Include="..\..\..\src\NeumorphismUI.hpp" />
     <ClInclude Include="..\..\..\src\OtherFunctions.hpp" />
+    <ClInclude Include="..\..\..\src\Player.hpp" />
     <ClInclude Include="..\..\..\src\Structs.hpp" />
     <ClInclude Include="Specific.hpp" />
   </ItemGroup>

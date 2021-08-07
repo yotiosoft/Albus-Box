@@ -18,6 +18,8 @@ enum Type {
 	FileOpen	= 0xf07c,
 	Setting		= 0xf1de,
 	Return		= 0xf060,
+
+	Information	= 0xf05a,
 	
 	Volume		= 0xf028,
 
