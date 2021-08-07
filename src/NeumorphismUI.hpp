@@ -89,6 +89,14 @@ namespace NeumorphismUI {
 					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
 				   Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4});
 
+	int RectButton(Vec2 argPosition,
+				Vec2 argSize,
+				Texture& argTexture,
+				Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
+				Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
+				int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
+			   Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4});
+
 	// 丸型
 	void NeumorphismCircle(int argPositionX, int argPositionY, int argSize, bool isDented,
 				Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,

@@ -5,6 +5,7 @@
 
 #include <Specific.hpp>
 #include <NeumorphismUI.hpp>
+#include "Player.hpp"
 
 pair<bool, FilePath> FileOpen();
 void AlbusBox();

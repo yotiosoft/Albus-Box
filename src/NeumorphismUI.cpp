@@ -179,6 +179,55 @@ namespace NeumorphismUI {
 		return RectButton(argPosition.x, argPosition.y, argSize.x, argSize.y, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
+	int RectButton(Vec2 argPosition,
+				   Vec2 argSize,
+				    Texture& argTexture,
+					Color argBackgroundColor, Color argDarkColor, Color argLightColor,
+					Color argFontColor, Color argPushedFontColor,
+					int argRadius, int argBlurSize, int argShadowSize,
+					Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
+	{
+		
+		Mat3x2 mat;
+		
+		RoundRect buttonRect(argPosition.x, argPosition.y, argSize.x, argSize.y, argRadius);
+		
+		// マウスオーバー時にマウスポインタを変更
+		if (buttonRect.mouseOver()) {
+			Cursor::RequestStyle(CursorStyle::Hand);
+		}
+		bool clicked = buttonRect.leftReleased();
+		
+		// 押下時の表示
+		if (buttonRect.leftPressed()) {
+			buttonRect.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
+			mat = Mat3x2::Scale(0.9, Point((int)(argPosition.x+argSize.x/2), (int)(argPosition.y+argSize.y/2)));
+			
+			if (!argTexture.isEmpty()) {
+				{
+					// 座標変換行列を適用
+					const Transformer2D t(mat, false);
+					argTexture.drawAt(argPosition.x+argSize.x/2, argPosition.y+argSize.y/2, argPushedFontColor);
+				}
+			}
+		}
+		// 押下時以外の表示
+		else {
+			buttonRect.drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
+			mat = Mat3x2::Identity();
+			
+			if (!argTexture.isEmpty()) {
+				{
+					// 座標変換行列を適用
+					const Transformer2D t(mat, false);
+					argTexture.drawAt(argPosition.x+argSize.x/2, argPosition.y+argSize.y/2, argFontColor);
+				}
+			}
+		}
+		
+		return clicked;
+	}
+
 	// 丸型
 	void NeumorphismCircle(int argPositionX, int argPositionY, int argSize, bool isDented,
 				Color argBackgroundColor, Color argDarkColor, Color argLightColor,

@@ -40,6 +40,7 @@
 		4B98592426BA5B0400D5D18F /* OtherFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B98592226BA5B0400D5D18F /* OtherFunctions.cpp */; };
 		4B98594426BDA82100D5D18F /* NeumorphismUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B98594226BDA82100D5D18F /* NeumorphismUI.cpp */; };
 		4B98594526BDA82100D5D18F /* AlbusBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B98594326BDA82100D5D18F /* AlbusBox.cpp */; };
+		4B98594A26BE801000D5D18F /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B98594826BE801000D5D18F /* Player.cpp */; };
 		4BAAAEE526090DB6000B9E51 /* Specific.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BAAAEE426090DB6000B9E51 /* Specific.cpp */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,8 @@
 		4B98594126BDA82000D5D18F /* AlbusBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AlbusBox.hpp; path = ../../../src/AlbusBox.hpp; sourceTree = "<group>"; };
 		4B98594226BDA82100D5D18F /* NeumorphismUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NeumorphismUI.cpp; path = ../../../src/NeumorphismUI.cpp; sourceTree = "<group>"; };
 		4B98594326BDA82100D5D18F /* AlbusBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlbusBox.cpp; path = ../../../src/AlbusBox.cpp; sourceTree = "<group>"; };
+		4B98594826BE801000D5D18F /* Player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		4B98594926BE801000D5D18F /* Player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
 		4BAAAEE326090DB6000B9E51 /* Specific.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Specific.hpp; sourceTree = "<group>"; };
 		4BAAAEE426090DB6000B9E51 /* Specific.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Specific.cpp; sourceTree = "<group>"; };
 		4BEA956F26098CDB008B4F3A /* Enums.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Enums.hpp; path = ../../../src/Enums.hpp; sourceTree = "<group>"; };
@@ -165,6 +168,8 @@
 				4B98592326BA5B0400D5D18F /* OtherFunctions.hpp */,
 				2C1778991CE0AA7C00BB8AD0 /* Main.cpp */,
 				4B98592A26BABCE900D5D18F /* ButtonEx.hpp */,
+				4B98594826BE801000D5D18F /* Player.cpp */,
+				4B98594926BE801000D5D18F /* Player.hpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 			files = (
 				4B98594526BDA82100D5D18F /* AlbusBox.cpp in Sources */,
 				2C17789A1CE0AA7C00BB8AD0 /* Main.cpp in Sources */,
+				4B98594A26BE801000D5D18F /* Player.cpp in Sources */,
 				4B98592426BA5B0400D5D18F /* OtherFunctions.cpp in Sources */,
 				4BAAAEE526090DB6000B9E51 /* Specific.cpp in Sources */,
 				4B98594426BDA82100D5D18F /* NeumorphismUI.cpp in Sources */,
