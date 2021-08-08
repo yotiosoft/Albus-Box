@@ -27,22 +27,13 @@ bool ExitButton(Font& font16, Color& button_close_color, Texture& window_close_i
 	return false;
 }
 
-void exit(Array<Audio>& audio_files_list, int track_in_list) {
-	audio_files_list[track_in_list].stop();
-
-	for (auto af : audio_files_list)
-		af.release();
-	
-	System::Exit();
-}
-
 bool VersionInformation(Player& player, Font& font13, Font& font16B, Font& font16, Font& font36,
 	Color& button_close_color, Texture& window_close_icon, Color& font_color) {
 	// ボタン用アイコン
 	Texture return_button_icon(Icon(IconFont::Return, 20));		// 戻る
 
 	// 画像
-	Texture albus_box_icon(U"./data/img/icon.png");
+	Texture albus_box_icon(U"{}/data/img/icon.png"_fmt(specific::getCurrentDir()));
 
 	// ボタンの位置
 	Point return_button_pos;
@@ -106,9 +97,6 @@ bool AlbusBoxSetting(Player& player, Font& font13, Font& font16B, Font& font16, 
 	// アイコン
 	Texture volume_icon(Icon(IconFont::Volume, 30));
 	Texture info_icon(Icon(IconFont::Information, 30));
-
-	// 画像
-	Texture albus_box_icon(U"./data/img/icon.png");
 	
 	// アイコンの位置
 	const int icon_left_x = 50;
@@ -146,6 +134,7 @@ bool AlbusBoxSetting(Player& player, Font& font13, Font& font16B, Font& font16, 
 		}
 		// もどる
 		if (NeumorphismUI::RectButton(return_button_pos, Vec2(40, 40), return_button_icon)) {
+			player.saveSettings();
 			return false;
 		}
 		
@@ -206,7 +195,8 @@ void AlbusBox() {
 	Font font16B(16, U"{}/NotoSansCJKjp/NotoSansCJKjp-Bold.otf"_fmt(specific::getFontsDir()));
 	Font font36(36, U"{}/NotoSansCJKjp/NotoSansCJKjp-Regular.otf"_fmt(specific::getFontsDir()));
 	
-	specific::moveToCurrentDir();
+	// プレイヤーの用意
+	Player player;
 
 	// シークバー
 	double play_pos = 0.0;		// シークバーの初期値
@@ -279,9 +269,6 @@ void AlbusBox() {
 	*/
 
 	FFTResult fft;
-	
-	// プレイヤーの用意
-	Player player;
 
 	// 座標変換行列（タイトル用）
 	Mat3x2 mat = Mat3x2::Identity();
@@ -434,4 +421,7 @@ void AlbusBox() {
 			window_moving = false;
 		}
 	}
+	
+	player.free();
+	player.saveSettings();
 }

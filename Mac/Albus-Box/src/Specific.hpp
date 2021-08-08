@@ -25,16 +25,13 @@
 namespace specific {
 	Array<FileStruct> getAllFilesName(string folderPath, string extension);
 
-	void chdir(string dir);
-	void moveToCurrentDir();
+	String getCurrentDir();
 	String getFontsDir();
 
 	bool isCursorEntered(Vec2 before_cursor_pos);
 	void changeCursor();
 
-	bool openSaveData(String& arg_file_path);
-	
-	const String SaveDataFilePath = U"./data/maps/";
+	String getSettingFilePath();
 
 	bool setWindowStyle(int x1, int y1, int x2, int y2, int w, int h);
 }

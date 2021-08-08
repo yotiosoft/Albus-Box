@@ -9,6 +9,7 @@
 #define Player_hpp
 
 #include <Siv3D.hpp>
+#include <Specific.hpp>
 
 namespace PlayerStatus {
 	enum Type {
@@ -90,6 +91,12 @@ public:
 	
 	// ファイルが開かれているか否か
 	bool isOpened();
+	
+	// 設定ファイルを読み込み
+	void loadSettings();
+	
+	// 設定ファイルを保存
+	void saveSettings();
 	
 	// 解放
 	void free();

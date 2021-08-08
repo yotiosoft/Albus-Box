@@ -52,12 +52,8 @@ Array<FileStruct> specific::getAllFilesName(string folderPath, string extension)
 	return retStr;
 }
 
-void specific::chdir(string dir) {
-	::chdir(dir.c_str());
-}
-
-void specific::moveToCurrentDir() {
-	chdir("./Albus-Box.app/Contents/Resources/assets");
+String specific::getCurrentDir() {
+	return U"./Albus-Box.app/Contents/Resources/assets/";
 }
 
 bool specific::isCursorEntered(Vec2 before_cursor_pos) {
@@ -68,19 +64,12 @@ void specific::changeCursor() {
 	return;			// Mac版では何もしない
 }
 
-bool specific::openSaveData(String& arg_file_path) {
-	Array<FileFilter> ff = {{U"セーブデータ", {/*U"cbd", */U"cbj"}}};
-	if (const auto open = Dialog::OpenFile(ff, specific::SaveDataFilePath)) {
-		arg_file_path = open.value();
-		
-		return true;
-	}
-	
-	return false;
-}
-
 String specific::getFontsDir() {
 	return U"./Albus-Box.app/Contents/Resources/assets/fonts";
+}
+
+String specific::getSettingFilePath() {
+	return U"./Albus-Box.app/Contents/Resources/assets/data/settings/settings.json";
 }
 
 bool specific::setWindowStyle(int x1, int y1, int x2, int y2, int w, int h) {

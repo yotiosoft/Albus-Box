@@ -10,9 +10,8 @@
 Player::Player() {
 	current_track = -1;
 	status = PlayerStatus::Stop;
-	volume = 1.0;
-	show_wave = true;
-	loop = false;
+	
+	loadSettings();
 }
 
 void Player::open(FilePath audio_filepath) {
@@ -254,14 +253,17 @@ void Player::setLoop(bool enable) {
 
 	if (!isOpened())
 		return;
+	
+	audio_files[current_track]->pause();
 
-	int play_samples = audio_files[current_track]->posSample();
+	int64 play_samples = audio_files[current_track]->posSample();
 
 	for (auto af : audio_files) {
 		af->setLoop(loop);
 	}
 
 	if (status == PlayerStatus::Play) {
+		std::cout << "to play " << play_samples << std::endl;
 		audio_files[current_track]->setPosSample(play_samples);
 		audio_files[current_track]->play();
 	}
@@ -279,6 +281,36 @@ bool Player::isOpened() {
 		return false;
 	}
 	return true;
+}
+
+void Player::loadSettings() {
+	if (!FileSystem::Exists(specific::getSettingFilePath())) {
+		volume = 1.0;
+		show_wave = true;
+		loop = false;
+		
+		return;
+	}
+	
+	JSONReader json(specific::getSettingFilePath());
+	
+	volume = json[U"volume"].get<double>();
+	show_wave = json[U"show_wave"].get<bool>();
+	loop = json[U"loop"].get<bool>();
+}
+
+void Player::saveSettings() {
+	JSONWriter json;
+	
+	json.startObject();
+	{
+		json.key(U"volume").write(volume);
+		json.key(U"show_wave").write(show_wave);
+		json.key(U"loop").write(loop);
+	}
+	json.endObject();
+	
+	json.save(specific::getSettingFilePath());
 }
 
 void Player::free() {
