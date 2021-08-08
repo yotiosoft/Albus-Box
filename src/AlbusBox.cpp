@@ -88,7 +88,7 @@ bool VersionInformation(Player& player, Font& font13, Font& font16B, Font& font1
 			mouse_clicked = Cursor::Pos();
 			window_moving = true;
 		}
-		else if (MouseL.pressed() && Cursor::GetRequestedStyle() != CursorStyle::Hand && window_moving) {
+		else if (MouseL.pressed() && Cursor::GetRequestedStyle() == CursorStyle::Arrow && window_moving) {
 			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
 		}
 		else {
@@ -184,7 +184,7 @@ bool AlbusBoxSetting(Player& player, Font& font13, Font& font16B, Font& font16, 
 			mouse_clicked = Cursor::Pos();
 			window_moving = true;
 		}
-		else if (MouseL.pressed() && Cursor::GetRequestedStyle() != CursorStyle::Hand && window_moving) {
+		else if (MouseL.pressed() && Cursor::GetRequestedStyle() == CursorStyle::Arrow && window_moving) {
 			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
 		}
 		else {
@@ -288,6 +288,10 @@ void AlbusBox() {
 	RectF title_rect, title_rect_before;
 	int count_for_music = 0;
 
+	// タイトル編集用
+	TextEditState tes_title;
+	bool editing_title = false;
+
 	while (System::Update()) {
 		// 画面上部のボタン群
 		bool isExitButtonPushed = ExitButton(font16, button_close_color, window_close_icon);
@@ -338,22 +342,47 @@ void AlbusBox() {
 		thumbnail_circle(thumbnail_texture(0, 0, thumbnail_size, thumbnail_size)).draw();
 
 		// タイトル
+		// タイトル部分のマウスオーバー時にタイトル部分を光らせる
+		if (title_rect.mouseOver()) {
+			title_rect.draw(Color(255, 255, 255, 100));
+		}
+
+		// タイトルの表示
 		title_rect = font16(player.getTitle()).region(Arg::center(Scene::Width() / 2, Scene::Height() / 3 + 170));
 		if (title_rect != title_rect_before) {
 			title_rect_before = title_rect;
 			count_for_music = Scene::Width();
 		}
-		if (title_rect.w > Scene::Width()) {
+		if (title_rect.w > Scene::Width() && !editing_title) {
 			mat = Mat3x2::Translate((title_rect.w - Scene::Width()) / 2 - (count_for_music % ((int)title_rect.w + Scene::Width())) + Scene::Width(), 0);
 			{
 				const Transformer2D t(mat, false);
 				font16(player.getTitle()).drawAt(Scene::Width() / 2, Scene::Height() / 3 + 170, font_color);
 			}
 		}
-		else {
+		else if (!editing_title) {
 			font16(player.getTitle()).drawAt(Scene::Width() / 2, Scene::Height() / 3 + 170, font_color);
 		}
 		count_for_music++;
+
+		// タイトル部分がクリックされたらテキストボックスを設置
+		if (title_rect.leftClicked() && !editing_title) {
+			editing_title = true;
+			tes_title.text = player.getTitle();
+		}
+		if (editing_title) {
+			SimpleGUI::TextBox(tes_title, Vec2(0, Scene::Height() / 3 + 170 - 10), Scene::Width());
+
+			// editing_title == trueかつタイトル部分以外でクリックされたら編集完了
+			if (!title_rect.leftClicked() && MouseL.down()) {
+				editing_title = false;
+				player.editTitle(tes_title.text);
+			}
+		}
+		// editing_title == trueかつタイトル部分以外でクリックされたら編集完了
+		if (editing_title && !title_rect.leftClicked() && MouseL.down()) {
+			editing_title = false;
+		}
 
 		// シークバー
 		if (!slider.isSliderMoving()) {
@@ -396,7 +425,7 @@ void AlbusBox() {
 			mouse_clicked = Cursor::Pos();
 			window_moving = true;
 		}
-		else if (MouseL.pressed() && Cursor::GetRequestedStyle() != CursorStyle::Hand && window_moving) {
+		else if (MouseL.pressed() && Cursor::GetRequestedStyle() == CursorStyle::Arrow && window_moving) {
 			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
 		}
 		else {

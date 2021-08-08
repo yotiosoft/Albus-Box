@@ -20,6 +20,7 @@ void Player::open(FilePath audio_filepath) {
 	audio_files.back()->setVolume(volume);
 	audio_files.back()->setLoop(loop);
 	audio_files_path << audio_filepath;
+	audio_titles << FileSystem::BaseName(audio_filepath);
 	
 	stop();
 	current_track = (int)audio_files.size()-1;
@@ -177,7 +178,11 @@ String Player::getTitle() {
 	if (!isOpened()) {
 		return U"";
 	}
-	return  FileSystem::BaseName(audio_files_path[current_track]);
+	return  audio_titles[current_track];
+}
+
+void Player::editTitle(String new_title) {
+	audio_titles[current_track] = new_title;
 }
 
 int Player::getPlayPosSec() {

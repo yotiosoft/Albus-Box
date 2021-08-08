@@ -56,6 +56,9 @@ public:
 	
 	// 曲のタイトルを返す
 	String getTitle();
+
+	// タイトルを編集
+	void editTitle(String new_title);
 	
 	// 再生位置を返す(秒)
 	int getPlayPosSec();
@@ -94,6 +97,7 @@ public:
 private:
 	Array<Audio*> audio_files;
 	Array<FilePath> audio_files_path;
+	Array<String> audio_titles;
 	int current_track;
 	PlayerStatus::Type status;
 	double volume;
