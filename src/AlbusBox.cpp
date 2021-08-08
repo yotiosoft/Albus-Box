@@ -118,6 +118,12 @@ bool AlbusBoxSetting(Player& player, Font& font13, Font& font16B, Font& font16, 
 	double volume = player.getVolume();
 	double volume_before = volume;
 	NeumorphismUI::Slider volume_bar(volume, Vec2{ icon_left_x+100, icon_top_y }, Scene::Width()-icon_left_x*2-100, 30);
+
+	// スイッチ
+	// 波形の表示
+	NeumorphismUI::SlideSwitch show_wave_switch(player.isShowWaveEnabled(), Vec2(Scene::Width() - icon_left_x - 50, icon_top_y + 100), Vec2(50, 30));
+	// ループ再生
+	NeumorphismUI::SlideSwitch loop_switch(player.isLoopEnabled(), Vec2(Scene::Width() - icon_left_x - 50, icon_top_y + 180), Vec2(50, 30));
 	
 	// ボタンの位置
 	Point return_button_pos;
@@ -154,6 +160,14 @@ bool AlbusBoxSetting(Player& player, Font& font13, Font& font16B, Font& font16, 
 			volume_before = volume;
 			player.changeVolumeTo(volume);
 		}
+
+		// 波形の表示
+		font16(U"波形の表示").draw(icon_left_x, icon_top_y + 100, font_color);
+		player.setShowWave(show_wave_switch.draw());
+
+		// ループ再生
+		font16(U"ループ再生").draw(icon_left_x, icon_top_y + 180, font_color);
+		player.setLoop(loop_switch.draw());
 
 		// バージョン情報
 		if (NeumorphismUI::RectButton(Vec2(Scene::Width() / 2 - 50/2, Scene::Height() - 100), Vec2(50, 50), info_icon)) {
@@ -269,6 +283,11 @@ void AlbusBox() {
 	// プレイヤーの用意
 	Player player;
 
+	// 座標変換行列（タイトル用）
+	Mat3x2 mat = Mat3x2::Identity();
+	RectF title_rect, title_rect_before;
+	int count_for_music = 0;
+
 	while (System::Update()) {
 		// 画面上部のボタン群
 		bool isExitButtonPushed = ExitButton(font16, button_close_color, window_close_icon);
@@ -296,7 +315,7 @@ void AlbusBox() {
 
 		// 波形を表示
 		LineString fft_line;
-		if (playing && player.isOpened()) {
+		if (playing && player.isOpened() && player.isShowWaveEnabled()) {
 			ScopedRenderTarget2D target(thumbnail_texture);
 			thunbnail_image_texture.draw(0, 0);
 			player.fft(fft);
@@ -319,7 +338,22 @@ void AlbusBox() {
 		thumbnail_circle(thumbnail_texture(0, 0, thumbnail_size, thumbnail_size)).draw();
 
 		// タイトル
-		cMes(font16, player.getTitle(), Point(0, Scene::Height() / 3 + 120), Size(Scene::Width(), 100), font_color);
+		title_rect = font16(player.getTitle()).region(Arg::center(Scene::Width() / 2, Scene::Height() / 3 + 170));
+		if (title_rect != title_rect_before) {
+			title_rect_before = title_rect;
+			count_for_music = Scene::Width();
+		}
+		if (title_rect.w > Scene::Width()) {
+			mat = Mat3x2::Translate((title_rect.w - Scene::Width()) / 2 - (count_for_music % ((int)title_rect.w + Scene::Width())) + Scene::Width(), 0);
+			{
+				const Transformer2D t(mat, false);
+				font16(player.getTitle()).drawAt(Scene::Width() / 2, Scene::Height() / 3 + 170, font_color);
+			}
+		}
+		else {
+			font16(player.getTitle()).drawAt(Scene::Width() / 2, Scene::Height() / 3 + 170, font_color);
+		}
+		count_for_music++;
 
 		// シークバー
 		if (!slider.isSliderMoving()) {

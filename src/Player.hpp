@@ -26,9 +26,6 @@ public:
 	// 曲を開く
 	void open(FilePath audio_filepath);
 	
-	// ループの設定
-	void setLoop(bool enable);
-	
 	// 再生
 	bool play();
 	bool playFromBegin();
@@ -76,6 +73,14 @@ public:
 	// 時分で曲の長さを返す
 	int getTotalTimeMin();
 	int getTotalTimeSec();
+
+	// 波形の表示状態
+	bool isShowWaveEnabled();
+	void setShowWave(bool enable);
+
+	// ループ再生
+	bool isLoopEnabled();
+	void setLoop(bool enable);
 	
 	// 高速フーリエ変換
 	void fft(FFTResult& fft);
@@ -92,6 +97,8 @@ private:
 	int current_track;
 	PlayerStatus::Type status;
 	double volume;
+	bool show_wave;
+	bool loop;
 };
 
 #endif /* Player_hpp */

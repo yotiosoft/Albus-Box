@@ -11,20 +11,19 @@ Player::Player() {
 	current_track = -1;
 	status = PlayerStatus::Stop;
 	volume = 1.0;
+	show_wave = true;
+	loop = false;
 }
 
 void Player::open(FilePath audio_filepath) {
 	audio_files << new Audio(audio_filepath);
 	audio_files.back()->setVolume(volume);
+	audio_files.back()->setLoop(loop);
 	audio_files_path << audio_filepath;
 	
 	stop();
 	current_track = (int)audio_files.size()-1;
 	play();
-}
-
-void Player::setLoop(bool enable) {
-	audio_files[current_track]->setLoop(enable);
 }
 
 bool Player::play() {
@@ -114,9 +113,14 @@ void Player::next() {
 		return;
 	}
 	
-	if (current_track == 0 && audio_files.size() == 1) {	// 1曲しかリストに読み込まれていない場合
-		audio_files[current_track]->setPosSec(0.0);			// 0.0秒に戻る
+	if (current_track == 0 && audio_files.size() == 1 && loop) {	// 1曲しかリストに読み込まれていない場合
+		audio_files[current_track]->setPosSec(0.0);					// 0.0秒に戻る
 		play();
+		return;
+	}
+	else if (current_track == 0 && audio_files.size() == 1 && !loop) {
+		audio_files[current_track]->setPosSec(0.0);
+		pause();
 		return;
 	}
 	
@@ -223,6 +227,39 @@ int Player::getTotalTimeSec() {
 		return 0;
 	}
 	return (int)audio_files[current_track]->lengthSec() % 60;
+}
+
+bool Player::isShowWaveEnabled() {
+	return show_wave;
+}
+
+void Player::setShowWave(bool enable) {
+	show_wave = enable;
+}
+
+bool Player::isLoopEnabled() {
+	return loop;
+}
+
+void Player::setLoop(bool enable) {
+	if (enable == loop)
+		return;
+
+	loop = enable;
+
+	if (!isOpened())
+		return;
+
+	int play_samples = audio_files[current_track]->posSample();
+
+	for (auto af : audio_files) {
+		af->setLoop(loop);
+	}
+
+	if (status == PlayerStatus::Play) {
+		audio_files[current_track]->setPosSample(play_samples);
+		audio_files[current_track]->play();
+	}
 }
 
 void Player::fft(FFTResult& fft) {
