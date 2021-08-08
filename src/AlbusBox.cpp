@@ -372,9 +372,11 @@ void AlbusBox() {
 		}
 		if (editing_title) {
 			SimpleGUI::TextBox(tes_title, Vec2(0, Scene::Height() / 3 + 170 - 10), Scene::Width());
+			
+			title_rect = RectF(0, Scene::Height() / 3 + 170 - 10, Scene::Width(), 40);
 
 			// editing_title == trueかつタイトル部分以外でクリックされたら編集完了
-			if (!title_rect.leftClicked() && MouseL.down()) {
+			if (!title_rect.leftClicked() && MouseL.down() && Cursor::GetRequestedStyle() != CursorStyle::IBeam) {
 				editing_title = false;
 				player.editTitle(tes_title.text);
 			}
