@@ -19,7 +19,6 @@ void Player::open(FilePath audio_filepath) {
 	audio_files.back()->setVolume(volume);
 	audio_files.back()->setLoop(loop);
 	audio_files_path << audio_filepath;
-	audio_titles << FileSystem::BaseName(audio_filepath);
 	
 	stop();
 	current_track = (int)audio_files.size()-1;
@@ -177,11 +176,22 @@ String Player::getTitle() {
 	if (!isOpened()) {
 		return U"";
 	}
-	return  audio_titles[current_track];
+	
+	if (audio_files_profile.count(getXXHash()) == 0) {
+		// ファイル情報が存在しなければファイル名を返す
+		return FileSystem::BaseName(audio_files_path[current_track]);
+	}
+	
+	// ファイル情報が存在するなら設定されたタイトルを返す
+	return audio_files_profile[getXXHash()].title;
 }
 
 void Player::editTitle(String new_title) {
-	audio_titles[current_track] = new_title;
+	// ファイル情報をハッシュ値とともに格納
+	audio_files_profile[getXXHash()].title = new_title;
+	
+	// 設定ファイルを上書き保存
+	saveSettings();
 }
 
 int Player::getPlayPosSec() {
@@ -297,6 +307,12 @@ void Player::loadSettings() {
 	volume = json[U"volume"].get<double>();
 	show_wave = json[U"show_wave"].get<bool>();
 	loop = json[U"loop"].get<bool>();
+	
+	for (auto audio_profile : json[U"audio_profiles"].arrayView()) {
+		uint64 hash = audio_profile[U"hash"].get<uint64>();
+		audio_files_profile[hash].title = audio_profile[U"title"].getString();
+		audio_files_profile[hash].artist_name = audio_profile[U"artist_name"].getString();
+	}
 }
 
 void Player::saveSettings() {
@@ -307,6 +323,21 @@ void Player::saveSettings() {
 		json.key(U"volume").write(volume);
 		json.key(U"show_wave").write(show_wave);
 		json.key(U"loop").write(loop);
+		
+		json.key(U"audio_profiles").startArray();
+		{
+			for (auto audio_profile : audio_files_profile) {
+				json.startObject();
+				{
+					json.key(U"hash").write(audio_profile.first);
+					
+					json.key(U"title").write(audio_profile.second.title);
+					json.key(U"artist_name").write(audio_profile.second.artist_name);
+				}
+				json.endObject();
+			}
+		}
+		json.endArray();
 	}
 	json.endObject();
 	
@@ -321,4 +352,8 @@ void Player::free() {
 		af->release();
 		delete(af);
 	}
+}
+
+uint64 Player::getXXHash() {
+	return Hash::XXHashFromFile(audio_files_path[current_track]);
 }

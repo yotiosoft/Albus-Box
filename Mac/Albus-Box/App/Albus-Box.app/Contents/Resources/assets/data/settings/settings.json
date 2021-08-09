@@ -1,5 +1,12 @@
 ﻿{
   "volume": 1.0,
   "show_wave": true,
-  "loop": true
+  "loop": true,
+  "audio_profiles": [
+    {
+      "hash": 18079113749390075656,
+      "title": "シャイニングスター",
+      "artist_name": ""
+    }
+  ]
 }

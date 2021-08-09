@@ -9,6 +9,7 @@
 #define Player_hpp
 
 #include <Siv3D.hpp>
+#include <Siv3D/XXHash.hpp>
 #include <Specific.hpp>
 
 namespace PlayerStatus {
@@ -18,6 +19,11 @@ namespace PlayerStatus {
 		Play	= 1
 	};
 }
+
+struct AudioFileProfile {
+	String title;
+	String artist_name;
+};
 
 class Player {
 public:
@@ -104,12 +110,15 @@ public:
 private:
 	Array<Audio*> audio_files;
 	Array<FilePath> audio_files_path;
-	Array<String> audio_titles;
+	map<uint64, AudioFileProfile> audio_files_profile;
 	int current_track;
 	PlayerStatus::Type status;
 	double volume;
 	bool show_wave;
 	bool loop;
+	
+	// ハッシュ値を取得(xxHash)
+	uint64 getXXHash();
 };
 
 #endif /* Player_hpp */
