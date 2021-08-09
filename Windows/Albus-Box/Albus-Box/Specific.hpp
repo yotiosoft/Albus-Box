@@ -21,13 +21,12 @@ namespace specific {
 	Array<FileStruct> getAllFilesName(string folderPath, string extension);
 
 	void chdir(string dir);
-	void moveToCurrentDir();
+	String getCurrentDir();
+	String getSettingFilePath();
 	String getFontsDir();
 
 	bool isCursorEntered(Vec2& before_cursor_pos);
 	void changeCursor();
-
-	bool openSaveData(String& arg_file_path);
 
 	bool setWindowStyle(int x1, int y1, int x2, int y2, int w, int h);
 

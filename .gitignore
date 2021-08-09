@@ -2,6 +2,7 @@
 /lib
 /Mac/Albus-Box/DerivedData
 /Windows/.vs
+/id3lib-3.8.3/
 *.ilk
 *.pdb
 *.res

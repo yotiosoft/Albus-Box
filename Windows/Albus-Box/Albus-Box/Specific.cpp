@@ -50,8 +50,12 @@ void specific::chdir(string dir) {
 	::_chdir(dir.c_str());
 }
 
-void specific::moveToCurrentDir() {
-	return;		// 何もしない
+String specific::getCurrentDir() {
+	return U"./";		// 何もしない
+}
+
+String specific::getSettingFilePath() {
+	return U"./data/settings/settings.json";
 }
 
 bool specific::isCursorEntered(Vec2& before_cursor_pos) {
@@ -70,17 +74,6 @@ bool specific::isCursorEntered(Vec2& before_cursor_pos) {
 
 void specific::changeCursor() {
 	Cursor::RequestStyle(CursorStyle::Arrow);
-}
-
-bool specific::openSaveData(String& arg_file_path) {
-	Array<FileFilter> ff = { {U"セーブデータ", {/*U"cbd", */U"cbj"}} };
-	if (const auto open = Dialog::OpenFile(ff, specific::SaveDataFilePath)) {
-		arg_file_path = open.value();
-
-		return true;
-	}
-
-	return false;
 }
 
 String specific::getFontsDir() {
