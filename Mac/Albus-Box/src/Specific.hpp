@@ -32,6 +32,7 @@ namespace specific {
 	void changeCursor();
 
 	String getSettingFilePath();
+	String getAudioProfilesFilePath();
 
 	bool setWindowStyle(int x1, int y1, int x2, int y2, int w, int h);
 }

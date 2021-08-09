@@ -104,6 +104,12 @@ public:
 	// 設定ファイルを保存
 	void saveSettings();
 	
+	// 楽曲情報を読み込み
+	void loadAudioProfiles();
+	
+	// 楽曲情報を保存
+	void saveAudioProfiles();
+	
 	// 解放
 	void free();
 	

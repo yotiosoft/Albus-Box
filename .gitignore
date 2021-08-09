@@ -13,6 +13,8 @@
 *.tlog
 Windows/Albus-Box/.vs/Albus-Box/v16/
 Windows/Albus-Box/Intermediate
+audio_profiles.json
+settings.json
 
 # Xcode
 #
