@@ -325,7 +325,7 @@ void Player::saveSettings() {
 }
 
 void Player::loadAudioProfiles() {
-	if (!FileSystem::Exists(specific::getSettingFilePath())) {
+	if (!FileSystem::Exists(specific::getAudioProfilesFilePath())) {
 		return;
 	}
 	
