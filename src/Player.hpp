@@ -51,6 +51,9 @@ public:
 	
 	// 次の曲へ
 	void next();
+
+	// 曲を遷移したときの処理
+	void move();
 	
 	// 再生位置変更
 	bool seekTo(double skip_pos);
@@ -122,6 +125,7 @@ private:
 	double volume;
 	bool show_wave;
 	bool loop;
+	uint64 current_track_hash;
 	
 	// ハッシュ値を取得(xxHash)
 	uint64 getXXHash();

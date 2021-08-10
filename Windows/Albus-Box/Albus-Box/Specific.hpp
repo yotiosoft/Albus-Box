@@ -23,6 +23,7 @@ namespace specific {
 	void chdir(string dir);
 	String getCurrentDir();
 	String getSettingFilePath();
+	String getAudioProfilesFilePath();
 	String getFontsDir();
 
 	bool isCursorEntered(Vec2& before_cursor_pos);

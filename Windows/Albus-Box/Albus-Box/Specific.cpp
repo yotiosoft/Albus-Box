@@ -58,6 +58,10 @@ String specific::getSettingFilePath() {
 	return U"./data/settings/settings.json";
 }
 
+String specific::getAudioProfilesFilePath() {
+	return U"./data/settings/audio_profiles.json";
+}
+
 bool specific::isCursorEntered(Vec2& before_cursor_pos) {
 	Vec2 cursor_pos = Cursor::Pos();
 	if (before_cursor_pos.x < 0 || before_cursor_pos.y < 0 || before_cursor_pos.x > Scene::Size().x || before_cursor_pos.y > Scene::Size().y) {

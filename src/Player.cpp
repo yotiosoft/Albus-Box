@@ -23,6 +23,7 @@ void Player::open(FilePath audio_filepath) {
 	
 	stop();
 	current_track = (int)audio_files.size()-1;
+	move();
 	play();
 }
 
@@ -96,6 +97,7 @@ void Player::previous() {
 	
 	// そうでなければ（前の曲へボタンが2度押されたら）前の曲へ
 	// 現在の曲をストップ
+	PlayerStatus::Type before_status = status;
 	stop();
 	
 	// 前の曲へ（現在の曲がリストの先頭ならリストの最後の曲へ）
@@ -103,9 +105,16 @@ void Player::previous() {
 	if (current_track == -1) {
 		current_track = (int)audio_files.size()-1;
 	}
+
+	move();
 	
-	// 再生
-	playFromBegin();
+	if (before_status == PlayerStatus::Play) {
+		// 再生
+		playFromBegin();
+	}
+	else {
+		pause();
+	}
 }
 
 void Player::next() {
@@ -125,6 +134,7 @@ void Player::next() {
 	}
 	
 	// 現在の曲をストップ
+	PlayerStatus::Type before_status = status;
 	stop();
 	
 	// 次の曲へ（現在の曲がリストの最後ならリストの先頭の曲へ）
@@ -132,9 +142,20 @@ void Player::next() {
 	if (current_track == audio_files.size()) {
 		current_track = 0;
 	}
+
+	move();
 	
-	// 再生
-	playFromBegin();
+	if (before_status == PlayerStatus::Play) {
+		// 再生
+		playFromBegin();
+	}
+	else {
+		pause();
+	}
+}
+
+void Player::move() {
+	current_track_hash = getXXHash();
 }
 
 bool Player::seekTo(double skip_pos) {
@@ -178,18 +199,18 @@ String Player::getTitle() {
 		return U"";
 	}
 	
-	if (audio_files_profile.count(getXXHash()) == 0) {
+	if (audio_files_profile.count(current_track_hash) == 0) {
 		// ファイル情報が存在しなければファイル名を返す
 		return FileSystem::BaseName(audio_files_path[current_track]);
 	}
 	
 	// ファイル情報が存在するなら設定されたタイトルを返す
-	return audio_files_profile[getXXHash()].title;
+	return audio_files_profile[current_track_hash].title;
 }
 
 void Player::editTitle(String new_title) {
 	// ファイル情報をハッシュ値とともに格納
-	audio_files_profile[getXXHash()].title = new_title;
+	audio_files_profile[current_track_hash].title = new_title;
 	
 	// 設定ファイルを上書き保存
 	saveAudioProfiles();
