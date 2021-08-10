@@ -16,6 +16,10 @@
 		<data>
 		HmLb2Aeq+fiFybCCxi2TyTXGJfA=
 		</data>
+		<key>Resources/assets/data/settings/settings.json</key>
+		<data>
+		Tev693H2pdfqht8n0Zky1JPRmhQ=
+		</data>
 		<key>Resources/assets/fonts/NotoSansCJKjp/LICENSE_OFL.txt</key>
 		<data>
 		7GYLF9/2kFjCu/EiyoWrg7kg/Oc=
@@ -211,6 +215,13 @@
 			<key>hash2</key>
 			<data>
 			62WdaQN4CKVkBpOW6PkGmieiPj351VoiT8Vywa9hOfs=
+			</data>
+		</dict>
+		<key>Resources/assets/data/settings/settings.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			w66/xoIqZPx72FvS55ENkuEECwPL3gx5o4hzJWUi34k=
 			</data>
 		</dict>
 		<key>Resources/assets/fonts/NotoSansCJKjp/LICENSE_OFL.txt</key>
