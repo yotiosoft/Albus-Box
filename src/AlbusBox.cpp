@@ -1,8 +1,19 @@
 #include "AlbusBox.hpp"
 
-pair<bool, FilePath> FileOpen() {
+pair<bool, FilePath> AudioFileOpen() {
 	// ファイル選択ダイアログ
 	Array<FileFilter> ff = { {U"音声ファイル", {U"mp3", U"ogg", U"wav", U"m4a"}} };
+	String filePathTemp;
+	if (const auto open = Dialog::OpenFile(ff)) {
+		return pair<bool, FilePath>(true, open.value());
+	}
+
+	return pair<bool, FilePath>(false, FilePath());
+}
+
+pair<bool, FilePath> ImageFileOpen() {
+	// ファイル選択ダイアログ
+	Array<FileFilter> ff = { {U"画像ファイル", {U"png", U"jpg", U"jpeg", U"bmp", U"gif", U"tga", U"ppm", U"pgm", U"pbm", U"pnm", U"webp"}} };
 	String filePathTemp;
 	if (const auto open = Dialog::OpenFile(ff)) {
 		return pair<bool, FilePath>(true, open.value());
@@ -183,6 +194,17 @@ bool AlbusBoxSetting(Player& player, Font& font13, Font& font16B, Font& font16, 
 	return true;
 }
 
+void drawThumbnailTexture(Player& player, int thumbnail_size) {
+	Texture thumbnail_texture = player.getThumbnailTexture();
+
+	if (thumbnail_texture.width() > thumbnail_texture.height()) {
+		thumbnail_texture.resized(Size(thumbnail_texture.width() / thumbnail_texture.height() * thumbnail_size, thumbnail_size)).draw(0, 0);
+	}
+	else {
+		thumbnail_texture.resized(Size(thumbnail_size, thumbnail_texture.height() / thumbnail_texture.width() * thumbnail_size)).draw(0, 0);
+	}
+}
+
 void AlbusBox() {
 	Scene::SetBackground(DEFAULT_BACKGROUND_COLOR);
 	Window::SetStyle(WindowStyle::Frameless);
@@ -244,30 +266,10 @@ void AlbusBox() {
 
 	// サムネ用
 	const int thumbnail_size = 260;
-	Image thumbnail_image(thumbnail_size, thumbnail_size, Palette::White);
-	Color thumbnail_color1(Palette::Orangered);
-	Color thumbnail_color2(Palette::Mediumpurple);
-
-	for (int y = 0; y < thumbnail_image.height(); y++) {
-		for (int x = 0; x < thumbnail_image.width(); x++) {
-			double t = (double)(x + y) / (thumbnail_image.width() + thumbnail_image.height() - 2);
-			thumbnail_image[y][x] = thumbnail_color1.lerp(thumbnail_color2, t);
-		}
-	}
-	RenderTexture thumbnail_texture(thumbnail_image);
-	Texture thunbnail_image_texture(thumbnail_image);
+	RenderTexture thumbnail_texture(player.getDefdaultThumbnailImage());
 	Circle thumbnail_circle(Scene::Width() / 2, Scene::Height() / 3, thumbnail_size / 2);
 
-	//Wave wave = audio_file.getWave();
-	//cout << wave.size() << " " << audio_file.samples() << endl;
-	/*
-	for (int t=0; t<wave.size(); t++) {
-		wave[t].left = 0.3;
-		wave[t].right = 0.3;
-	}
-	audio_file = Audio(wave);
-	*/
-
+	// 高速フーリエ変換用
 	FFTResult fft;
 
 	// 座標変換行列（タイトル用）
@@ -295,20 +297,29 @@ void AlbusBox() {
 		
 		// ファイルを開く
 		if (NeumorphismUI::CircleButton(fileopen_button_pos, 20, fileopen_icon)) {
-			auto file_open = FileOpen();
+			auto file_open = AudioFileOpen();
 			if (file_open.first) {
 				player.open(file_open.second);
 			}
 		}
 
 		// サムネイル
-		NeumorphismUI::NeumorphismCircle(Scene::Width() / 2, Scene::Height() / 3, thumbnail_size / 2 + 10, false);
+		if (NeumorphismUI::NeumorphismCircle(Scene::Width() / 2, Scene::Height() / 3, thumbnail_size / 2 + 10, false)) {
+			Cursor::RequestStyle(CursorStyle::Hand);
 
-		// 波形を表示
+			if (MouseL.down()) {
+				pair<bool, FilePath> image_file_open = ImageFileOpen();
+				if (image_file_open.first) {
+					player.setThumbnailImage(image_file_open.second);
+				}
+			}
+		}
+
+		// 波形を表示（FFT:高速フーリエ変換）
 		LineString fft_line;
 		if (playing && player.isOpened() && player.isShowWaveEnabled()) {
 			ScopedRenderTarget2D target(thumbnail_texture);
-			thunbnail_image_texture.draw(0, 0);
+			player.getThumbnailTexture().drawAt(thumbnail_size / 2, thumbnail_size / 2);
 			player.fft(fft);
 			int fft_size = 800;
 			int box_size = 10;
@@ -323,7 +334,7 @@ void AlbusBox() {
 		}
 		else {
 			ScopedRenderTarget2D target(thumbnail_texture);
-			thunbnail_image_texture.draw(0, 0);
+			player.getThumbnailTexture().drawAt(thumbnail_size / 2, thumbnail_size / 2);
 		}
 
 		thumbnail_circle(thumbnail_texture(0, 0, thumbnail_size, thumbnail_size)).draw();
@@ -332,6 +343,7 @@ void AlbusBox() {
 		// タイトル部分のマウスオーバー時にタイトル部分を光らせる
 		if (title_rect.mouseOver()) {
 			title_rect.draw(Color(255, 255, 255, 100));
+			Cursor::RequestStyle(CursorStyle::Hand);
 		}
 
 		// タイトルの表示

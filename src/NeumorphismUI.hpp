@@ -98,7 +98,7 @@ namespace NeumorphismUI {
 			   Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4});
 
 	// 丸型
-	void NeumorphismCircle(int argPositionX, int argPositionY, int argSize, bool isDented,
+	bool NeumorphismCircle(int argPositionX, int argPositionY, int argSize, bool isDented,
 				Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 				int argBlurSize = 16, int argShadowSize = 2,
 						   Vec2 argUpperShadowPosOffset = {-4, -4}, Vec2 argLowerShadowPosOffset = {4, 4});

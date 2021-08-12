@@ -23,6 +23,7 @@ namespace PlayerStatus {
 struct AudioFileProfile {
 	String title;
 	String artist_name;
+	FilePath thumbnail_image_filepath;
 };
 
 class Player {
@@ -69,6 +70,16 @@ public:
 
 	// タイトルを編集
 	void editTitle(String new_title);
+
+	// サムネイル画像を返す
+	Texture& getThumbnailTexture();
+	Image getDefdaultThumbnailImage();
+
+	// サムネイル画像を設定
+	void setThumbnailImage(FilePath thumbnail_image_filepath);
+
+	// サムネイル画像の読み込み・リサイズ処理
+	void loadThumbnailImage();
 	
 	// 再生位置を返す(秒)
 	int getPlayPosSec();
@@ -126,6 +137,11 @@ private:
 	bool show_wave;
 	bool loop;
 	uint64 current_track_hash;
+
+	// サムネイル関係
+	const int thumbnail_size = 260;
+	Texture default_thumbnail_texture;
+	Texture current_track_thumbnail_texture;
 	
 	// ハッシュ値を取得(xxHash)
 	uint64 getXXHash();

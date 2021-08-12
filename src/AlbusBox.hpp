@@ -7,7 +7,7 @@
 #include <NeumorphismUI.hpp>
 #include "Player.hpp"
 
-pair<bool, FilePath> FileOpen();
+pair<bool, FilePath> AudioFileOpen();
 void AlbusBox();
 
 #endif /* AlbusBox_hpp */

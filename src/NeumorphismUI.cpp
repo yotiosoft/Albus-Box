@@ -229,7 +229,7 @@ namespace NeumorphismUI {
 	}
 
 	// 丸型
-	void NeumorphismCircle(int argPositionX, int argPositionY, int argSize, bool isDented,
+	bool NeumorphismCircle(int argPositionX, int argPositionY, int argSize, bool isDented,
 				Color argBackgroundColor, Color argDarkColor, Color argLightColor,
 				int argBlurSize, int argShadowSize,
 				Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
@@ -242,6 +242,8 @@ namespace NeumorphismUI {
 		else {
 			switchCircle.drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 		}
+
+		return switchCircle.mouseOver();
 	}
 
 	// 丸型スイッチ

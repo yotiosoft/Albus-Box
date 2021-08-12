@@ -13,6 +13,10 @@ Player::Player() {
 	
 	loadSettings();
 	loadAudioProfiles();
+
+	// 標準のサムネイル画像を生成
+	default_thumbnail_texture = Texture(getDefdaultThumbnailImage());
+	current_track_thumbnail_texture = default_thumbnail_texture;
 }
 
 void Player::open(FilePath audio_filepath) {
@@ -24,6 +28,7 @@ void Player::open(FilePath audio_filepath) {
 	stop();
 	current_track = (int)audio_files.size()-1;
 	move();
+
 	play();
 }
 
@@ -155,7 +160,13 @@ void Player::next() {
 }
 
 void Player::move() {
+	// ハッシュ値の取得
 	current_track_hash = getXXHash();
+
+	// サムネイル画像の取得
+	loadThumbnailImage();
+
+	return;
 }
 
 bool Player::seekTo(double skip_pos) {
@@ -205,7 +216,12 @@ String Player::getTitle() {
 	}
 	
 	// ファイル情報が存在するなら設定されたタイトルを返す
-	return audio_files_profile[current_track_hash].title;
+	if (audio_files_profile[current_track_hash].title.length() > 0) {
+		return audio_files_profile[current_track_hash].title;
+	}
+	
+	// ファイル情報が存在してもタイトルが設定されていなければファイル名を返す
+	return FileSystem::BaseName(audio_files_path[current_track]);
 }
 
 void Player::editTitle(String new_title) {
@@ -214,6 +230,60 @@ void Player::editTitle(String new_title) {
 	
 	// 設定ファイルを上書き保存
 	saveAudioProfiles();
+}
+
+Texture& Player::getThumbnailTexture() {
+	return current_track_thumbnail_texture;
+}
+
+Image Player::getDefdaultThumbnailImage() {
+	Image thumbnail_image(thumbnail_size, thumbnail_size, Palette::White);
+	Color thumbnail_color1(Palette::Orangered);
+	Color thumbnail_color2(Palette::Mediumpurple);
+
+	for (int y = 0; y < thumbnail_image.height(); y++) {
+		for (int x = 0; x < thumbnail_image.width(); x++) {
+			double t = (double)(x + y) / (thumbnail_image.width() + thumbnail_image.height() - 2);
+			thumbnail_image[y][x] = thumbnail_color1.lerp(thumbnail_color2, t);
+		}
+	}
+
+	return thumbnail_image;
+}
+
+void Player::setThumbnailImage(FilePath thumbnail_image_filepath) {
+	if (thumbnail_image_filepath.length() > 0 && FileSystem::Exists(thumbnail_image_filepath)) {
+		audio_files_profile[current_track_hash].thumbnail_image_filepath = thumbnail_image_filepath;
+		loadThumbnailImage();
+
+		saveAudioProfiles();
+	}
+}
+
+void Player::loadThumbnailImage() {
+	if (audio_files_profile.count(current_track_hash) > 0) {
+		if (audio_files_profile[current_track_hash].thumbnail_image_filepath.length() > 0 
+			&& FileSystem::Exists(audio_files_profile[current_track_hash].thumbnail_image_filepath)) {
+
+			Image thumbnail_image_temp(audio_files_profile[current_track_hash].thumbnail_image_filepath);
+
+			if (thumbnail_image_temp.width() > thumbnail_image_temp.height()) {
+				thumbnail_image_temp = thumbnail_image_temp.fitted(Size(thumbnail_image_temp.width() / thumbnail_image_temp.height() * thumbnail_size * 2, thumbnail_size * 2));
+			}
+			else {
+				thumbnail_image_temp = thumbnail_image_temp.fitted(Size(thumbnail_size * 2, thumbnail_image_temp.height() / thumbnail_image_temp.width() * thumbnail_size * 2));
+			}
+
+			current_track_thumbnail_texture = Texture(thumbnail_image_temp);
+
+			return;
+		}
+	}
+
+	// ファイル情報が存在しなければデフォルトのサムネイル画像
+	current_track_thumbnail_texture = default_thumbnail_texture;
+
+	return;
 }
 
 int Player::getPlayPosSec() {
@@ -356,6 +426,7 @@ void Player::loadAudioProfiles() {
 		uint64 hash = audio_profile[U"hash"].get<uint64>();
 		audio_files_profile[hash].title = audio_profile[U"title"].getString();
 		audio_files_profile[hash].artist_name = audio_profile[U"artist_name"].getString();
+		audio_files_profile[hash].thumbnail_image_filepath = audio_profile[U"thumbnail_image_filepath"].getString();
 	}
 }
 
@@ -373,6 +444,7 @@ void Player::saveAudioProfiles() {
 					
 					json.key(U"title").write(audio_profile.second.title);
 					json.key(U"artist_name").write(audio_profile.second.artist_name);
+					json.key(U"thumbnail_image_filepath").write(audio_profile.second.thumbnail_image_filepath);
 				}
 				json.endObject();
 			}
