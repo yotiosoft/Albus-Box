@@ -478,7 +478,7 @@ namespace NeumorphismUI {
 		}
 		
 		// 押下時の表示
-		if (buttonCircle.leftPressed() && argEnable) {
+		if (buttonCircle.leftPressed()) {
 			buttonCircle.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 			mat = Mat3x2::Scale(0.9, Point(argPositionX, argPositionY));
 			
@@ -541,7 +541,7 @@ namespace NeumorphismUI {
 		}
 		
 		// 押下時の表示
-		if (buttonCircle.leftPressed() && clicked) {
+		if (buttonCircle.leftPressed()) {
 			buttonCircle.drawShadow(argUpperShadowPosOffset, argBlurSize, argShadowSize, argDarkColor).drawShadow(argLowerShadowPosOffset, argBlurSize, argShadowSize, argLightColor).draw(argBackgroundColor);
 			mat = Mat3x2::Scale(0.9, Point(argPositionX, argPositionY));
 			

@@ -118,14 +118,20 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 				// 土台
 				NeumorphismUI::NeumorphismRect(20, list_element_margin * i, Scene::Width()-40, list_element_h, false);
 
+				// ボタンの有効・無効
+				bool button_enable = true;
+				if (110 - scroll_y + list_element_margin * i + list_element_h / 2 + 20 < 100) {
+					button_enable = false;
+				}
+
 				// 再生・停止ボタン
 				if (i == title_list.second) {
 					bool v = true;
-					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h/2), 20, v, stop_icon);
+					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h/2), 20, v, stop_icon, button_enable);
 				}
 				else {
 					bool v = false;
-					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h / 2), 20, v, play_icon);
+					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h / 2), 20, v, play_icon, button_enable);
 				}
 				
 				// タイトル
