@@ -26,6 +26,11 @@ struct AudioFileProfile {
 	FilePath thumbnail_image_filepath;
 };
 
+struct AudioStruct {
+	uint64 hash;
+	Audio* audio;
+};
+
 class Player {
 public:
 	// コンストラクタ
@@ -66,7 +71,9 @@ public:
 	bool changeVolumeTo(double volume_norm);
 	
 	// 曲のタイトルを返す
+	String getTitle(int num);
 	String getTitle();
+	pair<Array<String>, int> getTitleList();
 
 	// タイトルを編集
 	void editTitle(String new_title);
@@ -128,7 +135,7 @@ public:
 	void free();
 	
 private:
-	Array<Audio*> audio_files;
+	Array<AudioStruct> audio_files;
 	Array<FilePath> audio_files_path;
 	map<uint64, AudioFileProfile> audio_files_profile;
 	int current_track;
@@ -136,15 +143,11 @@ private:
 	double volume;
 	bool show_wave;
 	bool loop;
-	uint64 current_track_hash;
 
 	// サムネイル関係
 	const int thumbnail_size = 260;
 	Texture default_thumbnail_texture;
 	Texture current_track_thumbnail_texture;
-	
-	// ハッシュ値を取得(xxHash)
-	uint64 getXXHash();
 };
 
 #endif /* Player_hpp */

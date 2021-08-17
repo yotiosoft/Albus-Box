@@ -20,9 +20,13 @@ Player::Player() {
 }
 
 void Player::open(FilePath audio_filepath) {
-	audio_files << new Audio(audio_filepath);
-	audio_files.back()->setVolume(volume);
-	audio_files.back()->setLoop(loop);
+	Audio* new_audio_file = new Audio(audio_filepath);
+	uint64 new_audio_hash = Hash::XXHashFromFile(audio_filepath);
+	AudioStruct new_audio_struct{ new_audio_hash, new_audio_file };
+
+	audio_files << new_audio_struct;
+	audio_files.back().audio->setVolume(volume);
+	audio_files.back().audio->setLoop(loop);
 	audio_files_path << audio_filepath;
 	
 	stop();
@@ -38,7 +42,7 @@ bool Player::play() {
 	}
 	
 	status = PlayerStatus::Play;
-	audio_files[current_track]->play();
+	audio_files[current_track].audio->play();
 	
 	return true;
 }
@@ -49,8 +53,8 @@ bool Player::playFromBegin() {
 	}
 	
 	status = PlayerStatus::Play;
-	audio_files[current_track]->setPosSample(0);
-	audio_files[current_track]->play();
+	audio_files[current_track].audio->setPosSample(0);
+	audio_files[current_track].audio->play();
 	
 	return true;
 }
@@ -60,7 +64,7 @@ bool Player::playing() {
 		return false;
 	}
 	
-	if (status == PlayerStatus::Play && !audio_files[current_track]->isPlaying()) {
+	if (status == PlayerStatus::Play && !audio_files[current_track].audio->isPlaying()) {
 		next();
 	}
 	
@@ -73,7 +77,7 @@ bool Player::pause() {
 	}
 	
 	status = PlayerStatus::Pause;
-	audio_files[current_track]->pause();
+	audio_files[current_track].audio->pause();
 	
 	return true;
 }
@@ -84,7 +88,7 @@ bool Player::stop() {
 	}
 	
 	status = PlayerStatus::Stop;
-	audio_files[current_track]->stop();
+	audio_files[current_track].audio->stop();
 	
 	return true;
 }
@@ -95,8 +99,8 @@ void Player::previous() {
 	}
 	
 	// 現在再生中の曲の再生位置が1.0秒以上なら0.0秒に戻る
-	if (audio_files[current_track]->posSec() >= 1.0) {
-		audio_files[current_track]->setPosSec(0.0);
+	if (audio_files[current_track].audio->posSec() >= 1.0) {
+		audio_files[current_track].audio->setPosSec(0.0);
 		return;
 	}
 	
@@ -128,12 +132,12 @@ void Player::next() {
 	}
 	
 	if (current_track == 0 && audio_files.size() == 1 && loop) {	// 1曲しかリストに読み込まれていない場合
-		audio_files[current_track]->setPosSec(0.0);					// 0.0秒に戻る
+		audio_files[current_track].audio->setPosSec(0.0);					// 0.0秒に戻る
 		play();
 		return;
 	}
 	else if (current_track == 0 && audio_files.size() == 1 && !loop) {
-		audio_files[current_track]->setPosSec(0.0);
+		audio_files[current_track].audio->setPosSec(0.0);
 		pause();
 		return;
 	}
@@ -160,9 +164,6 @@ void Player::next() {
 }
 
 void Player::move() {
-	// ハッシュ値の取得
-	current_track_hash = getXXHash();
-
 	// サムネイル画像の取得
 	loadThumbnailImage();
 
@@ -180,7 +181,7 @@ bool Player::seekTo(double skip_pos) {
 	}
 	
 	// 再生位置変更
-	audio_files[current_track]->setPosSample(skip_pos * audio_files[current_track]->samples());
+	audio_files[current_track].audio->setPosSample(skip_pos * audio_files[current_track].audio->samples());
 	
 	return true;
 }
@@ -199,34 +200,48 @@ bool Player::changeVolumeTo(double volume_norm) {
 	
 	// すべてのデータの適応
 	for (auto af : audio_files) {
-		af->setVolume(volume);
+		af.audio->setVolume(volume);
 	}
 	
 	return true;
 }
 
-String Player::getTitle() {
+String Player::getTitle(int num) {
 	if (!isOpened()) {
 		return U"";
 	}
-	
-	if (audio_files_profile.count(current_track_hash) == 0) {
+
+	if (audio_files_profile.count(audio_files[num].hash) == 0) {
 		// ファイル情報が存在しなければファイル名を返す
-		return FileSystem::BaseName(audio_files_path[current_track]);
+		return FileSystem::BaseName(audio_files_path[num]);
 	}
-	
+
 	// ファイル情報が存在するなら設定されたタイトルを返す
-	if (audio_files_profile[current_track_hash].title.length() > 0) {
-		return audio_files_profile[current_track_hash].title;
+	if (audio_files_profile[audio_files[num].hash].title.length() > 0) {
+		return audio_files_profile[audio_files[num].hash].title;
 	}
-	
+
 	// ファイル情報が存在してもタイトルが設定されていなければファイル名を返す
-	return FileSystem::BaseName(audio_files_path[current_track]);
+	return FileSystem::BaseName(audio_files_path[num]);
+}
+
+String Player::getTitle() {
+	return getTitle(current_track);
+}
+
+pair<Array<String>, int> Player::getTitleList() {
+	Array<String> title_list;
+
+	for (int i = 0; i < audio_files.size(); i++) {
+		title_list << getTitle(i);
+	}
+
+	return pair<Array<String>, int>{title_list, current_track};
 }
 
 void Player::editTitle(String new_title) {
 	// ファイル情報をハッシュ値とともに格納
-	audio_files_profile[current_track_hash].title = new_title;
+	audio_files_profile[audio_files[current_track].hash].title = new_title;
 	
 	// 設定ファイルを上書き保存
 	saveAudioProfiles();
@@ -253,7 +268,7 @@ Image Player::getDefdaultThumbnailImage() {
 
 void Player::setThumbnailImage(FilePath thumbnail_image_filepath) {
 	if (thumbnail_image_filepath.length() > 0 && FileSystem::Exists(thumbnail_image_filepath)) {
-		audio_files_profile[current_track_hash].thumbnail_image_filepath = thumbnail_image_filepath;
+		audio_files_profile[audio_files[current_track].hash].thumbnail_image_filepath = thumbnail_image_filepath;
 		loadThumbnailImage();
 
 		saveAudioProfiles();
@@ -261,11 +276,11 @@ void Player::setThumbnailImage(FilePath thumbnail_image_filepath) {
 }
 
 void Player::loadThumbnailImage() {
-	if (audio_files_profile.count(current_track_hash) > 0) {
-		if (audio_files_profile[current_track_hash].thumbnail_image_filepath.length() > 0 
-			&& FileSystem::Exists(audio_files_profile[current_track_hash].thumbnail_image_filepath)) {
+	if (audio_files_profile.count(audio_files[current_track].hash) > 0) {
+		if (audio_files_profile[audio_files[current_track].hash].thumbnail_image_filepath.length() > 0
+			&& FileSystem::Exists(audio_files_profile[audio_files[current_track].hash].thumbnail_image_filepath)) {
 
-			Image thumbnail_image_temp(audio_files_profile[current_track_hash].thumbnail_image_filepath);
+			Image thumbnail_image_temp(audio_files_profile[audio_files[current_track].hash].thumbnail_image_filepath);
 
 			if (thumbnail_image_temp.width() > thumbnail_image_temp.height()) {
 				thumbnail_image_temp = thumbnail_image_temp.fitted(Size(thumbnail_image_temp.width() / thumbnail_image_temp.height() * thumbnail_size * 2, thumbnail_size * 2));
@@ -290,49 +305,49 @@ int Player::getPlayPosSec() {
 	if (!isOpened()) {
 		return 0;
 	}
-	return audio_files[current_track]->posSec();
+	return audio_files[current_track].audio->posSec();
 }
 
 int Player::getPlayPosTimeMin() {
 	if (!isOpened()) {
 		return 0;
 	}
-	return (int)audio_files[current_track]->posSec() / 60;
+	return (int)audio_files[current_track].audio->posSec() / 60;
 }
 
 int Player::getPlayPosTimeSec() {
 	if (!isOpened()) {
 		return 0;
 	}
-	return (int)audio_files[current_track]->posSec() % 60;
+	return (int)audio_files[current_track].audio->posSec() % 60;
 }
 
 double Player::getPlayPosNorm() {
 	if (!isOpened()) {
 		return 0.0;
 	}
-	return (double)audio_files[current_track]->posSample() / audio_files[current_track]->samples();
+	return (double)audio_files[current_track].audio->posSample() / audio_files[current_track].audio->samples();
 }
 
 int64 Player::getPlayPosSample() {
 	if (!isOpened()) {
 		return 0;
 	}
-	return audio_files[current_track]->posSample();
+	return audio_files[current_track].audio->posSample();
 }
 
 int Player::getTotalTimeMin() {
 	if (!isOpened()) {
 		return 0;
 	}
-	return (int)audio_files[current_track]->lengthSec() / 60;
+	return (int)audio_files[current_track].audio->lengthSec() / 60;
 }
 
 int Player::getTotalTimeSec() {
 	if (!isOpened()) {
 		return 0;
 	}
-	return (int)audio_files[current_track]->lengthSec() % 60;
+	return (int)audio_files[current_track].audio->lengthSec() % 60;
 }
 
 bool Player::isShowWaveEnabled() {
@@ -356,18 +371,18 @@ void Player::setLoop(bool enable) {
 	if (!isOpened())
 		return;
 	
-	audio_files[current_track]->pause();
+	audio_files[current_track].audio->pause();
 
-	int64 play_samples = audio_files[current_track]->posSample();
+	int64 play_samples = audio_files[current_track].audio->posSample();
 
 	for (auto af : audio_files) {
-		af->setLoop(loop);
+		af.audio->setLoop(loop);
 	}
 
 	if (status == PlayerStatus::Play) {
 		std::cout << "to play " << play_samples << std::endl;
-		audio_files[current_track]->setPosSample(play_samples);
-		audio_files[current_track]->play();
+		audio_files[current_track].audio->setPosSample(play_samples);
+		audio_files[current_track].audio->play();
 	}
 }
 
@@ -375,7 +390,7 @@ void Player::fft(FFTResult& fft) {
 	if (!isOpened())
 		return;
 	
-	FFT::Analyze(fft, *audio_files[current_track]);
+	FFT::Analyze(fft, *audio_files[current_track].audio);
 }
 
 bool Player::isOpened() {
@@ -461,11 +476,7 @@ void Player::free() {
 	stop();
 	
 	for (auto af : audio_files) {
-		af->release();
-		delete(af);
+		af.audio->release();
+		delete(af.audio);
 	}
-}
-
-uint64 Player::getXXHash() {
-	return Hash::XXHashFromFile(audio_files_path[current_track]);
 }
