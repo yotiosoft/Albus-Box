@@ -57,7 +57,7 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 	else if (OS == "Mac") {
 		return_button_pos = Point(45, 10);
 	}
-	Point fileopen_button_pos = Point(Scene::Width()-60, Scene::Height()-50);
+	Point fileopen_button_pos = Point(Scene::Width()-50, Scene::Height()-50);
 
 	// リストビューを作成
 	pair<Array<String>, int> title_list = player.getTitleList();
@@ -82,13 +82,6 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 		// もどる
 		if (NeumorphismUI::RectButton(return_button_pos, Vec2(40, 40), return_button_icon)) {
 			return false;
-		}
-		// ファイルを開くボタン
-		if (NeumorphismUI::CircleButton(fileopen_button_pos, 20, fileopen_icon)) {
-			auto file_open = AudioFileOpen();
-			if (file_open.first) {
-				player.open(file_open.second);
-			}
 		}
 
 		// 画面タイトル
@@ -120,18 +113,18 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 
 				// ボタンの有効・無効
 				bool button_enable = true;
-				if (110 - scroll_y + list_element_margin * i + list_element_h / 2 + 20 < 100) {
+				if (110 - scroll_y + list_element_margin * i + list_element_h / 2 < 100) {
 					button_enable = false;
 				}
 
 				// 再生・停止ボタン
 				if (i == title_list.second) {
 					bool v = true;
-					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h/2), 20, v, stop_icon, button_enable);
+					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h/2), 25, v, stop_icon, button_enable);
 				}
 				else {
 					bool v = false;
-					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h / 2), 20, v, play_icon, button_enable);
+					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h / 2), 25, v, play_icon, button_enable);
 				}
 				
 				// タイトル
@@ -140,7 +133,13 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 		}
 		listview_texture.draw(0, 100);
 
-		Rect(Point(0, 0), Size(Scene::Width(), 100)).draw(Color(0, 0, 0, 0));
+		// ファイルを開くボタンを表示
+		if (NeumorphismUI::CircleButton(fileopen_button_pos, 30, fileopen_icon)) {
+			auto file_open = AudioFileOpen();
+			if (file_open.first) {
+				player.open(file_open.second);
+			}
+		}
 
 		// 再生処理を継続
 		player.playing();
