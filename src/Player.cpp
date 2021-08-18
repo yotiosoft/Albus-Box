@@ -30,32 +30,50 @@ void Player::open(FilePath audio_filepath) {
 	audio_files_path << audio_filepath;
 	
 	stop();
-	current_track = (int)audio_files.size()-1;
-	move();
+	move((int)audio_files.size() - 1);
 
 	play();
 }
 
 bool Player::play() {
+	return play(current_track);
+}
+
+bool Player::play(int num) {
 	if (!isOpened()) {
 		return false;
 	}
-	
+
+	if (num != current_track && num < audio_files.size()) {
+		pause();
+		move(num);
+		audio_files[current_track].audio->setPosSample(0);
+	}
+
 	status = PlayerStatus::Play;
 	audio_files[current_track].audio->play();
-	
+
 	return true;
 }
 
 bool Player::playFromBegin() {
+	return playFromBegin(current_track);
+}
+
+bool Player::playFromBegin(int num) {
 	if (!isOpened()) {
 		return false;
 	}
-	
+
+	if (num != current_track && num < audio_files.size()) {
+		stop();
+		move(num);
+	}
+
 	status = PlayerStatus::Play;
 	audio_files[current_track].audio->setPosSample(0);
 	audio_files[current_track].audio->play();
-	
+
 	return true;
 }
 
@@ -110,12 +128,7 @@ void Player::previous() {
 	stop();
 	
 	// 前の曲へ（現在の曲がリストの先頭ならリストの最後の曲へ）
-	current_track --;
-	if (current_track == -1) {
-		current_track = (int)audio_files.size()-1;
-	}
-
-	move();
+	move(current_track - 1);
 	
 	if (before_status == PlayerStatus::Play) {
 		// 再生
@@ -147,12 +160,7 @@ void Player::next() {
 	stop();
 	
 	// 次の曲へ（現在の曲がリストの最後ならリストの先頭の曲へ）
-	current_track ++;
-	if (current_track == audio_files.size()) {
-		current_track = 0;
-	}
-
-	move();
+	move(current_track + 1);
 	
 	if (before_status == PlayerStatus::Play) {
 		// 再生
@@ -163,7 +171,16 @@ void Player::next() {
 	}
 }
 
-void Player::move() {
+void Player::move(int num) {
+	if (num == audio_files.size()) {
+		num = 0;
+	}
+	if (num == -1) {
+		num = (int)audio_files.size() - 1;
+	}
+
+	current_track = num;
+
 	// サムネイル画像の取得
 	loadThumbnailImage();
 
@@ -229,14 +246,18 @@ String Player::getTitle() {
 	return getTitle(current_track);
 }
 
-pair<Array<String>, int> Player::getTitleList() {
+pair<Array<String>, Array<bool>> Player::getTitleList() {
 	Array<String> title_list;
-
 	for (int i = 0; i < audio_files.size(); i++) {
 		title_list << getTitle(i);
 	}
 
-	return pair<Array<String>, int>{title_list, current_track};
+	Array<bool> playing(audio_files.size(), false);
+	if (status == PlayerStatus::Play) {
+		playing[current_track] = true;
+	}
+
+	return pair<Array<String>, Array<bool>>{title_list, playing};
 }
 
 void Player::editTitle(String new_title) {

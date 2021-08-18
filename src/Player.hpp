@@ -41,7 +41,9 @@ public:
 	
 	// 再生
 	bool play();
+	bool play(int num);
 	bool playFromBegin();
+	bool playFromBegin(int num);
 	
 	// 再生中の処理
 	bool playing();
@@ -59,7 +61,7 @@ public:
 	void next();
 
 	// 曲を遷移したときの処理
-	void move();
+	void move(int num);
 	
 	// 再生位置変更
 	bool seekTo(double skip_pos);
@@ -73,7 +75,7 @@ public:
 	// 曲のタイトルを返す
 	String getTitle(int num);
 	String getTitle();
-	pair<Array<String>, int> getTitleList();
+	pair<Array<String>, Array<bool>> getTitleList();
 
 	// タイトルを編集
 	void editTitle(String new_title);

@@ -60,7 +60,7 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 	Point fileopen_button_pos = Point(Scene::Width()-50, Scene::Height()-50);
 
 	// リストビューを作成
-	pair<Array<String>, int> title_list = player.getTitleList();
+	pair<Array<String>, Array<bool>> title_list = player.getTitleList();
 
 	// リスト表示用RenderTexture
 	RenderTexture listview_texture(Scene::Width(), Scene::Height()-100, Color(DEFAULT_BACKGROUND_COLOR));
@@ -69,11 +69,18 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 	const int list_element_h = 80;
 	const int list_element_margin = list_element_h + 10;
 
+	Array<bool> before_playing(title_list.first.size(), false);
+	before_playing = title_list.second;
+	int target_audio = -1;
+
 	// マウスクリックした地点の記録用
 	Point mouse_clicked;
 	bool window_moving = false;
 
 	while (System::Update()) {
+		title_list = player.getTitleList();
+		before_playing = title_list.second;
+
 		// 画面上部のボタン群
 		// 閉じるボタン
 		if (ExitButton(font16B, button_close_color, window_close_icon)) {
@@ -118,13 +125,27 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 				}
 
 				// 再生・停止ボタン
-				if (i == title_list.second) {
-					bool v = true;
-					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h/2), 25, v, stop_icon, button_enable);
+				if (title_list.second[i]) {
+					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h/2), 25, title_list.second[i], stop_icon, button_enable);
+					target_audio = i;
+
+					if (before_playing[i] != title_list.second[i]) {
+						player.pause();
+						target_audio = -1;
+					}
 				}
 				else {
-					bool v = false;
-					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h / 2), 25, v, play_icon, button_enable);
+					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h / 2), 25, title_list.second[i], play_icon, button_enable);
+
+					if (before_playing[i] != title_list.second[i]) {
+						if (target_audio >= 0) {
+							player.pause();
+							title_list.second[target_audio] = false;
+							before_playing[target_audio] = false;
+						}
+						player.play(i);
+						target_audio = i;
+					}
 				}
 				
 				// タイトル
