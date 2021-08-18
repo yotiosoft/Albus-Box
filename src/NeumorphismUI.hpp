@@ -240,6 +240,8 @@ namespace NeumorphismUI {
 		bool setValue(double arg_value);
 		
 		bool setValueNoAnimetion(double arg_value);
+
+		void setPosition(Point arg_position);
 		
 		bool isSliderMoving();
 		

@@ -802,6 +802,23 @@ namespace NeumorphismUI {
 		
 		return true;
 	}
+
+	void Slider::setPosition(Point arg_position) {
+		upperShadowPosOffset = { -4, -4 };
+		lowerShadowPosOffset = { 4, 4 };
+		blurSize = 16;
+		shadowSize = 2;
+
+		position.x = arg_position.x;
+		position.y = arg_position.y;
+		innerSize.x = size.x - 10;
+		innerSize.y = size.y - 10;
+
+		sliderRect = RoundRect(arg_position.x, arg_position.y, size.x, size.y, size.y / 2);
+		innerSliderRect = RoundRect(arg_position.x + 10 / 2, arg_position.y + 10 / 2, innerSize.x, innerSize.y, innerSize.y / 2);
+
+		knobX = innerSize.x * value;
+	}
 	
 	bool Slider::isSliderMoving() {
 		return sliding;
@@ -832,10 +849,10 @@ namespace NeumorphismUI {
 		lightShadow = Color(255, 255, 255);
 		
 		sliderRect = RoundRect(argPositionX, argPositionY, argSizeW, argSizeH, argSizeH/2);
-		innerSliderRect = RoundRect(argPositionX+10/2, argPositionY+10/2, argSizeW-10, argSizeH-10, (argSizeH-10)/2);
+		innerSliderRect = RoundRect(argPositionX+10/2, argPositionY+10/2, innerSize.x, innerSize.y, innerSize.y / 2);
 		
 		knobClicked = false;
 		sliding = false;
-		knobX = (size.x-10)*value;
+		knobX = innerSize.x*value;
 	}
 }

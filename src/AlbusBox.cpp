@@ -59,6 +59,11 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 	}
 	Point fileopen_button_pos = Point(Scene::Width()-50, Scene::Height()-50);
 
+	// シークバー
+	double play_pos = 0.0;		// シークバーの初期値
+	int slider_width = Scene::Width() - 40 - 100 - 20;
+	NeumorphismUI::Slider slider(play_pos, Vec2{ 0, 0 }, slider_width, 20);
+
 	// リストビューを作成
 	pair<Array<String>, Array<bool>> title_list = player.getTitleList();
 
@@ -127,7 +132,19 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 				// 再生・停止ボタン
 				if (title_list.second[i]) {
 					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h/2), 25, title_list.second[i], stop_icon, button_enable);
-					target_audio = i;
+					
+					if (target_audio != i) {
+						slider.setPosition(Point(100, list_element_margin * i + 60));
+						target_audio = i;
+					}
+
+					if (!slider.isSliderMoving()) {
+						slider.setValueNoAnimetion(player.getPlayPosNorm());
+					}
+					play_pos = slider.draw();
+					if (slider.isSliderLeftReleased()) {
+						player.seekTo(play_pos);
+					}
 
 					if (before_playing[i] != title_list.second[i]) {
 						player.pause();
@@ -144,7 +161,6 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 							before_playing[target_audio] = false;
 						}
 						player.play(i);
-						target_audio = i;
 					}
 				}
 				

@@ -371,6 +371,10 @@ int Player::getTotalTimeSec() {
 	return (int)audio_files[current_track].audio->lengthSec() % 60;
 }
 
+PlayerStatus::Type Player::getStatus() {
+	return status;
+}
+
 bool Player::isShowWaveEnabled() {
 	return show_wave;
 }

@@ -107,6 +107,9 @@ public:
 	int getTotalTimeMin();
 	int getTotalTimeSec();
 
+	// 現在の再生状態を返す
+	PlayerStatus::Type getStatus();
+
 	// 波形の表示状態
 	bool isShowWaveEnabled();
 	void setShowWave(bool enable);
