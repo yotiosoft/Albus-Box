@@ -61,7 +61,7 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 
 	// シークバー
 	double play_pos = 0.0;		// シークバーの初期値
-	int slider_width = Scene::Width() - 40 - 100 - 20;
+	int slider_width = Scene::Width() - 40 - 100 - 30;
 	NeumorphismUI::Slider slider(play_pos, Vec2{ 0, 0 }, slider_width, 20);
 
 	// リストビューを作成
@@ -134,7 +134,7 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h/2), 25, title_list.second[i], stop_icon, button_enable);
 					
 					if (target_audio != i) {
-						slider.setPosition(Point(100, list_element_margin * i + 60));
+						slider.setPosition(Point(120, list_element_margin * i + 50));
 						target_audio = i;
 					}
 
@@ -150,6 +150,9 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 						player.pause();
 						target_audio = -1;
 					}
+
+					// タイトル
+					font16(title_list.first[i]).draw(Arg::leftCenter(120, list_element_margin * i + list_element_h / 2 - 10), font_color);
 				}
 				else {
 					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h / 2), 25, title_list.second[i], play_icon, button_enable);
@@ -162,10 +165,10 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 						}
 						player.play(i);
 					}
+
+					// タイトル
+					font16(title_list.first[i]).draw(Arg::leftCenter(120, list_element_margin * i + list_element_h / 2), font_color);
 				}
-				
-				// タイトル
-				font16(title_list.first[i]).draw(Arg::leftCenter(120, list_element_margin * i + list_element_h / 2), font_color);
 			}
 		}
 		listview_texture.draw(0, 100);
