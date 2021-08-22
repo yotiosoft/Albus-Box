@@ -44,7 +44,8 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 {
 	// ボタン用アイコン
 	Texture return_button_icon(Icon(IconFont::Return, 20));		// 戻る
-	Texture fileopen_icon(Icon(IconFont::Plus, 20));		// ファイルを開く
+	Texture fileopen_icon(Icon(IconFont::Plus, 20));			// ファイルを開く
+	Texture save_button_icon(Icon(IconFont::Save, 20));			// 保存
 
 	Texture play_icon(Icon(IconFont::Play, 20));			// 再生
 	Texture stop_icon(Icon(IconFont::Stop, 20));			// 停止
@@ -58,6 +59,7 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 		return_button_pos = Point(45, 10);
 	}
 	Point fileopen_button_pos = Point(Scene::Width()-50, Scene::Height()-50);
+	Point save_button_pos = Point(Scene::Width() / 2, 80);
 
 	// シークバー
 	double play_pos = 0.0;		// シークバーの初期値
@@ -94,6 +96,11 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 		// もどる
 		if (NeumorphismUI::RectButton(return_button_pos, Vec2(40, 40), return_button_icon)) {
 			return false;
+		}
+
+		// 保存ボタン
+		if (NeumorphismUI::CircleButton(save_button_pos, 20, save_button_icon)) {
+			player.savePlayList();
 		}
 
 		// 画面タイトル

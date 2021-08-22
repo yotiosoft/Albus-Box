@@ -135,6 +135,12 @@ public:
 	
 	// 楽曲情報を保存
 	void saveAudioProfiles();
+
+	// プレイリストを読み込み
+	void loadPlayList();
+
+	// プレイリストを保存
+	void savePlayList();
 	
 	// 解放
 	void free();

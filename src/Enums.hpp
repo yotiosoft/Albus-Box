@@ -22,6 +22,8 @@ enum Type {
 	Setting		= 0xf1de,
 	Return		= 0xf060,
 
+	Save		= 0xf0c7,
+
 	Information	= 0xf05a,
 	
 	Volume		= 0xf028,

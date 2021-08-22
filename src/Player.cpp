@@ -496,6 +496,32 @@ void Player::saveAudioProfiles() {
 	json.save(specific::getAudioProfilesFilePath());
 }
 
+void Player::loadPlayList() {
+
+}
+
+void Player::savePlayList() {
+	JSONWriter json;
+
+	json.startObject();
+	{
+		json.key(U"list").startArray();
+		{
+			for (auto audio_filepath : audio_files_path) {
+				json.write(audio_filepath);
+			}
+		}
+		json.endArray();
+	}
+	json.endObject();
+
+	Array<FileFilter> ff = { {U"プレイリスト", {U"playlist"}} };
+	String filePathTemp;
+	if (const auto save = Dialog::SaveFile(ff)) {
+		json.save(save.value());
+	}
+}
+
 void Player::free() {
 	// 再生中の曲を停止
 	stop();
