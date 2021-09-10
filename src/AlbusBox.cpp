@@ -71,7 +71,8 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 
 	// リスト表示用RenderTexture
 	RenderTexture listview_texture(Scene::Width(), Scene::Height()-100, Color(DEFAULT_BACKGROUND_COLOR));
-	Mat3x2 mat, mat_mouse;
+	RenderTexture title_texture(250, 40, Color(DEFAULT_BACKGROUND_COLOR));
+	Mat3x2 mat, mat_mouse, mat_title;
 	double scroll_y = 0.0, scroll_y_before = 0.0;
 	const int list_element_h = 80;
 	const int list_element_margin = list_element_h + 10;
@@ -159,7 +160,22 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 					}
 
 					// タイトル
-					font16(title_list.first[i]).draw(Arg::leftCenter(120, list_element_margin * i + list_element_h / 2 - 10), font_color);
+					mat_title = Mat3x2::Translate(0, 0);
+					const Transformer2D t2(mat_title);
+					{
+						const ScopedRenderTarget2D target2(title_texture);
+						title_texture.clear(DEFAULT_BACKGROUND_COLOR);
+
+						DrawableText title_text = font16(title_list.first[i]);
+						int title_w = title_text.region(0, 0).x;
+						int title_x = 0;
+						if (title_w > 250) {
+							title_x = -Scene::FrameCount() % title_w;
+						}
+
+						title_text.draw(title_x, 0, font_color);
+					}
+					title_texture.draw(120, list_element_margin * i + 10);
 				}
 				else {
 					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h / 2), 25, title_list.second[i], play_icon, button_enable);
