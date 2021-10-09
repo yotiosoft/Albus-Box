@@ -39,6 +39,20 @@ bool ExitButton(Color& button_close_color, Texture& window_close_icon) {
 	return false;
 }
 
+void moveWindow(Point& mouse_clicked, bool& window_moving) {
+	// ウィンドウの移動
+	if (MouseL.down()) {
+		mouse_clicked = Cursor::Pos();
+		window_moving = true;
+	}
+	else if (MouseL.pressed() && Window::GetState().focused && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
+		Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
+	}
+	else {
+		window_moving = false;
+	}
+}
+
 // 再生リスト
 bool playListView(Player& player, Color& button_close_color, Texture& window_close_icon, Color& font_color)
 {
@@ -208,16 +222,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 		player.playing();
 
 		// ウィンドウの移動
-		if (MouseL.down()) {
-			mouse_clicked = Cursor::Pos();
-			window_moving = true;
-		}
-		else if (MouseL.pressed() && Window::GetState().focused && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
-			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
-		}
-		else {
-			window_moving = false;
-		}
+		moveWindow(mouse_clicked, window_moving);
 	}
 	return true;
 }
@@ -269,16 +274,7 @@ bool VersionInformation(Player& player, Color& button_close_color, Texture& wind
 		player.playing();
 
 		// ウィンドウの移動
-		if (MouseL.down()) {
-			mouse_clicked = Cursor::Pos();
-			window_moving = true;
-		}
-		else if (MouseL.pressed() && Window::GetState().focused && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
-			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
-		}
-		else {
-			window_moving = false;
-		}
+		moveWindow(mouse_clicked, window_moving);
 	}
 	return true;
 }
@@ -362,16 +358,7 @@ bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_
 		player.playing();
 		
 		// ウィンドウの移動
-		if (MouseL.down()) {
-			mouse_clicked = Cursor::Pos();
-			window_moving = true;
-		}
-		else if (MouseL.pressed() && Window::GetState().focused && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
-			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
-		}
-		else {
-			window_moving = false;
-		}
+		moveWindow(mouse_clicked, window_moving);
 	}
 	return true;
 }
@@ -499,12 +486,14 @@ void AlbusBox() {
 
 		// サムネイル
 		if (NeumorphismUI::NeumorphismCircle(Scene::Width() / 2, Scene::Height() / 3, thumbnail_size / 2 + 10, false)) {
-			Cursor::RequestStyle(CursorStyle::Hand);
+			if (player.isOpened()) {
+				Cursor::RequestStyle(CursorStyle::Hand);
 
-			if (MouseL.down()) {
-				pair<bool, FilePath> image_file_open = ImageFileOpen();
-				if (image_file_open.first) {
-					player.setThumbnailImage(image_file_open.second);
+				if (MouseL.down()) {
+					pair<bool, FilePath> image_file_open = ImageFileOpen();
+					if (image_file_open.first) {
+						player.setThumbnailImage(image_file_open.second);
+					}
 				}
 			}
 		}
@@ -616,16 +605,7 @@ void AlbusBox() {
 		playing = player.playing();
 		
 		// ウィンドウの移動
-		if (MouseL.down()) {
-			mouse_clicked = Cursor::Pos();
-			window_moving = true;
-		}
-		else if (MouseL.pressed() && Window::GetState().focused && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
-			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
-		}
-		else {
-			window_moving = false;
-		}
+		moveWindow(mouse_clicked, window_moving);
 	}
 	
 	player.free();
