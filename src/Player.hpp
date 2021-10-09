@@ -9,7 +9,7 @@
 #define Player_hpp
 
 #include <Siv3D.hpp>
-#include <Siv3D/XXHash.hpp>
+#include <Siv3D/Hash.hpp>
 #include <Specific.hpp>
 
 namespace PlayerStatus {

@@ -1,5 +1,5 @@
 ﻿{
-  "volume": 1.0,
+  "loop": false,
   "show_wave": true,
-  "loop": false
+  "volume": 1.0
 }

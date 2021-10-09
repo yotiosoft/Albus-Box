@@ -60,7 +60,7 @@ namespace NeumorphismUI {
 			if (!argFont.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argFont(argStr).drawAt(argPositionX+argSizeX/2, argPositionY+argSizeY/2, argPushedFontColor);
 				}
 			}
@@ -73,7 +73,7 @@ namespace NeumorphismUI {
 			if (!argFont.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argFont(argStr).drawAt(argPositionX+argSizeX/2, argPositionY+argSizeY/2, argFontColor);
 				}
 			}
@@ -147,7 +147,7 @@ namespace NeumorphismUI {
 			if (!argFont.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argFont(argStr).drawAt(argPositionX+argSizeX/2, argPositionY+argSizeY/2, argPushedFontColor);
 				}
 			}
@@ -160,7 +160,7 @@ namespace NeumorphismUI {
 			if (!argFont.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argFont(argStr).drawAt(argPositionX+argSizeX/2, argPositionY+argSizeY/2, argFontColor);
 				}
 			}
@@ -232,7 +232,7 @@ namespace NeumorphismUI {
 			if (!argTexture.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argTexture.drawAt(argPosition.x+argSize.x/2, argPosition.y+argSize.y/2, argPushedFontColor);
 				}
 			}
@@ -245,7 +245,7 @@ namespace NeumorphismUI {
 			if (!argTexture.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argTexture.drawAt(argPosition.x+argSize.x/2, argPosition.y+argSize.y/2, argFontColor);
 				}
 			}
@@ -308,7 +308,7 @@ namespace NeumorphismUI {
 			if (!argFont.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argFont(argStr).drawAt(argPositionX, argPositionY, argPushedFontColor);
 				}
 			}
@@ -321,7 +321,7 @@ namespace NeumorphismUI {
 			if (!argFont.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argFont(argStr).drawAt(argPositionX, argPositionY, argFontColor);
 				}
 			}
@@ -375,7 +375,7 @@ namespace NeumorphismUI {
 			if (!argTexture.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argTexture.drawAt(argPositionX, argPositionY, argPushedFontColor);
 				}
 			}
@@ -388,7 +388,7 @@ namespace NeumorphismUI {
 			if (!argTexture.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argTexture.drawAt(argPositionX, argPositionY, argFontColor);
 				}
 			}
@@ -440,7 +440,7 @@ namespace NeumorphismUI {
 			mat = Mat3x2::Scale(0.9, Point(argPositionX, argPositionY));
 			
 			// 座標変換行列を適用
-			const Transformer2D t(mat, false);
+			const Transformer2D t(mat, TransformCursor::No);
 			argPushedTexture.drawAt(argPositionX, argPositionY, argFontColor);
 		}
 		// OFFの時の表示
@@ -449,7 +449,7 @@ namespace NeumorphismUI {
 			mat = Mat3x2::Identity();
 			
 			// 座標変換行列を適用
-			const Transformer2D t(mat, false);
+			const Transformer2D t(mat, TransformCursor::No);
 			argTexture.drawAt(argPositionX, argPositionY, argFontColor);
 		}
 	}
@@ -485,7 +485,7 @@ namespace NeumorphismUI {
 			if (!argFont.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argFont(argStr).drawAt(argPositionX, argPositionY, argPushedFontColor);
 				}
 			}
@@ -498,7 +498,7 @@ namespace NeumorphismUI {
 			if (!argFont.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argFont(argStr).drawAt(argPositionX, argPositionY, argFontColor);
 				}
 			}
@@ -548,7 +548,7 @@ namespace NeumorphismUI {
 			if (!argTexture.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argTexture.drawAt(argPositionX, argPositionY, argPushedFontColor);
 				}
 			}
@@ -561,7 +561,7 @@ namespace NeumorphismUI {
 			if (!argTexture.isEmpty()) {
 				{
 					// 座標変換行列を適用
-					const Transformer2D t(mat, false);
+					const Transformer2D t(mat, TransformCursor::No);
 					argTexture.drawAt(argPositionX, argPositionY, argFontColor);
 				}
 			}

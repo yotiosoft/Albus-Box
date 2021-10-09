@@ -1,4 +1,4 @@
-//
+﻿//
 //  Specific.hpp ( for Windows )
 //  Albus Box
 //
@@ -12,7 +12,7 @@
 #include <filesystem>
 #include <direct.h>
 
-#include "OtherFunctions.hpp"
+#include <OtherFunctions.hpp>
 
 /* OS依存の定数など */
 #define OS						"Windows"	// OS

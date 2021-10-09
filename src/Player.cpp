@@ -21,7 +21,7 @@ Player::Player() {
 
 void Player::open(FilePath audio_filepath) {
 	Audio* new_audio_file = new Audio(audio_filepath);
-	uint64 new_audio_hash = Hash::XXHashFromFile(audio_filepath);
+	uint64 new_audio_hash = Hash::XXHash3(&audio_filepath);
 	AudioStruct new_audio_struct{ new_audio_hash, new_audio_file };
 
 	audio_files << new_audio_struct;
@@ -47,7 +47,7 @@ bool Player::play(int num) {
 	if (num != current_track && num < audio_files.size()) {
 		pause();
 		move(num);
-		audio_files[current_track].audio->setPosSample(0);
+		audio_files[current_track].audio->seekSamples(0);
 	}
 
 	status = PlayerStatus::Play;
@@ -71,7 +71,7 @@ bool Player::playFromBegin(int num) {
 	}
 
 	status = PlayerStatus::Play;
-	audio_files[current_track].audio->setPosSample(0);
+	audio_files[current_track].audio->seekSamples(0);
 	audio_files[current_track].audio->play();
 
 	return true;
@@ -118,7 +118,7 @@ void Player::previous() {
 	
 	// 現在再生中の曲の再生位置が1.0秒以上なら0.0秒に戻る
 	if (audio_files[current_track].audio->posSec() >= 1.0) {
-		audio_files[current_track].audio->setPosSec(0.0);
+		audio_files[current_track].audio->seekTime(0.0);
 		return;
 	}
 	
@@ -145,12 +145,12 @@ void Player::next() {
 	}
 	
 	if (current_track == 0 && audio_files.size() == 1 && loop) {	// 1曲しかリストに読み込まれていない場合
-		audio_files[current_track].audio->setPosSec(0.0);					// 0.0秒に戻る
+		audio_files[current_track].audio->seekTime(0.0);					// 0.0秒に戻る
 		play();
 		return;
 	}
 	else if (current_track == 0 && audio_files.size() == 1 && !loop) {
-		audio_files[current_track].audio->setPosSec(0.0);
+		audio_files[current_track].audio->seekTime(0.0);
 		pause();
 		return;
 	}
@@ -198,7 +198,7 @@ bool Player::seekTo(double skip_pos) {
 	}
 	
 	// 再生位置変更
-	audio_files[current_track].audio->setPosSample(skip_pos * audio_files[current_track].audio->samples());
+	audio_files[current_track].audio->seekSamples(skip_pos * audio_files[current_track].audio->samples());
 	
 	return true;
 }
@@ -406,7 +406,7 @@ void Player::setLoop(bool enable) {
 
 	if (status == PlayerStatus::Play) {
 		std::cout << "to play " << play_samples << std::endl;
-		audio_files[current_track].audio->setPosSample(play_samples);
+		audio_files[current_track].audio->seekSamples(play_samples);
 		audio_files[current_track].audio->play();
 	}
 }
@@ -434,35 +434,31 @@ void Player::loadSettings() {
 		return;
 	}
 	
-	JSONReader json(specific::getSettingFilePath());
+	JSON j_setting = JSON::Load(specific::getSettingFilePath());
 	
-	volume = json[U"volume"].get<double>();
-	show_wave = json[U"show_wave"].get<bool>();
-	loop = json[U"loop"].get<bool>();
+	volume = j_setting[U"volume"].get<double>();
+	show_wave = j_setting[U"show_wave"].get<bool>();
+	loop = j_setting[U"loop"].get<bool>();
 }
 
 void Player::saveSettings() {
-	JSONWriter json;
+	JSON j_setting;
+
+	j_setting[U"volume"] = volume;
+	j_setting[U"show_wave"] = show_wave;
+	j_setting[U"loop"] = loop;
 	
-	json.startObject();
-	{
-		json.key(U"volume").write(volume);
-		json.key(U"show_wave").write(show_wave);
-		json.key(U"loop").write(loop);
-	}
-	json.endObject();
-	
-	json.save(specific::getSettingFilePath());
+	j_setting.save(specific::getSettingFilePath());
 }
 
 void Player::loadAudioProfiles() {
 	if (!FileSystem::Exists(specific::getAudioProfilesFilePath())) {
 		return;
 	}
+
+	JSON audio_profile = JSON::Load(specific::getAudioProfilesFilePath());
 	
-	JSONReader json(specific::getAudioProfilesFilePath());
-	
-	for (auto audio_profile : json[U"audio_profiles"].arrayView()) {
+	for (auto audio_profile : audio_profile[U"audio_profiles"].arrayView()) {
 		uint64 hash = audio_profile[U"hash"].get<uint64>();
 		audio_files_profile[hash].title = audio_profile[U"title"].getString();
 		audio_files_profile[hash].artist_name = audio_profile[U"artist_name"].getString();
@@ -471,29 +467,24 @@ void Player::loadAudioProfiles() {
 }
 
 void Player::saveAudioProfiles() {
-	JSONWriter json;
-	
-	json.startObject();
-	{
-		json.key(U"audio_profiles").startArray();
-		{
-			for (auto audio_profile : audio_files_profile) {
-				json.startObject();
-				{
-					json.key(U"hash").write(audio_profile.first);
-					
-					json.key(U"title").write(audio_profile.second.title);
-					json.key(U"artist_name").write(audio_profile.second.artist_name);
-					json.key(U"thumbnail_image_filepath").write(audio_profile.second.thumbnail_image_filepath);
-				}
-				json.endObject();
-			}
-		}
-		json.endArray();
+	JSON audio_profiles;
+
+	Array<JSON> audio_profile_json_array;
+	for (auto audio_profile : audio_files_profile) {
+		JSON audio_profile_json;
+
+		audio_profile_json[U"hash"] = audio_profile.first;
+
+		audio_profile_json[U"title"] = audio_profile.second.title;
+		audio_profile_json[U"artist_name"] = audio_profile.second.artist_name;
+		audio_profile_json[U"thumbnail_image_filepath"] = audio_profile.second.thumbnail_image_filepath;
+
+		audio_profile_json_array << audio_profile_json;
 	}
-	json.endObject();
+
+	audio_profiles[U"audio_profiles"] = audio_profile_json_array;
 	
-	json.save(specific::getAudioProfilesFilePath());
+	audio_profiles.save(specific::getAudioProfilesFilePath());
 }
 
 void Player::loadPlayList() {
@@ -501,24 +492,19 @@ void Player::loadPlayList() {
 }
 
 void Player::savePlayList() {
-	JSONWriter json;
+	JSON playlist;
 
-	json.startObject();
-	{
-		json.key(U"list").startArray();
-		{
-			for (auto audio_filepath : audio_files_path) {
-				json.write(audio_filepath);
-			}
-		}
-		json.endArray();
+	Array<JSON> playlist_json_array;
+	for (auto audio_filepath : audio_files_path) {
+		playlist_json_array << JSON(audio_filepath);
 	}
-	json.endObject();
+
+	playlist[U"list"] = playlist_json_array;
 
 	Array<FileFilter> ff = { {U"プレイリスト", {U"playlist"}} };
 	String filePathTemp;
 	if (const auto save = Dialog::SaveFile(ff)) {
-		json.save(save.value());
+		playlist.save(save.value());
 	}
 }
 

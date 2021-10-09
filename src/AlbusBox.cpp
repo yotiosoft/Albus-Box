@@ -22,7 +22,7 @@ pair<bool, FilePath> ImageFileOpen() {
 	return pair<bool, FilePath>(false, FilePath());
 }
 
-bool ExitButton(Font& font16, Color& button_close_color, Texture& window_close_icon) {
+bool ExitButton(Color& button_close_color, Texture& window_close_icon) {
 	// ウィンドウを閉じるボタン
 	if (OS == "Windows") {
 		if (NeumorphismUI::CircleButton(Scene::Width()-30, 30, 15, window_close_icon)) {
@@ -30,7 +30,8 @@ bool ExitButton(Font& font16, Color& button_close_color, Texture& window_close_i
 		}
 	}
 	else if (OS == "Mac") {
-		if (NeumorphismUI::CircleButton(25, 25, 8, U"", font16, true, button_close_color)) {
+		Font font_temp = Font(FontAsset(U"middle"));
+		if (NeumorphismUI::CircleButton(25, 25, 8, U"", font_temp, true, button_close_color)) {
 			return true;
 		}
 	}
@@ -39,16 +40,15 @@ bool ExitButton(Font& font16, Color& button_close_color, Texture& window_close_i
 }
 
 // 再生リスト
-bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Font& font36,
-	Color& button_close_color, Texture& window_close_icon, Color& font_color)
+bool playListView(Player& player, Color& button_close_color, Texture& window_close_icon, Color& font_color)
 {
 	// ボタン用アイコン
-	Texture return_button_icon(Icon(IconFont::Return, 20));		// 戻る
-	Texture fileopen_icon(Icon(IconFont::Plus, 20));			// ファイルを開く
-	Texture save_button_icon(Icon(IconFont::Save, 20));			// 保存
+	Texture return_button_icon{ Icon(IconFont::Return), 20 };		// 戻る
+	Texture fileopen_icon{ Icon(IconFont::Plus), 20 };				// ファイルを開く
+	Texture save_button_icon{ Icon(IconFont::Save), 20 };			// 保存
 
-	Texture play_icon(Icon(IconFont::Play, 20));			// 再生
-	Texture stop_icon(Icon(IconFont::Stop, 20));			// 停止
+	Texture play_icon{ Icon(IconFont::Play), 20 };			// 再生
+	Texture stop_icon{ Icon(IconFont::Stop), 20 };			// 停止
 
 	// ボタンの位置
 	Point return_button_pos;
@@ -91,7 +91,7 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 
 		// 画面上部のボタン群
 		// 閉じるボタン
-		if (ExitButton(font16B, button_close_color, window_close_icon)) {
+		if (ExitButton(button_close_color, window_close_icon)) {
 			return true;
 		}
 		// もどる
@@ -105,7 +105,7 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 		}
 
 		// 画面タイトル
-		font16B(U"プレイリスト").draw(Arg::center(Scene::Width() / 2, 30), Color(font_color));
+		FontAsset(U"title")(U"プレイリスト").draw(Arg::center(Scene::Width() / 2, 30), Color(font_color));
 
 		// リストを表示
 		scroll_y += Mouse::Wheel() * 10;
@@ -166,7 +166,7 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 						const ScopedRenderTarget2D target2(title_texture);
 						title_texture.clear(DEFAULT_BACKGROUND_COLOR);
 
-						DrawableText title_text = font16(title_list.first[i]);
+						DrawableText title_text = FontAsset(U"middle")(title_list.first[i]);
 						int title_w = title_text.region(0, 0).x;
 						int title_x = 0;
 						if (title_w > 250) {
@@ -190,7 +190,7 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 					}
 
 					// タイトル
-					font16(title_list.first[i]).draw(Arg::leftCenter(120, list_element_margin * i + list_element_h / 2), font_color);
+					FontAsset(U"middle")(title_list.first[i]).draw(Arg::leftCenter(120, list_element_margin * i + list_element_h / 2), font_color);
 				}
 			}
 		}
@@ -212,7 +212,7 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 			mouse_clicked = Cursor::Pos();
 			window_moving = true;
 		}
-		else if (MouseL.pressed() && Cursor::GetRequestedStyle() == CursorStyle::Arrow && window_moving) {
+		else if (MouseL.pressed() && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
 			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
 		}
 		else {
@@ -222,10 +222,9 @@ bool playListView(Player& player, Font& font13, Font& font16B, Font& font16, Fon
 	return true;
 }
 
-bool VersionInformation(Player& player, Font& font13, Font& font16B, Font& font16, Font& font36,
-	Color& button_close_color, Texture& window_close_icon, Color& font_color) {
+bool VersionInformation(Player& player, Color& button_close_color, Texture& window_close_icon, Color& font_color) {
 	// ボタン用アイコン
-	Texture return_button_icon(Icon(IconFont::Return, 20));		// 戻る
+	Texture return_button_icon{ Icon(IconFont::Return), 20 };		// 戻る
 
 	// 画像
 	Texture albus_box_icon(U"{}/data/img/icon.png"_fmt(specific::getCurrentDir()));
@@ -246,7 +245,7 @@ bool VersionInformation(Player& player, Font& font13, Font& font16B, Font& font1
 	while (System::Update()) {
 		// 画面上部のボタン群
 		// 閉じるボタン
-		if (ExitButton(font16B, button_close_color, window_close_icon)) {
+		if (ExitButton(button_close_color, window_close_icon)) {
 			return true;
 		}
 		// もどる
@@ -255,16 +254,16 @@ bool VersionInformation(Player& player, Font& font13, Font& font16B, Font& font1
 		}
 
 		// 画面タイトル
-		font16B(U"バージョン情報").draw(Arg::center(Scene::Width() / 2, 30), Color(font_color));
+		FontAsset(U"title")(U"バージョン情報").draw(Arg::center(Scene::Width() / 2, 30), Color(font_color));
 
 		// バージョン情報
 		albus_box_icon.resized(200, 200).drawAt(Scene::Width() / 2, 200);
 
-		font36(U"Albus Box").drawAt(Scene::Width() / 2, 350, font_color);
+		FontAsset(U"big")(U"Albus Box").drawAt(Scene::Width() / 2, 350, font_color);
 
-		font16(U"Version: {:>24}\nRelease Number: {:>8}"_fmt(VERSION, RELEASE_NUM)).drawAt(Scene::Width() / 2, 450, font_color);
+		FontAsset(U"middle")(U"Version: {:>24}\nRelease Number: {:>8}"_fmt(VERSION, RELEASE_NUM)).drawAt(Scene::Width() / 2, 450, font_color);
 
-		font13(U"©YotioSoft 2021 | Powered by OpenSiv3D").drawAt(Scene::Width() / 2, Scene::Height()-50, font_color);
+		FontAsset(U"small")(U"©YotioSoft 2021 | Powered by OpenSiv3D").drawAt(Scene::Width() / 2, Scene::Height()-50, font_color);
 
 		// 再生処理を継続
 		player.playing();
@@ -274,7 +273,7 @@ bool VersionInformation(Player& player, Font& font13, Font& font16B, Font& font1
 			mouse_clicked = Cursor::Pos();
 			window_moving = true;
 		}
-		else if (MouseL.pressed() && Cursor::GetRequestedStyle() == CursorStyle::Arrow && window_moving) {
+		else if (MouseL.pressed() && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
 			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
 		}
 		else {
@@ -284,14 +283,13 @@ bool VersionInformation(Player& player, Font& font13, Font& font16B, Font& font1
 	return true;
 }
 
-bool AlbusBoxSetting(Player& player, Font& font13, Font& font16B, Font& font16, Font& font36,
-	Color& button_close_color, Texture& window_close_icon, Color& font_color) {
+bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_close_icon, Color& font_color) {
 	// ボタン用アイコン
-	Texture return_button_icon(Icon(IconFont::Return, 20));		// 戻る
+	Texture return_button_icon{ Icon(IconFont::Return), 20 };		// 戻る
 	
 	// アイコン
-	Texture volume_icon(Icon(IconFont::Volume, 30));
-	Texture info_icon(Icon(IconFont::Information, 30));
+	Texture volume_icon{ Icon(IconFont::Volume), 30 };
+	Texture info_icon{ Icon(IconFont::Information), 30 };
 	
 	// アイコンの位置
 	const int icon_left_x = 50;
@@ -324,7 +322,7 @@ bool AlbusBoxSetting(Player& player, Font& font13, Font& font16B, Font& font16, 
 	while (System::Update()) {
 		// 画面上部のボタン群
 		// 閉じるボタン
-		if (ExitButton(font16B, button_close_color, window_close_icon)) {
+		if (ExitButton(button_close_color, window_close_icon)) {
 			return true;
 		}
 		// もどる
@@ -334,7 +332,7 @@ bool AlbusBoxSetting(Player& player, Font& font13, Font& font16B, Font& font16, 
 		}
 		
 		// 画面タイトル
-		font16B(U"設定").draw(Arg::center(Scene::Width()/2, 30), Color(font_color));
+		FontAsset(U"title")(U"設定").draw(Arg::center(Scene::Width()/2, 30), Color(font_color));
 		
 		// 各設定項目
 		// 音量
@@ -346,16 +344,16 @@ bool AlbusBoxSetting(Player& player, Font& font13, Font& font16B, Font& font16, 
 		}
 
 		// 波形の表示
-		font16(U"波形の表示").draw(icon_left_x, icon_top_y + 100, font_color);
+		FontAsset(U"middle")(U"波形の表示").draw(icon_left_x, icon_top_y + 100, font_color);
 		player.setShowWave(show_wave_switch.draw());
 
 		// ループ再生
-		font16(U"ループ再生").draw(icon_left_x, icon_top_y + 180, font_color);
+		FontAsset(U"middle")(U"ループ再生").draw(icon_left_x, icon_top_y + 180, font_color);
 		player.setLoop(loop_switch.draw());
 
 		// バージョン情報
 		if (NeumorphismUI::RectButton(Vec2(Scene::Width() / 2 - 50/2, Scene::Height() - 100), Vec2(50, 50), info_icon)) {
-			if (VersionInformation(player, font13, font16B, font16, font36, button_close_color, window_close_icon, font_color)) {
+			if (VersionInformation(player, button_close_color, window_close_icon, font_color)) {
 				return true;
 			}
 		}
@@ -368,7 +366,7 @@ bool AlbusBoxSetting(Player& player, Font& font13, Font& font16B, Font& font16, 
 			mouse_clicked = Cursor::Pos();
 			window_moving = true;
 		}
-		else if (MouseL.pressed() && Cursor::GetRequestedStyle() == CursorStyle::Arrow && window_moving) {
+		else if (MouseL.pressed() && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
 			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
 		}
 		else {
@@ -396,11 +394,12 @@ void AlbusBox() {
 
 	specific::setWindowStyle(0, 0, 400, 640, 40, 40);
 
-	Font font13(13, U"{}/NotoSansCJKjp/NotoSansCJKjp-Regular.otf"_fmt(specific::getFontsDir()));
-	Font font16(16, U"{}/NotoSansCJKjp/NotoSansCJKjp-Regular.otf"_fmt(specific::getFontsDir()));
-	Font font16B(16, U"{}/NotoSansCJKjp/NotoSansCJKjp-Bold.otf"_fmt(specific::getFontsDir()));
-	Font font36(36, U"{}/NotoSansCJKjp/NotoSansCJKjp-Regular.otf"_fmt(specific::getFontsDir()));
-	
+	// フォントアセットの登録
+	FontAsset::Register(U"small", 13, Typeface::CJK_Regular_JP);
+	FontAsset::Register(U"middle", 16, Typeface::CJK_Regular_JP);
+	FontAsset::Register(U"big", 36, Typeface::CJK_Regular_JP);
+	FontAsset::Register(U"title", 16, Typeface::Mplus_Bold);
+
 	// プレイヤーの用意
 	Player player;
 
@@ -417,17 +416,17 @@ void AlbusBox() {
 	bool window_moving = false;
 
 	// アイコン
-	Texture play_icon(Icon(IconFont::Play, 30));
-	Texture pause_icon(Icon(IconFont::Pause, 30));
+	Texture play_icon{ Icon(IconFont::Play), 30 };
+	Texture pause_icon{ Icon(IconFont::Pause), 30 };
 
-	Texture prev_icon(Icon(IconFont::Prev, 20));
-	Texture next_icon(Icon(IconFont::Next, 20));
+	Texture prev_icon{ Icon(IconFont::Prev), 20 };
+	Texture next_icon{ Icon(IconFont::Next), 20 };
 
-	Texture setting_icon(Icon(IconFont::Setting, 20));
-	Texture fileopen_icon(Icon(IconFont::FileOpen, 20));
-	Texture playlist_icon(Icon(IconFont::PlayList, 20));
+	Texture setting_icon{ Icon(IconFont::Setting), 20 };
+	Texture fileopen_icon{ Icon(IconFont::FileOpen), 20 };
+	Texture playlist_icon{ Icon(IconFont::PlayList), 20 };
 
-	Texture window_close_icon(Icon(IconFont::Times, 20));
+	Texture window_close_icon{ Icon(IconFont::Times), 20 };
 
 	// ボタンの位置
 	Point setting_button_pos;
@@ -471,14 +470,14 @@ void AlbusBox() {
 
 	while (System::Update()) {
 		// 画面上部のボタン群
-		bool isExitButtonPushed = ExitButton(font16, button_close_color, window_close_icon);
+		bool isExitButtonPushed = ExitButton(button_close_color, window_close_icon);
 		if (isExitButtonPushed)
 			break;
 
 		// 画面上部のボタン群
 		// 設定へ画面遷移
 		if (NeumorphismUI::CircleButton(setting_button_pos, 20, setting_icon)) {
-			if (AlbusBoxSetting(player, font13, font16B, font16, font36, button_close_color, window_close_icon, font_color)) {
+			if (AlbusBoxSetting(player, button_close_color, window_close_icon, font_color)) {
 				break;		// 閉じるボタンが押されたらループを抜ける
 			}
 		}
@@ -493,7 +492,7 @@ void AlbusBox() {
 		
 		// 再生リスト
 		if (NeumorphismUI::CircleButton(playlist_button_pos, 20, playlist_icon)) {
-			if (playListView(player, font13, font16B, font16, font36, button_close_color, window_close_icon, font_color)) {
+			if (playListView(player, button_close_color, window_close_icon, font_color)) {
 				break;		// 閉じるボタンが押されたらループを抜ける
 			}
 		}
@@ -542,7 +541,7 @@ void AlbusBox() {
 		}
 
 		// タイトルの表示
-		title_rect = font16(player.getTitle()).region(Arg::center(Scene::Width() / 2, Scene::Height() / 3 + 170));
+		title_rect = FontAsset(U"middle")(player.getTitle()).region(Arg::center(Scene::Width() / 2, Scene::Height() / 3 + 170));
 		if (title_rect != title_rect_before) {
 			title_rect_before = title_rect;
 			count_for_music = Scene::Width();
@@ -550,12 +549,12 @@ void AlbusBox() {
 		if (title_rect.w > Scene::Width() && !editing_title) {
 			mat = Mat3x2::Translate((title_rect.w - Scene::Width()) / 2 - (count_for_music % ((int)title_rect.w + Scene::Width())) + Scene::Width(), 0);
 			{
-				const Transformer2D t(mat, false);
-				font16(player.getTitle()).drawAt(Scene::Width() / 2, Scene::Height() / 3 + 170, font_color);
+				const Transformer2D t(mat, TransformCursor::No);
+				FontAsset(U"middle")(player.getTitle()).drawAt(Scene::Width() / 2, Scene::Height() / 3 + 170, font_color);
 			}
 		}
 		else if (!editing_title) {
-			font16(player.getTitle()).drawAt(Scene::Width() / 2, Scene::Height() / 3 + 170, font_color);
+			FontAsset(U"middle")(player.getTitle()).drawAt(Scene::Width() / 2, Scene::Height() / 3 + 170, font_color);
 		}
 		count_for_music++;
 
@@ -570,7 +569,7 @@ void AlbusBox() {
 			title_rect = RectF(0, Scene::Height() / 3 + 170 - 10, Scene::Width(), 40);
 
 			// editing_title == trueかつタイトル部分以外でクリックされたら編集完了
-			if (!title_rect.leftClicked() && MouseL.down() && Cursor::GetRequestedStyle() != CursorStyle::IBeam) {
+			if (!title_rect.leftClicked() && MouseL.down()/* && Cursor::GetRequestedStyle() != CursorStyle::IBeam */) {
 				editing_title = false;
 				player.editTitle(tes_title.text);
 			}
@@ -591,8 +590,8 @@ void AlbusBox() {
 		}
 
 		// 再生位置表示
-		font13(U"{}:{:0>2}"_fmt(player.getPlayPosTimeMin(), player.getPlayPosTimeSec())).draw(40, Scene::Height() / 2 + 140, font_color);
-		font13(U"{}:{:0>2}"_fmt(player.getTotalTimeMin(), player.getTotalTimeSec())).draw(Arg::topRight = Point(Scene::Width() - 40, Scene::Height() / 2 + 140), font_color);
+		FontAsset(U"small")(U"{}:{:0>2}"_fmt(player.getPlayPosTimeMin(), player.getPlayPosTimeSec())).draw(40, Scene::Height() / 2 + 140, font_color);
+		FontAsset(U"small")(U"{}:{:0>2}"_fmt(player.getTotalTimeMin(), player.getTotalTimeSec())).draw(Arg::topRight = Point(Scene::Width() - 40, Scene::Height() / 2 + 140), font_color);
 
 		// トラック移動ボタン
 		prev_button_pressed = NeumorphismUI::CircleButton(Scene::Width() / 4 - 10, Scene::Height() - 100, 30, prev_icon);
@@ -621,7 +620,7 @@ void AlbusBox() {
 			mouse_clicked = Cursor::Pos();
 			window_moving = true;
 		}
-		else if (MouseL.pressed() && Cursor::GetRequestedStyle() == CursorStyle::Arrow && window_moving) {
+		else if (MouseL.pressed() && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
 			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
 		}
 		else {
