@@ -23,8 +23,6 @@
 #define	OS						"Mac"	// OS
 
 namespace specific {
-	Array<FileStruct> getAllFilesName(string folderPath, string extension);
-
 	String getCurrentDir();
 	String getFontsDir();
 

@@ -4,41 +4,9 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Resources/assets/data/.DS_Store</key>
-		<data>
-		Oxtq46XlQrIVBnw2/G+dreY6QTA=
-		</data>
 		<key>Resources/assets/data/img/icon.png</key>
 		<data>
 		tfzw8UoIkUmBKeYidbJHk45f22o=
-		</data>
-		<key>Resources/assets/data/settings/audio_profiles.json</key>
-		<data>
-		0YiZUawTCi3Sq2p/KwUoGAucZ6A=
-		</data>
-		<key>Resources/assets/data/settings/settings.json</key>
-		<data>
-		Tev693H2pdfqht8n0Zky1JPRmhQ=
-		</data>
-		<key>Resources/assets/fonts/NotoSansCJKjp/LICENSE_OFL.txt</key>
-		<data>
-		7GYLF9/2kFjCu/EiyoWrg7kg/Oc=
-		</data>
-		<key>Resources/assets/fonts/NotoSansCJKjp/NotoSansCJKjp-Bold.otf</key>
-		<data>
-		T3aBtusgtOHRe/0n1hfFaenoo8I=
-		</data>
-		<key>Resources/assets/fonts/NotoSansCJKjp/NotoSansCJKjp-Regular.otf</key>
-		<data>
-		A9H5g5jaS6QTeqF31BmiJA6+F/4=
-		</data>
-		<key>Resources/assets/fonts/NotoSansCJKjp/README</key>
-		<data>
-		VRT6wH19OOIfkaF97VUEDlTwzXg=
-		</data>
-		<key>Resources/engine/emoji/noto7_dictionary.dat</key>
-		<data>
-		CFwksNqLAYvCiQA4tLERwIKXOS8=
 		</data>
 		<key>Resources/engine/font/fontawesome/LICENSE.txt</key>
 		<data>
@@ -46,11 +14,19 @@
 		</data>
 		<key>Resources/engine/font/fontawesome/fontawesome-brands.otf.zstdcmp</key>
 		<data>
-		KUbcZTxfLi2nL2GJVwaYgreEKiM=
+		R5Ixrl19Pw6Xy8w+5lGiPg5/a28=
 		</data>
 		<key>Resources/engine/font/fontawesome/fontawesome-solid.otf.zstdcmp</key>
 		<data>
-		VrlR+R8PmJ4S9LYMUTTx6cu1n8I=
+		U1v/EyijUI2rjrzH6Oo2SMZW9oQ=
+		</data>
+		<key>Resources/engine/font/materialdesignicons/license.md</key>
+		<data>
+		cJWyncez4FrzSCOUdQtUHKginOs=
+		</data>
+		<key>Resources/engine/font/materialdesignicons/materialdesignicons-webfont.ttf.zstdcmp</key>
+		<data>
+		oTncpvaXcPwpwIBHNbwBLpZjMgc=
 		</data>
 		<key>Resources/engine/font/mplus/LICENSE_E</key>
 		<data>
@@ -58,119 +34,171 @@
 		</data>
 		<key>Resources/engine/font/mplus/mplus-1p-black.ttf.zstdcmp</key>
 		<data>
-		iDytmTOKtT/y+JYhYHzxEvgP9ak=
+		iXjLPujI4l0fvjO7VK7xreSgqeg=
 		</data>
 		<key>Resources/engine/font/mplus/mplus-1p-bold.ttf.zstdcmp</key>
 		<data>
-		V0mIFOi9Zo6sC2j0Vl+kpitaoV0=
+		p28SiGhJHlTTkXeRFaemFjdjOK8=
 		</data>
 		<key>Resources/engine/font/mplus/mplus-1p-heavy.ttf.zstdcmp</key>
 		<data>
-		DUmF2P0PTzacjRuA8oUdxqLUg7M=
+		UCR2UloN4RX48hcFDgvj62mE5UM=
 		</data>
 		<key>Resources/engine/font/mplus/mplus-1p-light.ttf.zstdcmp</key>
 		<data>
-		yfz4bkiQcjzkY6v+7oKWxWGxG6w=
+		+NG/kUc+Apz+XOYzxwNGv8Ah1eQ=
 		</data>
 		<key>Resources/engine/font/mplus/mplus-1p-medium.ttf.zstdcmp</key>
 		<data>
-		Gy70A4PpcpvoeZcR/FhuPMU9Y2s=
+		73hQpOurwcUuv/RK7yJJsITpops=
 		</data>
 		<key>Resources/engine/font/mplus/mplus-1p-regular.ttf.zstdcmp</key>
 		<data>
-		YJzAE54MYr2hnCmCl0fw08zg26o=
+		wTC+8UFcWHg6We+FstJmo9Ij/ik=
 		</data>
 		<key>Resources/engine/font/mplus/mplus-1p-thin.ttf.zstdcmp</key>
 		<data>
-		2RcUm/CRtbwYSpzQmYKMETLBra4=
+		fW6M+6wWxheqq9+HqqiU5v/Ks44=
 		</data>
-		<key>Resources/engine/font/noto/LICENSE_OFL.txt</key>
+		<key>Resources/engine/font/noto-cjk/LICENSE</key>
 		<data>
 		7GYLF9/2kFjCu/EiyoWrg7kg/Oc=
 		</data>
-		<key>Resources/engine/font/noto/NotoColorEmoji.ttf.zstdcmp</key>
+		<key>Resources/engine/font/noto-cjk/NotoSansCJK-Regular.ttc.zstdcmp</key>
 		<data>
-		u3q1mS8eHXQtS0ya2LQ+iHSmgl4=
+		P5I9TKChnyvg6OesrJkEbrf7YVU=
 		</data>
-		<key>Resources/engine/font/noto/NotoEmoji-Regular.ttf.zstdcmp</key>
+		<key>Resources/engine/font/noto-emoji/LICENSE</key>
 		<data>
-		ICWZnUTDCYE23XS1+v7SnnbN/9Y=
+		7GYLF9/2kFjCu/EiyoWrg7kg/Oc=
 		</data>
-		<key>Resources/engine/lib/mpg123/libmpg123.0.dylib</key>
+		<key>Resources/engine/font/noto-emoji/NotoColorEmoji.ttf.zstdcmp</key>
 		<data>
-		We7thRjMEXhDnBcGFBitKSXhXu4=
+		tltPIEzVfbNNtMV5IMTrW0937X8=
 		</data>
-		<key>Resources/engine/nlp/japanese/jumanpp/LICENSE</key>
+		<key>Resources/engine/font/noto-emoji/NotoEmoji-Regular.ttf.zstdcmp</key>
 		<data>
-		DBT2ml74eEER1jnC1xKE+jIyu4g=
+		5UITuoiMUXyQXadtf3S6pOfPEwg=
 		</data>
-		<key>Resources/engine/nlp/japanese/jumanpp/jumanpp_v2</key>
+		<key>Resources/engine/lib/soundtouch/COPYING.TXT</key>
 		<data>
-		Xvm+3R5yPoEtAPEupYV5TfVqVkA=
+		v7g1I1qhbsLs7gn6X1LAif5bSsU=
 		</data>
-		<key>Resources/engine/objdetect/haarcascade/eye.xml.zstdcmp</key>
+		<key>Resources/engine/lib/soundtouch/libSoundTouch.dylib</key>
 		<data>
-		TKAtXyhUC4vPewdk8nLKEu8e3Dk=
+		KfuA3tPN6FxoKaBk0y9mDRQm5Vo=
 		</data>
-		<key>Resources/engine/objdetect/haarcascade/eye_eyeglasses.xml.zstdcmp</key>
+		<key>Resources/engine/shader/glsl/apply_srgb_curve.frag</key>
 		<data>
-		4u8xjmI7ovs2NL31/1pRT6zS2UY=
+		kWW5exbvKoX5o6uNyyiYTT/FVd8=
 		</data>
-		<key>Resources/engine/objdetect/haarcascade/face_anime.xml.zstdcmp</key>
+		<key>Resources/engine/shader/glsl/bitmapfont.frag</key>
 		<data>
-		m3Mj1aP0DaE3HaM1jPRipdUmWGk=
+		PGMuIz1uZYiFJocXLOs0UDw+780=
 		</data>
-		<key>Resources/engine/objdetect/haarcascade/frontal_catface.xml.zstdcmp</key>
+		<key>Resources/engine/shader/glsl/copy.frag</key>
 		<data>
-		umbM31V/dekDYm1mvCoN8+FkV1g=
+		Y7XvUAVyMeZDy4j3Trfq1RT306o=
 		</data>
-		<key>Resources/engine/objdetect/haarcascade/frontal_face_alt2.xml.zstdcmp</key>
+		<key>Resources/engine/shader/glsl/forward3d.frag</key>
 		<data>
-		xj8beZK/eIlE305G8TimWp37G6A=
+		2hypQyKD8zI511oxC/dTekFnOTA=
 		</data>
-		<key>Resources/engine/shader/copy.frag</key>
+		<key>Resources/engine/shader/glsl/forward3d.vert</key>
 		<data>
-		a2xxVI8PEQymAc0LHobsO5eMVN0=
+		93I8eWGBIZrSANRHNDhvYpMgsqU=
 		</data>
-		<key>Resources/engine/shader/fullscreen_triangle.frag</key>
+		<key>Resources/engine/shader/glsl/fullscreen_triangle.frag</key>
 		<data>
-		S/PDW2njaEOySWeNzBQVWJElMws=
+		bopreuJYRFg/30QibtmQT5Gu8Tg=
 		</data>
-		<key>Resources/engine/shader/fullscreen_triangle.vert</key>
+		<key>Resources/engine/shader/glsl/fullscreen_triangle.vert</key>
 		<data>
-		hEVUdvEU7rYJUcxyQsjZtmiVM7c=
+		we+FWfIiUvWiWbJdaSBa5XiwVZ0=
 		</data>
-		<key>Resources/engine/shader/gaussian_blur_9.frag</key>
+		<key>Resources/engine/shader/glsl/gaussian_blur_9.frag</key>
 		<data>
-		9fVoYzDGZ7ZXcbbrd85HGG1Tcqw=
+		rripHZsR2kHsqBGvgEFOpSpGaDo=
 		</data>
-		<key>Resources/engine/shader/round_dot.frag</key>
+		<key>Resources/engine/shader/glsl/line3d.frag</key>
 		<data>
-		s7r2xvtIMAYzyDMKl4RkGVGBMaM=
+		7Bg4VJRVMwAnRJ4tAqbvF4/1M3s=
 		</data>
-		<key>Resources/engine/shader/sdf.frag</key>
+		<key>Resources/engine/shader/glsl/line3d.vert</key>
 		<data>
-		cMc18gnVcvHjOPDGfQsI1ExYmEI=
+		wbfnuYXGAxFTn8k7SNvXWRi8FHw=
 		</data>
-		<key>Resources/engine/shader/shape.frag</key>
+		<key>Resources/engine/shader/glsl/msdffont.frag</key>
 		<data>
-		t+p3Zg5eqKm8iZFnr0ge6KGldb4=
+		/oQminw5ZsS84y57UVyicFs3uEo=
 		</data>
-		<key>Resources/engine/shader/sprite.vert</key>
+		<key>Resources/engine/shader/glsl/msdffont_outline.frag</key>
 		<data>
-		Ok8libLKart1XHjfOa2Y3xr59vs=
+		JyXEJphJN9M06bN/gFc+C+seqcw=
 		</data>
-		<key>Resources/engine/shader/square_dot.frag</key>
+		<key>Resources/engine/shader/glsl/msdffont_outlineshadow.frag</key>
 		<data>
-		1VU+XJT+hYqBG3GMSxU3EiacU8g=
+		sqfnTQNsvczISd3IC9Sx4QFDxVg=
 		</data>
-		<key>Resources/engine/shader/texture.frag</key>
+		<key>Resources/engine/shader/glsl/msdffont_shadow.frag</key>
 		<data>
-		Aw8yZRlr0XBScZpfICLfT5516/o=
+		J6wHSilT7sGQW8lYLk7TfgVSM/U=
+		</data>
+		<key>Resources/engine/shader/glsl/msdfprint.frag</key>
+		<data>
+		M4kkMvAmABODtaQGVa6ei3Bckpo=
+		</data>
+		<key>Resources/engine/shader/glsl/round_dot.frag</key>
+		<data>
+		jla1LIbiczPgxHIgDxuFhE+35rI=
+		</data>
+		<key>Resources/engine/shader/glsl/sdffont.frag</key>
+		<data>
+		htkJPiF7aJggNEIoGKLy5HM/EiI=
+		</data>
+		<key>Resources/engine/shader/glsl/sdffont_outline.frag</key>
+		<data>
+		ZGC054Mck02zaABy3OL6UpAfbjg=
+		</data>
+		<key>Resources/engine/shader/glsl/sdffont_outlineshadow.frag</key>
+		<data>
+		6kDXIjtH+m2Ua75FRTzHeILUywk=
+		</data>
+		<key>Resources/engine/shader/glsl/sdffont_shadow.frag</key>
+		<data>
+		wXBhgOpBSEbWjvnhrFsMF9PQQQY=
+		</data>
+		<key>Resources/engine/shader/glsl/shape.frag</key>
+		<data>
+		e1RgsgNd8KHbX1wb93mo1qITeTE=
+		</data>
+		<key>Resources/engine/shader/glsl/sky.frag</key>
+		<data>
+		X/hk+850dBNotEQmHUB9JsuH2eI=
+		</data>
+		<key>Resources/engine/shader/glsl/sprite.vert</key>
+		<data>
+		DaVCk34U4ixl4bx1H/JBk4mGoKk=
+		</data>
+		<key>Resources/engine/shader/glsl/square_dot.frag</key>
+		<data>
+		VHUdch4jNecYsseaF6aC9US7ovQ=
+		</data>
+		<key>Resources/engine/shader/glsl/texture.frag</key>
+		<data>
+		oAMyByzj9Xq12awZkgyhcy6SYQA=
+		</data>
+		<key>Resources/engine/shader/msl/sprite.metal</key>
+		<data>
+		BnwBPaG3c/z3odbt2HcljXN0NtM=
+		</data>
+		<key>Resources/engine/soundfont/GMGSx.sf2.txt</key>
+		<data>
+		2JEoh+JOS4upL01w1It8gdeXEhI=
 		</data>
 		<key>Resources/engine/soundfont/GMGSx.sf2.zstdcmp</key>
 		<data>
-		3jD1ZNhwDmoUqel6Kh1OEQdsBrM=
+		CpWbhaYsmtsIrKrrZIEANjANdOY=
 		</data>
 		<key>Resources/engine/texture/box-shadow/128.png</key>
 		<data>
@@ -210,55 +238,6 @@
 			Gq9KOQ8u9DsbmrW4NyejQ8HteBjPu1kZlBQIM8jsaXA=
 			</data>
 		</dict>
-		<key>Resources/assets/data/settings/audio_profiles.json</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			GncYPmy8CyAzFMnGWz2ccz6AqRk5wA4+qSwAooN216c=
-			</data>
-		</dict>
-		<key>Resources/assets/data/settings/settings.json</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			w66/xoIqZPx72FvS55ENkuEECwPL3gx5o4hzJWUi34k=
-			</data>
-		</dict>
-		<key>Resources/assets/fonts/NotoSansCJKjp/LICENSE_OFL.txt</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			anP5VBwt50FYwOfPawpY73dPWngL8ZHy1+ycxT7+K/I=
-			</data>
-		</dict>
-		<key>Resources/assets/fonts/NotoSansCJKjp/NotoSansCJKjp-Bold.otf</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			nKkR8DPGFhYrwtLx1hxnOd+Lx6m9An3w7VfJYCmzOno=
-			</data>
-		</dict>
-		<key>Resources/assets/fonts/NotoSansCJKjp/NotoSansCJKjp-Regular.otf</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			8YJTr/2WjI6lktjfbYSx1MXTpG0mflOh9nSebE92oj0=
-			</data>
-		</dict>
-		<key>Resources/assets/fonts/NotoSansCJKjp/README</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			wnkfKJ++aOQHbt7k4VZdB1rTU6wtcRwGYfgNyZKYpyY=
-			</data>
-		</dict>
-		<key>Resources/engine/emoji/noto7_dictionary.dat</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			OuMUUg4rhCqVn5J42H9YBjz+38qnz7TrKqt3ZYnVgmw=
-			</data>
-		</dict>
 		<key>Resources/engine/font/fontawesome/LICENSE.txt</key>
 		<dict>
 			<key>hash2</key>
@@ -270,14 +249,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			uEPB/1SMlGzrjFTFd4cRMrXjH7yxiZRzq+cEYime2d4=
+			x9uXWGKHcaboAAC/x06CH+u6cD2OaJcfeosmEB6+C7Y=
 			</data>
 		</dict>
 		<key>Resources/engine/font/fontawesome/fontawesome-solid.otf.zstdcmp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Sb1hUCn4yqWqqM1AQgdYElO6W7V68/NOLdlh6fGMlkY=
+			UdqC5YH93In1CbEaJq82QmptQBMu2OL4W1vHURQP1yE=
+			</data>
+		</dict>
+		<key>Resources/engine/font/materialdesignicons/license.md</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			zgWnPIpRSu1JEZyg3uLRsc2txtuMLLt3nIDUKZ40e30=
+			</data>
+		</dict>
+		<key>Resources/engine/font/materialdesignicons/materialdesignicons-webfont.ttf.zstdcmp</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			9qm+v8sYdL7HBMwMCSS0B+Szgn3xWoWa2IFF/G+jEg8=
 			</data>
 		</dict>
 		<key>Resources/engine/font/mplus/LICENSE_E</key>
@@ -291,203 +284,294 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			LbkZZU6TVylVPT8nelgVjD78Ddb4qOniXOum6SM1bOo=
+			W5TcmK+5JI9O2+DVMIhqLFdo7pBazG/Sh6y1SpXY+7Q=
 			</data>
 		</dict>
 		<key>Resources/engine/font/mplus/mplus-1p-bold.ttf.zstdcmp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Jg0T9IUjfWJlmuc47U3asxUW3yqMBWyFzgIW+6BtWwk=
+			maUjt9L7zd2k8Tl9N22+M0vBePRoEiBrgPkAapdRMHA=
 			</data>
 		</dict>
 		<key>Resources/engine/font/mplus/mplus-1p-heavy.ttf.zstdcmp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Q0xtx+hvt/347rWZSj6AmtL2k5IZqjfxO4M5a+5soR4=
+			J1ZqjgAWW7JTt1hkCujoLjT7NGE0ZLL4Cy4WO8gLUvU=
 			</data>
 		</dict>
 		<key>Resources/engine/font/mplus/mplus-1p-light.ttf.zstdcmp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			X/wu+bML7MGM3llr4+WDrJHEr6qcVKLVdqWcvewg+EI=
+			o8NLJeXXz+/7jpcLxU9IEFvllSQMgC0Z1a1pNAKV+B8=
 			</data>
 		</dict>
 		<key>Resources/engine/font/mplus/mplus-1p-medium.ttf.zstdcmp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			y7NLvckcxPLTn7TRxKxHC4OM4FMjYtrXUw9cdsiI6Kg=
+			e8kn5Y85F2hEowYYOYZPb0PNSF7yVyLrwqrnhE//qkY=
 			</data>
 		</dict>
 		<key>Resources/engine/font/mplus/mplus-1p-regular.ttf.zstdcmp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5TDHegmyKXTRRJqNbf7n63N3r/hbsC0U4MUfAFdZ7k0=
+			Mju4rOmmSNJbnGhkLlkXZLQoyVjIriPUuYBDdzYoncw=
 			</data>
 		</dict>
 		<key>Resources/engine/font/mplus/mplus-1p-thin.ttf.zstdcmp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			g4LjZ2el7fW8qS+PG7wNZchnBkJNvileG3lUGPk/uUE=
+			+/Dscmbhyta07Djg8KAn28hW4aTXwxkKv8a7+5DLy+U=
 			</data>
 		</dict>
-		<key>Resources/engine/font/noto/LICENSE_OFL.txt</key>
+		<key>Resources/engine/font/noto-cjk/LICENSE</key>
 		<dict>
 			<key>hash2</key>
 			<data>
 			anP5VBwt50FYwOfPawpY73dPWngL8ZHy1+ycxT7+K/I=
 			</data>
 		</dict>
-		<key>Resources/engine/font/noto/NotoColorEmoji.ttf.zstdcmp</key>
+		<key>Resources/engine/font/noto-cjk/NotoSansCJK-Regular.ttc.zstdcmp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			NDg8//3hmMCevlTPZhsy0NTaQvldfH+Ha+kKngbSwm4=
+			xupztGV6j4TOTJBHK8h7+Pr1uV0jagP1L5YwQqfOgio=
 			</data>
 		</dict>
-		<key>Resources/engine/font/noto/NotoEmoji-Regular.ttf.zstdcmp</key>
+		<key>Resources/engine/font/noto-emoji/LICENSE</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			1Ks6w0Czpg5zk85dVuu8FKQPDLfaQg+YP/Jkl0dTcjU=
+			anP5VBwt50FYwOfPawpY73dPWngL8ZHy1+ycxT7+K/I=
 			</data>
 		</dict>
-		<key>Resources/engine/lib/mpg123/libmpg123.0.dylib</key>
+		<key>Resources/engine/font/noto-emoji/NotoColorEmoji.ttf.zstdcmp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			IiASJBP9hQEtMr32eORdTJJJTV7r4iCo9zS5LMhRYDM=
+			izBl2PoAjwZCIfwQzae3WNY9Wy+OIvpAt2OEVR+a0vY=
 			</data>
 		</dict>
-		<key>Resources/engine/nlp/japanese/jumanpp/LICENSE</key>
+		<key>Resources/engine/font/noto-emoji/NotoEmoji-Regular.ttf.zstdcmp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZHPHmMwjkQd1ztljobhb3nhHWDDrAbB4mLNKyKKYIX4=
+			Z8GTDmIANBjNXBvgzgFCUr31NLQ4qIXcB7U5jX47sJI=
 			</data>
 		</dict>
-		<key>Resources/engine/nlp/japanese/jumanpp/jumanpp_v2</key>
+		<key>Resources/engine/lib/soundtouch/COPYING.TXT</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			UsAHJJt0dddJknsBdn5Tvgt+5DfXmwpc5ceW1gzDSgE=
+			a3P2MnE2qSSCHsBEu9nxfPhnf68vKisTZqn/9hiMlog=
 			</data>
 		</dict>
-		<key>Resources/engine/objdetect/haarcascade/eye.xml.zstdcmp</key>
+		<key>Resources/engine/lib/soundtouch/libSoundTouch.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			nTx7vamsgWufCS0fniO6FtRviYbt0TsTYf5lIHsD2Ao=
+			FXbnoHhZhYq31G1mpvOZ6XFb6UOfap2rHRVRPj/XkV0=
 			</data>
 		</dict>
-		<key>Resources/engine/objdetect/haarcascade/eye_eyeglasses.xml.zstdcmp</key>
+		<key>Resources/engine/shader/glsl/apply_srgb_curve.frag</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			cWA3bGOouldsln5D7KNbD/YBLErBkNtvn/7OY+2viio=
+			JLfZG0ZvJ5a2SlVhKHVlkipxOXtWF6DZwNgBYtm0mS0=
 			</data>
 		</dict>
-		<key>Resources/engine/objdetect/haarcascade/face_anime.xml.zstdcmp</key>
+		<key>Resources/engine/shader/glsl/bitmapfont.frag</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			W8jtNYhlbsgxjGj3o6x1wiaERMyLrCbvIO0gd6MkqlM=
+			yxy4zvXHhwgLCbFJtgWfVM4fWnX7NLNJpZoOgnS8C5I=
 			</data>
 		</dict>
-		<key>Resources/engine/objdetect/haarcascade/frontal_catface.xml.zstdcmp</key>
+		<key>Resources/engine/shader/glsl/copy.frag</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			b0PjCzTYU3V05ia+ifa6vhVQYnkX2dGJvM6ui62DngY=
+			fjIYMvXL8Fccqg6SJw1MZTfZQ99RGk2okWFOUnkpKL0=
 			</data>
 		</dict>
-		<key>Resources/engine/objdetect/haarcascade/frontal_face_alt2.xml.zstdcmp</key>
+		<key>Resources/engine/shader/glsl/forward3d.frag</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			VXjRTisNXP52XCacT1Q8mxQa5BWO7si9G/KT+Fgslkk=
+			H86aiYGZMtGJF6fdTweGcBzZP2H69kfIdjWpvXvfeZ0=
 			</data>
 		</dict>
-		<key>Resources/engine/shader/copy.frag</key>
+		<key>Resources/engine/shader/glsl/forward3d.vert</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			siI/fIy3sOxaiYMOyou4NwGYtKmtNaVMbWN/Ndhl/x8=
+			0GynQrKpaZMGZZw8Du1T2CLsAo1y7Vk8OuohFfUC8Y8=
 			</data>
 		</dict>
-		<key>Resources/engine/shader/fullscreen_triangle.frag</key>
+		<key>Resources/engine/shader/glsl/fullscreen_triangle.frag</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Mh00+S+A957FAAgw31Mkh5iDT52cjN3qHCs/I/4xDg8=
+			HW563v05BBPlD8fcSgzJu9fkl7uBH22FyKmntq6LIW8=
 			</data>
 		</dict>
-		<key>Resources/engine/shader/fullscreen_triangle.vert</key>
+		<key>Resources/engine/shader/glsl/fullscreen_triangle.vert</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			H+M9pcfByxfTOJZhJM6YtHH7tJ6kiUlMJWxTZ57P/mM=
+			qTxF6aemnL10dFm1t5qkZqNqeave1YWjPMqA9F0Hp9I=
 			</data>
 		</dict>
-		<key>Resources/engine/shader/gaussian_blur_9.frag</key>
+		<key>Resources/engine/shader/glsl/gaussian_blur_9.frag</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wWKMyVNn5dHMhZ1/rLdFSEK892ohkxn6WP5p45UPvuk=
+			+njUcZ8Umuk+jYtKsTsTYArc0P4Itek16pxUbG3fM2A=
 			</data>
 		</dict>
-		<key>Resources/engine/shader/round_dot.frag</key>
+		<key>Resources/engine/shader/glsl/line3d.frag</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			E1NaMX1sMARUPLLSODnAoCUKGDef7QE1x4tc950uA50=
+			jV0SufBsKemZIPuNJi0mxpVpuwbjC6bY3OONRcVwbzg=
 			</data>
 		</dict>
-		<key>Resources/engine/shader/sdf.frag</key>
+		<key>Resources/engine/shader/glsl/line3d.vert</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			41HUDVHS+Js9rtnfwJi4QBdPEaZUwxvzvH4Vk2Koqeo=
+			/XUW5zFKVeOStQoLXWEZYYrHKSp6LCoJcgQrbKCU7ig=
 			</data>
 		</dict>
-		<key>Resources/engine/shader/shape.frag</key>
+		<key>Resources/engine/shader/glsl/msdffont.frag</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			BviSIZYUPxtya9VJutIFKZOk40MEaCIfUg++wxMeoqM=
+			yMpjhI9T6GTakYWUUCASdye3wiLAksDPcQ21xoHrjuE=
 			</data>
 		</dict>
-		<key>Resources/engine/shader/sprite.vert</key>
+		<key>Resources/engine/shader/glsl/msdffont_outline.frag</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			PA/FD0HgOcfp5Pq1MOEWiVRDSwS+2DbtnU4rL8fHoc0=
+			4ghMfWOYUmmQ64+DmT1dQO1JaFucLZ+YEE4uP3yaLQ4=
 			</data>
 		</dict>
-		<key>Resources/engine/shader/square_dot.frag</key>
+		<key>Resources/engine/shader/glsl/msdffont_outlineshadow.frag</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZD0Z2MX40y58SfuFfeAO+D81cjzX85jDK84q+4RVeOI=
+			QVuY6PMQ24G2wyM51t9I7RUCAH+rSyndrDpFisVLkzM=
 			</data>
 		</dict>
-		<key>Resources/engine/shader/texture.frag</key>
+		<key>Resources/engine/shader/glsl/msdffont_shadow.frag</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			s5wtWRO4Z+cCaoKXtzvzV374lq2rY6seUAzMDZJEFzQ=
+			QYzBjzQXEXgLmRrYfJwpiiZ1cpIxM/SVGGqHnRTAdi4=
+			</data>
+		</dict>
+		<key>Resources/engine/shader/glsl/msdfprint.frag</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			dqbQaQ+CHR5prf264O8LZLX9Pr4cPH3vKCrYstXBt0I=
+			</data>
+		</dict>
+		<key>Resources/engine/shader/glsl/round_dot.frag</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			C0oXtDelSmJLSW6pwH/JBNx1R9ZpWsvf0/uTGMrzdTk=
+			</data>
+		</dict>
+		<key>Resources/engine/shader/glsl/sdffont.frag</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			fgb3+gy4ajarmMga6NfXWhEU23kW1ANIgDx1kRuBnz8=
+			</data>
+		</dict>
+		<key>Resources/engine/shader/glsl/sdffont_outline.frag</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			M+zaNAwL8Ry1uUkOZKFiXFvzpJKpff6g27F/1yNfPyg=
+			</data>
+		</dict>
+		<key>Resources/engine/shader/glsl/sdffont_outlineshadow.frag</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			h6ZoCu9wfO+wK/Z7mTjLgz7Wgu74S1M743UA5vbwpNI=
+			</data>
+		</dict>
+		<key>Resources/engine/shader/glsl/sdffont_shadow.frag</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			o9cax1rcVCkk19/pHNbnIDbOuhGHtDfEKR/YS3JOeak=
+			</data>
+		</dict>
+		<key>Resources/engine/shader/glsl/shape.frag</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			vUiGpPydoWsba5LPXqn2qICny7zGETKKAdqY/6bBy/I=
+			</data>
+		</dict>
+		<key>Resources/engine/shader/glsl/sky.frag</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			w3EeoZy6iKfv323uTZHS1+z0XeRvoR4npXK3JEpTsT4=
+			</data>
+		</dict>
+		<key>Resources/engine/shader/glsl/sprite.vert</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			k9YYciShnbsGlqtXa2dRKGHsWVmLdHL78HedBjH9Ug8=
+			</data>
+		</dict>
+		<key>Resources/engine/shader/glsl/square_dot.frag</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			zi2VfJSTqT5+DqXLrqy45DZoM4IQO8oH+cSkQqlmZ9M=
+			</data>
+		</dict>
+		<key>Resources/engine/shader/glsl/texture.frag</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			3XbCLvbx7qw18IsfDPsovKiavEvif077cCtZHqQZtRk=
+			</data>
+		</dict>
+		<key>Resources/engine/shader/msl/sprite.metal</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			U+gID0j5lzX+drwEPbfop4y7n1cChdeV5QezcF+ejtk=
+			</data>
+		</dict>
+		<key>Resources/engine/soundfont/GMGSx.sf2.txt</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			+dloj8uo1HqcuOEty5Uz/5xeLEerbLvOQJHnLqwXukw=
 			</data>
 		</dict>
 		<key>Resources/engine/soundfont/GMGSx.sf2.zstdcmp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			tMsHwQP/O4SWT5Q0kqfSHYf4DsB2/v7nP1hUKA2hXik=
+			GExVnkN6RjV10x933+S1TwLofGCDaEUJSqeeduWXs6k=
 			</data>
 		</dict>
 		<key>Resources/engine/texture/box-shadow/128.png</key>

@@ -46,7 +46,7 @@ void moveWindow(Point& mouse_clicked, bool& window_moving) {
 		window_moving = true;
 	}
 	else if (MouseL.pressed() && Window::GetState().focused && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
-		Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
+		Window::SetPos(Point{Cursor::ScreenPos().x/2, Cursor::ScreenPos().y/2} - mouse_clicked);
 	}
 	else {
 		window_moving = false;

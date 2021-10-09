@@ -9,49 +9,6 @@
 
 #include "Specific.hpp"
 
-Array<FileStruct> specific::getAllFilesName(string folderPath, string extension) {
-	Array<FileStruct> retStr;
-	const char* targetDirlog = folderPath.c_str();
-	const char* targetFileExtension = ("."+extension).c_str();
-	DIR* dp = opendir(targetDirlog);
-	if (dp == NULL) {
-		return retStr;
-	}
-	
-	struct dirent* dent = NULL;
-	while(true) {
-		dent = readdir(dp);
-		if(dent == NULL) {
-			break;
-		}
-		string fileName = dent->d_name;
-		
-		FileStruct newFS;
-		
-		if (dent != NULL && fileName != "." && fileName != "..") {
-			// サブディレクトリの中身も検索
-			if (fileName.find(".") == string::npos) {
-				Array<FileStruct> subDirStr = getAllFilesName(folderPath+"/"+fileName, extension);
-				copy(subDirStr.begin(), subDirStr.end(), back_inserter(retStr));
-			}
-			
-			if (extension.size() == 0 || fileName.find(targetFileExtension) != string::npos) {
-				newFS.file_path = folderPath+"/"+fileName;
-				
-				newFS.folder_path = folderPath;
-				newFS.folder_name = splitUTF8(folderPath, "/").back();
-				newFS.file_name = fileName;
-				
-				retStr.push_back(newFS);
-			}
-		}
-	};
-	
-	closedir(dp);
-	
-	return retStr;
-}
-
 String specific::getCurrentDir() {
 	return U"./Albus-Box.app/Contents/Resources/assets/";
 }
