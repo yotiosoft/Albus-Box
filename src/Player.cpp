@@ -25,10 +25,15 @@ void Player::open(FilePath audio_filepath) {
 	AudioStruct new_audio_struct{ new_audio_hash, new_audio_file };
 
 	audio_files << new_audio_struct;
+	audio_files_path << audio_filepath;
+
 	audio_files.back().audio->setVolume(volume);
 	audio_files.back().audio->setLoop(loop);
-	audio_files_path << audio_filepath;
-	
+}
+
+void Player::openAndPlay(FilePath audio_filepath) {
+	open(audio_filepath);
+
 	stop();
 	move((int)audio_files.size() - 1);
 
@@ -487,8 +492,20 @@ void Player::saveAudioProfiles() {
 	audio_profiles.save(specific::getAudioProfilesFilePath());
 }
 
-void Player::loadPlayList() {
+void Player::loadPlayList(FilePath playlist_filepath) {
+	JSON playlist = JSON::Load(playlist_filepath);
 
+	// 現在のプレイリストをクリア
+	audio_files_path.clear();
+
+	// プレイリスト読み込み
+	for (auto audio_filepath : playlist[U"list"].arrayView()) {
+		open(audio_filepath.getString());
+	}
+
+	// 最初の曲を再生
+	move(0);
+	play();
 }
 
 void Player::savePlayList() {

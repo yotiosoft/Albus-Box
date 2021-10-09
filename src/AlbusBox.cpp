@@ -2,7 +2,7 @@
 
 pair<bool, FilePath> AudioFileOpen() {
 	// ファイル選択ダイアログ
-	Array<FileFilter> ff = { {U"音声ファイル", {U"mp3", U"ogg", U"wav", U"m4a"}} };
+	Array<FileFilter> ff = { {U"音声ファイルとプレイリスト", {U"mp3", U"ogg", U"wav", U"m4a", U"playlist"}} };
 	String filePathTemp;
 	if (const auto open = Dialog::OpenFile(ff)) {
 		return pair<bool, FilePath>(true, open.value());
@@ -73,7 +73,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 		return_button_pos = Point(45, 10);
 	}
 	Point fileopen_button_pos = Point(Scene::Width()-50, Scene::Height()-50);
-	Point save_button_pos = Point(Scene::Width() / 2, 80);
+	Point save_button_pos = Point(Scene::Width() / 2, 70);
 
 	// シークバー
 	double play_pos = 0.0;		// シークバーの初期値
@@ -473,7 +473,12 @@ void AlbusBox() {
 		if (NeumorphismUI::CircleButton(fileopen_button_pos, 20, fileopen_icon)) {
 			auto file_open = AudioFileOpen();
 			if (file_open.first) {
-				player.open(file_open.second);
+				if (FileSystem::Extension(file_open.second) == U"playlist") {
+					player.loadPlayList(file_open.second);
+				}
+				else {
+					player.openAndPlay(file_open.second);
+				}
 			}
 		}
 		

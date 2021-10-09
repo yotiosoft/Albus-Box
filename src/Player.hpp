@@ -38,6 +38,7 @@ public:
 	
 	// 曲を開く
 	void open(FilePath audio_filepath);
+	void openAndPlay(FilePath audio_filepath);
 	
 	// 再生
 	bool play();
@@ -137,7 +138,7 @@ public:
 	void saveAudioProfiles();
 
 	// プレイリストを読み込み
-	void loadPlayList();
+	void loadPlayList(FilePath playlist_filepath);
 
 	// プレイリストを保存
 	void savePlayList();
