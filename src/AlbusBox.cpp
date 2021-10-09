@@ -212,7 +212,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 			mouse_clicked = Cursor::Pos();
 			window_moving = true;
 		}
-		else if (MouseL.pressed() && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
+		else if (MouseL.pressed() && Window::GetState().focused && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
 			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
 		}
 		else {
@@ -273,7 +273,7 @@ bool VersionInformation(Player& player, Color& button_close_color, Texture& wind
 			mouse_clicked = Cursor::Pos();
 			window_moving = true;
 		}
-		else if (MouseL.pressed() && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
+		else if (MouseL.pressed() && Window::GetState().focused && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
 			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
 		}
 		else {
@@ -366,7 +366,7 @@ bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_
 			mouse_clicked = Cursor::Pos();
 			window_moving = true;
 		}
-		else if (MouseL.pressed() && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
+		else if (MouseL.pressed() && Window::GetState().focused && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
 			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
 		}
 		else {
@@ -620,7 +620,7 @@ void AlbusBox() {
 			mouse_clicked = Cursor::Pos();
 			window_moving = true;
 		}
-		else if (MouseL.pressed() && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
+		else if (MouseL.pressed() && Window::GetState().focused && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
 			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
 		}
 		else {

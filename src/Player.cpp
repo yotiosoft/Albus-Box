@@ -21,7 +21,7 @@ Player::Player() {
 
 void Player::open(FilePath audio_filepath) {
 	Audio* new_audio_file = new Audio(audio_filepath);
-	uint64 new_audio_hash = Hash::XXHash3(&audio_filepath);
+	uint64 new_audio_hash = MD5::FromFile(audio_filepath).hash();
 	AudioStruct new_audio_struct{ new_audio_hash, new_audio_file };
 
 	audio_files << new_audio_struct;
