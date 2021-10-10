@@ -36,3 +36,17 @@ String specific::getAudioProfilesFilePath() {
 bool specific::setWindowStyle(int x1, int y1, int x2, int y2, int w, int h) {
 	return false;
 }
+
+void specific::moveWindow(Point& mouse_clicked, bool& window_moving) {
+	// ウィンドウの移動
+	if (MouseL.down()) {
+		mouse_clicked = Cursor::Pos();
+		window_moving = true;
+	}
+	else if (MouseL.pressed() && Window::GetState().focused && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
+		Window::SetPos(Point{ Cursor::ScreenPos().x / 2, Cursor::ScreenPos().y / 2 } - mouse_clicked);
+	}
+	else {
+		window_moving = false;
+	}
+}

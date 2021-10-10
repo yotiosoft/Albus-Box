@@ -266,6 +266,10 @@ pair<Array<String>, Array<bool>> Player::getTitleList() {
 }
 
 void Player::editTitle(String new_title) {
+	if (getTitle(current_track) == new_title || new_title == U"") {
+		return;
+	}
+
 	// ファイル情報をハッシュ値とともに格納
 	audio_files_profile[audio_files[current_track].hash].title = new_title;
 	
