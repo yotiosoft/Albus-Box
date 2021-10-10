@@ -28,13 +28,14 @@ namespace NeumorphismUI {
 	// 角丸長方形スイッチ
 	void RectSwitch(int argPositionX, int argPositionY,
 					int argSizeX, int argSizeY,
-					bool& argVar, bool argEnable,
+					bool& argVar, bool& onCursor, bool argEnable,
 					String argStr, Font& argFont,
 					Color argBackgroundColor, Color argDarkColor, Color argLightColor,
 					Color argFontColor, Color argPushedFontColor,
 					int argRadius, int argBlurSize, int argShadowSize,
 					Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
+		onCursor = false;
 		
 		Mat3x2 mat;
 		
@@ -44,6 +45,7 @@ namespace NeumorphismUI {
 		if (argEnable) {
 			if (switchRect.mouseOver()) {
 				Cursor::RequestStyle(CursorStyle::Hand);
+				onCursor = true;
 			}
 			// クリックされたら状態を切り替え
 			bool isClicked = switchRect.leftClicked();
@@ -82,49 +84,50 @@ namespace NeumorphismUI {
 
 	void RectSwitch(Vec2 argPosition,
 					int argSizeX, int argSizeY,
-					bool& argVar, bool argEnable,
+					bool& argVar, bool& onCursor, bool argEnable,
 					String argStr, Font& argFont,
 					Color argBackgroundColor, Color argDarkColor, Color argLightColor,
 					Color argFontColor, Color argPushedFontColor,
 					int argRadius, int argBlurSize, int argShadowSize,
 					Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
-		RectSwitch(argPosition.x, argPosition.y, argSizeX, argSizeY, argEnable, argVar, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+		RectSwitch(argPosition.x, argPosition.y, argSizeX, argSizeY, onCursor, argEnable, argVar, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
 	void RectSwitch(int argPositionX, int argPositionY,
 					Vec2 argSize,
-					bool& argVar, bool argEnable,
+					bool& argVar, bool& onCursor, bool argEnable,
 					String argStr, Font& argFont,
 					Color argBackgroundColor, Color argDarkColor, Color argLightColor,
 					Color argFontColor, Color argPushedFontColor,
 					int argRadius, int argBlurSize, int argShadowSize,
 					Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
-		RectSwitch(argPositionX, argPositionY, argSize.x, argSize.y, argEnable, argVar, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+		RectSwitch(argPositionX, argPositionY, argSize.x, argSize.y, onCursor, argEnable, argVar, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
 	void RectSwitch(Vec2 argPosition,
 					Vec2 argSize,
-					bool& argVar, bool argEnable,
+					bool& argVar, bool& onCursor, bool argEnable,
 					String argStr, Font& argFont,
 					Color argBackgroundColor, Color argDarkColor, Color argLightColor,
 					Color argFontColor, Color argPushedFontColor,
 					int argRadius, int argBlurSize, int argShadowSize,
 					Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
-		RectSwitch(argPosition.x, argPosition.y, argSize.x, argSize.y, argEnable, argVar, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+		RectSwitch(argPosition.x, argPosition.y, argSize.x, argSize.y, onCursor, argEnable, argVar, argStr, argFont, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
 	// 角丸長方形ボタン
 	int RectButton(int argPositionX, int argPositionY,
 					int argSizeX, int argSizeY,
-					String argStr, Font& argFont, bool argEnable,
+					String argStr, Font& argFont, bool& onCursor, bool argEnable,
 					Color argBackgroundColor, Color argDarkColor, Color argLightColor,
 					Color argFontColor, Color argPushedFontColor,
 					int argRadius, int argBlurSize, int argShadowSize,
 					Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
+		onCursor = false;
 		
 		Mat3x2 mat;
 		
@@ -135,6 +138,7 @@ namespace NeumorphismUI {
 		if (argEnable) {
 			if (buttonRect.mouseOver()) {
 				Cursor::RequestStyle(CursorStyle::Hand);
+				onCursor = true;
 			}
 			clicked = buttonRect.leftReleased();
 		}
@@ -171,45 +175,46 @@ namespace NeumorphismUI {
 
 	int RectButton(Vec2 argPosition,
 					int argSizeX, int argSizeY,
-					String argStr, Font& argFont, bool argEnable,
+					String argStr, Font& argFont, bool& onCursor, bool argEnable,
 					Color argBackgroundColor, Color argDarkColor, Color argLightColor,
 					Color argFontColor, Color argPushedFontColor,
 					int argRadius, int argBlurSize, int argShadowSize,
 					Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
-		return RectButton(argPosition.x, argPosition.y, argSizeX, argSizeY, argStr, argFont, argEnable, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+		return RectButton(argPosition.x, argPosition.y, argSizeX, argSizeY, argStr, argFont, onCursor, argEnable, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
 	int RectButton(int argPositionX, int argPositionY,
 					Vec2 argSize,
-					String argStr, Font& argFont, bool argEnable,
+					String argStr, Font& argFont, bool& onCursor, bool argEnable,
 					Color argBackgroundColor, Color argDarkColor, Color argLightColor,
 					Color argFontColor, Color argPushedFontColor,
 					int argRadius, int argBlurSize, int argShadowSize,
 					Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
-		return RectButton(argPositionX, argPositionY, argSize.x, argSize.y, argStr, argFont, argEnable, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+		return RectButton(argPositionX, argPositionY, argSize.x, argSize.y, argStr, argFont, onCursor, argEnable, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
 	int RectButton(Vec2 argPosition,
 					Vec2 argSize,
-					String argStr, Font& argFont, bool argEnable,
+					String argStr, Font& argFont, bool& onCursor, bool argEnable,
 					Color argBackgroundColor, Color argDarkColor, Color argLightColor,
 					Color argFontColor, Color argPushedFontColor,
 					int argRadius, int argBlurSize, int argShadowSize,
 					Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
-		return RectButton(argPosition.x, argPosition.y, argSize.x, argSize.y, argStr, argFont, argEnable, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+		return RectButton(argPosition.x, argPosition.y, argSize.x, argSize.y, argStr, argFont, onCursor, argEnable, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argRadius, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
 	int RectButton(Vec2 argPosition,
 				   Vec2 argSize,
-				    Texture& argTexture, bool argEnable,
+				    Texture& argTexture, bool& onCursor, bool argEnable,
 					Color argBackgroundColor, Color argDarkColor, Color argLightColor,
 					Color argFontColor, Color argPushedFontColor,
 					int argRadius, int argBlurSize, int argShadowSize,
 					Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
+		onCursor = false;
 		
 		Mat3x2 mat;
 		
@@ -220,6 +225,7 @@ namespace NeumorphismUI {
 		if (argEnable) {
 			if (buttonRect.mouseOver()) {
 				Cursor::RequestStyle(CursorStyle::Hand);
+				onCursor = true;
 			}
 			clicked = buttonRect.leftReleased();
 		}
@@ -276,12 +282,13 @@ namespace NeumorphismUI {
 	void CircleSwitch(int argPositionX, int argPositionY,
 					  int argSize,
 					  bool& argVar,
-					  String argStr, Font& argFont, bool argEnable,
+					  String argStr, Font& argFont, bool& onCursor, bool argEnable,
 					  Color argBackgroundColor, Color argDarkColor, Color argLightColor,
 					  Color argFontColor, Color argPushedFontColor,
 					  int argBlurSize, int argShadowSize,
 					  Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
+		onCursor = false;
 		
 		Mat3x2 mat;
 		
@@ -292,6 +299,7 @@ namespace NeumorphismUI {
 		if (argEnable) {
 			if (switchCircle.mouseOver()) {
 				Cursor::RequestStyle(CursorStyle::Hand);
+				onCursor = true;
 			}
 			// クリックされたら状態を切り替え
 			isClicked = switchCircle.leftClicked();
@@ -331,24 +339,25 @@ namespace NeumorphismUI {
 	void CircleSwitch(Vec2 argPosition,
 					  int argSize,
 					  bool& argVar,
-					  String argStr, Font& argFont, bool argEnable,
+					  String argStr, Font& argFont, bool& onCursor, bool argEnable,
 					  Color argBackgroundColor, Color argDarkColor, Color argLightColor,
 					  Color argFontColor, Color argPushedFontColor,
 					  int argBlurSize, int argShadowSize,
 					  Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
-		CircleSwitch(argPosition.x, argPosition.y, argSize, argVar, argStr, argFont, argEnable, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+		CircleSwitch(argPosition.x, argPosition.y, argSize, argVar, argStr, argFont, onCursor, argEnable, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
 	void CircleSwitch(int argPositionX, int argPositionY,
 					  int argSize,
 					  bool& argVar,
-					  Texture& argTexture, bool argEnable,
+					  Texture& argTexture, bool& onCursor, bool argEnable,
 					  Color argBackgroundColor, Color argDarkColor, Color argLightColor,
 					  Color argFontColor, Color argPushedFontColor,
 					  int argBlurSize, int argShadowSize,
 					  Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
+		onCursor = false;
 		
 		Mat3x2 mat;
 		
@@ -359,6 +368,7 @@ namespace NeumorphismUI {
 		if (argEnable) {
 			if (switchCircle.mouseOver()) {
 				Cursor::RequestStyle(CursorStyle::Hand);
+				onCursor = true;
 			}
 			// クリックされたら状態を切り替え
 			isClicked = switchCircle.leftClicked();
@@ -398,19 +408,19 @@ namespace NeumorphismUI {
 	void CircleSwitch(Vec2 argPosition,
 					  int argSize,
 					  bool& argVar,
-					  Texture& argTexture, bool argEnable,
+					  Texture& argTexture, bool& onCursor, bool argEnable,
 					  Color argBackgroundColor, Color argDarkColor, Color argLightColor,
 					  Color argFontColor, Color argPushedFontColor,
 					  int argBlurSize, int argShadowSize,
 					  Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
-		CircleSwitch(argPosition.x, argPosition.y, argSize, argVar, argTexture, argEnable, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+		CircleSwitch(argPosition.x, argPosition.y, argSize, argVar, argTexture, onCursor, argEnable, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
 	void CircleSwitch(int argPositionX, int argPositionY,
 					  int argSize,
 					  bool& argVar,
-					  Texture& argTexture, Texture& argPushedTexture, bool argEnable,
+					  Texture& argTexture, Texture& argPushedTexture, bool& onCursor, bool argEnable,
 					  Color argBackgroundColor, Color argDarkColor, Color argLightColor,
 					  Color argFontColor, Color argPushedFontColor,
 					  int argBlurSize, int argShadowSize,
@@ -426,6 +436,7 @@ namespace NeumorphismUI {
 		if (argEnable) {
 			if (switchCircle.mouseOver()) {
 				Cursor::RequestStyle(CursorStyle::Hand);
+				onCursor = true;
 			}
 			// クリックされたら状態を切り替え
 			isClicked = switchCircle.leftClicked();
@@ -457,7 +468,7 @@ namespace NeumorphismUI {
 	// 丸型ボタン
 	int CircleButton(int argPositionX, int argPositionY,
 					 int argSize,
-					 String argStr, Font& argFont, bool argEnable,
+					 String argStr, Font& argFont, bool& onCursor, bool argEnable,
 					 Color argBackgroundColor , Color argDarkColor, Color argLightColor,
 					 Color argFontColor, Color argPushedFontColor,
 					 int argBlurSize, int argShadowSize,
@@ -473,6 +484,7 @@ namespace NeumorphismUI {
 		if (argEnable) {
 			if (buttonCircle.mouseOver()) {
 				Cursor::RequestStyle(CursorStyle::Hand);
+				onCursor = true;
 			}
 			clicked = buttonCircle.leftReleased();
 		}
@@ -509,18 +521,18 @@ namespace NeumorphismUI {
 
 	int CircleButton(Vec2 argPosition,
 					 int argSize,
-					 String argStr, Font& argFont, bool argEnable,
+					 String argStr, Font& argFont, bool& onCursor, bool argEnable,
 					 Color argBackgroundColor, Color argDarkColor, Color argLightColor,
 					 Color argFontColor, Color argPushedFontColor,
 					 int argBlurSize, int argShadowSize,
 					 Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
-		return CircleButton(argPosition.x, argPosition.y, argSize, argStr, argFont, argEnable, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+		return CircleButton(argPosition.x, argPosition.y, argSize, argStr, argFont, onCursor, argEnable, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
 	int CircleButton(int argPositionX, int argPositionY,
 					 int argSize,
-					 Texture& argTexture, bool argEnable,
+					 Texture& argTexture, bool& onCursor, bool argEnable,
 					 Color argBackgroundColor, Color argDarkColor, Color argLightColor,
 					 Color argFontColor, Color argPushedFontColor,
 					 int argBlurSize, int argShadowSize,
@@ -536,6 +548,7 @@ namespace NeumorphismUI {
 		if (argEnable) {
 			if (buttonCircle.mouseOver()) {
 				Cursor::RequestStyle(CursorStyle::Hand);
+				onCursor = true;
 			}
 			clicked = buttonCircle.leftReleased();
 		}
@@ -572,13 +585,13 @@ namespace NeumorphismUI {
 
 	int CircleButton(Vec2 argPosition,
 					 int argSize,
-					 Texture& argTexture, bool argEnable,
+					 Texture& argTexture, bool& onCursor, bool argEnable,
 					 Color argBackgroundColor, Color argDarkColor, Color argLightColor,
 					 Color argFontColor, Color argPushedFontColor,
 					 int argBlurSize, int argShadowSize,
 					 Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
-		return CircleButton(argPosition.x, argPosition.y, argSize, argTexture, argEnable, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+		return CircleButton(argPosition.x, argPosition.y, argSize, argTexture, onCursor, argEnable, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
 	}
 
 	// スライドスイッチ
@@ -692,7 +705,7 @@ namespace NeumorphismUI {
 		init(argVar, argPosition.x, argPosition.y, argSize.x, argSize.y);
 	}
 	
-	double Slider::draw() {
+	double Slider::draw(bool& onCursor) {
 		sliderRect
 		.drawShadow(lowerShadowPosOffset, blurSize, shadowSize, darkShadow)
 		.drawShadow(upperShadowPosOffset, blurSize, shadowSize, lightShadow)
@@ -714,6 +727,7 @@ namespace NeumorphismUI {
 		// マウスオーバー時にマウスポインタを変更
 		if (knobCircle.mouseOver() || barRect.mouseOver() || innerSliderRect.mouseOver()) {
 			Cursor::RequestStyle(CursorStyle::Hand);
+			onCursor = true;
 		}
 		
 		if (mouseLPressed) {

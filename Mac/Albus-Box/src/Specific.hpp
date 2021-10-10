@@ -34,8 +34,7 @@ namespace specific {
 
 	bool setWindowStyle(int x1, int y1, int x2, int y2, int w, int h);
 
-	void specific::moveWindow(Point& mouse_clicked, bool& window_moving);
-}
+	void moveWindow(Point& mouse_clicked, bool& window_moving);
 }
 
 #endif /* Specific_h */

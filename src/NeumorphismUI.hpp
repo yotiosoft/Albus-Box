@@ -29,7 +29,7 @@ namespace NeumorphismUI {
 	void RectSwitch(int argPositionX, int argPositionY,
 					int argSizeX, int argSizeY,
 					bool& argVar,
-					String argStr, Font& argFont, bool argEnable = true,
+					String argStr, Font& argFont, bool& onCursor, bool argEnable = true,
 					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
@@ -38,7 +38,7 @@ namespace NeumorphismUI {
 	void RectSwitch(Vec2 argPosition,
 					int argSizeX, int argSizeY,
 					bool& argVar,
-					String argStr, Font& argFont, bool argEnable = true,
+					String argStr, Font& argFont, bool& onCursor, bool argEnable = true,
 					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
@@ -47,7 +47,7 @@ namespace NeumorphismUI {
 	void RectSwitch(int argPositionX, int argPositionY,
 					Vec2 argSize,
 					bool& argVar,
-					String argStr, Font& argFont, bool argEnable = true,
+					String argStr, Font& argFont, bool& onCursor, bool argEnable = true,
 					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
@@ -56,7 +56,7 @@ namespace NeumorphismUI {
 	void RectSwitch(Vec2 argPosition,
 					Vec2 argSize,
 					bool& argVar,
-					String argStr, Font& argFont, bool argEnable = true,
+					String argStr, Font& argFont, bool& onCursor, bool argEnable = true,
 					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
@@ -65,7 +65,7 @@ namespace NeumorphismUI {
 	// 角丸長方形ボタン
 	int RectButton(int argPositionX, int argPositionY,
 					int argSizeX, int argSizeY,
-					String argStr, Font& argFont, bool argEnable = true,
+					String argStr, Font& argFont, bool& onCursor, bool argEnable = true,
 					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
@@ -73,7 +73,7 @@ namespace NeumorphismUI {
 
 	int RectButton(Vec2 argPosition,
 					int argSizeX, int argSizeY,
-					String argStr, Font& argFont, bool argEnable = true,
+					String argStr, Font& argFont, bool& onCursor, bool argEnable = true,
 					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
@@ -81,7 +81,7 @@ namespace NeumorphismUI {
 
 	int RectButton(int argPositionX, int argPositionY,
 					Vec2 argSize,
-					String argStr, Font& argFont, bool argEnable = true,
+					String argStr, Font& argFont, bool& onCursor, bool argEnable = true,
 					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
@@ -89,7 +89,7 @@ namespace NeumorphismUI {
 
 	int RectButton(Vec2 argPosition,
 					Vec2 argSize,
-					String argStr, Font& argFont, bool argEnable = true,
+					String argStr, Font& argFont, bool& onCursor, bool argEnable = true,
 					Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
@@ -97,7 +97,7 @@ namespace NeumorphismUI {
 
 	int RectButton(Vec2 argPosition,
 				Vec2 argSize,
-				Texture& argTexture, bool argEnable = true,
+				Texture& argTexture, bool& onCursor, bool argEnable = true,
 				Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 				Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 				int argRadius = 10, int argBlurSize = 16, int argShadowSize = 2,
@@ -113,7 +113,7 @@ namespace NeumorphismUI {
 	void CircleSwitch(int argPositionX, int argPositionY,
 					  int argSize,
 					  bool& argVar,
-					  String argStr, Font& argFont, bool argEnable = true,
+					  String argStr, Font& argFont, bool& onCursor, bool argEnable = true,
 					  Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					  Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					  int argBlurSize = 16, int argShadowSize = 2,
@@ -122,7 +122,7 @@ namespace NeumorphismUI {
 	void CircleSwitch(Vec2 argPosition,
 					  int argSize,
 					  bool& argVar,
-					  String argStr, Font& argFont, bool argEnable = true,
+					  String argStr, Font& argFont, bool& onCursor, bool argEnable = true,
 					  Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					  Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					  int argBlurSize = 16, int argShadowSize = 2,
@@ -131,7 +131,7 @@ namespace NeumorphismUI {
 	void CircleSwitch(int argPositionX, int argPositionY,
 					  int argSize,
 					  bool& argVar,
-					  Texture& argTexture, bool argEnable = true,
+					  Texture& argTexture, bool& onCursor, bool argEnable = true,
 					  Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					  Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					  int argBlurSize = 16, int argShadowSize = 2,
@@ -140,7 +140,7 @@ namespace NeumorphismUI {
 	void CircleSwitch(Vec2 argPosition,
 					  int argSize,
 					  bool& argVar,
-					  Texture& argTexture, bool argEnable = true,
+					  Texture& argTexture, bool& onCursor, bool argEnable = true,
 					  Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					  Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					  int argBlurSize = 16, int argShadowSize = 2,
@@ -149,7 +149,7 @@ namespace NeumorphismUI {
 	void CircleSwitch(int argPositionX, int argPositionY,
 					  int argSize,
 					  bool& argVar,
-					  Texture& argTexture, Texture& argPushedTexture, bool argEnable = true,
+					  Texture& argTexture, Texture& argPushedTexture, bool& onCursor, bool argEnable = true,
 					  Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					  Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					  int argBlurSize = 16, int argShadowSize = 2,
@@ -158,7 +158,7 @@ namespace NeumorphismUI {
 	// 丸型ボタン
 	int CircleButton(int argPositionX, int argPositionY,
 					 int argSize,
-					 String argStr, Font& argFont, bool argEnable = true,
+					 String argStr, Font& argFont, bool& onCursor, bool argEnable = true,
 					 Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					 Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					 int argBlurSize = 16, int argShadowSize = 2,
@@ -166,7 +166,7 @@ namespace NeumorphismUI {
 
 	int CircleButton(Vec2 argPosition,
 					 int argSize,
-					 String argStr, Font& argFont, bool argEnable = true,
+					 String argStr, Font& argFont, bool& onCursor, bool argEnable = true,
 					 Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					 Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					 int argBlurSize = 16, int argShadowSize = 2,
@@ -174,7 +174,7 @@ namespace NeumorphismUI {
 
 	int CircleButton(int argPositionX, int argPositionY,
 					 int argSize,
-					 Texture& argTexture, bool argEnable = true,
+					 Texture& argTexture, bool& onCursor, bool argEnable = true,
 					 Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					 Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					 int argBlurSize = 16, int argShadowSize = 2,
@@ -182,7 +182,7 @@ namespace NeumorphismUI {
 
 	int CircleButton(Vec2 argPosition,
 					 int argSize,
-					 Texture& argTexture, bool argEnable = true,
+					 Texture& argTexture, bool& onCursor, bool argEnable = true,
 					 Color argBackgroundColor = DEFAULT_BACKGROUND_COLOR, Color argDarkColor = DEFAULT_SHADOW_COLOR, Color argLightColor = DEFAULT_LIGHT_COLOR,
 					 Color argFontColor = Palette::Gray, Color argPushedFontColor = Palette::Gray,
 					 int argBlurSize = 16, int argShadowSize = 2,
@@ -235,7 +235,7 @@ namespace NeumorphismUI {
 		Slider(double argVar, Vec2 argPosition, int argSizeW, int argSizeH);
 		Slider(double argVar, Vec2 argPosition, Vec2 argSize);
 		
-		double draw();
+		double draw(bool& onCursor);
 		
 		bool setValue(double arg_value);
 		

@@ -4,10 +4,6 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Resources/assets/data/img/icon.png</key>
-		<data>
-		tfzw8UoIkUmBKeYidbJHk45f22o=
-		</data>
 		<key>Resources/engine/font/fontawesome/LICENSE.txt</key>
 		<data>
 		mQfFUwb/+2hc4OBsnkaUdQNdX6Y=
@@ -231,13 +227,6 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Resources/assets/data/img/icon.png</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Gq9KOQ8u9DsbmrW4NyejQ8HteBjPu1kZlBQIM8jsaXA=
-			</data>
-		</dict>
 		<key>Resources/engine/font/fontawesome/LICENSE.txt</key>
 		<dict>
 			<key>hash2</key>

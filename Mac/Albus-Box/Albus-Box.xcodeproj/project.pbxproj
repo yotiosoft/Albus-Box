@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C17789A1CE0AA7C00BB8AD0 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C1778991CE0AA7C00BB8AD0 /* Main.cpp */; };
 		2C1778A31CE0B65500BB8AD0 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2C1778A21CE0B65500BB8AD0 /* icon.icns */; };
 		2C5C46DD26B4F00D005E8C85 /* libcurl.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C46DC26B4F00D005E8C85 /* libcurl.tbd */; };
 		2C5C46DF26B4F014005E8C85 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C46DE26B4F014005E8C85 /* AudioToolbox.framework */; };
@@ -36,17 +37,17 @@
 		2C5C470F26B4F08A005E8C85 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C470D26B4F08A005E8C85 /* libopus.a */; };
 		2C5C471126B4F08E005E8C85 /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C471026B4F08E005E8C85 /* libzlib.a */; };
 		2C6906D82298140F00A427D0 /* engine in Resources */ = {isa = PBXBuildFile; fileRef = 2C6906D72298140F00A427D0 /* engine */; };
-		4B987C342711EEEE00A2F33E /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B987C322711EEEE00A2F33E /* Main.cpp */; };
-		4B987C352711EEEE00A2F33E /* Specific.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B987C332711EEEE00A2F33E /* Specific.cpp */; };
-		4B987C432711EEFE00A2F33E /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B987C392711EEFE00A2F33E /* Player.cpp */; };
-		4B987C442711EEFE00A2F33E /* OtherFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B987C3C2711EEFE00A2F33E /* OtherFunctions.cpp */; };
-		4B987C452711EEFE00A2F33E /* AlbusBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B987C3F2711EEFE00A2F33E /* AlbusBox.cpp */; };
-		4B987C462711EEFE00A2F33E /* NeumorphismUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B987C402711EEFE00A2F33E /* NeumorphismUI.cpp */; };
+		4B987C5A27132E8200A2F33E /* NeumorphismUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B987C4E27132E8100A2F33E /* NeumorphismUI.cpp */; };
+		4B987C5B27132E8200A2F33E /* OtherFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B987C4F27132E8100A2F33E /* OtherFunctions.cpp */; };
+		4B987C5C27132E8200A2F33E /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B987C5627132E8200A2F33E /* Player.cpp */; };
+		4B987C5D27132E8200A2F33E /* AlbusBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B987C5927132E8200A2F33E /* AlbusBox.cpp */; };
+		4B987C6227132ED200A2F33E /* Specific.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B987C6127132ED200A2F33E /* Specific.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C1778841CE0A9EA00BB8AD0 /* Albus-Box.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Albus-Box.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C1778921CE0A9EA00BB8AD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C1778991CE0AA7C00BB8AD0 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = "<group>"; };
 		2C1778A21CE0B65500BB8AD0 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
 		2C5C46DC26B4F00D005E8C85 /* libcurl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.tbd; path = usr/lib/libcurl.tbd; sourceTree = SDKROOT; };
 		2C5C46DE26B4F014005E8C85 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -76,21 +77,20 @@
 		2C5C470D26B4F08A005E8C85 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopus.a; path = ../../lib/macOS/opus/libopus.a; sourceTree = "<group>"; };
 		2C5C471026B4F08E005E8C85 /* libzlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzlib.a; path = ../../lib/macOS/zlib/libzlib.a; sourceTree = "<group>"; };
 		2C6906D72298140F00A427D0 /* engine */ = {isa = PBXFileReference; lastKnownFileType = folder; name = engine; path = App/engine; sourceTree = "<group>"; };
-		4B987C312711EEEE00A2F33E /* Specific.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Specific.hpp; sourceTree = "<group>"; };
-		4B987C322711EEEE00A2F33E /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = "<group>"; };
-		4B987C332711EEEE00A2F33E /* Specific.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Specific.cpp; sourceTree = "<group>"; };
-		4B987C372711EEFE00A2F33E /* AlbusBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AlbusBox.hpp; path = ../../../src/AlbusBox.hpp; sourceTree = "<group>"; };
-		4B987C382711EEFE00A2F33E /* ButtonEx.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ButtonEx.hpp; path = ../../../src/ButtonEx.hpp; sourceTree = "<group>"; };
-		4B987C392711EEFE00A2F33E /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Player.cpp; path = ../../../src/Player.cpp; sourceTree = "<group>"; };
-		4B987C3A2711EEFE00A2F33E /* Header.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Header.hpp; path = ../../../src/Header.hpp; sourceTree = "<group>"; };
-		4B987C3B2711EEFE00A2F33E /* Enums.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Enums.hpp; path = ../../../src/Enums.hpp; sourceTree = "<group>"; };
-		4B987C3C2711EEFE00A2F33E /* OtherFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OtherFunctions.cpp; path = ../../../src/OtherFunctions.cpp; sourceTree = "<group>"; };
-		4B987C3D2711EEFE00A2F33E /* NeumorphismUI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NeumorphismUI.hpp; path = ../../../src/NeumorphismUI.hpp; sourceTree = "<group>"; };
-		4B987C3E2711EEFE00A2F33E /* Structs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Structs.hpp; path = ../../../src/Structs.hpp; sourceTree = "<group>"; };
-		4B987C3F2711EEFE00A2F33E /* AlbusBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlbusBox.cpp; path = ../../../src/AlbusBox.cpp; sourceTree = "<group>"; };
-		4B987C402711EEFE00A2F33E /* NeumorphismUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NeumorphismUI.cpp; path = ../../../src/NeumorphismUI.cpp; sourceTree = "<group>"; };
-		4B987C412711EEFE00A2F33E /* OtherFunctions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = OtherFunctions.hpp; path = ../../../src/OtherFunctions.hpp; sourceTree = "<group>"; };
-		4B987C422711EEFE00A2F33E /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Player.hpp; path = ../../../src/Player.hpp; sourceTree = "<group>"; };
+		4B987C4E27132E8100A2F33E /* NeumorphismUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NeumorphismUI.cpp; path = ../../../src/NeumorphismUI.cpp; sourceTree = "<group>"; };
+		4B987C4F27132E8100A2F33E /* OtherFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OtherFunctions.cpp; path = ../../../src/OtherFunctions.cpp; sourceTree = "<group>"; };
+		4B987C5027132E8100A2F33E /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Player.hpp; path = ../../../src/Player.hpp; sourceTree = "<group>"; };
+		4B987C5127132E8100A2F33E /* ButtonEx.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ButtonEx.hpp; path = ../../../src/ButtonEx.hpp; sourceTree = "<group>"; };
+		4B987C5227132E8200A2F33E /* Structs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Structs.hpp; path = ../../../src/Structs.hpp; sourceTree = "<group>"; };
+		4B987C5327132E8200A2F33E /* Header.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Header.hpp; path = ../../../src/Header.hpp; sourceTree = "<group>"; };
+		4B987C5427132E8200A2F33E /* AlbusBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AlbusBox.hpp; path = ../../../src/AlbusBox.hpp; sourceTree = "<group>"; };
+		4B987C5527132E8200A2F33E /* Enums.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Enums.hpp; path = ../../../src/Enums.hpp; sourceTree = "<group>"; };
+		4B987C5627132E8200A2F33E /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Player.cpp; path = ../../../src/Player.cpp; sourceTree = "<group>"; };
+		4B987C5727132E8200A2F33E /* NeumorphismUI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NeumorphismUI.hpp; path = ../../../src/NeumorphismUI.hpp; sourceTree = "<group>"; };
+		4B987C5827132E8200A2F33E /* OtherFunctions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = OtherFunctions.hpp; path = ../../../src/OtherFunctions.hpp; sourceTree = "<group>"; };
+		4B987C5927132E8200A2F33E /* AlbusBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlbusBox.cpp; path = ../../../src/AlbusBox.cpp; sourceTree = "<group>"; };
+		4B987C6027132ED200A2F33E /* Specific.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Specific.hpp; sourceTree = "<group>"; };
+		4B987C6127132ED200A2F33E /* Specific.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Specific.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,21 +154,21 @@
 		2C1778981CE0AA7C00BB8AD0 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				4B987C3F2711EEFE00A2F33E /* AlbusBox.cpp */,
-				4B987C372711EEFE00A2F33E /* AlbusBox.hpp */,
-				4B987C382711EEFE00A2F33E /* ButtonEx.hpp */,
-				4B987C3B2711EEFE00A2F33E /* Enums.hpp */,
-				4B987C3A2711EEFE00A2F33E /* Header.hpp */,
-				4B987C402711EEFE00A2F33E /* NeumorphismUI.cpp */,
-				4B987C3D2711EEFE00A2F33E /* NeumorphismUI.hpp */,
-				4B987C3C2711EEFE00A2F33E /* OtherFunctions.cpp */,
-				4B987C412711EEFE00A2F33E /* OtherFunctions.hpp */,
-				4B987C392711EEFE00A2F33E /* Player.cpp */,
-				4B987C422711EEFE00A2F33E /* Player.hpp */,
-				4B987C3E2711EEFE00A2F33E /* Structs.hpp */,
-				4B987C322711EEEE00A2F33E /* Main.cpp */,
-				4B987C332711EEEE00A2F33E /* Specific.cpp */,
-				4B987C312711EEEE00A2F33E /* Specific.hpp */,
+				4B987C6127132ED200A2F33E /* Specific.cpp */,
+				4B987C6027132ED200A2F33E /* Specific.hpp */,
+				4B987C5927132E8200A2F33E /* AlbusBox.cpp */,
+				4B987C5427132E8200A2F33E /* AlbusBox.hpp */,
+				4B987C5127132E8100A2F33E /* ButtonEx.hpp */,
+				4B987C5527132E8200A2F33E /* Enums.hpp */,
+				4B987C5327132E8200A2F33E /* Header.hpp */,
+				4B987C4E27132E8100A2F33E /* NeumorphismUI.cpp */,
+				4B987C5727132E8200A2F33E /* NeumorphismUI.hpp */,
+				4B987C4F27132E8100A2F33E /* OtherFunctions.cpp */,
+				4B987C5827132E8200A2F33E /* OtherFunctions.hpp */,
+				4B987C5627132E8200A2F33E /* Player.cpp */,
+				4B987C5027132E8100A2F33E /* Player.hpp */,
+				4B987C5227132E8200A2F33E /* Structs.hpp */,
+				2C1778991CE0AA7C00BB8AD0 /* Main.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -275,12 +275,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B987C452711EEFE00A2F33E /* AlbusBox.cpp in Sources */,
-				4B987C342711EEEE00A2F33E /* Main.cpp in Sources */,
-				4B987C352711EEEE00A2F33E /* Specific.cpp in Sources */,
-				4B987C442711EEFE00A2F33E /* OtherFunctions.cpp in Sources */,
-				4B987C432711EEFE00A2F33E /* Player.cpp in Sources */,
-				4B987C462711EEFE00A2F33E /* NeumorphismUI.cpp in Sources */,
+				4B987C5D27132E8200A2F33E /* AlbusBox.cpp in Sources */,
+				4B987C5C27132E8200A2F33E /* Player.cpp in Sources */,
+				2C17789A1CE0AA7C00BB8AD0 /* Main.cpp in Sources */,
+				4B987C5B27132E8200A2F33E /* OtherFunctions.cpp in Sources */,
+				4B987C5A27132E8200A2F33E /* NeumorphismUI.cpp in Sources */,
+				4B987C6227132ED200A2F33E /* Specific.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,8 +409,8 @@
 				HEADER_SEARCH_PATHS = (
 					../../include,
 					../../include/ThirdParty,
-					../../src/,
 					./src,
+					../../src,
 				);
 				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -486,8 +486,8 @@
 				HEADER_SEARCH_PATHS = (
 					../../include,
 					../../include/ThirdParty,
-					../../src/,
 					./src,
+					../../src,
 				);
 				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
