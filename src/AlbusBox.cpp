@@ -40,7 +40,7 @@ bool ExitButton(Color& button_close_color, Texture& window_close_icon, bool& onA
 }
 
 // 再生リスト
-bool playListView(Player& player, Color& button_close_color, Texture& window_close_icon, Color& font_color, bool& onAnyButton)
+bool playListView(Player& player, Color& button_close_color, Texture& window_close_icon, Color& font_color)
 {
 	// ボタン用アイコン
 	Texture return_button_icon{ Icon(IconFont::Return), 20 };		// 戻る
@@ -84,8 +84,12 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 	// マウスクリックした地点の記録用
 	Point mouse_clicked;
 	bool window_moving = false;
+	
+	bool onAnyButton;
 
 	while (System::Update()) {
+		onAnyButton = false;
+		
 		title_list = player.getTitleList();
 		before_playing = title_list.second;
 
@@ -225,12 +229,14 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 		player.playing();
 
 		// ウィンドウの移動
-		specific::moveWindow(mouse_clicked, window_moving);
+		if (!onAnyButton) {
+			specific::moveWindow(mouse_clicked, window_moving);
+		}
 	}
 	return true;
 }
 
-bool VersionInformation(Player& player, Color& button_close_color, Texture& window_close_icon, Color& font_color, bool& onAnyButton) {
+bool VersionInformation(Player& player, Color& button_close_color, Texture& window_close_icon, Color& font_color) {
 	// ボタン用アイコン
 	Texture return_button_icon{ Icon(IconFont::Return), 20 };		// 戻る
 
@@ -249,8 +255,12 @@ bool VersionInformation(Player& player, Color& button_close_color, Texture& wind
 	// マウスクリックした地点の記録用
 	Point mouse_clicked;
 	bool window_moving = false;
-
+	
+	bool onAnyButton;
+	
 	while (System::Update()) {
+		onAnyButton = false;
+		
 		// 画面上部のボタン群
 		// 閉じるボタン
 		if (ExitButton(button_close_color, window_close_icon, onAnyButton)) {
@@ -277,12 +287,14 @@ bool VersionInformation(Player& player, Color& button_close_color, Texture& wind
 		player.playing();
 
 		// ウィンドウの移動
-		specific::moveWindow(mouse_clicked, window_moving);
+		if (!onAnyButton) {
+			specific::moveWindow(mouse_clicked, window_moving);
+		}
 	}
 	return true;
 }
 
-bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_close_icon, Color& font_color, bool& onAnyButton) {
+bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_close_icon, Color& font_color) {
 	// ボタン用アイコン
 	Texture return_button_icon{ Icon(IconFont::Return), 20 };		// 戻る
 	
@@ -318,7 +330,11 @@ bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_
 	Point mouse_clicked;
 	bool window_moving = false;
 	
+	bool onAnyButton;
+	
 	while (System::Update()) {
+		onAnyButton = false;
+		
 		// 画面上部のボタン群
 		// 閉じるボタン
 		if (ExitButton(button_close_color, window_close_icon, onAnyButton)) {
@@ -352,7 +368,7 @@ bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_
 
 		// バージョン情報
 		if (NeumorphismUI::RectButton(Vec2(Scene::Width() / 2 - 50/2, Scene::Height() - 100), Vec2(50, 50), info_icon, onAnyButton)) {
-			if (VersionInformation(player, button_close_color, window_close_icon, font_color, onAnyButton)) {
+			if (VersionInformation(player, button_close_color, window_close_icon, font_color)) {
 				return true;
 			}
 		}
@@ -361,7 +377,9 @@ bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_
 		player.playing();
 		
 		// ウィンドウの移動
-		specific::moveWindow(mouse_clicked, window_moving);
+		if (!onAnyButton) {
+			specific::moveWindow(mouse_clicked, window_moving);
+		}
 	}
 	return true;
 }
@@ -472,7 +490,7 @@ void AlbusBox() {
 		// 画面上部のボタン群
 		// 設定へ画面遷移
 		if (NeumorphismUI::CircleButton(setting_button_pos, 20, setting_icon, onAnyButton)) {
-			if (AlbusBoxSetting(player, button_close_color, window_close_icon, font_color, onAnyButton)) {
+			if (AlbusBoxSetting(player, button_close_color, window_close_icon, font_color)) {
 				break;		// 閉じるボタンが押されたらループを抜ける
 			}
 		}
@@ -492,7 +510,7 @@ void AlbusBox() {
 		
 		// 再生リスト
 		if (NeumorphismUI::CircleButton(playlist_button_pos, 20, playlist_icon, onAnyButton)) {
-			if (playListView(player, button_close_color, window_close_icon, font_color, onAnyButton)) {
+			if (playListView(player, button_close_color, window_close_icon, font_color)) {
 				break;		// 閉じるボタンが押されたらループを抜ける
 			}
 		}

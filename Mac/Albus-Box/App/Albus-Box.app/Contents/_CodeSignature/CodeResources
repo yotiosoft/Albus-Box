@@ -4,6 +4,22 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Resources/assets/data/.DS_Store</key>
+		<data>
+		Oxtq46XlQrIVBnw2/G+dreY6QTA=
+		</data>
+		<key>Resources/assets/data/img/icon.png</key>
+		<data>
+		tfzw8UoIkUmBKeYidbJHk45f22o=
+		</data>
+		<key>Resources/assets/data/settings/audio_profiles.json</key>
+		<data>
+		0YiZUawTCi3Sq2p/KwUoGAucZ6A=
+		</data>
+		<key>Resources/assets/data/settings/settings.json</key>
+		<data>
+		Tev693H2pdfqht8n0Zky1JPRmhQ=
+		</data>
 		<key>Resources/engine/font/fontawesome/LICENSE.txt</key>
 		<data>
 		mQfFUwb/+2hc4OBsnkaUdQNdX6Y=
@@ -227,6 +243,27 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Resources/assets/data/img/icon.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Gq9KOQ8u9DsbmrW4NyejQ8HteBjPu1kZlBQIM8jsaXA=
+			</data>
+		</dict>
+		<key>Resources/assets/data/settings/audio_profiles.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			GncYPmy8CyAzFMnGWz2ccz6AqRk5wA4+qSwAooN216c=
+			</data>
+		</dict>
+		<key>Resources/assets/data/settings/settings.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			w66/xoIqZPx72FvS55ENkuEECwPL3gx5o4hzJWUi34k=
+			</data>
+		</dict>
 		<key>Resources/engine/font/fontawesome/LICENSE.txt</key>
 		<dict>
 			<key>hash2</key>

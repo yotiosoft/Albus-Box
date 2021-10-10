@@ -35,8 +35,6 @@ namespace NeumorphismUI {
 					int argRadius, int argBlurSize, int argShadowSize,
 					Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
-		onCursor = false;
-		
 		Mat3x2 mat;
 		
 		RoundRect switchRect(argPositionX, argPositionY, argSizeX, argSizeY, argRadius);
@@ -127,8 +125,6 @@ namespace NeumorphismUI {
 					int argRadius, int argBlurSize, int argShadowSize,
 					Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
-		onCursor = false;
-		
 		Mat3x2 mat;
 		
 		RoundRect buttonRect(argPositionX, argPositionY, argSizeX, argSizeY, argRadius);
@@ -214,8 +210,6 @@ namespace NeumorphismUI {
 					int argRadius, int argBlurSize, int argShadowSize,
 					Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
-		onCursor = false;
-		
 		Mat3x2 mat;
 		
 		RoundRect buttonRect(argPosition.x, argPosition.y, argSize.x, argSize.y, argRadius);
@@ -288,8 +282,6 @@ namespace NeumorphismUI {
 					  int argBlurSize, int argShadowSize,
 					  Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
-		onCursor = false;
-		
 		Mat3x2 mat;
 		
 		Circle switchCircle(argPositionX, argPositionY, argSize);
@@ -357,8 +349,6 @@ namespace NeumorphismUI {
 					  int argBlurSize, int argShadowSize,
 					  Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset)
 	{
-		onCursor = false;
-		
 		Mat3x2 mat;
 		
 		Circle switchCircle(argPositionX, argPositionY, argSize);
