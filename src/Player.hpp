@@ -12,6 +12,9 @@
 #include <Siv3D/MD5.hpp>
 #include <Specific.hpp>
 
+#include <iostream>
+#include <thread>
+
 namespace PlayerStatus {
 	enum Type {
 		Stop	= -1,
@@ -30,6 +33,7 @@ struct AudioStruct {
 	uint64 hash;
 	Audio* audio;
 	FilePath file_path;
+	bool isOpened = false;
 };
 
 class Player {
@@ -44,6 +48,9 @@ public:
 
 	//　曲を閉じる
 	void close(int num);
+
+	// 前後の曲を含めて読み込み
+	void openAudioFiles(int num);
 	
 	// 再生
 	bool play();

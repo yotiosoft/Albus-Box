@@ -30,6 +30,7 @@ void Player::audioRegister(FilePath audio_filepath) {
 void Player::open(int num) {
 	Audio* new_audio_file = new Audio(audio_files[num].file_path);
 	audio_files[num].audio = new_audio_file;
+	audio_files[num].isOpened = true;
 }
 
 void Player::openAndPlay(FilePath audio_filepath) {
@@ -46,6 +47,33 @@ void Player::close(int num) {
 	}
 	
 	audio_files[num].audio->release();
+	audio_files[num].isOpened = false;
+}
+
+void Player::openAudioFiles(int num) {
+	// 現在の曲から3曲以上離れていれば閉じる
+	for (int i = 0; i < audio_files.size(); i++) {
+		if (abs(i - num) <= 2) {
+			continue;
+		}
+
+		if (audio_files[i].isOpened) {
+			close(i);
+		}
+	}
+
+	// 前後含め5曲分読み込み
+	Array<std::thread> threads;
+	for (int i = 0; i < audio_files.size(); i++) {
+		if (abs(i - num) <= 2) {
+			if (!audio_files[i].isOpened) {
+				threads << std::thread([this, i]() { this->open(i); });
+			}
+		}
+	}
+	for (int ti = 0; ti < threads.size(); ti++) {
+		threads[ti].join();
+	}
 }
 
 bool Player::play() {
@@ -190,9 +218,6 @@ void Player::next() {
 
 void Player::move(int num) {
 	// 前の曲を閉じる
-	Console << current_track << U"->" << num;
-	close(current_track);
-
 	if (num == audio_files.size()) {
 		num = 0;
 	}
@@ -206,7 +231,7 @@ void Player::move(int num) {
 	loadThumbnailImage();
 
 	// ファイルを開く
-	open(num);
+	openAudioFiles(num);
 
 	return;
 }
