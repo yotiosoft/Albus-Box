@@ -221,7 +221,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 		if (NeumorphismUI::CircleButton(fileopen_button_pos, 30, fileopen_icon, onAnyButton)) {
 			auto file_open = AudioFileOpen();
 			if (file_open.first) {
-				player.open(file_open.second);
+				player.audioRegister(file_open.second);
 			}
 		}
 
