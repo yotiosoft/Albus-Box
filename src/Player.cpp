@@ -63,16 +63,13 @@ void Player::openAudioFiles(int num) {
 	}
 
 	// 前後含め5曲分読み込み
-	Array<std::thread> threads;
-	for (int i = 0; i < audio_files.size(); i++) {
-		if (abs(i - num) <= 2) {
-			if (!audio_files[i].isOpened) {
-				threads << std::thread([this, i]() { this->open(i); });
-			}
+	for (int i = -2; i <= 2; i++) {
+		int track_num = getTrackNumber(num, i);
+		Console << U"trk: " << track_num;
+		if (!audio_files[track_num].isOpened) {
+			Console << U"open: " << track_num;
+			threads << std::thread([this, track_num]() { this->open(track_num); });
 		}
-	}
-	for (int ti = 0; ti < threads.size(); ti++) {
-		threads[ti].join();
 	}
 }
 
@@ -230,8 +227,18 @@ void Player::move(int num) {
 	// サムネイル画像の取得
 	loadThumbnailImage();
 
+	for (int ti = 0; ti < threads.size(); ti++) {
+		threads[ti].join();
+	}
+	threads.clear();
+
 	// ファイルを開く
 	openAudioFiles(num);
+
+	for (int ti = 0; ti < threads.size(); ti++) {
+		threads[ti].join();
+	}
+	threads.clear();
 
 	return;
 }
@@ -270,6 +277,19 @@ bool Player::changeVolumeTo(double volume_norm) {
 	}
 	
 	return true;
+}
+
+int Player::getTrackNumber(int current, int offset) {
+	int ret = current + offset;
+
+	if (ret >= audio_files.size()) {
+		ret %= audio_files.size();
+	}
+	else if (ret < 0) {
+		ret %= audio_files.size();
+	}
+
+	return ret;
 }
 
 String Player::getTitle(int num) {
