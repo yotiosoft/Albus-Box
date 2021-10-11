@@ -30,8 +30,11 @@ bool ExitButton(Color& button_close_color, Texture& window_close_icon, bool& onA
 		}
 	}
 	else if (OS == "Mac") {
-		Font font_temp = Font(FontAsset(U"middle"));
-		if (NeumorphismUI::CircleButton(25, 25, 8, U"", font_temp, onAnyButton, true, button_close_color)) {
+		Circle exit_button = Circle(25, 25, 8).draw(button_close_color);
+		if (exit_button.mouseOver()) {
+			FontAsset(U"small")(U"×").draw(Arg::center(25, 25), Color(Palette::Black));
+		}
+		if (exit_button.leftReleased()) {
 			return true;
 		}
 	}
@@ -56,7 +59,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 		return_button_pos = Point(10, 10);
 	}
 	else if (OS == "Mac") {
-		return_button_pos = Point(45, 10);
+		return_button_pos = Point(20, 40);
 	}
 	Point fileopen_button_pos = Point(Scene::Width()-50, Scene::Height()-50);
 	Point save_button_pos = Point(Scene::Width() / 2, 70);
@@ -249,7 +252,7 @@ bool VersionInformation(Player& player, Color& button_close_color, Texture& wind
 		return_button_pos = Point(10, 10);
 	}
 	else if (OS == "Mac") {
-		return_button_pos = Point(45, 10);
+		return_button_pos = Point(20, 10);
 	}
 
 	// マウスクリックした地点の記録用
@@ -323,7 +326,7 @@ bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_
 		return_button_pos = Point(10, 10);
 	}
 	else if (OS == "Mac") {
-		return_button_pos = Point(45, 10);
+		return_button_pos = Point(20, 10);
 	}
 	
 	// マウスクリックした地点の記録用
