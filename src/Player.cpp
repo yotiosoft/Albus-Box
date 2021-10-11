@@ -19,25 +19,33 @@ Player::Player() {
 	current_track_thumbnail_texture = default_thumbnail_texture;
 }
 
-void Player::open(FilePath audio_filepath) {
-	Audio* new_audio_file = new Audio(audio_filepath);
+void Player::audioRegister(FilePath audio_filepath) {
 	uint64 new_audio_hash = MD5::FromFile(audio_filepath).hash();
-	AudioStruct new_audio_struct{ new_audio_hash, new_audio_file };
+	AudioStruct new_audio_struct{ new_audio_hash, nullptr, audio_filepath };
 
 	audio_files << new_audio_struct;
 	audio_files_path << audio_filepath;
+}
 
-	audio_files.back().audio->setVolume(volume);
-	audio_files.back().audio->setLoop(loop);
+void Player::open(int num) {
+	Audio* new_audio_file = new Audio(audio_files[num].file_path);
+	audio_files[num].audio = new_audio_file;
 }
 
 void Player::openAndPlay(FilePath audio_filepath) {
-	open(audio_filepath);
+	audioRegister(audio_filepath);
 
 	stop();
-	move((int)audio_files.size() - 1);
 
-	play();
+	play((int)audio_files.size() - 1);
+}
+
+void Player::close(int num) {
+	if (num < 0) {
+		return;
+	}
+	
+	audio_files[num].audio->release();
 }
 
 bool Player::play() {
@@ -51,6 +59,7 @@ bool Player::play(int num) {
 
 	if (num != current_track && num < audio_files.size()) {
 		pause();
+		close(current_track);
 		move(num);
 		audio_files[current_track].audio->seekSamples(0);
 	}
@@ -72,12 +81,9 @@ bool Player::playFromBegin(int num) {
 
 	if (num != current_track && num < audio_files.size()) {
 		stop();
-		move(num);
 	}
 
-	status = PlayerStatus::Play;
-	audio_files[current_track].audio->seekSamples(0);
-	audio_files[current_track].audio->play();
+	play(num);
 
 	return true;
 }
@@ -98,6 +104,9 @@ bool Player::pause() {
 	if (!isOpened()) {
 		return false;
 	}
+	if (current_track < 0) {
+		return false;
+	}
 	
 	status = PlayerStatus::Pause;
 	audio_files[current_track].audio->pause();
@@ -107,6 +116,9 @@ bool Player::pause() {
 
 bool Player::stop() {
 	if (!isOpened()) {
+		return false;
+	}
+	if (current_track < 0) {
 		return false;
 	}
 	
@@ -177,6 +189,10 @@ void Player::next() {
 }
 
 void Player::move(int num) {
+	// 前の曲を閉じる
+	Console << current_track << U"->" << num;
+	close(current_track);
+
 	if (num == audio_files.size()) {
 		num = 0;
 	}
@@ -188,6 +204,9 @@ void Player::move(int num) {
 
 	// サムネイル画像の取得
 	loadThumbnailImage();
+
+	// ファイルを開く
+	open(num);
 
 	return;
 }
@@ -428,7 +447,7 @@ void Player::fft(FFTResult& fft) {
 }
 
 bool Player::isOpened() {
-	if (current_track == -1) {
+	if (audio_files.size() == 0) {
 		return false;
 	}
 	return true;
@@ -504,7 +523,7 @@ void Player::loadPlayList(FilePath playlist_filepath) {
 
 	// プレイリスト読み込み
 	for (auto audio_filepath : playlist[U"list"].arrayView()) {
-		open(audio_filepath.getString());
+		audioRegister(audio_filepath.getString());
 	}
 
 	// 最初の曲を再生

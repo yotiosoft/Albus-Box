@@ -29,6 +29,7 @@ struct AudioFileProfile {
 struct AudioStruct {
 	uint64 hash;
 	Audio* audio;
+	FilePath file_path;
 };
 
 class Player {
@@ -37,8 +38,12 @@ public:
 	Player();
 	
 	// 曲を開く
-	void open(FilePath audio_filepath);
+	void audioRegister(FilePath audio_filepath);
+	void open(int num);
 	void openAndPlay(FilePath audio_filepath);
+
+	//　曲を閉じる
+	void close(int num);
 	
 	// 再生
 	bool play();
