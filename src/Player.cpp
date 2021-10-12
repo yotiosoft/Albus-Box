@@ -65,10 +65,9 @@ void Player::openAudioFiles(int num) {
 	// 前後含め5曲分読み込み
 	for (int i = -2; i <= 2; i++) {
 		int track_num = getTrackNumber(num, i);
-		Console << U"trk: " << track_num;
 		if (!audio_files[track_num].isOpened) {
-			Console << U"open: " << track_num;
-			threads << std::thread([this, track_num]() { this->open(track_num); });
+			audio_files[track_num].isOpened = true;
+			threads[track_num] = std::thread([this, track_num]() { this->open(track_num); });
 		}
 	}
 }
@@ -227,18 +226,18 @@ void Player::move(int num) {
 	// サムネイル画像の取得
 	loadThumbnailImage();
 
-	for (int ti = 0; ti < threads.size(); ti++) {
-		threads[ti].join();
+	for (auto it = threads.begin(); it != threads.end(); it++) {
+		it->second.join();
 	}
 	threads.clear();
 
 	// ファイルを開く
 	openAudioFiles(num);
 
-	for (int ti = 0; ti < threads.size(); ti++) {
-		threads[ti].join();
+	if (threads.count(num) > 0) {
+		threads[num].join();
+		threads.erase(num);
 	}
-	threads.clear();
 
 	return;
 }
@@ -596,7 +595,14 @@ void Player::savePlayList() {
 void Player::free() {
 	// 再生中の曲を停止
 	stop();
+
+	// スレッド処理の無効化
+	for (auto it = threads.begin(); it != threads.end(); it++) {
+		it->second.detach();
+	}
+	threads.clear();
 	
+	// Audioの解放
 	for (auto af : audio_files) {
 		af.audio->release();
 		delete(af.audio);

@@ -162,7 +162,7 @@ public:
 	void free();
 	
 private:
-	Array<std::thread> threads;
+	HashTable<int, std::thread> threads;
 	Array<AudioStruct> audio_files;
 	Array<FilePath> audio_files_path;
 	map<uint64, AudioFileProfile> audio_files_profile;
