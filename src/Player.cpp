@@ -14,6 +14,8 @@ Player::Player() {
 	loadSettings();
 	loadAudioProfiles();
 
+	loading_texture = Texture(U"{}/data/img/icon_loader_a_ww_01_s1.gif"_fmt(specific::getCurrentDir()));
+
 	// 標準のサムネイル画像を生成
 	default_thumbnail_texture = Texture(getDefdaultThumbnailImage());
 	current_track_thumbnail_texture = default_thumbnail_texture;
@@ -51,24 +53,25 @@ void Player::close(int num) {
 }
 
 void Player::openAudioFiles(int num) {
-	// 現在の曲から3曲以上離れていれば閉じる
-	for (int i = 0; i < audio_files.size(); i++) {
-		if (abs(i - num) <= 2) {
-			continue;
-		}
-
-		if (audio_files[i].isOpened) {
-			close(i);
-		}
-	}
-
 	// 前後含め5曲分読み込み
-	for (int i = -2; i <= 2; i++) {
+	for (int i = -RANGE; i <= RANGE; i++) {
 		int track_num = getTrackNumber(num, i);
 		if (!audio_files[track_num].isOpened) {
 			audio_files[track_num].isOpened = true;
 			threads[track_num] = std::thread([this, track_num]() { this->open(track_num); });
 		}
+	}
+}
+
+void Player::closeAudioFiles(int num) {
+	int close_num = getTrackNumber(num, num - RANGE - 1);
+	if (abs(num - close_num) > RANGE && audio_files[close_num].isOpened) {
+		close(close_num);
+	}
+
+	close_num = getTrackNumber(num, num + RANGE + 1);
+	if (abs(num - close_num) > RANGE && audio_files[close_num].isOpened) {
+		close(close_num);
 	}
 }
 
@@ -231,8 +234,13 @@ void Player::move(int num) {
 	}
 	threads.clear();
 
+	// 不要なファイルを閉じる
+	closeAudioFiles(num);
+
 	// ファイルを開く
 	openAudioFiles(num);
+
+	loading_texture.drawAt(Scene::Width() / 2, Scene::Height() / 3);
 
 	if (threads.count(num) > 0) {
 		threads[num].join();

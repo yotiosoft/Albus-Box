@@ -51,6 +51,7 @@ public:
 
 	// 前後の曲を含めて読み込み
 	void openAudioFiles(int num);
+	void closeAudioFiles(int num);
 	
 	// 再生
 	bool play();
@@ -171,6 +172,7 @@ private:
 	double volume;
 	bool show_wave;
 	bool loop;
+	Texture loading_texture;
 
 	// サムネイル関係
 	const int thumbnail_size = 260;

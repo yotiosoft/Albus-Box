@@ -22,5 +22,6 @@
 #define TITLE			U"Albus Box"
 #define VERSION			U"0.1"
 #define RELEASE_NUM		1
+#define RANGE			2
 
 using namespace std;
