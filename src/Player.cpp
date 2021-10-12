@@ -62,14 +62,14 @@ void Player::openAudioFiles(int num) {
 }
 
 void Player::closeAudioFiles(int num) {
-	int close_num = getTrackNumber(num, num - RANGE - 1);
-	if (abs(num - close_num) > RANGE && audio_files[close_num].isOpened) {
-		close(close_num);
-	}
-
-	close_num = getTrackNumber(num, num + RANGE + 1);
-	if (abs(num - close_num) > RANGE && audio_files[close_num].isOpened) {
-		close(close_num);
+	for (int i = 0; i < audio_files.size(); i++) {
+		if (audio_files[i].isOpened) {
+			int distance = abs(i - num) % audio_files.size();
+			if (distance > RANGE) {
+				close(i);
+				Console << U"Close: " << i << U" num: " << num << U" distance: " << distance;
+			}
+		}
 	}
 }
 
