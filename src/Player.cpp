@@ -14,8 +14,6 @@ Player::Player() {
 	loadSettings();
 	loadAudioProfiles();
 
-	loading_texture = Texture(U"{}/data/img/icon_loader_a_ww_01_s1.gif"_fmt(specific::getCurrentDir()));
-
 	// 標準のサムネイル画像を生成
 	default_thumbnail_texture = Texture(getDefdaultThumbnailImage());
 	current_track_thumbnail_texture = default_thumbnail_texture;
@@ -239,8 +237,6 @@ void Player::move(int num) {
 
 	// ファイルを開く
 	openAudioFiles(num);
-
-	loading_texture.drawAt(Scene::Width() / 2, Scene::Height() / 3);
 
 	if (threads.count(num) > 0) {
 		threads[num].join();
@@ -612,7 +608,8 @@ void Player::free() {
 	
 	// Audioの解放
 	for (auto af : audio_files) {
-		af.audio->release();
+		if (af.isOpened)
+			af.audio->release();
 		delete(af.audio);
 	}
 }

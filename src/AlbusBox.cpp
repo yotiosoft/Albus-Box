@@ -435,6 +435,8 @@ void AlbusBox() {
 	Texture playlist_icon{ Icon(IconFont::PlayList), 20 };
 
 	Texture window_close_icon{ Icon(IconFont::Times), 20 };
+	
+	Texture loading_texture(U"{}/data/img/loading-24.gif"_fmt(specific::getCurrentDir()));
 
 	// ボタンの位置
 	Point setting_button_pos;
@@ -478,6 +480,8 @@ void AlbusBox() {
 	
 	// カーソルが何らかのボタンオブジェクト上にあるか
 	bool onAnyButton;
+	
+	pair<bool, FilePath> file_open;
 
 	while (System::Update()) {
 		onAnyButton = false;
@@ -492,19 +496,6 @@ void AlbusBox() {
 		if (NeumorphismUI::CircleButton(setting_button_pos, 20, setting_icon, onAnyButton)) {
 			if (AlbusBoxSetting(player, button_close_color, window_close_icon, font_color)) {
 				break;		// 閉じるボタンが押されたらループを抜ける
-			}
-		}
-
-		// ファイルを開く
-		if (NeumorphismUI::CircleButton(fileopen_button_pos, 20, fileopen_icon, onAnyButton)) {
-			auto file_open = AudioFileOpen();
-			if (file_open.first) {
-				if (FileSystem::Extension(file_open.second) == U"playlist") {
-					player.loadPlayList(file_open.second);
-				}
-				else {
-					player.openAndPlay(file_open.second);
-				}
 			}
 		}
 		
@@ -634,6 +625,25 @@ void AlbusBox() {
 		}
 		
 		playing = player.playing();
+		
+		// ファイルを開く
+		if (file_open.first) {
+			if (FileSystem::Extension(file_open.second) == U"playlist") {
+				player.loadPlayList(file_open.second);
+			}
+			else {
+				player.openAndPlay(file_open.second);
+			}
+			
+			file_open.first = false;
+		}
+		if (NeumorphismUI::CircleButton(fileopen_button_pos, 20, fileopen_icon, onAnyButton)) {
+			file_open = AudioFileOpen();
+			
+			if (file_open.first) {
+				loading_texture.drawAt(Scene::Width() / 2, Scene::Height() / 3);
+			}
+		}
 		
 		// ウィンドウの移動
 		if (!onAnyButton) {
