@@ -506,6 +506,27 @@ void AlbusBox() {
 			}
 		}
 
+		// ファイルを開く
+		if (file_open.first) {
+			loading_texture.drawAt(Scene::Width() / 2, Scene::Height() / 3);
+
+			if (FileSystem::Extension(file_open.second) == U"playlist") {
+				player.loadPlayList(file_open.second);
+			}
+			else {
+				player.openAndPlay(file_open.second);
+			}
+
+			file_open.first = false;
+		}
+		if (NeumorphismUI::CircleButton(fileopen_button_pos, 20, fileopen_icon, onAnyButton)) {
+			file_open = AudioFileOpen();
+
+			if (file_open.first) {
+				FontAsset(U"middle")(U"Loading...").drawAt(Scene::Width() / 2, Scene::Height() / 3 + 170, font_color);
+			}
+		}
+
 		// サムネイル
 		if (NeumorphismUI::NeumorphismCircle(Scene::Width() / 2, Scene::Height() / 3, thumbnail_size / 2 + 10, false)) {
 			if (player.isOpened()) {
@@ -625,25 +646,6 @@ void AlbusBox() {
 		}
 		
 		playing = player.playing();
-		
-		// ファイルを開く
-		if (file_open.first) {
-			if (FileSystem::Extension(file_open.second) == U"playlist") {
-				player.loadPlayList(file_open.second);
-			}
-			else {
-				player.openAndPlay(file_open.second);
-			}
-			
-			file_open.first = false;
-		}
-		if (NeumorphismUI::CircleButton(fileopen_button_pos, 20, fileopen_icon, onAnyButton)) {
-			file_open = AudioFileOpen();
-			
-			if (file_open.first) {
-				loading_texture.drawAt(Scene::Width() / 2, Scene::Height() / 3);
-			}
-		}
 		
 		// ウィンドウの移動
 		if (!onAnyButton) {

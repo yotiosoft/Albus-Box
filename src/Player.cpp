@@ -366,6 +366,11 @@ Image Player::getDefdaultThumbnailImage() {
 void Player::setThumbnailImage(FilePath thumbnail_image_filepath) {
 	if (thumbnail_image_filepath.length() > 0 && FileSystem::Exists(thumbnail_image_filepath)) {
 		audio_files_profile[audio_files[current_track].hash].thumbnail_image_filepath = thumbnail_image_filepath;
+
+		if (!audio_files_profile[audio_files[current_track].hash].thumbnail_texture.isEmpty()) {
+			audio_files_profile[audio_files[current_track].hash].thumbnail_texture.release();
+		}
+
 		loadThumbnailImage();
 
 		saveAudioProfiles();
@@ -377,16 +382,19 @@ void Player::loadThumbnailImage() {
 		if (audio_files_profile[audio_files[current_track].hash].thumbnail_image_filepath.length() > 0
 			&& FileSystem::Exists(audio_files_profile[audio_files[current_track].hash].thumbnail_image_filepath)) {
 
-			Image thumbnail_image_temp(audio_files_profile[audio_files[current_track].hash].thumbnail_image_filepath);
+			if (audio_files_profile[audio_files[current_track].hash].thumbnail_texture.isEmpty()) {
+				Image thumbnail_image_temp(audio_files_profile[audio_files[current_track].hash].thumbnail_image_filepath);
 
-			if (thumbnail_image_temp.width() > thumbnail_image_temp.height()) {
-				thumbnail_image_temp = thumbnail_image_temp.fitted(Size(thumbnail_image_temp.width() / thumbnail_image_temp.height() * thumbnail_size * 2, thumbnail_size * 2));
-			}
-			else {
-				thumbnail_image_temp = thumbnail_image_temp.fitted(Size(thumbnail_size * 2, thumbnail_image_temp.height() / thumbnail_image_temp.width() * thumbnail_size * 2));
-			}
+				if (thumbnail_image_temp.width() > thumbnail_image_temp.height()) {
+					thumbnail_image_temp = thumbnail_image_temp.fitted(Size(thumbnail_image_temp.width() / thumbnail_image_temp.height() * thumbnail_size * 2, thumbnail_size * 2));
+				}
+				else {
+					thumbnail_image_temp = thumbnail_image_temp.fitted(Size(thumbnail_size * 2, thumbnail_image_temp.height() / thumbnail_image_temp.width() * thumbnail_size * 2));
+				}
 
-			current_track_thumbnail_texture = Texture(thumbnail_image_temp);
+				audio_files_profile[audio_files[current_track].hash].thumbnail_texture = Texture(thumbnail_image_temp);
+			}
+			current_track_thumbnail_texture = audio_files_profile[audio_files[current_track].hash].thumbnail_texture;
 
 			return;
 		}

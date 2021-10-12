@@ -27,6 +27,7 @@ struct AudioFileProfile {
 	String title;
 	String artist_name;
 	FilePath thumbnail_image_filepath;
+	Texture thumbnail_texture;
 };
 
 struct AudioStruct {
@@ -172,7 +173,6 @@ private:
 	double volume;
 	bool show_wave;
 	bool loop;
-	Texture loading_texture;
 
 	// サムネイル関係
 	const int thumbnail_size = 260;
