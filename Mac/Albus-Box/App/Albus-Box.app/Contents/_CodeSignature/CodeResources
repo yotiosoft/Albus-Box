@@ -12,14 +12,6 @@
 		<data>
 		tfzw8UoIkUmBKeYidbJHk45f22o=
 		</data>
-		<key>Resources/assets/data/img/icon_loader_a_ww_01_s1.gif</key>
-		<data>
-		DEbM4YFz6pAvxNac42BI+84D0lc=
-		</data>
-		<key>Resources/assets/data/img/loading-24.gif</key>
-		<data>
-		rM2sinq+qw4hxJU5qtCpc63bKO8=
-		</data>
 		<key>Resources/assets/data/settings/audio_profiles.json</key>
 		<data>
 		0YiZUawTCi3Sq2p/KwUoGAucZ6A=
@@ -256,20 +248,6 @@
 			<key>hash2</key>
 			<data>
 			Gq9KOQ8u9DsbmrW4NyejQ8HteBjPu1kZlBQIM8jsaXA=
-			</data>
-		</dict>
-		<key>Resources/assets/data/img/icon_loader_a_ww_01_s1.gif</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			SQvMTvrT0zfZF1yamZLRZ1u6396CaFMuCWDo7Y7Ox5Y=
-			</data>
-		</dict>
-		<key>Resources/assets/data/img/loading-24.gif</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			kDTV00AV5LBdLB0ajcn27J1ZvZbTBeueJOJOZcWRpkU=
 			</data>
 		</dict>
 		<key>Resources/assets/data/settings/audio_profiles.json</key>
