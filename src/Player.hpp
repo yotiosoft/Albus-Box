@@ -99,7 +99,7 @@ public:
 	void editTitle(String new_title);
 
 	// サムネイル画像を返す
-	Texture& getThumbnailTexture();
+	Texture* getThumbnailTexture();
 	Image getDefdaultThumbnailImage();
 
 	// サムネイル画像を設定
@@ -177,7 +177,7 @@ private:
 	// サムネイル関係
 	const int thumbnail_size = 260;
 	Texture default_thumbnail_texture;
-	Texture current_track_thumbnail_texture;
+	Texture *current_track_thumbnail_texture;
 };
 
 #endif /* Player_hpp */

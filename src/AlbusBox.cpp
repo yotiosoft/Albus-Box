@@ -385,13 +385,13 @@ bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_
 }
 
 void drawThumbnailTexture(Player& player, int thumbnail_size) {
-	Texture thumbnail_texture = player.getThumbnailTexture();
+	Texture *thumbnail_texture = player.getThumbnailTexture();
 
-	if (thumbnail_texture.width() > thumbnail_texture.height()) {
-		thumbnail_texture.resized(Size(thumbnail_texture.width() / thumbnail_texture.height() * thumbnail_size, thumbnail_size)).draw(0, 0);
+	if (thumbnail_texture->width() > thumbnail_texture->height()) {
+		thumbnail_texture->resized(Size(thumbnail_texture->width() / thumbnail_texture->height() * thumbnail_size, thumbnail_size)).draw(0, 0);
 	}
 	else {
-		thumbnail_texture.resized(Size(thumbnail_size, thumbnail_texture.height() / thumbnail_texture.width() * thumbnail_size)).draw(0, 0);
+		thumbnail_texture->resized(Size(thumbnail_size, thumbnail_texture->height() / thumbnail_texture->width() * thumbnail_size)).draw(0, 0);
 	}
 }
 
@@ -545,7 +545,7 @@ void AlbusBox() {
 		LineString fft_line;
 		if (playing && player.isOpened() && player.isShowWaveEnabled()) {
 			ScopedRenderTarget2D target(thumbnail_texture);
-			player.getThumbnailTexture().drawAt(thumbnail_size / 2, thumbnail_size / 2);
+			player.getThumbnailTexture()->drawAt(thumbnail_size / 2, thumbnail_size / 2);
 			player.fft(fft);
 			int fft_size = 800;
 			int box_size = 10;
@@ -560,7 +560,7 @@ void AlbusBox() {
 		}
 		else {
 			ScopedRenderTarget2D target(thumbnail_texture);
-			player.getThumbnailTexture().drawAt(thumbnail_size / 2, thumbnail_size / 2);
+			player.getThumbnailTexture()->drawAt(thumbnail_size / 2, thumbnail_size / 2);
 		}
 
 		thumbnail_circle(thumbnail_texture(0, 0, thumbnail_size, thumbnail_size)).draw();

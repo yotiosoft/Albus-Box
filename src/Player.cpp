@@ -16,7 +16,7 @@ Player::Player() {
 
 	// 標準のサムネイル画像を生成
 	default_thumbnail_texture = Texture(getDefdaultThumbnailImage());
-	current_track_thumbnail_texture = default_thumbnail_texture;
+	current_track_thumbnail_texture = &default_thumbnail_texture;
 }
 
 void Player::audioRegister(FilePath audio_filepath) {
@@ -344,7 +344,7 @@ void Player::editTitle(String new_title) {
 	saveAudioProfiles();
 }
 
-Texture& Player::getThumbnailTexture() {
+Texture* Player::getThumbnailTexture() {
 	return current_track_thumbnail_texture;
 }
 
@@ -394,14 +394,14 @@ void Player::loadThumbnailImage() {
 
 				audio_files_profile[audio_files[current_track].hash].thumbnail_texture = Texture(thumbnail_image_temp);
 			}
-			current_track_thumbnail_texture = audio_files_profile[audio_files[current_track].hash].thumbnail_texture;
+			current_track_thumbnail_texture = &audio_files_profile[audio_files[current_track].hash].thumbnail_texture;
 
 			return;
 		}
 	}
 
 	// ファイル情報が存在しなければデフォルトのサムネイル画像
-	current_track_thumbnail_texture = default_thumbnail_texture;
+	current_track_thumbnail_texture = &default_thumbnail_texture;
 
 	return;
 }
