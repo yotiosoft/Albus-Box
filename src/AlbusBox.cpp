@@ -31,7 +31,14 @@ bool ExitButton(Color& button_close_color, Texture& window_close_icon, bool& onA
 	}
 	else if (OS == "Mac") {
 		Font font_temp = Font(FontAsset(U"middle"));
-		if (NeumorphismUI::CircleButton(25, 25, 8, U"", font_temp, onAnyButton, true, button_close_color)) {
+		Circle exit_button_circle(25, 25, 8);
+		exit_button_circle.draw(Color(255, 95, 87));
+		if (exit_button_circle.mouseOver()) {
+			Cursor::RequestStyle(CursorStyle::Hand);
+			onAnyButton = true;
+			FontAsset(U"small")(U"×").draw(Arg::center(25, 25));
+		}
+		if (exit_button_circle.leftReleased()) {
 			return true;
 		}
 	}
