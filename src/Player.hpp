@@ -77,6 +77,9 @@ public:
 
 	// 曲を遷移したときの処理
 	void move(int num);
+
+	// 現在の設定をAudioに反映
+	bool reflectSettings(int num);
 	
 	// 再生位置変更
 	bool seekTo(double skip_pos);

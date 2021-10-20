@@ -564,6 +564,11 @@ void AlbusBox() {
 					Rect(Arg::center(i * thumbnail_texture.width() / row_boxes + box_size / 2, thumbnail_texture.height() - j * box_size - box_size / 2), box_size * 3 / 4, box_size * 3 / 4).draw(Color(200, 200, 200, 200));
 				}
 			}
+
+			if (thumbnail_circle.mouseOver()) {
+				Rect(0, 0, thumbnail_size, thumbnail_size).draw(Color(0, 0, 0, 127));
+				FontAsset(U"small")(U"クリックでサムネイル画像変更").draw(Arg::center(thumbnail_size / 2, thumbnail_size / 2), Color(Palette::White));
+			}
 		}
 		else {
 			ScopedRenderTarget2D target(thumbnail_texture);

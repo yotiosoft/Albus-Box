@@ -51,7 +51,7 @@ void Player::close(int num) {
 }
 
 void Player::openAudioFiles(int num) {
-	// 前後含め5曲分読み込み
+	// 前後含め3曲分読み込み
 	for (int i = -RANGE; i <= RANGE; i++) {
 		int track_num = getTrackNumber(num, i);
 		if (!audio_files[track_num].isOpened) {
@@ -243,7 +243,24 @@ void Player::move(int num) {
 		threads.erase(num);
 	}
 
+	// 設定を反映
+	reflectSettings(current_track);
+
 	return;
+}
+
+bool Player::reflectSettings(int num) {
+	if (audio_files.size() <= num) {
+		return false;
+	}
+
+	// ボリュームの反映
+	audio_files[num].audio->setVolume(volume);
+
+	// ループ設定の反映
+	audio_files[num].audio->setLoop(loop);
+
+	return true;
 }
 
 bool Player::seekTo(double skip_pos) {
@@ -273,11 +290,12 @@ bool Player::changeVolumeTo(double volume_norm) {
 	
 	// ボリューム変更
 	volume = volume_norm;
-	
-	// すべてのデータの適応
-	for (auto af : audio_files) {
-		af.audio->setVolume(volume);
+
+	if (audio_files.size() == 0) {
+		return true;
 	}
+
+	audio_files[current_track].audio->setVolume(volume);
 	
 	return true;
 }
@@ -484,12 +502,9 @@ void Player::setLoop(bool enable) {
 
 	int64 play_samples = audio_files[current_track].audio->posSample();
 
-	for (auto af : audio_files) {
-		af.audio->setLoop(loop);
-	}
+	audio_files[current_track].audio->setLoop(loop);
 
 	if (status == PlayerStatus::Play) {
-		std::cout << "to play " << play_samples << std::endl;
 		audio_files[current_track].audio->seekSamples(play_samples);
 		audio_files[current_track].audio->play();
 	}
