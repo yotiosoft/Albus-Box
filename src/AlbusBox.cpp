@@ -171,7 +171,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 					}
 
 					// タイトル
-					mat_title = Mat3x2::Translate(0, 0);
+					mat_title = Mat3x2::Translate(0, scroll_y);
 					const Transformer2D t2(mat_title);
 					{
 						const ScopedRenderTarget2D target2(title_texture);
@@ -185,9 +185,9 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 							title_x = -Scene::FrameCount() % title_w;
 						}
 
-						title_text.draw(title_x, scroll_y, font_color);
+						title_text.draw(title_x, 0, font_color);
 					}
-					title_texture.draw(120, list_element_margin * i + 10);
+					title_texture.draw(120, list_element_margin * i + 10 - scroll_y);
 				}
 				else {		// 別の曲が再生中
 					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h / 2), 25, title_list.second[i], play_icon, button_enable);
@@ -202,7 +202,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 					}
 
 					// タイトル
-					mat_title = Mat3x2::Translate(0, 0);
+					mat_title = Mat3x2::Translate(0, scroll_y);
 					const Transformer2D t2(mat_title);
 					{
 						const ScopedRenderTarget2D target2(title_texture);
@@ -216,9 +216,9 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 							title_x = -Scene::FrameCount() % title_w;
 						}
 
-						title_text.draw(title_x, scroll_y, font_color);
+						title_text.draw(title_x, 0, font_color);
 					}
-					title_texture.draw(120, list_element_margin * i + 20);
+					title_texture.draw(120, list_element_margin * i + 20 - scroll_y);
 				}
 			}
 		}
