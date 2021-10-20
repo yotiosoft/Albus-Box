@@ -9,7 +9,6 @@
 *.pdb
 *.res
 *.entitlements
-*.html
 *.obj
 *.log
 *.tlog
