@@ -43,3 +43,6 @@ DerivedData/
 
 ## Gcc Patch
 /*.gcno
+
+## Linux
+./Linux/App/Albus-Box
