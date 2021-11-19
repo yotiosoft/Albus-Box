@@ -15,7 +15,7 @@
 Windows/Albus-Box/.vs/Albus-Box/v16/
 Windows/Albus-Box/Intermediate
 audio_profiles.json
-settings.json
+Windows/Albus-Box/App/data/settings/
 
 # Xcode
 #
@@ -45,4 +45,4 @@ DerivedData/
 /*.gcno
 
 ## Linux
-./Linux/App/Albus-Box
+Linux/App/Albus-Box
