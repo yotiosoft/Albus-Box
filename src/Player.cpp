@@ -631,7 +631,7 @@ void Player::free() {
 	
 	// Audioの解放
 	for (auto af : audio_files) {
-		if (af.isOpened)
+		if (af.isOpened && af.audio != nullptr)
 			af.audio->release();
 		delete(af.audio);
 	}
