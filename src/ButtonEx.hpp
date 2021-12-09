@@ -10,7 +10,7 @@
 #ifndef ButtonEx_hpp
 #define ButtonEx_hpp
 
-#include "Specific.hpp"
+#include <Specific.hpp>
 
 namespace NeumorphismUI {
 	// 丸型スイッチ

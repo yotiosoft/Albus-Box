@@ -12,7 +12,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{0154827d-c0c7-4202-8fa6-8a5c262d7e8d}</ProjectGuid>
+    <ProjectGuid>{2eae846f-0cf0-4d74-a5b9-e96252a113dc}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Albus_Box</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -49,18 +49,18 @@
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\Debug\Intermediate\</IntDir>
     <TargetName>$(ProjectName)(debug)</TargetName>
     <LocalDebuggerWorkingDirectory>$(ProjectDir)App</LocalDebuggerWorkingDirectory>
-    <IncludePath>./;../../../src;$(SIV3D_0_6_2)\include;$(SIV3D_0_6_2)\include\ThirdParty;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SIV3D_0_6_2)\lib\Windows;$(LibraryPath)</LibraryPath>
-    <SourcePath>$(SourcePath)</SourcePath>
+    <IncludePath>./;../../../src;$(SIV3D_0_6_3)\include;$(SIV3D_0_6_3)\include\ThirdParty;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SIV3D_0_6_3)\lib\Windows;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Intermediate\$(ProjectName)\Release\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\Release\Intermediate\</IntDir>
     <LocalDebuggerWorkingDirectory>$(ProjectDir)App</LocalDebuggerWorkingDirectory>
-    <IncludePath>./;../../../src;$(SIV3D_0_6_2)\include;$(SIV3D_0_6_2)\include\ThirdParty;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SIV3D_0_6_2)\lib\Windows;$(LibraryPath)</LibraryPath>
-    <SourcePath>$(SourcePath)</SourcePath>
+    <IncludePath>./;../../../src;$(SIV3D_0_6_3)\include;$(SIV3D_0_6_3)\include\ThirdParty;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SIV3D_0_6_3)\lib\Windows;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -180,6 +180,8 @@
     <None Include="App\engine\font\fontawesome\fontawesome-solid.otf.zstdcmp" />
     <None Include="App\engine\font\materialdesignicons\license.md" />
     <None Include="App\engine\font\materialdesignicons\materialdesignicons-webfont.ttf.zstdcmp" />
+    <None Include="App\engine\font\min\LICENSE" />
+    <None Include="App\engine\font\min\siv3d-min.woff" />
     <None Include="App\engine\font\mplus\LICENSE_E" />
     <None Include="App\engine\font\mplus\mplus-1p-black.ttf.zstdcmp" />
     <None Include="App\engine\font\mplus\mplus-1p-bold.ttf.zstdcmp" />

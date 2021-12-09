@@ -67,7 +67,7 @@ void Player::closeAudioFiles(int num) {
 			int distance = abs(i - num) % audio_files.size();
 			if (distance > RANGE) {
 				close(i);
-				Console << U"Close: " << i << U" num: " << num << U" distance: " << distance;
+				//Console << U"Close: " << i << U" num: " << num << U" distance: " << distance;
 			}
 		}
 	}
