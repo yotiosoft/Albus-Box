@@ -4,9 +4,9 @@ Windows / macOS / Linux(Debian)対応のプレイヤーアプリ。ニューモ�
 
 | プラットフォーム | 動作環境                 | SDK              | 実行ファイル                                                 |
 | ---------------- | ------------------------ | ---------------- | ------------------------------------------------------------ |
-| Windows版        | Windows 10以降           | OpenSiv3D v0.6.2 | ``Windows/Albus-Box/App/Albus-Box(Debug).exe``  <br />※Debug版 |
+| Windows版        | Windows 10以降           | OpenSiv3D v0.6.3 | ``Windows/Albus-Box/App/Albus-Box(Debug).exe``  <br />※Debug版 |
 | macOS版          | macOS 10.15以降          | OpenSiv3D v0.6.2 | ``Mac/Albus-Box/App/Albus-Box.app``                          |
-| Linux版          | Ubuntu 20.04 / Debian 10 | OpenSiv3D v0.6.3 | ``Linux/App/Albus-Box``                                      |
+| Linux版          | Ubuntu 20.04 / Debian 10 | OpenSiv3D v0.6.3 | 添付なし（要コンパイル）                                     |
 
 
 
@@ -16,7 +16,7 @@ Windows / macOS / Linux(Debian)対応のプレイヤーアプリ。ニューモ�
   - Windows SDK : 10.0
   - C++ コンパイラ：C++ 20
   - 統合開発環境 : Visual Studio 2019 (v142)
-  - ライブラリ：OpenSiv3D v0.6.2
+  - ライブラリ：OpenSiv3D v0.6.3
 - Mac版
   - OS : macOS 11.5.2 Big Sur
   - C++ コンパイラ：C++ 20
