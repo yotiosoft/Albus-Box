@@ -589,8 +589,14 @@ void Player::saveAudioProfiles() {
 void Player::loadPlayList(FilePath playlist_filepath) {
 	JSON playlist = JSON::Load(playlist_filepath);
 
-	// 現在のプレイリストをクリア
-	audio_files_path.clear();
+	if (isOpened()) {
+		// 再生中の曲をストップ
+		stop();
+
+		// 現在のプレイリストをクリア
+		audio_files.clear();
+		audio_files_path.clear();
+	}
 
 	// プレイリスト読み込み
 	for (auto audio_filepath : playlist[U"list"].arrayView()) {

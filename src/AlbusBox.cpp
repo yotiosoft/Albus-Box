@@ -11,6 +11,17 @@ pair<bool, FilePath> AudioFileOpen() {
 	return pair<bool, FilePath>(false, FilePath());
 }
 
+pair<bool, FilePath> OpenPlayList() {
+	// ファイル選択ダイアログ
+	Array<FileFilter> ff = { {U"プレイリスト", {U"playlist"}} };
+	String filePathTemp;
+	if (const auto open = Dialog::OpenFile(ff)) {
+		return pair<bool, FilePath>(true, open.value());
+	}
+
+	return pair<bool, FilePath>(false, FilePath());
+}
+
 pair<bool, FilePath> ImageFileOpen() {
 	// ファイル選択ダイアログ
 	Array<FileFilter> ff = { {U"画像ファイル", {U"png", U"jpg", U"jpeg", U"bmp", U"gif", U"tga", U"ppm", U"pgm", U"pbm", U"pnm", U"webp"}} };
@@ -51,7 +62,8 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 {
 	// ボタン用アイコン
 	Texture return_button_icon{ Icon(IconFont::Return), 20 };		// 戻る
-	Texture fileopen_icon{ Icon(IconFont::Plus), 20 };				// ファイルを開く
+	Texture fileopen_icon{ Icon(IconFont::Plus), 20 };				// ファイルを追加
+	Texture listopen_button_icon{ Icon(IconFont::FileOpen), 20 };	// リストを読み込み
 	Texture save_button_icon{ Icon(IconFont::Save), 20 };			// 保存
 
 	Texture play_icon{ Icon(IconFont::Play), 20 };			// 再生
@@ -66,7 +78,8 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 		return_button_pos = Point(45, 10);
 	}
 	Point fileopen_button_pos = Point(Scene::Width()-50, Scene::Height()-50);
-	Point save_button_pos = Point(Scene::Width() / 2, 70);
+	Point listopen_button_pos = Point(Scene::Width() / 2 - 30, 70);
+	Point save_button_pos = Point(Scene::Width() / 2 + 30, 70);
 
 	// シークバー
 	double play_pos = 0.0;		// シークバーの初期値
@@ -110,6 +123,13 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 			return false;
 		}
 
+		// リストを開くボタン
+		if (NeumorphismUI::CircleButton(listopen_button_pos, 20, listopen_button_icon, onAnyButton)) {
+			pair<bool, FilePath> playlist = OpenPlayList();
+			if (playlist.first) {
+				player.loadPlayList(playlist.second);
+			}
+		}
 		// 保存ボタン
 		if (NeumorphismUI::CircleButton(save_button_pos, 20, save_button_icon, onAnyButton)) {
 			player.savePlayList();
@@ -408,6 +428,9 @@ void AlbusBox() {
 	Window::Resize(400, 640);
 
 	specific::setWindowStyle(0, 0, 400, 640, 40, 40);
+
+	// ウィンドウタイトル
+	Window::SetTitle(TITLE);
 
 	// フォントアセットの登録
 	FontAsset::Register(U"small", 13, Typeface::CJK_Regular_JP);
