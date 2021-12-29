@@ -1,6 +1,7 @@
 body {
     text-align: center;
     display: block;
+    background-color: #f4f4f5;
 }
 
 h1 {
@@ -69,4 +70,8 @@ h1 {
 }
 .icon-flex img {
     padding-top: 20px;
+}
+
+tr {
+    background-color: #f3f3f5;
 }
