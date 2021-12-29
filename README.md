@@ -2,11 +2,11 @@
 ## 概要
 Windows / macOS / Linux(Debian)対応のプレイヤーアプリ。ニューモーフィズムに則ったシンプルなデザインがコンセプトです。
 
-| プラットフォーム | 動作環境                 | SDK              | 実行ファイル                                                 |
-| ---------------- | ------------------------ | ---------------- | ------------------------------------------------------------ |
-| Windows版        | Windows 10以降           | OpenSiv3D v0.6.3 | ``Windows/Albus-Box/App/Albus-Box(Debug).exe``  <br />※Debug版 |
-| macOS版          | macOS 10.15以降          | OpenSiv3D v0.6.2 | ``Mac/Albus-Box/App/Albus-Box.app``                          |
-| Linux版          | Ubuntu 20.04 / Debian 10 | OpenSiv3D v0.6.3 | 添付なし（要コンパイル）                                     |
+| プラットフォーム | 動作環境                 | SDK              | 実行ファイル                            |
+| ---------------- | ------------------------ | ---------------- | --------------------------------------- |
+| Windows版        | Windows 10以降           | OpenSiv3D v0.6.3 | ``Windows/Albus-Box/App/Albus-Box.exe`` |
+| macOS版          | macOS 10.15以降          | OpenSiv3D v0.6.3 | ``Mac/Albus-Box/App/Albus-Box.app``     |
+| Linux版          | Ubuntu 20.04 / Debian 10 | OpenSiv3D v0.6.3 | 添付なし（要コンパイル）                |
 
 
 
