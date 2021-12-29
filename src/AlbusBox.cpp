@@ -40,19 +40,6 @@ bool ExitButton(Color& button_close_color, Texture& window_close_icon, bool& onA
 			return true;
 		}
 	}
-	else if (OS == "Mac") {
-		Font font_temp = Font(FontAsset(U"middle"));
-		Circle exit_button_circle(25, 25, 8);
-		exit_button_circle.draw(Color(255, 95, 87));
-		if (exit_button_circle.mouseOver()) {
-			Cursor::RequestStyle(CursorStyle::Hand);
-			onAnyButton = true;
-			FontAsset(U"small")(U"×").draw(Arg::center(25, 25));
-		}
-		if (exit_button_circle.leftReleased()) {
-			return true;
-		}
-	}
 	
 	return false;
 }
@@ -71,12 +58,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 
 	// ボタンの位置
 	Point return_button_pos;
-	if (OS == "Windows") {
-		return_button_pos = Point(10, 10);
-	}
-	else if (OS == "Mac") {
-		return_button_pos = Point(45, 10);
-	}
+	return_button_pos = Point(10, 10);
 	Point fileopen_button_pos = Point(Scene::Width()-50, Scene::Height()-50);
 	Point listopen_button_pos = Point(Scene::Width() / 2 - 30, 70);
 	Point save_button_pos = Point(Scene::Width() / 2 + 30, 70);
@@ -256,7 +238,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 		player.playing();
 
 		// ウィンドウの移動
-		if (!onAnyButton) {
+		if (!onAnyButton && OS == "Windows") {
 			specific::moveWindow(mouse_clicked, window_moving);
 		}
 	}
@@ -272,12 +254,7 @@ bool VersionInformation(Player& player, Color& button_close_color, Texture& wind
 
 	// ボタンの位置
 	Point return_button_pos;
-	if (OS == "Windows") {
-		return_button_pos = Point(10, 10);
-	}
-	else if (OS == "Mac") {
-		return_button_pos = Point(45, 10);
-	}
+	return_button_pos = Point(10, 10);
 
 	// マウスクリックした地点の記録用
 	Point mouse_clicked;
@@ -314,7 +291,7 @@ bool VersionInformation(Player& player, Color& button_close_color, Texture& wind
 		player.playing();
 
 		// ウィンドウの移動
-		if (!onAnyButton) {
+		if (!onAnyButton && OS == "Windows") {
 			specific::moveWindow(mouse_clicked, window_moving);
 		}
 	}
@@ -346,12 +323,7 @@ bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_
 	
 	// ボタンの位置
 	Point return_button_pos;
-	if (OS == "Windows") {
-		return_button_pos = Point(10, 10);
-	}
-	else if (OS == "Mac") {
-		return_button_pos = Point(45, 10);
-	}
+	return_button_pos = Point(10, 10);
 	
 	// マウスクリックした地点の記録用
 	Point mouse_clicked;
@@ -404,7 +376,7 @@ bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_
 		player.playing();
 		
 		// ウィンドウの移動
-		if (!onAnyButton) {
+		if (!onAnyButton && OS == "Windows") {
 			specific::moveWindow(mouse_clicked, window_moving);
 		}
 	}
@@ -424,7 +396,9 @@ void drawThumbnailTexture(Player& player, int thumbnail_size) {
 
 void AlbusBox() {
 	Scene::SetBackground(DEFAULT_BACKGROUND_COLOR);
-	Window::SetStyle(WindowStyle::Frameless);
+	if (OS == "Windows") {
+		Window::SetStyle(WindowStyle::Frameless);
+	}
 	Window::Resize(400, 640);
 
 	specific::setWindowStyle(0, 0, 400, 640, 40, 40);
@@ -466,22 +440,13 @@ void AlbusBox() {
 
 	Texture window_close_icon{ Icon(IconFont::Times), 20 };
 	
-	Texture loading_texture(U"{}/data/img/loading-24.gif"_fmt(specific::getCurrentDir()));
-
 	// ボタンの位置
 	Point setting_button_pos;
 	Point fileopen_button_pos;
 	Point playlist_button_pos;
-	if (OS == "Windows") {
-		setting_button_pos = Point(30, 30);
-		fileopen_button_pos = Point(80, 30);
-		playlist_button_pos = Point(130, 30);
-	}
-	else if (OS == "Mac") {
-		playlist_button_pos = Point(Scene::Width() - 130, 30);
-		fileopen_button_pos = Point(Scene::Width() - 80, 30);
-		setting_button_pos = Point(Scene::Width() - 30, 30);
-	}
+	setting_button_pos = Point(30, 30);
+	fileopen_button_pos = Point(80, 30);
+	playlist_button_pos = Point(130, 30);
 
 	// ボタン押下検知用
 	bool prev_button_pressed = false;
@@ -538,8 +503,6 @@ void AlbusBox() {
 
 		// ファイルを開く
 		if (file_open.first) {
-			loading_texture.drawAt(Scene::Width() / 2, Scene::Height() / 3);
-
 			if (FileSystem::Extension(file_open.second) == U"playlist") {
 				player.loadPlayList(file_open.second);
 			}
@@ -683,7 +646,7 @@ void AlbusBox() {
 		playing = player.playing();
 		
 		// ウィンドウの移動
-		if (!onAnyButton) {
+		if (!onAnyButton && OS == "Windows") {
 			specific::moveWindow(mouse_clicked, window_moving);
 		}
 	}
