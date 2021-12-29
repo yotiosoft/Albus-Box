@@ -6,7 +6,7 @@
 //
 #pragma once
 
-#include <Siv3D.hpp> // OpenSiv3D v0.6.2
+#include <Siv3D.hpp> // OpenSiv3D v0.6.3
 #if defined(_WIN32) || defined(_WIN64)
 	#include <Siv3D/Windows/Windows.hpp>
 #endif
