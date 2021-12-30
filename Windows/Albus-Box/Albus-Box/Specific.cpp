@@ -7,6 +7,8 @@
 
 #include <Specific.hpp>
 
+#define DPI_STANDARD	96
+
 Array<FileStruct> specific::getAllFilesName(string folder_path, string extension) {
 	using namespace filesystem;
 	directory_iterator iter(folder_path), end;
@@ -84,12 +86,16 @@ String specific::getFontsDir() {
 	return U"example/font";
 }
 
+double specific::getDpiDist() {
+	return (double)GetDpiForSystem() / DPI_STANDARD;
+}
+
 bool specific::setWindowStyle(int x1, int y1, int x2, int y2, int w, int h) {
 	// ウィンドウハンドルを取得
 	auto hWnd = static_cast<HWND>(s3d::Platform::Windows::Window::GetHWND());
 
 	//ShowWindow(hWnd, SW_HIDE);
-	auto hRegion = CreateRoundRectRgn(x1, y1, x2, y2, w, h);
+	auto hRegion = CreateRoundRectRgn(x1, y1, x2 * getDpiDist(), y2 * getDpiDist(), w, h);
 	SetWindowRgn(hWnd, hRegion, 1);
 
 	//GetWindowLongA(hWnd, -20);
@@ -106,7 +112,7 @@ bool specific::setWindowStyle(int x1, int y1, int x2, int y2, int w, int h) {
 void specific::moveWindow(Point& mouse_clicked, bool& window_moving) {
 	// ウィンドウの移動
 	if (MouseL.down()) {
-		mouse_clicked = Cursor::Pos();
+		mouse_clicked = { (int)(Cursor::Pos().x * getDpiDist()), (int)(Cursor::Pos().y * getDpiDist()) };
 		window_moving = true;
 	}
 	else if (MouseL.pressed() && Window::GetState().focused && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {

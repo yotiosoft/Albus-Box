@@ -6,9 +6,12 @@
 //
 #pragma once
 
+#define SIV3D_WINDOWS_HIGH_DPI
+
 #include <Siv3D.hpp> // OpenSiv3D v0.6.3
 #if defined(_WIN32) || defined(_WIN64)
 	#include <Siv3D/Windows/Windows.hpp>
+	#include <WinUser.h>
 #endif
 
 #include <stdio.h>
@@ -20,8 +23,8 @@
 #include "Structs.hpp"
 
 #define TITLE			U"Albus Box"
-#define VERSION			U"0.1"
-#define RELEASE_NUM		1
+#define VERSION			U"0.1.1"
+#define RELEASE_NUM		2
 #define RANGE			1
 
 using namespace std;

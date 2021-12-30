@@ -29,6 +29,8 @@ namespace specific {
 	bool isCursorEntered(Vec2& before_cursor_pos);
 	void changeCursor();
 
+	double getDpiDist();
+
 	bool setWindowStyle(int x1, int y1, int x2, int y2, int w, int h);
 
 	void moveWindow(Point& mouse_clicked, bool& window_moving);
