@@ -1,6 +1,8 @@
 /include
 /lib
 /Mac/Albus-Box/DerivedData
+/Windows/
+/Mac/
 /Windows/.vs
 /Windows/Albus-Box(0.4.3)
 /Windows/Albus-Box(0.6.2)

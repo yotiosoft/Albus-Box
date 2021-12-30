@@ -29,7 +29,8 @@ h1 {
 
 .content {
     text-align: left;
-    margin-bottom: 50px;
+    padding-top: 20px;
+    padding-bottom: 10px;
 }
 
 .content-flex {
