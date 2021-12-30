@@ -603,6 +603,10 @@ void AlbusBox() {
 				editing_title = false;
 				player.editTitle(tes_title.text);
 			}
+
+			if (title_rect.mouseOver()) {
+				onAnyButton = true;
+			}
 		}
 		// editing_title == trueかつタイトル部分以外でクリックされたら編集完了
 		if (editing_title && !title_rect.leftClicked() && MouseL.down()) {

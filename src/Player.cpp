@@ -23,12 +23,21 @@ void Player::audioRegister(FilePath audio_filepath) {
 	uint64 new_audio_hash = MD5::FromFile(audio_filepath).hash();
 	AudioStruct new_audio_struct{ new_audio_hash, nullptr, audio_filepath };
 
+	if (!FileSystem::Exists(audio_filepath)) {
+		return;
+	}
+
 	audio_files << new_audio_struct;
 	audio_files_path << audio_filepath;
 }
 
 void Player::open(int num) {
 	Audio* new_audio_file = new Audio(audio_files[num].file_path);
+
+	if (!FileSystem::Exists(audio_files[num].file_path)) {
+		return;
+	}
+
 	audio_files[num].audio = new_audio_file;
 	audio_files[num].isOpened = true;
 }
@@ -401,6 +410,12 @@ void Player::loadThumbnailImage() {
 			&& FileSystem::Exists(audio_files_profile[audio_files[current_track].hash].thumbnail_image_filepath)) {
 
 			if (audio_files_profile[audio_files[current_track].hash].thumbnail_texture.isEmpty()) {
+				if (!FileSystem::Exists(audio_files_profile[audio_files[current_track].hash].thumbnail_image_filepath)) {
+					// ファイルが存在しなければデフォルトのサムネイル画像
+					current_track_thumbnail_texture = &default_thumbnail_texture;
+					return;
+				}
+
 				Image thumbnail_image_temp(audio_files_profile[audio_files[current_track].hash].thumbnail_image_filepath);
 
 				if (thumbnail_image_temp.width() > thumbnail_image_temp.height()) {
