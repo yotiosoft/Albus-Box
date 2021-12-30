@@ -21,7 +21,7 @@ Windows / macOS / Linux(Debian)対応のプレイヤーアプリ。ニューモ�
   - OS : macOS 11.5.2 Big Sur
   - C++ コンパイラ：C++ 20
   - 統合開発環境 : Xcode 12.3
-  - ライブラリ：OpenSiv3D v0.6.2
+  - ライブラリ：OpenSiv3D v0.6.3
 
 - Linux版
   - OS : Ubuntu 20.04 / Crostini on Chrome OS
