@@ -240,6 +240,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 		// ウィンドウの移動
 		if (!onAnyButton && OS == "Windows") {
 			specific::moveWindow(mouse_clicked, window_moving);
+			specific::setWindowStyle(0, 0, 400, 640, 40, 40);
 		}
 	}
 	return true;
@@ -293,6 +294,7 @@ bool VersionInformation(Player& player, Color& button_close_color, Texture& wind
 		// ウィンドウの移動
 		if (!onAnyButton && OS == "Windows") {
 			specific::moveWindow(mouse_clicked, window_moving);
+			specific::setWindowStyle(0, 0, 400, 640, 40, 40);
 		}
 	}
 	return true;
@@ -378,6 +380,7 @@ bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_
 		// ウィンドウの移動
 		if (!onAnyButton && OS == "Windows") {
 			specific::moveWindow(mouse_clicked, window_moving);
+			specific::setWindowStyle(0, 0, 400, 640, 40, 40);
 		}
 	}
 	return true;
@@ -652,6 +655,7 @@ void AlbusBox() {
 		// ウィンドウの移動
 		if (!onAnyButton && OS == "Windows") {
 			specific::moveWindow(mouse_clicked, window_moving);
+			specific::setWindowStyle(0, 0, 400, 640, 40, 40);
 		}
 	}
 	
