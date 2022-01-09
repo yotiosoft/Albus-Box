@@ -9,6 +9,9 @@
 
 #define DPI_STANDARD	96
 
+double before_dpi_dist = 0.0;
+HWND hWnd = 0;
+
 Array<FileStruct> specific::getAllFilesName(string folder_path, string extension) {
 	using namespace filesystem;
 	directory_iterator iter(folder_path), end;
@@ -87,24 +90,25 @@ String specific::getFontsDir() {
 }
 
 double specific::getDpiDist() {
-	return (double)GetDpiForSystem() / DPI_STANDARD;
+	return (double)GetDpiForWindow(hWnd) / DPI_STANDARD;
 }
 
 bool specific::setWindowStyle(int x1, int y1, int x2, int y2, int w, int h) {
-	// ウィンドウハンドルを取得
-	auto hWnd = static_cast<HWND>(s3d::Platform::Windows::Window::GetHWND());
+	// ウィンドウハンドルを取得（Siv3D）
+	if (hWnd == 0) {
+		hWnd = static_cast<HWND>(s3d::Platform::Windows::Window::GetHWND());
+	}
 
-	//ShowWindow(hWnd, SW_HIDE);
-	auto hRegion = CreateRoundRectRgn(x1, y1, x2 * getDpiDist(), y2 * getDpiDist(), w, h);
+	double dpi_dist = getDpiDist();
+	if (dpi_dist == before_dpi_dist) {
+		return false;
+	}
+	before_dpi_dist = dpi_dist;
+
+	// 角丸長方形の生成
+	auto hRegion = CreateRoundRectRgn(x1, y1, x2 * dpi_dist, y2 * dpi_dist, w, h);
+	// 角丸長方形をウィンドウの形に適用
 	SetWindowRgn(hWnd, hRegion, 1);
-
-	//GetWindowLongA(hWnd, -20);
-	//SetWindowLongA(hWnd, -20, GetWindowLong(hWnd, GWL_STYLE) | 0x00080000);
-	//SetLayeredWindowAttributes(hWnd, 0, 70*255/100, 2);
-	//GetClassLong(hWnd, GCL_STYLE); //クラススタイルの取得
-	//SetClassLong(hWnd, GCL_STYLE, GetClassLong(hWnd, GCL_STYLE) | CS_DROPSHADOW);
-	//SetLayeredWindowAttributes(hWnd, 0xe0e5ec, 0, LWA_COLORKEY);
-	//ShowWindow(hWnd, SW_SHOWNORMAL);
 
 	return true;
 }
