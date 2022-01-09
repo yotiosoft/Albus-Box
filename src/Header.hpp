@@ -23,8 +23,8 @@
 #include "Structs.hpp"
 
 #define TITLE			U"Albus Box"
-#define VERSION			U"0.1.1"
-#define RELEASE_NUM		2
+#define VERSION			U"0.1.2"
+#define RELEASE_NUM		3
 #define RANGE			1
 
 using namespace std;
