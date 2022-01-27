@@ -35,5 +35,7 @@ namespace specific {
 
 	void moveWindow(Point& mouse_clicked, bool& window_moving);
 
+	void pinWindow(const bool pin);
+
 	const String SaveDataFilePath = U"";
 }
