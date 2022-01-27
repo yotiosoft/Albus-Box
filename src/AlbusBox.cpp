@@ -1,5 +1,7 @@
 #include "AlbusBox.hpp"
 
+bool pin_window = false;
+
 pair<bool, FilePath> AudioFileOpen() {
 	// ファイル選択ダイアログ
 	Array<FileFilter> ff = { {U"音声ファイルとプレイリスト", {U"mp3", U"ogg", U"wav", U"m4a", U"playlist"}} };
@@ -34,8 +36,18 @@ pair<bool, FilePath> ImageFileOpen() {
 }
 
 bool ExitButton(Color& button_close_color, Texture& window_close_icon, bool& onAnyButton) {
-	// ウィンドウを閉じるボタン
 	if (OS == "Windows") {
+		// 最前面表示ボタン
+		Font small_font = FontAsset(U"icon_font");
+		if (pin_window) {
+			NeumorphismUI::CircleSwitch(Scene::Width() - 70, 30, 15, pin_window, U"\U000F0404", small_font, onAnyButton);
+		}
+		else {
+			NeumorphismUI::CircleSwitch(Scene::Width() - 70, 30, 15, pin_window, U"\U000F0403", small_font, onAnyButton);
+		}
+		specific::pinWindow(pin_window);
+
+		// ウィンドウを閉じるボタン
 		if (NeumorphismUI::CircleButton(Scene::Width()-30, 30, 15, window_close_icon, onAnyButton)) {
 			return true;
 		}
@@ -414,6 +426,7 @@ void AlbusBox() {
 	FontAsset::Register(U"middle", 16, Typeface::CJK_Regular_JP);
 	FontAsset::Register(U"big", 36, Typeface::CJK_Regular_JP);
 	FontAsset::Register(U"title", 16, Typeface::Mplus_Bold);
+	FontAsset::Register(U"icon_font", 16, Typeface::Icon_MaterialDesign);
 
 	// プレイヤーの用意
 	Player player;

@@ -11,6 +11,7 @@
 
 double before_dpi_dist = 0.0;
 HWND hWnd = 0;
+bool before_pin_window = false;
 
 Array<FileStruct> specific::getAllFilesName(string folder_path, string extension) {
 	using namespace filesystem;
@@ -111,6 +112,18 @@ bool specific::setWindowStyle(int x1, int y1, int x2, int y2, int w, int h) {
 	SetWindowRgn(hWnd, hRegion, 1);
 
 	return true;
+}
+
+void specific::pinWindow(const bool pin) {
+	if (pin != before_pin_window) {
+		if (pin) {
+			SetWindowPos(hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+		}
+		else {
+			SetWindowPos(hWnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+		}
+		before_pin_window = pin;
+	}
 }
 
 void specific::moveWindow(Point& mouse_clicked, bool& window_moving) {
