@@ -36,7 +36,7 @@ pair<bool, FilePath> ImageFileOpen() {
 }
 
 bool ExitButton(Color& button_close_color, Texture& window_close_icon, bool& onAnyButton) {
-	if (OS == "Windows") {
+	//if (OS == "Windows") {
 		// 最前面表示ボタン
 		Font small_font = FontAsset(U"icon_font");
 		if (pin_window) {
@@ -51,7 +51,7 @@ bool ExitButton(Color& button_close_color, Texture& window_close_icon, bool& onA
 		if (NeumorphismUI::CircleButton(Scene::Width()-30, 30, 15, window_close_icon, onAnyButton)) {
 			return true;
 		}
-	}
+	//}
 	
 	return false;
 }

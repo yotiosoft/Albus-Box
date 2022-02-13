@@ -58,5 +58,7 @@ void specific::moveWindow(Point& mouse_clicked, bool& window_moving) {
 }
 
 void specific::pinWindow(bool temp) {
+	//SIV3D_ENGINE(s3d::Window);
+	//std::cout << getHandle() << std::endl;
 	return;
 }
