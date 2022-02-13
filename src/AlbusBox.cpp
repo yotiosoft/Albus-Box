@@ -587,20 +587,22 @@ void AlbusBox() {
 		}
 
 		// タイトルの表示
-		title_rect = FontAsset(U"middle")(player.getTitle()).region(Arg::center(Scene::Width() / 2, Scene::Height() / 3 + 170));
-		if (title_rect != title_rect_before) {
-			title_rect_before = title_rect;
-			count_for_music = Scene::Width();
-		}
-		if (title_rect.w > Scene::Width() && !editing_title) {
-			mat = Mat3x2::Translate((title_rect.w - Scene::Width()) / 2 - (count_for_music % ((int)title_rect.w + Scene::Width())) + Scene::Width(), 0);
-			{
-				const Transformer2D t(mat, TransformCursor::No);
+		if (!file_open.first) {	// "Loading..."を表示していないときだけ
+			title_rect = FontAsset(U"middle")(player.getTitle()).region(Arg::center(Scene::Width() / 2, Scene::Height() / 3 + 170));
+			if (title_rect != title_rect_before) {
+				title_rect_before = title_rect;
+				count_for_music = Scene::Width();
+			}
+			if (title_rect.w > Scene::Width() && !editing_title) {
+				mat = Mat3x2::Translate((title_rect.w - Scene::Width()) / 2 - (count_for_music % ((int)title_rect.w + Scene::Width())) + Scene::Width(), 0);
+				{
+					const Transformer2D t(mat, TransformCursor::No);
+					FontAsset(U"middle")(player.getTitle()).drawAt(Scene::Width() / 2, Scene::Height() / 3 + 170, font_color);
+				}
+			}
+			else if (!editing_title) {
 				FontAsset(U"middle")(player.getTitle()).drawAt(Scene::Width() / 2, Scene::Height() / 3 + 170, font_color);
 			}
-		}
-		else if (!editing_title) {
-			FontAsset(U"middle")(player.getTitle()).drawAt(Scene::Width() / 2, Scene::Height() / 3 + 170, font_color);
 		}
 		count_for_music++;
 
