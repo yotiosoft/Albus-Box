@@ -16,6 +16,8 @@
 #include <iostream>
 #include <filesystem>
 
+//#include <Siv3D/Window.hpp>
+
 #include <OtherFunctions.hpp>
 
 /* OS依存の定数など */
