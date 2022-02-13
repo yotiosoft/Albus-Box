@@ -158,13 +158,13 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 
 				// ボタンの有効・無効
 				bool button_enable = true;
-				if (110 - scroll_y + list_element_margin * i + list_element_h / 2 < 100) {
+				if (110 - scroll_y + list_element_margin * i + list_element_h / 2 < 90) {
 					button_enable = false;
 				}
 
 				// 再生・停止ボタン
 				if (title_list.second[i]) {	// 再生中
-					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h/2), 25, title_list.second[i], stop_icon, button_enable);
+					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h/2), 25, title_list.second[i], stop_icon, onAnyButton, button_enable);
 					
 					if (target_audio != i) {
 						slider.setPosition(Point(120, list_element_margin * i + 50));
@@ -174,8 +174,8 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 					if (!slider.isSliderMoving()) {
 						slider.setValueNoAnimetion(player.getPlayPosNorm());
 					}
-					play_pos = slider.draw(onAnyButton);
-					if (slider.isSliderLeftReleased()) {
+					play_pos = slider.draw(onAnyButton, button_enable);
+					if (slider.isSliderLeftReleased() && button_enable) {
 						player.seekTo(play_pos);
 					}
 
@@ -204,7 +204,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 					title_texture.draw(120, list_element_margin * i + 10 - scroll_y);
 				}
 				else {		// 別の曲が再生中
-					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h / 2), 25, title_list.second[i], play_icon, button_enable);
+					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h / 2), 25, title_list.second[i], play_icon, onAnyButton, button_enable);
 
 					if (before_playing[i] != title_list.second[i]) {
 						if (target_audio >= 0) {

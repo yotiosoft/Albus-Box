@@ -235,7 +235,7 @@ namespace NeumorphismUI {
 		Slider(double argVar, Vec2 argPosition, int argSizeW, int argSizeH);
 		Slider(double argVar, Vec2 argPosition, Vec2 argSize);
 		
-		double draw(bool& onCursor);
+		double draw(bool& onCursor, bool slider_enable = true);
 		
 		bool setValue(double arg_value);
 		
