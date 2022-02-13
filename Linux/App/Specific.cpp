@@ -50,3 +50,8 @@ void specific::moveWindow(Point& mouse_clicked, bool& window_moving) {
 		window_moving = false;
 	}
 }
+
+void specific::pinWindow(bool temp) {
+	return;
+}
+
