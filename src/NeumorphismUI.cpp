@@ -695,7 +695,7 @@ namespace NeumorphismUI {
 		init(argVar, argPosition.x, argPosition.y, argSize.x, argSize.y);
 	}
 	
-	double Slider::draw(bool& onCursor) {
+	double Slider::draw(bool& onCursor, bool slider_enable) {
 		sliderRect
 		.drawShadow(lowerShadowPosOffset, blurSize, shadowSize, darkShadow)
 		.drawShadow(upperShadowPosOffset, blurSize, shadowSize, lightShadow)
@@ -715,44 +715,46 @@ namespace NeumorphismUI {
 		knobCircle.draw(background);
 
 		// マウスオーバー時にマウスポインタを変更
-		if (knobCircle.mouseOver() || barRect.mouseOver() || innerSliderRect.mouseOver()) {
-			Cursor::RequestStyle(CursorStyle::Hand);
-			onCursor = true;
-		}
-		
-		if (mouseLPressed) {
-			mouseLPressed = false;
-		}
-		
-		// クリックされたら状態変更
-		if (knobCircle.leftPressed() || barRect.leftPressed() || innerSliderRect.leftPressed() || knobClicked) {
-			if (!mouseLPressed && MouseL.down()) {
-				mouseLPressed = true;
+		if (slider_enable) {
+			if (knobCircle.mouseOver() || barRect.mouseOver() || innerSliderRect.mouseOver()) {
+				Cursor::RequestStyle(CursorStyle::Hand);
+				onCursor = true;
 			}
-			
-			if (knobCircle.leftPressed()) {
-				knobClicked = true;
+
+			if (mouseLPressed) {
+				mouseLPressed = false;
 			}
-			
-			// マウスがクリックされっぱなしのときにスライドし続ける
-			if (barRect.leftPressed() || innerSliderRect.leftPressed()) {
-				beforeX = knobX;
-				clickedX = Cursor::Pos().x-position.x+10/2;
-				sliding = true;
-				slidingCount = 0.0;
+
+			// クリックされたら状態変更
+			if (knobCircle.leftPressed() || barRect.leftPressed() || innerSliderRect.leftPressed() || knobClicked) {
+				if (!mouseLPressed && MouseL.down()) {
+					mouseLPressed = true;
+				}
+
+				if (knobCircle.leftPressed()) {
+					knobClicked = true;
+				}
+
+				// マウスがクリックされっぱなしのときにスライドし続ける
+				if (barRect.leftPressed() || innerSliderRect.leftPressed()) {
+					beforeX = knobX;
+					clickedX = Cursor::Pos().x - position.x + 10 / 2;
+					sliding = true;
+					slidingCount = 0.0;
+				}
+
+				value = (Cursor::Pos().x - position.x - 10 / 2) / innerSize.x;
+
+				if (value > 1.0) {
+					value = 1.0;
+				}
+				if (value < 0.0) {
+					value = 0.0;
+				}
 			}
-			
-			value = (Cursor::Pos().x-position.x-10/2)/innerSize.x;
-			
-			if (value > 1.0) {
-				value = 1.0;
+			if (knobClicked && !MouseL.pressed()) {
+				knobClicked = false;
 			}
-			if (value < 0.0) {
-				value = 0.0;
-			}
-		}
-		if (knobClicked && !MouseL.pressed()) {
-			knobClicked = false;
 		}
 		
 		// スライド中の動作
