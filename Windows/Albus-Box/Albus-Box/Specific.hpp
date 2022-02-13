@@ -18,8 +18,6 @@
 #define OS						"Windows"	// OS
 
 namespace specific {
-	Array<FileStruct> getAllFilesName(string folderPath, string extension);
-
 	void chdir(string dir);
 	String getCurrentDir();
 	String getSettingFilePath();
