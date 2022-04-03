@@ -25,14 +25,24 @@ class Lyrics {
 public:
 	void make_sample();
 
+	// コンストラクタ
+	Lyrics();
+
 	// 歌詞の取り込み（設定画面から）
-	void set_lyrics(Array<LyricsElement> lyrics_array);
+	void add_lyric(int begin, int end, String str);
 
 	// 歌詞の取得
-	void get_lyrics(Timestamp time);
+	String get_lyrics(int time_samples);
 	
 private:
-	
+	// 歌詞配列
+	Array<LyricsElement> lyrics_array;
+
+	// 現在のサンプル数（再生位置）
+	int current_samples;
+
+	// 現在の歌詞のインデックス番号
+	int current_index;
 };
 
 #endif /* Lyrics_hpp */
