@@ -494,6 +494,9 @@ void AlbusBox() {
 	
 	pair<bool, FilePath> file_open;
 
+	Lyrics ly;
+	ly.make_sample();
+
 	while (System::Update()) {
 		onAnyButton = false;
 		
@@ -642,8 +645,10 @@ void AlbusBox() {
 		}
 
 		// 再生位置表示
-		FontAsset(U"small")(U"{}:{:0>2}"_fmt(player.getPlayPosTimeMin(), player.getPlayPosTimeSec())).draw(40, Scene::Height() / 2 + 140, font_color);
-		FontAsset(U"small")(U"{}:{:0>2}"_fmt(player.getTotalTimeMin(), player.getTotalTimeSec())).draw(Arg::topRight = Point(Scene::Width() - 40, Scene::Height() / 2 + 140), font_color);
+		Timestamp current_time = player.getPlayPosTime();
+		Timestamp length_time = player.getTotalTime();
+		FontAsset(U"small")(U"{}:{:0>2}"_fmt(current_time.min, current_time.sec)).draw(40, Scene::Height() / 2 + 140, font_color);
+		FontAsset(U"small")(U"{}:{:0>2}"_fmt(length_time.min, length_time.sec)).draw(Arg::topRight = Point(Scene::Width() - 40, Scene::Height() / 2 + 140), font_color);
 
 		// トラック移動ボタン
 		prev_button_pressed = NeumorphismUI::CircleButton(Scene::Width() / 4 - 10, Scene::Height() - 100, 30, prev_icon, onAnyButton);

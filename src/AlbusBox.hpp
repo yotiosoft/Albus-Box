@@ -6,6 +6,7 @@
 #include <Specific.hpp>
 #include <NeumorphismUI.hpp>
 #include "Player.hpp"
+#include "Lyrics.hpp"
 
 pair<bool, FilePath> AudioFileOpen();
 void AlbusBox();

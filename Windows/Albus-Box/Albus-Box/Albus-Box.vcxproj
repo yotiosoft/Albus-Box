@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\AlbusBox.cpp" />
+    <ClCompile Include="..\..\..\src\Lyrics.cpp" />
     <ClCompile Include="..\..\..\src\NeumorphismUI.cpp" />
     <ClCompile Include="..\..\..\src\OtherFunctions.cpp" />
     <ClCompile Include="..\..\..\src\Player.cpp" />
@@ -324,6 +325,7 @@
     <ClInclude Include="..\..\..\src\ButtonEx.hpp" />
     <ClInclude Include="..\..\..\src\Enums.hpp" />
     <ClInclude Include="..\..\..\src\Header.hpp" />
+    <ClInclude Include="..\..\..\src\Lyrics.hpp" />
     <ClInclude Include="..\..\..\src\NeumorphismUI.hpp" />
     <ClInclude Include="..\..\..\src\OtherFunctions.hpp" />
     <ClInclude Include="..\..\..\src\Player.hpp" />
