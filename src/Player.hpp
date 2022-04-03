@@ -115,8 +115,7 @@ public:
 	int getPlayPosSec();
 	
 	// 時分で再生位置を返す
-	int getPlayPosTimeMin();
-	int getPlayPosTimeSec();
+	Timestamp getPlayPosTime();
 	
 	// 再生位置を返す(0.0~1.0)
 	double getPlayPosNorm();
@@ -125,8 +124,7 @@ public:
 	int64 getPlayPosSample();
 	
 	// 時分で曲の長さを返す
-	int getTotalTimeMin();
-	int getTotalTimeSec();
+	Timestamp getTotalTime();
 
 	// 現在の再生状態を返す
 	PlayerStatus::Type getStatus();

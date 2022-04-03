@@ -446,18 +446,13 @@ int Player::getPlayPosSec() {
 	return audio_files[current_track].audio->posSec();
 }
 
-int Player::getPlayPosTimeMin() {
+Timestamp Player::getPlayPosTime() {
 	if (!isOpened()) {
-		return 0;
+		return Timestamp{ 0, 0 };
 	}
-	return (int)audio_files[current_track].audio->posSec() / 60;
-}
 
-int Player::getPlayPosTimeSec() {
-	if (!isOpened()) {
-		return 0;
-	}
-	return (int)audio_files[current_track].audio->posSec() % 60;
+	double pos_sec = audio_files[current_track].audio->posSec();
+	return Timestamp{ (int)pos_sec / 60, (int)pos_sec % 60 };
 }
 
 double Player::getPlayPosNorm() {
@@ -474,18 +469,13 @@ int64 Player::getPlayPosSample() {
 	return audio_files[current_track].audio->posSample();
 }
 
-int Player::getTotalTimeMin() {
+Timestamp Player::getTotalTime() {
 	if (!isOpened()) {
-		return 0;
+		return Timestamp{ 0, 0 };
 	}
-	return (int)audio_files[current_track].audio->lengthSec() / 60;
-}
 
-int Player::getTotalTimeSec() {
-	if (!isOpened()) {
-		return 0;
-	}
-	return (int)audio_files[current_track].audio->lengthSec() % 60;
+	double length_sec = audio_files[current_track].audio->lengthSec();
+	return Timestamp{ (int)length_sec / 60, (int)length_sec % 60 };
 }
 
 PlayerStatus::Type Player::getStatus() {
