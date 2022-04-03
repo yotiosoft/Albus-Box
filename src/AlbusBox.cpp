@@ -495,7 +495,18 @@ void AlbusBox() {
 	pair<bool, FilePath> file_open;
 
 	Lyrics ly;
-	ly.make_sample();
+	ly.add_lyric(3000, 4000, U"This is a test 2");
+	ly.add_lyric(1000, 2000, U"This is a test 1");
+
+	for (int t = 0; t < 3000; t++) {
+		Console << U"1 > {} : {}"_fmt(t, ly.get_lyrics(t));
+	}
+	for (int t = 100; t < 5000; t++) {
+		Console << U"2 > {} : {}"_fmt(t, ly.get_lyrics(t));
+	}
+	for (int t = 3500; t < 5000; t++) {
+		Console << U"2 > {} : {}"_fmt(t, ly.get_lyrics(t));
+	}
 
 	while (System::Update()) {
 		onAnyButton = false;
