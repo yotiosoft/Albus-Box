@@ -494,9 +494,7 @@ void AlbusBox() {
 	
 	pair<bool, FilePath> file_open;
 
-	Lyrics ly;
-	ly.add_lyric(3000, 4000, U"This is a test 2");
-	ly.add_lyric(1000, 2000, U"This is a test 1");
+	Lyrics ly(U"test.lyrics");
 
 	for (int t = 0; t < 3000; t++) {
 		Console << U"1 > {} : {}"_fmt(t, ly.get_lyrics(t));

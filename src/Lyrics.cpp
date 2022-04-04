@@ -34,6 +34,32 @@ void Lyrics::make_sample() {
 Lyrics::Lyrics() {
 	current_samples = 0;
 	current_index = 0;
+	lyrics_array.clear();
+	is_valid = false;
+}
+
+Lyrics::Lyrics(String path) {
+	// 初期化
+	current_samples = 0;
+	current_index = 0;
+	lyrics_array.clear();
+	is_valid = false;
+
+	// jsonファイル読み込み
+	JSON j_lyrics_whole = JSON::Load(path);
+	if (not j_lyrics_whole) {
+		return;
+	}
+	is_valid = true;
+
+	// 歌詞の読み込み
+	for (auto j_element : j_lyrics_whole[U"lyrics"].arrayView()) {
+		int begin = j_element[U"begin"].get<int>();
+		int end = j_element[U"end"].get<int>();
+		String str = j_element[U"str"].getString();
+
+		add_lyric(begin, end, str);
+	}
 }
 
 // 歌詞の取り込み
@@ -53,6 +79,11 @@ void Lyrics::add_lyric(int begin, int end, String str) {
 		t++;
 	}
 	lyrics_array.insert(lyrics_array.begin() + t, new_lyric);
+
+	// 有効化
+	if (!is_valid) {
+		is_valid = true;
+	}
 }
 
 // 歌詞の取得
