@@ -27,6 +27,7 @@ public:
 
 	// コンストラクタ
 	Lyrics();
+	Lyrics(String path);
 
 	// 歌詞の取り込み（設定画面から）
 	void add_lyric(int begin, int end, String str);
@@ -43,6 +44,9 @@ private:
 
 	// 現在の歌詞のインデックス番号
 	int current_index;
+
+	// このLyricsインスタンスは有効？
+	bool is_valid;
 };
 
 #endif /* Lyrics_hpp */
