@@ -11,6 +11,7 @@
 #include <Siv3D.hpp>
 #include <Siv3D/MD5.hpp>
 #include <Specific.hpp>
+#include <Lyrics.hpp>
 
 #include <iostream>
 #include <thread>
@@ -49,6 +50,9 @@ public:
 
 	//　曲を閉じる
 	void close(int num);
+
+	// 歌詞ファイルを開く
+	void openLyricsFile(int num);
 
 	// 前後の曲を含めて読み込み
 	void openAudioFiles(int num);
@@ -122,6 +126,11 @@ public:
 	
 	// 再生位置を返す(フレーム)
 	int64 getPlayPosSample();
+
+	// 現在の歌詞を返す
+	bool lyricsExist();
+	bool updateLyrics();
+	String getLyrics();
 	
 	// 時分で曲の長さを返す
 	Timestamp getTotalTime();
@@ -169,11 +178,14 @@ private:
 	Array<AudioStruct> audio_files;
 	Array<FilePath> audio_files_path;
 	map<uint64, AudioFileProfile> audio_files_profile;
+	map<uint64, Lyrics> lyrics;
 	int current_track;
 	PlayerStatus::Type status;
 	double volume;
 	bool show_wave;
 	bool loop;
+	bool lyrics_exist;
+	String current_lyrics, temp_lyrics, before_lyrics;
 
 	// サムネイル関係
 	const int thumbnail_size = 260;
