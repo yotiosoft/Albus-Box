@@ -10,6 +10,7 @@
 Player::Player() {
 	current_track = -1;
 	status = PlayerStatus::Stop;
+	lyrics_exist = false;
 	
 	loadSettings();
 	loadAudioProfiles();
@@ -29,6 +30,9 @@ void Player::audioRegister(FilePath audio_filepath) {
 
 	audio_files << new_audio_struct;
 	audio_files_path << audio_filepath;
+
+	lyrics_exist = false;
+	openLyricsFile(audio_files.size()-1);
 }
 
 void Player::open(int num) {
@@ -40,6 +44,9 @@ void Player::open(int num) {
 
 	audio_files[num].audio = new_audio_file;
 	audio_files[num].isOpened = true;
+
+	lyrics_exist = false;
+	openLyricsFile(num);
 }
 
 void Player::openAndPlay(FilePath audio_filepath) {
@@ -48,6 +55,15 @@ void Player::openAndPlay(FilePath audio_filepath) {
 	stop();
 
 	play((int)audio_files.size() - 1);
+}
+
+void Player::openLyricsFile(int num) {
+	// ハッシュ値に対応する歌詞ファイルがlyricsディレクトリ内にあれば開く
+	String lyrics_filepath = U"{}/{}.lyrics"_fmt(specific::getLyricsDirPath(), audio_files[num].hash);
+	if (FileSystem::Exists(lyrics_filepath)) {
+		lyrics[audio_files[num].hash] = Lyrics(lyrics_filepath);
+		lyrics_exist = true;
+	}
 }
 
 void Player::close(int num) {
@@ -476,6 +492,31 @@ Timestamp Player::getTotalTime() {
 
 	double length_sec = audio_files[current_track].audio->lengthSec();
 	return Timestamp{ (int)length_sec / 60, (int)length_sec % 60 };
+}
+
+bool Player::lyricsExist() {
+	return lyrics_exist && isOpened();
+}
+
+bool Player::updateLyrics() {
+	if (!isOpened() || !lyrics_exist) {
+		return false;
+	}
+
+	if ((temp_lyrics = lyrics[current_track].get_lyrics(audio_files[current_track].audio->posSample())) != before_lyrics) {
+		current_lyrics = temp_lyrics;
+		return true;
+	}
+
+	return false;
+}
+
+String Player::getLyrics() {
+	if (isOpened() && lyrics_exist) {
+		return current_lyrics;
+	}
+
+	return U"";
 }
 
 PlayerStatus::Type Player::getStatus() {

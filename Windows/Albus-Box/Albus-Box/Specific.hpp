@@ -22,6 +22,7 @@ namespace specific {
 	String getCurrentDir();
 	String getSettingFilePath();
 	String getAudioProfilesFilePath();
+	String getLyricsDirPath();
 	String getFontsDir();
 
 	bool isCursorEntered(Vec2& before_cursor_pos);

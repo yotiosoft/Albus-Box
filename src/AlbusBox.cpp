@@ -477,6 +477,11 @@ void AlbusBox() {
 	RenderTexture thumbnail_texture(player.getDefdaultThumbnailImage());
 	Circle thumbnail_circle(Scene::Width() / 2, Scene::Height() / 3, thumbnail_size / 2);
 
+	// 歌詞用
+	Circle lyrics_circle(Scene::Width() / 2, Scene::Height() / 3, thumbnail_size / 2);
+	String lyrics_str;
+	Font lyrics_font{ 30 };
+
 	// 高速フーリエ変換用
 	FFTResult fft;
 
@@ -590,6 +595,14 @@ void AlbusBox() {
 		}
 
 		thumbnail_circle(thumbnail_texture(0, 0, thumbnail_size, thumbnail_size)).draw();
+
+		// 歌詞を表示
+		if (player.lyricsExist()) {
+			if (player.updateLyrics()) {
+				lyrics_font.preload(player.getLyrics());
+			}
+			lyrics_circle(lyrics_font.getTexture()).draw();
+		}
 
 		// タイトル
 		// タイトル部分のマウスオーバー時にタイトル部分を光らせる
