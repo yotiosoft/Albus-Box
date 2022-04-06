@@ -602,6 +602,7 @@ void AlbusBox() {
 				lyrics_font.preload(player.getLyrics());
 			}
 			lyrics_circle(lyrics_font.getTexture()).draw();
+			Console << player.getLyrics();
 		}
 
 		// タイトル

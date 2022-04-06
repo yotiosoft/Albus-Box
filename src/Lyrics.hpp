@@ -39,9 +39,6 @@ private:
 	// 歌詞配列
 	Array<LyricsElement> lyrics_array;
 
-	// 現在のサンプル数（再生位置）
-	int current_samples;
-
 	// 現在の歌詞のインデックス番号
 	int current_index;
 
