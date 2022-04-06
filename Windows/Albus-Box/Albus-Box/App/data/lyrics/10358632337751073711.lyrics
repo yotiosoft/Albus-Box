@@ -1,0 +1,15 @@
+﻿{
+  "lyrics": [
+    {
+      "begin": 10000,
+      "end": 100000,
+      "str": "This is a test."
+    },
+    {
+      "begin": 200000,
+      "end": 300000,
+      "str": "This is a test.2"
+    }
+  ],
+  "saved_release_num": 4
+}

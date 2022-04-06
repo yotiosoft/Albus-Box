@@ -503,7 +503,9 @@ bool Player::updateLyrics() {
 		return false;
 	}
 
-	if ((temp_lyrics = lyrics[current_track].get_lyrics(audio_files[current_track].audio->posSample())) != before_lyrics) {
+	Console << audio_files[current_track].audio->posSample();
+
+	if ((temp_lyrics = lyrics[audio_files[current_track].hash].get_lyrics(audio_files[current_track].audio->posSample())) != before_lyrics) {
 		current_lyrics = temp_lyrics;
 		return true;
 	}

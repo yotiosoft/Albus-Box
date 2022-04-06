@@ -32,16 +32,14 @@ void Lyrics::make_sample() {
 
 // コンストラクタ
 Lyrics::Lyrics() {
-	current_samples = 0;
-	current_index = 0;
+	current_index = -1;
 	lyrics_array.clear();
 	is_valid = false;
 }
 
 Lyrics::Lyrics(String path) {
 	// 初期化
-	current_samples = 0;
-	current_index = 0;
+	current_index = -1;
 	lyrics_array.clear();
 	is_valid = false;
 
@@ -88,34 +86,19 @@ void Lyrics::add_lyric(int begin, int end, String str) {
 
 // 歌詞の取得
 String Lyrics::get_lyrics(int time_samples) {
-	int before_samples = current_samples;
-	current_samples = time_samples;
-
-	if (before_samples - time_samples == 1) {
-		// 次の歌詞の開始位置ならcurent_index++
-		if (current_index < lyrics_array.size()) {
-			if (current_samples == lyrics_array[current_index + 1].begin) {
-				current_index++;
-			}
+	if (current_index >= 0) {
+		if (lyrics_array[current_index].begin <= time_samples && lyrics_array[current_index].end > time_samples) {
+			return lyrics_array[current_index].lyrics;
 		}
 	}
-	else {
-		current_index = 0;
-		for (int i = 0; i < lyrics_array.size(); i++) {
-			if (lyrics_array[i].begin <= current_samples && lyrics_array[i].end > current_samples) {
-				current_index = i;
-				break;
-			}
-		}
-	}
-
-	// 歌詞が適用範囲なら歌詞を返す
-	if (current_index >= 0 && current_index < lyrics_array.size()) {
-		if (lyrics_array[current_index].begin <= current_samples && lyrics_array[current_index].end > current_samples) {
+	
+	current_index = -1;
+	for (int i = 0; i < lyrics_array.size(); i++) {
+		if (lyrics_array[i].begin <= time_samples && lyrics_array[i].end > time_samples) {
+			current_index = i;
 			return lyrics_array[current_index].lyrics;
 		}
 	}
 
-	// 適用範囲の歌詞が存在しなければ空白を返す
 	return U"";
 }
