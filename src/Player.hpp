@@ -185,6 +185,7 @@ private:
 	bool show_wave;
 	bool loop;
 	bool lyrics_exist;
+	Array<bool> has_lyrics;
 	String current_lyrics, temp_lyrics, before_lyrics;
 
 	// サムネイル関係

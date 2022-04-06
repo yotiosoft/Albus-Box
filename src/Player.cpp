@@ -30,8 +30,8 @@ void Player::audioRegister(FilePath audio_filepath) {
 
 	audio_files << new_audio_struct;
 	audio_files_path << audio_filepath;
+	has_lyrics << false;
 
-	lyrics_exist = false;
 	openLyricsFile(audio_files.size()-1);
 }
 
@@ -44,9 +44,6 @@ void Player::open(int num) {
 
 	audio_files[num].audio = new_audio_file;
 	audio_files[num].isOpened = true;
-
-	lyrics_exist = false;
-	openLyricsFile(num);
 }
 
 void Player::openAndPlay(FilePath audio_filepath) {
@@ -60,9 +57,12 @@ void Player::openAndPlay(FilePath audio_filepath) {
 void Player::openLyricsFile(int num) {
 	// ハッシュ値に対応する歌詞ファイルがlyricsディレクトリ内にあれば開く
 	String lyrics_filepath = U"{}/{}.lyrics"_fmt(specific::getLyricsDirPath(), audio_files[num].hash);
-	if (FileSystem::Exists(lyrics_filepath)) {
+	if (!has_lyrics[num] && FileSystem::Exists(lyrics_filepath)) {
 		lyrics[audio_files[num].hash] = Lyrics(lyrics_filepath);
-		lyrics_exist = true;
+		has_lyrics[num] = true;
+	}
+	else {
+		has_lyrics[num] = false;
 	}
 }
 
@@ -495,18 +495,17 @@ Timestamp Player::getTotalTime() {
 }
 
 bool Player::lyricsExist() {
-	return lyrics_exist && isOpened();
+	return has_lyrics[current_track] && isOpened();
 }
 
 bool Player::updateLyrics() {
-	if (!isOpened() || !lyrics_exist) {
+	if (!isOpened() || !has_lyrics[current_track]) {
 		return false;
 	}
-
-	Console << audio_files[current_track].audio->posSample();
-
+	
 	if ((temp_lyrics = lyrics[audio_files[current_track].hash].get_lyrics(audio_files[current_track].audio->posSample())) != before_lyrics) {
 		current_lyrics = temp_lyrics;
+		before_lyrics = current_lyrics;
 		return true;
 	}
 
@@ -514,7 +513,7 @@ bool Player::updateLyrics() {
 }
 
 String Player::getLyrics() {
-	if (isOpened() && lyrics_exist) {
+	if (isOpened() && has_lyrics[current_track]) {
 		return current_lyrics;
 	}
 
