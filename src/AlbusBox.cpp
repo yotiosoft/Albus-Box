@@ -478,9 +478,9 @@ void AlbusBox() {
 	Circle thumbnail_circle(Scene::Width() / 2, Scene::Height() / 3, thumbnail_size / 2);
 
 	// 歌詞用
-	Circle lyrics_circle(Scene::Width() / 2, Scene::Height() / 3, thumbnail_size / 2);
+	Rect lyrics_rect;
 	String lyrics_str;
-	Font lyrics_font{ 30 };
+	Font lyrics_font{ 14, Typeface::CJK_Regular_JP };
 
 	// 高速フーリエ変換用
 	FFTResult fft;
@@ -498,18 +498,6 @@ void AlbusBox() {
 	bool onAnyButton;
 	
 	pair<bool, FilePath> file_open;
-
-	Lyrics ly(U"test.lyrics");
-
-	for (int t = 0; t < 3000; t++) {
-		Console << U"1 > {} : {}"_fmt(t, ly.get_lyrics(t));
-	}
-	for (int t = 100; t < 5000; t++) {
-		Console << U"2 > {} : {}"_fmt(t, ly.get_lyrics(t));
-	}
-	for (int t = 3500; t < 5000; t++) {
-		Console << U"2 > {} : {}"_fmt(t, ly.get_lyrics(t));
-	}
 
 	while (System::Update()) {
 		onAnyButton = false;
@@ -599,10 +587,19 @@ void AlbusBox() {
 		// 歌詞を表示
 		if (player.lyricsExist()) {
 			if (player.updateLyrics()) {
-				lyrics_font.preload(player.getLyrics());
+				lyrics_str = player.getLyrics();
+				RectF region = lyrics_font(lyrics_str).region(0, 0);
+				if (region.w > thumbnail_size) {
+					lyrics_rect = Rect(Arg::center(Scene::Width() / 2, Scene::Height() / 3), thumbnail_size, region.w / thumbnail_size * lyrics_font.fontSize());
+				}
+				else {
+					lyrics_rect = Rect(Arg::center(Scene::Width() / 2, Scene::Height() / 3), region.w + 10, region.h + 10);
+				}
 			}
-			lyrics_circle(lyrics_font.getTexture()).draw();
-			Console << player.getLyrics();
+			//lyrics_circle(lyrics_font.getTexture()).draw();
+			if (lyrics_str.size() > 0) {
+				lyrics_font(lyrics_str).draw(lyrics_rect, Palette::White);
+			}
 		}
 
 		// タイトル
