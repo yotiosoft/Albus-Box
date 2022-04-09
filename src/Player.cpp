@@ -468,7 +468,7 @@ Timestamp Player::getPlayPosTime() {
 	}
 
 	double pos_sec = audio_files[current_track].audio->posSec();
-	return Timestamp{ (int)pos_sec / 60, (int)pos_sec % 60 };
+	return Timestamp{ (int)pos_sec / 60, /*(int)pos_sec % 60*/(int)audio_files[current_track].audio ->posSample()};
 }
 
 double Player::getPlayPosNorm() {
