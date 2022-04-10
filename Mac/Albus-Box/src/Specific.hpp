@@ -33,6 +33,7 @@ namespace specific {
 
 	String getSettingFilePath();
 	String getAudioProfilesFilePath();
+	String getLyricsDirPath();
 	
 	double getDpiDist();
 	bool setWindowStyle(int x1, int y1, int x2, int y2, int w, int h);
