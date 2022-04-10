@@ -33,6 +33,10 @@ String specific::getAudioProfilesFilePath() {
 	return U"./Albus-Box.app/Contents/data/settings/audio_profiles.json";
 }
 
+String specific::getLyricsDirPath() {
+	return U"./Albus-Box.app/Contents/data/lyrics";
+}
+
 double specific::getDpiDist() {
 	return 1.0;
 }
