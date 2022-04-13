@@ -593,11 +593,12 @@ void AlbusBox() {
 					lyrics_rect = Rect(Arg::center(Scene::Width() / 2, Scene::Height() / 3), thumbnail_size, region.w / thumbnail_size * lyrics_font.fontSize());
 				}
 				else {
-					lyrics_rect = Rect(Arg::center(Scene::Width() / 2, Scene::Height() / 3), region.w + 10, region.h + 10);
+					lyrics_rect = Rect(Arg::center(Scene::Width() / 2, Scene::Height() / 3), region.w + 2, region.h + 2);
 				}
 			}
 			//lyrics_circle(lyrics_font.getTexture()).draw();
 			if (lyrics_str.size() > 0) {
+				lyrics_rect.draw(Palette::Black);
 				lyrics_font(lyrics_str).draw(lyrics_rect, Palette::White);
 			}
 		}
