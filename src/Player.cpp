@@ -500,14 +500,18 @@ bool Player::lyricsExist() {
 
 bool Player::updateLyrics() {
 	if (!isOpened() || !has_lyrics[current_track]) {
+		lyrics_display_count = 0;
 		return false;
 	}
 	
 	if ((temp_lyrics = lyrics[audio_files[current_track].hash].get_lyrics(audio_files[current_track].audio->posSample())) != before_lyrics) {
 		current_lyrics = temp_lyrics;
 		before_lyrics = current_lyrics;
+		lyrics_display_count = 0;
 		return true;
 	}
+
+	lyrics_display_count++;
 
 	return false;
 }
@@ -518,6 +522,23 @@ String Player::getLyrics() {
 	}
 
 	return U"";
+}
+
+int Player::getLyricsDisplayAlphaColor() {
+	if (!isOpened() || !has_lyrics[current_track]) {
+		return 0;
+	}
+
+	if (lyrics_display_count * 10 > 255) {
+		return 255;
+	}
+
+	int rest_count;
+	if ((rest_count = lyrics[audio_files[current_track].hash].get_current_lyrics_length(audio_files[current_track].audio->posSample())) <= 255) {
+		return rest_count;
+	}
+
+	return lyrics_display_count * 10;
 }
 
 PlayerStatus::Type Player::getStatus() {
