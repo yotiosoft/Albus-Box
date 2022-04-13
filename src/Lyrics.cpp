@@ -86,19 +86,35 @@ void Lyrics::add_lyric(int begin, int end, String str) {
 
 // 歌詞の取得
 String Lyrics::get_lyrics(int time_samples) {
-	if (current_index >= 0) {
-		if (lyrics_array[current_index].begin <= time_samples && lyrics_array[current_index].end > time_samples) {
-			return lyrics_array[current_index].lyrics;
-		}
-	}
-	
-	current_index = -1;
-	for (int i = 0; i < lyrics_array.size(); i++) {
-		if (lyrics_array[i].begin <= time_samples && lyrics_array[i].end > time_samples) {
-			current_index = i;
-			return lyrics_array[current_index].lyrics;
-		}
+	if ((current_index = get_lyrics_index(time_samples)) >= 0) {
+		return lyrics_array[current_index].lyrics;
 	}
 
 	return U"";
+}
+
+// 現在の歌詞のインデックス値を取得
+int Lyrics::get_lyrics_index(int time_samples) {
+	if (current_index >= 0) {
+		if (lyrics_array[current_index].begin <= time_samples && lyrics_array[current_index].end > time_samples) {
+			return current_index;
+		}
+	}
+
+	for (int i = 0; i < lyrics_array.size(); i++) {
+		if (lyrics_array[i].begin <= time_samples && lyrics_array[i].end > time_samples) {
+			return i;
+		}
+	}
+
+	return -1;
+}
+
+// 歌詞の長さ
+int Lyrics::get_current_lyrics_length(int time_samples) {
+	if (current_index < 0) {
+		return 0;
+	}
+
+	return lyrics_array[current_index].end - time_samples;
 }

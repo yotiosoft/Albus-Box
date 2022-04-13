@@ -131,6 +131,7 @@ public:
 	bool lyricsExist();
 	bool updateLyrics();
 	String getLyrics();
+	int getLyricsDisplayAlphaColor();
 	
 	// 時分で曲の長さを返す
 	Timestamp getTotalTime();
@@ -187,6 +188,7 @@ private:
 	bool lyrics_exist;
 	Array<bool> has_lyrics;
 	String current_lyrics, temp_lyrics, before_lyrics;
+	int lyrics_display_count;
 
 	// サムネイル関係
 	const int thumbnail_size = 260;

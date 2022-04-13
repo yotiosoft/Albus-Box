@@ -598,8 +598,9 @@ void AlbusBox() {
 			}
 			//lyrics_circle(lyrics_font.getTexture()).draw();
 			if (lyrics_str.size() > 0) {
-				lyrics_rect.draw(Palette::Black);
-				lyrics_font(lyrics_str).draw(lyrics_rect, Palette::White);
+				//lyrics_rect.draw(Palette::Black);
+				int lyrics_display_count = player.getLyricsDisplayAlphaColor();
+				lyrics_font(lyrics_str).draw(lyrics_rect, Color(255, 255, 255, lyrics_display_count));
 			}
 		}
 

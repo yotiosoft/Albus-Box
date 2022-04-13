@@ -34,6 +34,12 @@ public:
 
 	// 歌詞の取得
 	String get_lyrics(int time_samples);
+
+	// 現在の歌詞のインデックス値を取得
+	int get_lyrics_index(int time_samples);
+
+	// 歌詞の長さ
+	int get_current_lyrics_length(int time_samples);
 	
 private:
 	// 歌詞配列
@@ -41,6 +47,7 @@ private:
 
 	// 現在の歌詞のインデックス番号
 	int current_index;
+	int before_index;
 
 	// このLyricsインスタンスは有効？
 	bool is_valid;
