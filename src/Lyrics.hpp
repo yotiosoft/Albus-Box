@@ -30,16 +30,16 @@ public:
 	Lyrics(String path);
 
 	// 歌詞の取り込み（設定画面から）
-	void add_lyric(int begin, int end, String str);
+	void add_lyric(double begin, double end, String str);
 
 	// 歌詞の取得
-	String get_lyrics(int time_samples);
+	String get_lyrics(double time_samples);
 
 	// 現在の歌詞のインデックス値を取得
-	int get_lyrics_index(int time_samples);
+	int get_lyrics_index(double time_samples);
 
 	// 歌詞の長さ
-	int get_current_lyrics_length(int time_samples);
+	int get_current_lyrics_length(double time_samples);
 	
 private:
 	// 歌詞配列

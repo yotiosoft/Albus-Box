@@ -61,7 +61,7 @@ Lyrics::Lyrics(String path) {
 }
 
 // 歌詞の取り込み
-void Lyrics::add_lyric(int begin, int end, String str) {
+void Lyrics::add_lyric(double begin, double end, String str) {
 	// 新しいLyricsElementを生成
 	LyricsElement new_lyric;
 	new_lyric.begin = begin;
@@ -85,7 +85,7 @@ void Lyrics::add_lyric(int begin, int end, String str) {
 }
 
 // 歌詞の取得
-String Lyrics::get_lyrics(int time_samples) {
+String Lyrics::get_lyrics(double time_samples) {
 	if ((current_index = get_lyrics_index(time_samples)) >= 0) {
 		return lyrics_array[current_index].lyrics;
 	}
@@ -94,7 +94,7 @@ String Lyrics::get_lyrics(int time_samples) {
 }
 
 // 現在の歌詞のインデックス値を取得
-int Lyrics::get_lyrics_index(int time_samples) {
+int Lyrics::get_lyrics_index(double time_samples) {
 	if (current_index >= 0) {
 		if (lyrics_array[current_index].begin <= time_samples && lyrics_array[current_index].end > time_samples) {
 			return current_index;
@@ -111,7 +111,7 @@ int Lyrics::get_lyrics_index(int time_samples) {
 }
 
 // 歌詞の長さ
-int Lyrics::get_current_lyrics_length(int time_samples) {
+int Lyrics::get_current_lyrics_length(double time_samples) {
 	if (current_index < 0) {
 		return 0;
 	}
