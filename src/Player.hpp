@@ -188,7 +188,7 @@ private:
 	bool lyrics_exist;
 	Array<bool> has_lyrics;
 	String current_lyrics, temp_lyrics, before_lyrics;
-	int lyrics_display_count;
+	double lyrics_begin_time, lyrics_end_time;
 
 	// サムネイル関係
 	const int thumbnail_size = 260;

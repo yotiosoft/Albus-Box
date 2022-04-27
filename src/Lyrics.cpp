@@ -52,8 +52,8 @@ Lyrics::Lyrics(String path) {
 
 	// 歌詞の読み込み
 	for (auto j_element : j_lyrics_whole[U"lyrics"].arrayView()) {
-		int begin = j_element[U"begin"].get<int>();
-		int end = j_element[U"end"].get<int>();
+		double begin = j_element[U"begin"].get<int>();
+		double end = j_element[U"end"].get<int>();
 		String str = j_element[U"str"].getString();
 
 		add_lyric(begin, end, str);
@@ -117,4 +117,12 @@ int Lyrics::get_current_lyrics_length(double time_samples) {
 	}
 
 	return lyrics_array[current_index].end - time_samples;
+}
+
+// 歌詞の始点からの経過時間と終点までの残り時間
+double Lyrics::get_begin_time() {
+	return lyrics_array[current_index].begin;
+}
+double Lyrics::get_end_time() {
+	return lyrics_array[current_index].end;
 }

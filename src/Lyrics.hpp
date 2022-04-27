@@ -16,8 +16,8 @@
 #include <thread>
 
 typedef struct LyricsElement {
-	int begin;
-	int end;
+	double begin;
+	double end;
 	String lyrics;
 } LyricsElement;
 
@@ -40,6 +40,10 @@ public:
 
 	// 歌詞の長さ
 	int get_current_lyrics_length(double time_samples);
+
+	// 歌詞の始点からの経過時間と終点までの残り時間
+	double get_begin_time();
+	double get_end_time();
 	
 private:
 	// 歌詞配列

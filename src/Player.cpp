@@ -501,18 +501,18 @@ bool Player::lyricsExist() {
 
 bool Player::updateLyrics() {
 	if (!isOpened() || !has_lyrics[current_track]) {
-		lyrics_display_count = 0;
+		lyrics_begin_time = -1.0;
+		lyrics_end_time = -1.0;
 		return false;
 	}
 	
 	if ((temp_lyrics = lyrics[audio_files[current_track].hash].get_lyrics(audio_files[current_track].audio->posSec())) != before_lyrics) {
 		current_lyrics = temp_lyrics;
 		before_lyrics = current_lyrics;
-		lyrics_display_count = 0;
+		lyrics_begin_time = lyrics[audio_files[current_track].hash].get_begin_time();
+		lyrics_end_time = lyrics[audio_files[current_track].hash].get_end_time();
 		return true;
 	}
-
-	lyrics_display_count++;
 
 	return false;
 }
@@ -530,16 +530,22 @@ int Player::getLyricsDisplayAlphaColor() {
 		return 0;
 	}
 
-	if (lyrics_display_count * 10 > 255) {
-		return 255;
+	if (lyrics_begin_time < 0 || lyrics_end_time < 0) {
+		return 0;
 	}
 
-	int rest_count;
-	if ((rest_count = lyrics[audio_files[current_track].hash].get_current_lyrics_length(audio_files[current_track].audio->posSec())) <= 255) {
-		return rest_count;
+	double play_sec = audio_files[current_track].audio->posSec();
+	double trans_len = 0.2;
+
+	if (0.0 <= play_sec - lyrics_begin_time && play_sec - lyrics_begin_time <= trans_len) {
+		return (play_sec - lyrics_begin_time) * 255 / trans_len;
 	}
 
-	return lyrics_display_count * 10;
+	if (0.0 <= lyrics_end_time - play_sec && lyrics_end_time - play_sec <= trans_len) {
+		return (lyrics_end_time - play_sec) * 255 / trans_len;
+	}
+
+	return 255;
 }
 
 PlayerStatus::Type Player::getStatus() {
