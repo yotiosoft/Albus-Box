@@ -30,7 +30,7 @@ namespace specific {
 
 	double getDpiDist();
 
-	bool setWindowStyle(int x1, int y1, int x2, int y2, int w, int h);
+	bool setWindowStyle(int x1, int y1, int x2, int y2, int w, int h, bool update_dpi);
 
 	void moveWindow(Point& mouse_clicked, bool& window_moving);
 
