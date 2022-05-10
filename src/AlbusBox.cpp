@@ -99,7 +99,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 	Point mouse_clicked;
 	bool window_moving = false;
 	
-	bool onAnyButton;
+	bool onAnyButton, dpi_update = true;
 
 	while (System::Update()) {
 		onAnyButton = false;
@@ -252,8 +252,10 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 		// ウィンドウの移動
 		if (!onAnyButton && OS == "Windows") {
 			specific::moveWindow(mouse_clicked, window_moving);
-			specific::setWindowStyle(0, 0, 400, 640, 40, 40);
+			specific::setWindowStyle(0, 0, 400, 640, 40, 40, dpi_update);
 		}
+
+		dpi_update = !dpi_update;
 	}
 	return true;
 }
@@ -273,7 +275,7 @@ bool VersionInformation(Player& player, Color& button_close_color, Texture& wind
 	Point mouse_clicked;
 	bool window_moving = false;
 	
-	bool onAnyButton;
+	bool onAnyButton, dpi_update = true;
 	
 	while (System::Update()) {
 		onAnyButton = false;
@@ -306,8 +308,10 @@ bool VersionInformation(Player& player, Color& button_close_color, Texture& wind
 		// ウィンドウの移動
 		if (!onAnyButton && OS == "Windows") {
 			specific::moveWindow(mouse_clicked, window_moving);
-			specific::setWindowStyle(0, 0, 400, 640, 40, 40);
+			specific::setWindowStyle(0, 0, 400, 640, 40, 40, dpi_update);
 		}
+
+		dpi_update = !dpi_update;
 	}
 	return true;
 }
@@ -343,7 +347,7 @@ bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_
 	Point mouse_clicked;
 	bool window_moving = false;
 	
-	bool onAnyButton;
+	bool onAnyButton, dpi_update = true;
 	
 	while (System::Update()) {
 		onAnyButton = false;
@@ -392,8 +396,10 @@ bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_
 		// ウィンドウの移動
 		if (!onAnyButton && OS == "Windows") {
 			specific::moveWindow(mouse_clicked, window_moving);
-			specific::setWindowStyle(0, 0, 400, 640, 40, 40);
+			specific::setWindowStyle(0, 0, 400, 640, 40, 40, dpi_update);
 		}
+
+		dpi_update = !dpi_update;
 	}
 	return true;
 }
@@ -416,7 +422,7 @@ void AlbusBox() {
 	}
 	Window::Resize(400, 640);
 
-	specific::setWindowStyle(0, 0, 400, 640, 40, 40);
+	specific::setWindowStyle(0, 0, 400, 640, 40, 40, true);
 
 	// ウィンドウタイトル
 	Window::SetTitle(TITLE);
@@ -499,6 +505,7 @@ void AlbusBox() {
 	
 	pair<bool, FilePath> file_open;
 
+	bool fft_update = true;
 	while (System::Update()) {
 		onAnyButton = false;
 		
@@ -556,11 +563,15 @@ void AlbusBox() {
 		}
 
 		// 波形を表示（FFT:高速フーリエ変換）
-		LineString fft_line;
 		if (playing && player.isOpened() && player.isShowWaveEnabled()) {
 			ScopedRenderTarget2D target(thumbnail_texture);
 			player.getThumbnailTexture()->drawAt(thumbnail_size / 2, thumbnail_size / 2);
-			player.fft(fft);
+
+			// FFT更新
+			if (fft_update) {
+				player.fft(fft);
+			}
+
 			int fft_size = 800;
 			int box_size = 10;
 			int row_boxes = 20;
@@ -697,8 +708,10 @@ void AlbusBox() {
 		// ウィンドウの移動
 		if (!onAnyButton && OS == "Windows") {
 			specific::moveWindow(mouse_clicked, window_moving);
-			specific::setWindowStyle(0, 0, 400, 640, 40, 40);
+			specific::setWindowStyle(0, 0, 400, 640, 40, 40, fft_update);
 		}
+
+		fft_update = !fft_update;
 	}
 	
 	player.free();

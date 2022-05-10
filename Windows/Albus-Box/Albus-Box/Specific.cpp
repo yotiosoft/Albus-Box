@@ -12,6 +12,7 @@
 double before_dpi_dist = 0.0;
 HWND hWnd = 0;
 bool before_pin_window = false;
+double dpi_dist;
 
 void specific::chdir(string dir) {
 	::_chdir(dir.c_str());
@@ -59,13 +60,14 @@ double specific::getDpiDist() {
 	return (double)GetDpiForWindow(hWnd) / DPI_STANDARD;
 }
 
-bool specific::setWindowStyle(int x1, int y1, int x2, int y2, int w, int h) {
+bool specific::setWindowStyle(int x1, int y1, int x2, int y2, int w, int h, bool update_dpi) {
 	// ウィンドウハンドルを取得（Siv3D）
 	if (hWnd == 0) {
 		hWnd = static_cast<HWND>(s3d::Platform::Windows::Window::GetHWND());
 	}
 
-	double dpi_dist = getDpiDist();
+	if (update_dpi)
+		dpi_dist = getDpiDist();
 	if (dpi_dist == before_dpi_dist) {
 		return false;
 	}
