@@ -514,6 +514,18 @@ void AlbusBox() {
 	bool onAnyButton;
 	
 	pair<bool, FilePath> file_open;
+    
+    // サムネイルFFT関連
+    const int fft_size = 800;
+    const int box_size = 10;
+    const int box_half_size = box_size / 2;
+    const int row_boxes = 20;
+    int i, j;
+    const double fft_size_per_row_boxes = (double)fft_size / row_boxes;
+    int fft_box_count;
+    const int row_box_x_const = thumbnail_texture.width() / row_boxes;
+    const int thumbnail_height = thumbnail_texture.height();
+    const int row_box_wh = box_size * 3 / 4;
 
 	bool fft_update = true;
 	while (System::Update()) {
@@ -574,29 +586,26 @@ void AlbusBox() {
 
 		// 波形を表示（FFT:高速フーリエ変換）
 		if (playing && player.isOpened() && player.isShowWaveEnabled()) {
-			ScopedRenderTarget2D target(thumbnail_texture);
-			player.getThumbnailTexture()->drawAt(thumbnail_size / 2, thumbnail_size / 2);
+            if (fft_update) {
+                ScopedRenderTarget2D target(thumbnail_texture);
+                player.getThumbnailTexture()->drawAt(thumbnail_size / 2, thumbnail_size / 2);
 
-			// FFT更新
-			if (fft_update) {
-				player.fft(fft);
-			}
+                // FFT更新
+                player.fft(fft);
+                
+                for (i = 0; i < row_boxes; i++) {
+                    double size = Pow(fft.buffer[i * fft_size_per_row_boxes], 0.6f) * 2000;
+                    fft_box_count = size / box_size;
+                    for (j = 0; j < fft_box_count; j++) {
+                        Rect(Arg::center(i * row_box_x_const + box_half_size, thumbnail_height - j * box_size - box_half_size), row_box_wh, row_box_wh).draw(Color(200, 200, 200, 200));
+                    }
+                }
 
-			int fft_size = 800;
-			int box_size = 10;
-			int row_boxes = 20;
-			for (int i = 0; i < row_boxes; i++) {
-				double size = Pow(fft.buffer[i * (double)fft_size / row_boxes], 0.6f) * 2000;
-				int fft_box_count = size / box_size;
-				for (int j = 0; j < fft_box_count; j++) {
-					Rect(Arg::center(i * thumbnail_texture.width() / row_boxes + box_size / 2, thumbnail_texture.height() - j * box_size - box_size / 2), box_size * 3 / 4, box_size * 3 / 4).draw(Color(200, 200, 200, 200));
-				}
-			}
-
-			if (thumbnail_circle.mouseOver()) {
-				Rect(0, 0, thumbnail_size, thumbnail_size).draw(Color(0, 0, 0, 127));
-				FontAsset(U"small")(U"クリックでサムネイル画像変更").draw(Arg::center(thumbnail_size / 2, thumbnail_size / 2), Color(Palette::White));
-			}
+                if (thumbnail_circle.mouseOver()) {
+                    Rect(0, 0, thumbnail_size, thumbnail_size).draw(Color(0, 0, 0, 127));
+                    FontAsset(U"small")(U"クリックでサムネイル画像変更").draw(Arg::center(thumbnail_size / 2, thumbnail_size / 2), Color(Palette::White));
+                }
+            }
 		}
 		else {
 			ScopedRenderTarget2D target(thumbnail_texture);
