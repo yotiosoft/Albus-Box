@@ -36,7 +36,7 @@ pair<bool, FilePath> ImageFileOpen() {
 }
 
 bool ExitButton(Color& button_close_color, Texture& window_close_icon, bool& onAnyButton) {
-	if (OS == "Windows") {
+#if defined(_WIN32) || defined(_WIN64)
 		// 最前面表示ボタン
 		Font small_font = FontAsset(U"icon_font");
 		if (pin_window) {
@@ -51,7 +51,7 @@ bool ExitButton(Color& button_close_color, Texture& window_close_icon, bool& onA
 		if (NeumorphismUI::CircleButton(Scene::Width()-30, 30, 15, window_close_icon, onAnyButton)) {
 			return true;
 		}
-	}
+#endif
 	
 	return false;
 }
@@ -250,13 +250,16 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 		player.playing();
 
 		// ウィンドウの移動
-		if (!onAnyButton && OS == "Windows") {
+#if defined(_WIN32) || defined(_WIN64)
+		if (!onAnyButton) {
 			specific::moveWindow(mouse_clicked, window_moving);
 			specific::setWindowStyle(0, 0, 400, 640, 40, 40, dpi_update);
 		}
 
 		dpi_update = !dpi_update;
-	}
+#endif
+    }
+    
 	return true;
 }
 
@@ -305,14 +308,17 @@ bool VersionInformation(Player& player, Color& button_close_color, Texture& wind
 		// 再生処理を継続
 		player.playing();
 
+#if defined(_WIN32) || defined(_WIN64)
 		// ウィンドウの移動
-		if (!onAnyButton && OS == "Windows") {
+		if (!onAnyButton) {
 			specific::moveWindow(mouse_clicked, window_moving);
 			specific::setWindowStyle(0, 0, 400, 640, 40, 40, dpi_update);
 		}
 
 		dpi_update = !dpi_update;
-	}
+#endif
+    }
+        
 	return true;
 }
 
@@ -393,13 +399,15 @@ bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_
 		// 再生処理を継続
 		player.playing();
 		
+#if defined(_WIN32) || defined(_WIN64)
 		// ウィンドウの移動
-		if (!onAnyButton && OS == "Windows") {
+		if (!onAnyButton) {
 			specific::moveWindow(mouse_clicked, window_moving);
 			specific::setWindowStyle(0, 0, 400, 640, 40, 40, dpi_update);
 		}
 
 		dpi_update = !dpi_update;
+#endif
 	}
 	return true;
 }
@@ -417,12 +425,14 @@ void drawThumbnailTexture(Player& player, int thumbnail_size) {
 
 void AlbusBox() {
 	Scene::SetBackground(DEFAULT_BACKGROUND_COLOR);
-	if (OS == "Windows") {
-		Window::SetStyle(WindowStyle::Frameless);
-	}
-	Window::Resize(400, 640);
-
-	specific::setWindowStyle(0, 0, 400, 640, 40, 40, true);
+    Window::Resize(400, 640);
+    
+#if defined(_WIN32) || defined(_WIN64)
+    Window::SetStyle(WindowStyle::Frameless);
+    specific::setWindowStyle(0, 0, 400, 640, 40, 40, true);
+#else
+    specific::setWindowStyle(0, 0, 400, 640, 40, 40);
+#endif
 
 	// ウィンドウタイトル
 	Window::SetTitle(TITLE);
@@ -705,11 +715,13 @@ void AlbusBox() {
 		
 		playing = player.playing();
 		
+#if defined(_WIN32) || defined(_WIN64)
 		// ウィンドウの移動
-		if (!onAnyButton && OS == "Windows") {
+		if (!onAnyButton) {
 			specific::moveWindow(mouse_clicked, window_moving);
 			specific::setWindowStyle(0, 0, 400, 640, 40, 40, fft_update);
 		}
+#endif
 
 		fft_update = !fft_update;
 	}
