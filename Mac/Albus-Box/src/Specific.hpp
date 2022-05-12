@@ -22,7 +22,6 @@
 
 /* OS依存の定数など */
 #define LINE_FEED_CODE			0		// 改行コードに用いる文字数
-#define	OS						"Mac"	// OS
 
 namespace specific {
 	String getCurrentDir();
