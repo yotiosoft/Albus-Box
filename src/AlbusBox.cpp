@@ -526,6 +526,7 @@ void AlbusBox() {
     const int row_box_x_const = thumbnail_texture.width() / row_boxes;
     const int thumbnail_height = thumbnail_texture.height();
     const int row_box_wh = box_size * 3 / 4;
+	const int thumbnail_half_wh = thumbnail_height / 2;
 
 	bool fft_update = true;
 	while (System::Update()) {
@@ -593,6 +594,7 @@ void AlbusBox() {
                 // FFT更新
                 player.fft(fft);
                 
+				// 波形の描画
                 for (i = 0; i < row_boxes; i++) {
                     double size = Pow(fft.buffer[i * fft_size_per_row_boxes], 0.6f) * 2000;
                     fft_box_count = size / box_size;
@@ -601,6 +603,27 @@ void AlbusBox() {
                     }
                 }
 
+				// 歌詞を表示
+				if (player.lyricsExist()) {
+					if (player.updateLyrics()) {
+						lyrics_str = player.getLyrics();
+						RectF region = lyrics_font(lyrics_str).region(0, 0);
+						if (region.w > thumbnail_size) {
+							lyrics_rect = Rect(Arg::center(thumbnail_half_wh, thumbnail_half_wh), thumbnail_size, region.w / thumbnail_size * lyrics_font.fontSize());
+						}
+						else {
+							lyrics_rect = Rect(Arg::center(thumbnail_half_wh, thumbnail_half_wh), region.w + 2, region.h + 2);
+						}
+					}
+					//lyrics_circle(lyrics_font.getTexture()).draw();
+					if (lyrics_str.size() > 0) {
+						//lyrics_rect.draw(Palette::Black);
+						int lyrics_display_count = player.getLyricsDisplayAlphaColor();
+						lyrics_font(lyrics_str).draw(lyrics_rect, Color(255, 255, 255, lyrics_display_count));
+					}
+				}
+
+				// マウスオーバー時の表示
                 if (thumbnail_circle.mouseOver()) {
                     Rect(0, 0, thumbnail_size, thumbnail_size).draw(Color(0, 0, 0, 127));
                     FontAsset(U"small")(U"クリックでサムネイル画像変更").draw(Arg::center(thumbnail_size / 2, thumbnail_size / 2), Color(Palette::White));
@@ -613,26 +636,6 @@ void AlbusBox() {
 		}
 
 		thumbnail_circle(thumbnail_texture(0, 0, thumbnail_size, thumbnail_size)).draw();
-
-		// 歌詞を表示
-		if (player.lyricsExist()) {
-			if (player.updateLyrics()) {
-				lyrics_str = player.getLyrics();
-				RectF region = lyrics_font(lyrics_str).region(0, 0);
-				if (region.w > thumbnail_size) {
-					lyrics_rect = Rect(Arg::center(Scene::Width() / 2, Scene::Height() / 3), thumbnail_size, region.w / thumbnail_size * lyrics_font.fontSize());
-				}
-				else {
-					lyrics_rect = Rect(Arg::center(Scene::Width() / 2, Scene::Height() / 3), region.w + 2, region.h + 2);
-				}
-			}
-			//lyrics_circle(lyrics_font.getTexture()).draw();
-			if (lyrics_str.size() > 0) {
-				//lyrics_rect.draw(Palette::Black);
-				int lyrics_display_count = player.getLyricsDisplayAlphaColor();
-				lyrics_font(lyrics_str).draw(lyrics_rect, Color(255, 255, 255, lyrics_display_count));
-			}
-		}
 
 		// タイトル
 		// タイトル部分のマウスオーバー時にタイトル部分を光らせる
