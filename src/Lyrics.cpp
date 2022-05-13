@@ -87,7 +87,7 @@ void Lyrics::add_lyric(double begin, double end, String str) {
 // 歌詞の取得
 String Lyrics::get_lyrics(double time_samples) {
 	if ((current_index = get_lyrics_index(time_samples)) >= 0) {
-		return lyrics_array[current_index].lyrics;
+		return current_lyrics->lyrics;
 	}
 
 	return U"";
@@ -96,33 +96,60 @@ String Lyrics::get_lyrics(double time_samples) {
 // 現在の歌詞のインデックス値を取得
 int Lyrics::get_lyrics_index(double time_samples) {
 	if (current_index >= 0) {
-		if (lyrics_array[current_index].begin <= time_samples && lyrics_array[current_index].end > time_samples) {
+		if (current_lyrics->begin <= time_samples && current_lyrics->end > time_samples) {
+            before_time = time_samples;
 			return current_index;
 		}
 	}
-
-	for (int i = 0; i < lyrics_array.size(); i++) {
-		if (lyrics_array[i].begin <= time_samples && lyrics_array[i].end > time_samples) {
-			return i;
-		}
-	}
-
+    
+    if (before_time < time_samples && current_index >= 0) {
+        for (int i = current_index; i < lyrics_array.size(); i++) {
+            if (lyrics_array[i].begin <= time_samples && lyrics_array[i].end > time_samples) {
+                current_index = i;
+                current_lyrics = &lyrics_array[i];
+                before_time = time_samples;
+                return i;
+            }
+            if (lyrics_array[i].begin > time_samples) {
+                break;
+            }
+        }
+    }
+    else if (current_index < 0) {
+        for (int i = 0; i < lyrics_array.size(); i++) {
+            if (lyrics_array[i].begin <= time_samples && lyrics_array[i].end > time_samples) {
+                current_index = i;
+                current_lyrics = &lyrics_array[i];
+                before_time = time_samples;
+                return i;
+            }
+            if (lyrics_array[i].begin > time_samples) {
+                break;
+            }
+        }
+    }
+    else {
+        for (int i = current_index; i >= 0; i--) {
+            if (lyrics_array[i].begin <= time_samples && lyrics_array[i].end > time_samples) {
+                current_index = i;
+                current_lyrics = &lyrics_array[i];
+                before_time = time_samples;
+                return i;
+            }
+            if (lyrics_array[i].begin > time_samples) {
+                break;
+            }
+        }
+    }
+    
+    before_time = time_samples;
 	return -1;
-}
-
-// 歌詞の長さ
-int Lyrics::get_current_lyrics_length(double time_samples) {
-	if (current_index < 0) {
-		return 0;
-	}
-
-	return lyrics_array[current_index].end - time_samples;
 }
 
 // 歌詞の始点からの経過時間と終点までの残り時間
 double Lyrics::get_begin_time() {
-	return lyrics_array[current_index].begin;
+	return current_lyrics->begin;
 }
 double Lyrics::get_end_time() {
-	return lyrics_array[current_index].end;
+	return current_lyrics->end;
 }
