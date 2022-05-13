@@ -38,9 +38,6 @@ public:
 	// 現在の歌詞のインデックス値を取得
 	int get_lyrics_index(double time_samples);
 
-	// 歌詞の長さ
-	int get_current_lyrics_length(double time_samples);
-
 	// 歌詞の始点からの経過時間と終点までの残り時間
 	double get_begin_time();
 	double get_end_time();
@@ -48,10 +45,11 @@ public:
 private:
 	// 歌詞配列
 	Array<LyricsElement> lyrics_array;
+    LyricsElement* current_lyrics;
 
 	// 現在の歌詞のインデックス番号
 	int current_index;
-	int before_index;
+    double before_time;
 
 	// このLyricsインスタンスは有効？
 	bool is_valid;
