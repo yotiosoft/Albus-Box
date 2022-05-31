@@ -144,10 +144,10 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Specific.cpp">
+    <ClCompile Include="..\..\..\src\AlbusBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\AlbusBox.cpp">
+    <ClCompile Include="..\..\..\src\Lyrics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\NeumorphismUI.cpp">
@@ -159,7 +159,7 @@
     <ClCompile Include="..\..\..\src\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\Lyrics.cpp">
+    <ClCompile Include="Specific.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -794,9 +794,6 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Specific.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\AlbusBox.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -807,6 +804,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\Header.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Lyrics.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\NeumorphismUI.hpp">
@@ -821,7 +821,7 @@
     <ClInclude Include="..\..\..\src\Structs.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\Lyrics.hpp">
+    <ClInclude Include="Specific.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
