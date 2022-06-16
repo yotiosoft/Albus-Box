@@ -328,11 +328,9 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 	// ボタン用アイコン
 	Texture return_button_icon{ Icon(IconFont::Return), 20 };		// 戻る
 	Texture fileopen_icon{ Icon(IconFont::Plus), 20 };				// ファイルを追加
-	Texture listopen_button_icon{ Icon(IconFont::FileOpen), 20 };	// リストを読み込み
-	Texture save_button_icon{ Icon(IconFont::Save), 20 };			// 保存
 
 	Texture play_icon{ Icon(IconFont::Play), 20 };			// 再生
-	Texture stop_icon{ Icon(IconFont::Stop), 20 };			// 停止
+	Texture stop_icon{ Icon(IconFont::Pause), 20 };			// 停止
 
 	// ボタンの位置
 	Point return_button_pos;
@@ -345,6 +343,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 	double play_pos = 0.0;		// シークバーの初期値
 	int slider_width = Scene::Width() - 40 - 100 - 30;
 	NeumorphismUI::Slider slider(play_pos, Vec2{ 0, 0 }, slider_width, 20);
+    slider.setPosition(Point(120, 100));
 
 	// リストビューを作成
 	pair<Array<String>, Array<bool>> title_list = player.getTitleList();
@@ -357,8 +356,6 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 	const int list_element_h = 80;
 	const int list_element_margin = list_element_h + 10;
 
-	Array<bool> before_playing(title_list.first.size(), false);
-	before_playing = title_list.second;
 	int target_audio = -1;
 
 	// マウスクリックした地点の記録用
@@ -371,7 +368,6 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 		onAnyButton = false;
 
 		title_list = player.getTitleList();
-		before_playing = title_list.second;
 
 		// 画面上部のボタン群
 		// 閉じるボタン
@@ -383,20 +379,48 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 			return false;
 		}
 
-		// リストを開くボタン
-		if (NeumorphismUI::CircleButton(listopen_button_pos, 20, listopen_button_icon, onAnyButton)) {
-			pair<bool, FilePath> playlist = OpenPlayList();
-			if (playlist.first) {
-				player.loadPlayList(playlist.second);
-			}
-		}
-		// 保存ボタン
-		if (NeumorphismUI::CircleButton(save_button_pos, 20, save_button_icon, onAnyButton)) {
-			player.savePlayList();
-		}
-
 		// 画面タイトル
 		FontAsset(U"title")(U"歌詞設定").draw(Arg::center(Scene::Width() / 2, 30), Color(font_color));
+        
+        // 再生ボタン、シークバー、タイトルを表示
+        bool playing = player.playing();
+        NeumorphismUI::CircleSwitch(Vec2(70, 100), 25, playing, stop_icon, onAnyButton);
+        
+        if (!slider.isSliderMoving()) {
+            slider.setValueNoAnimetion(player.getPlayPosNorm());
+        }
+        play_pos = slider.draw(onAnyButton);
+        if (slider.isSliderLeftReleased()) {
+            player.seekTo(play_pos);
+        }
+
+        if (playing != player.playing()) {
+            if (playing) {
+                player.play();
+            }
+            else {
+                player.pause();
+            }
+        }
+
+        // タイトル
+        mat_title = Mat3x2::Translate(0, scroll_y);
+        const Transformer2D t2(mat_title);
+        {
+            const ScopedRenderTarget2D target2(title_texture);
+            //title_texture.clear(DEFAULT_BACKGROUND_COLOR);
+            Rect(0, 0, Scene::Width(), Scene::Height() - 100).draw(DEFAULT_BACKGROUND_COLOR);
+
+            DrawableText title_text = FontAsset(U"middle")(player.getTitle());
+            int title_w = title_text.region(0, 0).x;
+            int title_x = 0;
+            if (title_w > 250) {
+                title_x = -Scene::FrameCount() % title_w;
+            }
+
+            title_text.draw(title_x, 0, font_color);
+        }
+        title_texture.draw(120, 50 + 10 - scroll_y);
 
 		// リストを表示
 		scroll_y += Mouse::Wheel() * 10;
@@ -420,89 +444,16 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
 			for (int i = 0; i < title_list.first.size(); i++) {
 				// 土台
-				NeumorphismUI::NeumorphismRect(20, list_element_margin * i, Scene::Width() - 40, list_element_h, false);
+				//NeumorphismUI::NeumorphismRect(20, list_element_margin * i, Scene::Width() - 40, list_element_h, false);
 
 				// ボタンの有効・無効
 				bool button_enable = true;
 				if (110 - scroll_y + list_element_margin * i + list_element_h / 2 < 90) {
 					button_enable = false;
 				}
-
-				// 再生・停止ボタン
-				if (title_list.second[i]) {	// 再生中
-					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h / 2), 25, title_list.second[i], stop_icon, onAnyButton, button_enable);
-
-					if (target_audio != i) {
-						slider.setPosition(Point(120, list_element_margin * i + 50));
-						target_audio = i;
-					}
-
-					if (!slider.isSliderMoving()) {
-						slider.setValueNoAnimetion(player.getPlayPosNorm());
-					}
-					play_pos = slider.draw(onAnyButton, button_enable);
-					if (slider.isSliderLeftReleased() && button_enable) {
-						player.seekTo(play_pos);
-					}
-
-					if (before_playing[i] != title_list.second[i]) {
-						player.pause();
-						target_audio = -1;
-					}
-
-					// タイトル
-					mat_title = Mat3x2::Translate(0, scroll_y);
-					const Transformer2D t2(mat_title);
-					{
-						const ScopedRenderTarget2D target2(title_texture);
-						//title_texture.clear(DEFAULT_BACKGROUND_COLOR);
-						Rect(0, 0, Scene::Width(), Scene::Height() - 100).draw(DEFAULT_BACKGROUND_COLOR);
-
-						DrawableText title_text = FontAsset(U"middle")(title_list.first[i]);
-						int title_w = title_text.region(0, 0).x;
-						int title_x = 0;
-						if (title_w > 250) {
-							title_x = -Scene::FrameCount() % title_w;
-						}
-
-						title_text.draw(title_x, 0, font_color);
-					}
-					title_texture.draw(120, list_element_margin * i + 10 - scroll_y);
-				}
-				else {		// 別の曲が再生中
-					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h / 2), 25, title_list.second[i], play_icon, onAnyButton, button_enable);
-
-					if (before_playing[i] != title_list.second[i]) {
-						if (target_audio >= 0) {
-							player.pause();
-							title_list.second[target_audio] = false;
-							before_playing[target_audio] = false;
-						}
-						player.play(i);
-					}
-
-					// タイトル
-					mat_title = Mat3x2::Translate(0, scroll_y);
-					const Transformer2D t2(mat_title);
-					{
-						const ScopedRenderTarget2D target2(title_texture);
-						//title_texture.clear(DEFAULT_BACKGROUND_COLOR);
-						Rect(0, 0, Scene::Width(), Scene::Height() - 100).draw(DEFAULT_BACKGROUND_COLOR);
-
-						DrawableText title_text = FontAsset(U"middle")(title_list.first[i]);
-						int title_w = title_text.region(0, 0).x;
-						int title_x = 0;
-						if (title_w > 250) {
-							title_x = -Scene::FrameCount() % title_w;
-						}
-
-						title_text.draw(title_x, 0, font_color);
-					}
-					title_texture.draw(120, list_element_margin * i + 20 - scroll_y);
-				}
 			}
 		}
-		listview_texture.draw(0, 100);
+		listview_texture.draw(0, 150);
 
 		// ファイルを開くボタンを表示
 		if (NeumorphismUI::CircleButton(fileopen_button_pos, 30, fileopen_icon, onAnyButton)) {
