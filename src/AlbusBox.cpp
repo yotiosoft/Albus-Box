@@ -396,7 +396,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 		}
 
 		// 画面タイトル
-		FontAsset(U"title")(U"プレイリスト").draw(Arg::center(Scene::Width() / 2, 30), Color(font_color));
+		FontAsset(U"title")(U"歌詞設定").draw(Arg::center(Scene::Width() / 2, 30), Color(font_color));
 
 		// リストを表示
 		scroll_y += Mouse::Wheel() * 10;
@@ -601,7 +601,11 @@ bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_
 		player.setLoop(loop_switch.draw());
 
 		// 歌詞設定画面
-		NeumorphismUI::RectButton(Vec2(icon_left_x, icon_top_y + 260), Vec2(150, 50), U"歌詞設定", button_font, onAnyButton);
+		if (NeumorphismUI::RectButton(Vec2(icon_left_x, icon_top_y + 260), Vec2(150, 50), U"歌詞設定", button_font, onAnyButton)) {
+			if (lyricsSetting(player, button_close_color, window_close_icon, font_color)) {
+				return true;
+			}
+		}
 
 		// バージョン情報
 		if (NeumorphismUI::RectButton(Vec2(Scene::Width() / 2 - 50/2, Scene::Height() - 100), Vec2(50, 50), info_icon, onAnyButton)) {
