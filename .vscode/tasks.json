@@ -14,6 +14,9 @@
                 "-configuration",
                 "Debug"
             ],
+            "presentation": {
+                "clear": true
+            }
         },
         {
             "label": "debug-build-run",
@@ -38,6 +41,9 @@
                 "-configuration",
                 "Release"
             ],
+            "presentation": {
+                "clear": true
+            }
         },
         {
             "label": "release-build-run",
