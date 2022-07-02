@@ -376,7 +376,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 	Lyrics* lyrics_obj = player.getLyricsObj();
 	// 歌詞リストを取得
 	Array<struct lyrics_with_timestamp> lyrics_list;
-	if (lyrics_obj != NULL) {
+	if (lyrics_obj != nullptr) {
 		for (LyricsElement lyrics_el : lyrics_obj->get_lyrics_list()) {
 			Timestamp begin = player.convertToTimestamp(lyrics_el.begin);
 			Timestamp end = player.convertToTimestamp(lyrics_el.end);
