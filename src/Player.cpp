@@ -565,7 +565,7 @@ Lyrics* Player::getLyricsObj() {
 		return &lyrics[audio_files[current_track].hash];
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 PlayerStatus::Type Player::getStatus() {
