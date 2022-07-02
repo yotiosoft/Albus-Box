@@ -389,6 +389,11 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 	// 編集中の歌詞カードのインデックス（-1: 未指定）
 	int editing_lyrics_card_num = -1;
 
+	// 入力ボックス用
+	TextEditState tes_lyrics;
+	TextEditState tes_begin_min, tes_begin_sec;
+	TextEditState tes_end_min, tes_end_sec;
+
 	while (System::Update()) {
 		onAnyButton = false;
 
@@ -453,7 +458,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
 		//NeumorphismUI::NeumorphismRect(20, 80, Scene::Width()-40, Scene::Height()-80-20, true);
 		mat = Mat3x2::Translate(0, 10 - scroll_y);
-		mat_mouse = Mat3x2::Translate(0, 110 - scroll_y);
+		mat_mouse = Mat3x2::Translate(0, 150 - scroll_y);
 		{
 			const ScopedRenderTarget2D target(listview_texture);
 			listview_texture.clear(DEFAULT_BACKGROUND_COLOR);
@@ -462,8 +467,8 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
 			for (int i = 0; i < lyrics_list.size(); i++) {
 				// 土台
-				Rect background_rect(20, list_element_margin * i + 50, Scene::Width() - 40, list_element_h);
-				if (background_rect.mouseOver()) {
+				Rect background_rect(20, list_element_margin * i, Scene::Width() - 40, list_element_h);
+				if (background_rect.mouseOver() && editing_lyrics_card_num != i) {
 					NeumorphismUI::NeumorphismRect(20, list_element_margin * i, Scene::Width() - 40, list_element_h, false, Color(250, 250, 250));
 					Cursor::RequestStyle(CursorStyle::Hand);
 				}
@@ -472,15 +477,37 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 				}
 
 				// クリックされたら編集中の歌詞に指定
-				if (background_rect.leftClicked()) {
+				if (background_rect.leftPressed()) {
 					editing_lyrics_card_num = i;
 				}
+				else if (editing_lyrics_card_num == i && MouseL.down()) {
+					editing_lyrics_card_num = -1;
+				}
 
-				// 歌詞の有効範囲の表示
-				FontAsset(U"small")(U"{}:{:0>2} ～ {}:{:0>2}"_fmt(lyrics_list[i].time_begin.min, lyrics_list[i].time_begin.sec, lyrics_list[i].time_end.min, lyrics_list[i].time_end.sec)).draw(50, list_element_margin * i + 10, Color(font_color));
+				// 編集中の場合
+				if (editing_lyrics_card_num == i) {
+					// 歌詞の有効範囲の設定項目
+					SimpleGUI::TextBox(tes_begin_min, Vec2(50, list_element_margin * i), 40);
+					FontAsset(U"middle")(U":").draw(Arg::center(50 + 40*1 + 5*1, list_element_margin * i + 15), Color(font_color));
+					SimpleGUI::TextBox(tes_begin_sec, Vec2(50 + 40*1 + 5*2, list_element_margin * i), 40);
 
-				// 歌詞の表示
-				FontAsset(U"middle")(lyrics_list[i].lyrics.lyrics).draw(50, list_element_margin * i + 40, Color(font_color));
+					FontAsset(U"middle")(U"～").draw(Arg::center(50 + 40*2 + 5*2 + 15*1, list_element_margin * i + 15), Color(font_color));
+
+					SimpleGUI::TextBox(tes_end_min, Vec2(50 + 40*2 + 5*2 + 15*2, list_element_margin * i), 40);
+					FontAsset(U"middle")(U":").draw(Arg::center(50 + 40*3 + 5*3 + 15*2, list_element_margin * i + 15), Color(font_color));
+					SimpleGUI::TextBox(tes_end_sec, Vec2(50 + 40*3 + 5*4 + 15*2, list_element_margin * i), 40);
+
+					// 歌詞の設定
+					SimpleGUI::TextBox(tes_lyrics, Vec2(50, list_element_margin * i + 40), background_rect.size.x - 50);
+				}
+				// それ以外
+				else {
+					// 歌詞の有効範囲の表示
+					FontAsset(U"small")(U"{}:{:0>2} ～ {}:{:0>2}"_fmt(lyrics_list[i].time_begin.min, lyrics_list[i].time_begin.sec, lyrics_list[i].time_end.min, lyrics_list[i].time_end.sec)).draw(50, list_element_margin * i + 10, Color(font_color));
+
+					// 歌詞の表示
+					FontAsset(U"middle")(lyrics_list[i].lyrics.lyrics).draw(50, list_element_margin * i + 40, Color(font_color));
+				}
 			}
 		}
 		listview_texture.draw(0, 150);
