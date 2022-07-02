@@ -323,8 +323,16 @@ bool VersionInformation(Player& player, Color& button_close_color, Texture& wind
 }
 
 // 歌詞設定画面
+struct lyrics_with_timestamp {
+	LyricsElement lyrics;
+	Timestamp time_begin;
+	Timestamp time_end;
+};
 bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_close_icon, Color& font_color)
 {
+	// 自動で曲の遷移を無効化
+	player.setAutoMoveToNext(false);
+
 	// ボタン用アイコン
 	Texture return_button_icon{ Icon(IconFont::Return), 20 };		// 戻る
 	Texture fileopen_icon{ Icon(IconFont::Plus), 20 };				// ファイルを追加
@@ -364,18 +372,36 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
 	bool onAnyButton, dpi_update = true;
 
+	// 歌詞オブジェクトを取得
+	Lyrics* lyrics_obj = player.getLyricsObj();
+	// 歌詞リストを取得
+	Array<struct lyrics_with_timestamp> lyrics_list;
+	if (lyrics_obj != NULL) {
+		for (LyricsElement lyrics_el : lyrics_obj->get_lyrics_list()) {
+			Timestamp begin = player.convertToTimestamp(lyrics_el.begin);
+			Timestamp end = player.convertToTimestamp(lyrics_el.end);
+
+			struct lyrics_with_timestamp lwt = { lyrics_el, begin, end };
+			lyrics_list << lwt;
+		}
+	}
+
 	while (System::Update()) {
 		onAnyButton = false;
-
-		title_list = player.getTitleList();
 
 		// 画面上部のボタン群
 		// 閉じるボタン
 		if (ExitButton(button_close_color, window_close_icon, onAnyButton)) {
+			// 自動で曲の遷移を有効化
+			player.setAutoMoveToNext(true);
+
 			return true;
 		}
 		// もどる
 		if (NeumorphismUI::RectButton(return_button_pos, Vec2(40, 40), return_button_icon, onAnyButton)) {
+			// 自動で曲の遷移を有効化
+			player.setAutoMoveToNext(true);
+
 			return false;
 		}
 
@@ -384,7 +410,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
         
         // 再生ボタン、シークバー、タイトルを表示
         bool playing = player.playing();
-        NeumorphismUI::CircleSwitch(Vec2(70, 100), 25, playing, stop_icon, onAnyButton);
+        NeumorphismUI::CircleSwitch(Vec2(70, 100), 25, playing, play_icon, stop_icon, onAnyButton);
         
         if (!slider.isSliderMoving()) {
             slider.setValueNoAnimetion(player.getPlayPosNorm());
@@ -404,36 +430,27 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
         }
 
         // タイトル
-        mat_title = Mat3x2::Translate(0, scroll_y);
-        const Transformer2D t2(mat_title);
-        {
-            const ScopedRenderTarget2D target2(title_texture);
-            //title_texture.clear(DEFAULT_BACKGROUND_COLOR);
-            Rect(0, 0, Scene::Width(), Scene::Height() - 100).draw(DEFAULT_BACKGROUND_COLOR);
-
-            DrawableText title_text = FontAsset(U"middle")(player.getTitle());
-            int title_w = title_text.region(0, 0).x;
-            int title_x = 0;
-            if (title_w > 250) {
-                title_x = -Scene::FrameCount() % title_w;
-            }
-
-            title_text.draw(title_x, 0, font_color);
-        }
-        title_texture.draw(120, 50 + 10 - scroll_y);
+		DrawableText title_text = FontAsset(U"middle")(player.getTitle());
+		int title_w = title_text.region(0, 0).x;
+		int title_x = 120;
+		/*
+		if (title_w > 250) {
+			title_x = -Scene::FrameCount() % title_w;
+		}
+		*/
+		title_text.draw(title_x, 70, font_color);
 
 		// リストを表示
-		scroll_y += Mouse::Wheel() * 10;
+		scroll_y += Mouse::Wheel() * 50;
 		if (scroll_y < 0.0) {
 			scroll_y = 0.0;
 		}
-		if (scroll_y > list_element_margin * (title_list.first.size() - 1)) {
+		if (scroll_y > list_element_margin * (lyrics_list.size() - 1)) {
 			scroll_y = scroll_y_before;
 		}
 		scroll_y_before = scroll_y;
 
 		//NeumorphismUI::NeumorphismRect(20, 80, Scene::Width()-40, Scene::Height()-80-20, true);
-
 		mat = Mat3x2::Translate(0, 10 - scroll_y);
 		mat_mouse = Mat3x2::Translate(0, 110 - scroll_y);
 		{
@@ -442,15 +459,15 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
 			const Transformer2D t(mat, mat_mouse);
 
-			for (int i = 0; i < title_list.first.size(); i++) {
+			for (int i = 0; i < lyrics_list.size(); i++) {
 				// 土台
-				//NeumorphismUI::NeumorphismRect(20, list_element_margin * i, Scene::Width() - 40, list_element_h, false);
+				NeumorphismUI::NeumorphismRect(20, list_element_margin * i, Scene::Width() - 40, list_element_h, false);
 
-				// ボタンの有効・無効
-				bool button_enable = true;
-				if (110 - scroll_y + list_element_margin * i + list_element_h / 2 < 90) {
-					button_enable = false;
-				}
+				// 歌詞の有効範囲の表示
+				FontAsset(U"small")(U"{}:{:0>2} ～ {}:{:0>2}"_fmt(lyrics_list[i].time_begin.min, lyrics_list[i].time_begin.sec, lyrics_list[i].time_end.min, lyrics_list[i].time_end.sec)).draw(50, list_element_margin * i + 10, Color(font_color));
+
+				// 歌詞の表示
+				FontAsset(U"middle")(lyrics_list[i].lyrics.lyrics).draw(50, list_element_margin * i + 40, Color(font_color));
 			}
 		}
 		listview_texture.draw(0, 150);
@@ -476,6 +493,9 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 		dpi_update = !dpi_update;
 #endif
 	}
+
+	// 自動で曲の遷移を有効化
+	player.setAutoMoveToNext(true);
 
 	return true;
 }

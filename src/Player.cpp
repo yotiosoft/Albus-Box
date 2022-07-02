@@ -210,6 +210,10 @@ void Player::next() {
 	if (!isOpened()) {
 		return;
 	}
+	if (!auto_move_to_next) {
+		status = PlayerStatus::Pause;
+		return;
+	}
 	
 	if (current_track == 0 && audio_files.size() == 1 && loop) {	// 1曲しかリストに読み込まれていない場合
 		audio_files[current_track].audio->seekTime(0.0);					// 0.0秒に戻る
@@ -272,6 +276,10 @@ void Player::move(int num) {
 	reflectSettings(current_track);
 
 	return;
+}
+
+void Player::setAutoMoveToNext(bool arg) {
+	auto_move_to_next = arg;
 }
 
 bool Player::reflectSettings(int num) {
@@ -469,7 +477,7 @@ Timestamp Player::getPlayPosTime() {
 
 	double pos_sec = audio_files[current_track].audio->posSec();
 	//Console << pos_sec;
-	return Timestamp{ (int)pos_sec / 60, (int)pos_sec % 60 };
+	return convertToTimestamp(pos_sec);
 }
 
 double Player::getPlayPosNorm() {
@@ -492,7 +500,11 @@ Timestamp Player::getTotalTime() {
 	}
 
 	double length_sec = audio_files[current_track].audio->lengthSec();
-	return Timestamp{ (int)length_sec / 60, (int)length_sec % 60 };
+	return convertToTimestamp(length_sec);
+}
+
+Timestamp Player::convertToTimestamp(double sec) {
+	return Timestamp{ (int)sec / 60, (int)sec % 60 };
 }
 
 bool Player::lyricsExist() {
@@ -546,6 +558,14 @@ int Player::getLyricsDisplayAlphaColor() {
 	}
 
 	return 255;
+}
+
+Lyrics* Player::getLyricsObj() {
+	if (isOpened() && has_lyrics[current_track]) {
+		return &lyrics[audio_files[current_track].hash];
+	}
+
+	return NULL;
 }
 
 PlayerStatus::Type Player::getStatus() {
