@@ -323,6 +323,11 @@ bool VersionInformation(Player& player, Color& button_close_color, Texture& wind
 }
 
 // 歌詞設定画面
+struct lyrics_with_timestamp {
+	LyricsElement lyrics;
+	Timestamp time_begin;
+	Timestamp time_end;
+};
 bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_close_icon, Color& font_color)
 {
 	// 自動で曲の遷移を無効化
@@ -370,9 +375,15 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 	// 歌詞オブジェクトを取得
 	Lyrics* lyrics_obj = player.getLyricsObj();
 	// 歌詞リストを取得
-	Array<LyricsElement> lyrics_list;
+	Array<struct lyrics_with_timestamp> lyrics_list;
 	if (lyrics_obj != NULL) {
-		lyrics_list = lyrics_obj->get_lyrics_list();
+		for (LyricsElement lyrics_el : lyrics_obj->get_lyrics_list()) {
+			Timestamp begin = player.convertToTimestamp(lyrics_el.begin);
+			Timestamp end = player.convertToTimestamp(lyrics_el.end);
+
+			struct lyrics_with_timestamp lwt = { lyrics_el, begin, end };
+			lyrics_list << lwt;
+		}
 	}
 
 	while (System::Update()) {
@@ -452,15 +463,11 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 				// 土台
 				NeumorphismUI::NeumorphismRect(20, list_element_margin * i, Scene::Width() - 40, list_element_h, false);
 
-				// 歌詞の有効範囲の取得
-				Timestamp begin	 = player.convertToTimestamp(lyrics_list[i].begin);
-				Timestamp end	 = player.convertToTimestamp(lyrics_list[i].end);
-
 				// 歌詞の有効範囲の表示
-				FontAsset(U"small")(U"{}:{:0>2} ～ {}:{:0>2}"_fmt(begin.min, begin.sec, end.min, end.sec)).draw(50, list_element_margin * i + 10, Color(font_color));
+				FontAsset(U"small")(U"{}:{:0>2} ～ {}:{:0>2}"_fmt(lyrics_list[i].time_begin.min, lyrics_list[i].time_begin.sec, lyrics_list[i].time_end.min, lyrics_list[i].time_end.sec)).draw(50, list_element_margin * i + 10, Color(font_color));
 
 				// 歌詞の表示
-				FontAsset(U"middle")(lyrics_list[i].lyrics).draw(50, list_element_margin * i + 40, Color(font_color));
+				FontAsset(U"middle")(lyrics_list[i].lyrics.lyrics).draw(50, list_element_margin * i + 40, Color(font_color));
 			}
 		}
 		listview_texture.draw(0, 150);
