@@ -436,7 +436,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 		// 再生位置を表示
 		Timestamp now = player.getPlayPosTime();
 		Timestamp total = player.getTotalTime();
-		FontAsset(U"small")(U"{}:{:0>2} / {}:{:0>2}"_fmt(now.min, now.sec, total.min, total.sec)).draw(120, 135), Color(font_color);
+		FontAsset(U"small")(U"{}:{:0>2} / {}:{:0>2}"_fmt(now.min, now.sec, total.min, total.sec)).draw(120, 135, Color(font_color));
 
 		// リストを表示
 		scroll_y += Mouse::Wheel() * 50;
