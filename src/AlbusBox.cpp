@@ -459,7 +459,12 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
 			for (int i = 0; i < lyrics_list.size(); i++) {
 				// 土台
-				NeumorphismUI::NeumorphismRect(20, list_element_margin * i, Scene::Width() - 40, list_element_h, false);
+				if (Rect(20, list_element_margin * i + 50, Scene::Width() - 40, list_element_h).mouseOver()) {
+					NeumorphismUI::NeumorphismRect(20, list_element_margin * i, Scene::Width() - 40, list_element_h, false, Color(250, 250, 250));
+				}
+				else {
+					NeumorphismUI::NeumorphismRect(20, list_element_margin * i, Scene::Width() - 40, list_element_h, false);
+				}
 
 				// 歌詞の有効範囲の表示
 				FontAsset(U"small")(U"{}:{:0>2} ～ {}:{:0>2}"_fmt(lyrics_list[i].time_begin.min, lyrics_list[i].time_begin.sec, lyrics_list[i].time_end.min, lyrics_list[i].time_end.sec)).draw(50, list_element_margin * i + 10, Color(font_color));
