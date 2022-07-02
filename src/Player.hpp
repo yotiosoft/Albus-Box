@@ -82,6 +82,9 @@ public:
 	// 曲を遷移したときの処理
 	void move(int num);
 
+	// 曲が終わったときに自動で次の曲に移動するか設定
+	void setAutoMoveToNext(bool arg);
+
 	// 現在の設定をAudioに反映
 	bool reflectSettings(int num);
 	
@@ -132,6 +135,7 @@ public:
 	bool updateLyrics();
 	String getLyrics();
 	int getLyricsDisplayAlphaColor();
+	Lyrics* getLyricsObj();
 	
 	// 時分で曲の長さを返す
 	Timestamp getTotalTime();
@@ -185,6 +189,7 @@ private:
 	double volume;
 	bool show_wave;
 	bool loop;
+	bool auto_move_to_next = true;
 	bool lyrics_exist;
 	Array<bool> has_lyrics;
 	String current_lyrics, temp_lyrics, before_lyrics;

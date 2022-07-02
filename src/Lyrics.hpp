@@ -34,6 +34,7 @@ public:
 
 	// 歌詞の取得
 	String get_lyrics(double time_samples);
+	Array<LyricsElement> get_lyrics_list();
 
 	// 現在の歌詞のインデックス値を取得
 	int get_lyrics_index(double time_samples);
