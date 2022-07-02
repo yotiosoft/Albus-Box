@@ -93,6 +93,10 @@ String Lyrics::get_lyrics(double time_samples) {
 	return U"";
 }
 
+Array<LyricsElement> Lyrics::get_lyrics_list() {
+	return lyrics_array;
+}
+
 // 現在の歌詞のインデックス値を取得
 int Lyrics::get_lyrics_index(double time_samples) {
 	if (current_index >= 0) {

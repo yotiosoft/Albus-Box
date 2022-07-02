@@ -455,6 +455,17 @@ namespace NeumorphismUI {
 		}
 	}
 
+	void CircleSwitch(Vec2 argPosition,
+					  int argSize,
+					  bool& argVar,
+					  Texture& argTexture, Texture& argPushedTexture, bool& onCursor, bool argEnable,
+					  Color argBackgroundColor, Color argDarkColor, Color argLightColor,
+					  Color argFontColor, Color argPushedFontColor,
+					  int argBlurSize, int argShadowSize,
+					  Vec2 argUpperShadowPosOffset, Vec2 argLowerShadowPosOffset) {
+		CircleSwitch(argPosition.x, argPosition.y, argSize, argVar, argTexture, argPushedTexture, onCursor, argEnable, argBackgroundColor, argDarkColor, argLightColor, argFontColor, argPushedFontColor, argBlurSize, argShadowSize, argUpperShadowPosOffset, argLowerShadowPosOffset);
+	}
+
 	// 丸型ボタン
 	int CircleButton(int argPositionX, int argPositionY,
 					 int argSize,
