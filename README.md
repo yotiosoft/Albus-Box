@@ -30,7 +30,7 @@ Player application for Windows / macOS / Linux(Debian). The concept is a simple 
 ## Supported File Formats
 - Audio files:
   - mp3, wav, ogg, m4a
-- Image files:（for thumbnail images）
+- Image files（for thumbnail images）:
   - png. jpeg, bmp, gif, tga, ppm, pgm, pbm, pnm, webp
 
 
@@ -40,8 +40,8 @@ Player application for Windows / macOS / Linux(Debian). The concept is a simple 
 ## Albus Box
 
 Albus Box is licensed under the MIT License.  
-Please see the included [LICENSE](. /LICENSE) for the license terms.  
+Please see the included [LICENSE](./LICENSE) for the license terms.  
 
 ## Libraries
 
-For libraries (OpenSiv3D, etc) licenses, please refer to the included [Licenses.html](. /Licenses.html) for the library license.
+For libraries (OpenSiv3D, etc) licenses, please refer to the included [Licenses.html](./Licenses.html) for the library license.
