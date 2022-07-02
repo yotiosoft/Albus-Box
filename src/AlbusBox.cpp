@@ -386,6 +386,9 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 		}
 	}
 
+	// 編集中の歌詞カードのインデックス（-1: 未指定）
+	int editing_lyrics_card_num = -1;
+
 	while (System::Update()) {
 		onAnyButton = false;
 
@@ -459,11 +462,18 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
 			for (int i = 0; i < lyrics_list.size(); i++) {
 				// 土台
-				if (Rect(20, list_element_margin * i + 50, Scene::Width() - 40, list_element_h).mouseOver()) {
+				Rect background_rect(20, list_element_margin * i + 50, Scene::Width() - 40, list_element_h);
+				if (background_rect.mouseOver()) {
 					NeumorphismUI::NeumorphismRect(20, list_element_margin * i, Scene::Width() - 40, list_element_h, false, Color(250, 250, 250));
+					Cursor::RequestStyle(CursorStyle::Hand);
 				}
 				else {
 					NeumorphismUI::NeumorphismRect(20, list_element_margin * i, Scene::Width() - 40, list_element_h, false);
+				}
+
+				// クリックされたら編集中の歌詞に指定
+				if (background_rect.leftClicked()) {
+					editing_lyrics_card_num = i;
 				}
 
 				// 歌詞の有効範囲の表示
