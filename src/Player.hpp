@@ -130,6 +130,9 @@ public:
 	// 再生位置を返す(フレーム)
 	int64 getPlayPosSample();
 
+	// 秒数をTimestamp型に変更
+	Timestamp convertToTimestamp(double sec);
+
 	// 現在の歌詞を返す
 	bool lyricsExist();
 	bool updateLyrics();

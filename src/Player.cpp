@@ -477,7 +477,7 @@ Timestamp Player::getPlayPosTime() {
 
 	double pos_sec = audio_files[current_track].audio->posSec();
 	//Console << pos_sec;
-	return Timestamp{ (int)pos_sec / 60, (int)pos_sec % 60 };
+	return convertToTimestamp(pos_sec);
 }
 
 double Player::getPlayPosNorm() {
@@ -500,7 +500,11 @@ Timestamp Player::getTotalTime() {
 	}
 
 	double length_sec = audio_files[current_track].audio->lengthSec();
-	return Timestamp{ (int)length_sec / 60, (int)length_sec % 60 };
+	return convertToTimestamp(length_sec);
+}
+
+Timestamp Player::convertToTimestamp(double sec) {
+	return Timestamp{ (int)sec / 60, (int)sec % 60 };
 }
 
 bool Player::lyricsExist() {
