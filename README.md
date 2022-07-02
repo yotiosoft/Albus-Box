@@ -1,44 +1,47 @@
 #  Albus Box
-## 概要
-Windows / macOS / Linux(Debian)対応のプレイヤーアプリ。ニューモーフィズムに則ったシンプルなデザインがコンセプトです。
+## Summary
+Player application for Windows / macOS / Linux(Debian). The concept is a simple design in accordance with neumorphism.
 
-| プラットフォーム | 動作環境                 | SDK              | 実行ファイル                            |
-| ---------------- | ------------------------ | ---------------- | --------------------------------------- |
-| Windows版        | Windows 10以降           | OpenSiv3D v0.6.3 | ``Windows/Albus-Box/App/Albus-Box.exe`` |
-| macOS版          | macOS 10.15以降          | OpenSiv3D v0.6.3 | ``Mac/Albus-Box/App/Albus-Box.app``     |
-| Linux版          | Ubuntu 20.04 / Debian 10 | OpenSiv3D v0.6.3 | 添付なし（要コンパイル）                |
+| Plarform | Environment              | SDK              | Executable file                         |
+| -------- | ------------------------ | ---------------- | --------------------------------------- |
+| Windows  | Windows 10 or later      | OpenSiv3D v0.6.4 | ``Windows/Albus-Box/App/Albus-Box.exe`` |
+| macOS    | macOS 10.15 or later     | OpenSiv3D v0.6.4 | ``Mac/Albus-Box/App/Albus-Box.app``     |
+| Linux    | Ubuntu 20.04 / Debian 10 | OpenSiv3D v0.6.3 | Not attached (please compile yourself)  |
 
 
 
-## 開発環境
-- Windows版
+## Development Environment
+- for Windows
   - OS : Windows 10 Home 64bit
   - Windows SDK : 10.0
-  - C++ コンパイラ：C++ 20
-  - 統合開発環境 : Visual Studio 2019 (v142)
-  - ライブラリ：OpenSiv3D v0.6.3
-- Mac版
+  - C++ compiler：Microsoft Visual C++ 2022
+  - IDE : Visual Studio 2022
+  - SDK：OpenSiv3D v0.6.4
+- for macOS
   - OS : macOS 11.5.2 Big Sur
-  - C++ コンパイラ：C++ 20
-  - 統合開発環境 : Xcode 12.3
-  - ライブラリ：OpenSiv3D v0.6.3
+  - C++ compiler：Apple clang version 13.1.6
+  - IDE : Xcode 12.3
+  - SDK：OpenSiv3D v0.6.3
 
-- Linux版
+- for Linux
   - OS : Ubuntu 20.04 / Crostini on Chrome OS
-  - C++ コンパイラ：C++ 20
-  - ライブラリ：OpenSiv3D v0.6.3
-## 対応形式
-- 音声ファイル
+  - C++ compiler：gcc
+  - SDK：OpenSiv3D v0.6.3
+## Supported File Formats
+- Audio files:
   - mp3, wav, ogg, m4a
-- 画像ファイル（サムネイル用）
+- Image files:（for thumbnail images）
   - png. jpeg, bmp, gif, tga, ppm, pgm, pbm, pnm, webp
 
 
 
-# ライセンス
+# License
 
 ## Albus Box
 
-Albus BoxはMITライセンスで提供されています。  
-ライセンス条項については同梱の[LICENSE](./LICENSE)をご覧ください。  
-ライブラリのライセンスについては同梱の[Licenses.html](./Licenses.html)をご覧ください。
+Albus Box is licensed under the MIT License.  
+Please see the included [LICENSE](. /LICENSE) for the license terms.  
+
+## Libraries
+
+For libraries (OpenSiv3D, etc) licenses, please refer to the included [Licenses.html](. /Licenses.html) for the library license.
