@@ -540,7 +540,13 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
 						// インデックス番号が変更された場合はスクロール
 						if (editing_lyrics_card_num != new_lyric_index) {
+							int before_scroll_y = scroll_y;
 							scroll_y = list_element_margin * new_lyric_index;
+
+							// 位置修正前の時点で歌詞カードが画面外に出ない場合はスクロールの必要なし
+							if (abs(scroll_y - before_scroll_y) < listview_texture.height()) {
+								scroll_y = before_scroll_y;
+							}
 						}
 
 						// 未編集状態に
