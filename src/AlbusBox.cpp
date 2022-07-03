@@ -371,6 +371,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 	bool window_moving = false;
 
 	bool onAnyButton, dpi_update = true;
+	bool onAddButton = false;
 
 	// 歌詞オブジェクトを取得
 	Lyrics* lyrics_obj = player.getLyricsObj();
@@ -468,26 +469,24 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 			for (int i = 0; i < lyrics_list.size(); i++) {
 				// 土台
 				Rect background_rect(20, list_element_margin * i, Scene::Width() - 40, list_element_h);
-				if (background_rect.mouseOver() && editing_lyrics_card_num != i) {
+				if (!onAddButton && background_rect.mouseOver() && editing_lyrics_card_num != i) {
 					NeumorphismUI::NeumorphismRect(20, list_element_margin * i, Scene::Width() - 40, list_element_h, false, Color(250, 250, 250));
 					Cursor::RequestStyle(CursorStyle::Hand);
+
+					// クリックされたら編集中の歌詞に指定
+					if (background_rect.leftClicked()) {
+						editing_lyrics_card_num = i;
+
+						// 値の代入
+						tes_begin_min.text = Format(lyrics_list[editing_lyrics_card_num].time_begin.min);
+						tes_begin_sec.text = Format(lyrics_list[editing_lyrics_card_num].time_begin.sec);
+						tes_end_min.text = Format(lyrics_list[editing_lyrics_card_num].time_end.min);
+						tes_end_sec.text = Format(lyrics_list[editing_lyrics_card_num].time_end.sec);
+						tes_lyrics.text = lyrics_list[editing_lyrics_card_num].lyrics.lyrics;
+					}
 				}
 				else {
 					NeumorphismUI::NeumorphismRect(20, list_element_margin * i, Scene::Width() - 40, list_element_h, false);
-				}
-
-				// クリックされたら編集中の歌詞に指定
-				bool just_click = false;
-				if (background_rect.leftPressed()) {
-					editing_lyrics_card_num = i;
-					just_click = true;
-
-					// 値の代入
-					tes_begin_min.text = Format(lyrics_list[editing_lyrics_card_num].time_begin.min);
-					tes_begin_sec.text = Format(lyrics_list[editing_lyrics_card_num].time_begin.sec);
-					tes_end_min.text = Format(lyrics_list[editing_lyrics_card_num].time_end.min);
-					tes_end_sec.text = Format(lyrics_list[editing_lyrics_card_num].time_end.sec);
-					tes_lyrics.text = lyrics_list[editing_lyrics_card_num].lyrics.lyrics;
 				}
 
 				// 編集中の場合
@@ -507,10 +506,10 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 					SimpleGUI::TextBox(tes_lyrics, Vec2(50, list_element_margin * i + 40), background_rect.size.x - 50);
 
 					// 枠外がクリックされたら設定を反映
-					if (!just_click && MouseL.down()) {
+					if (!background_rect.leftPressed() && MouseL.down()) {
 						double begin_double = Parse<double>(tes_begin_min.text) * 60 + Parse<double>(tes_begin_sec.text);
 						double end_double = Parse<double>(tes_end_min.text) * 60 + Parse<double>(tes_end_sec.text);
-						lyrics_obj->set_lyric(editing_lyrics_card_num, begin_double, end_double, tes_lyrics.text);
+						int new_lyric_index = lyrics_obj->set_lyric(editing_lyrics_card_num, begin_double, end_double, tes_lyrics.text);
 
 						// リストを再取得
 						lyrics_list.clear();
@@ -522,6 +521,12 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 							lyrics_list << lwt;
 						}
 
+						// インデックス番号が変更された場合はスクロール
+						if (editing_lyrics_card_num != new_lyric_index) {
+							scroll_y = list_element_margin * new_lyric_index;
+						}
+
+						// 未編集状態に
 						editing_lyrics_card_num = -1;
 
 						break;
@@ -540,9 +545,29 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 		listview_texture.draw(0, 150);
 
 		// 歌詞ボタン
-		if (NeumorphismUI::CircleButton(fileopen_button_pos, 30, fileopen_icon, onAnyButton)) {
+		onAddButton = false;
+		if (NeumorphismUI::CircleButton(fileopen_button_pos, 30, fileopen_icon, onAddButton)) {
+			// 末尾に移動
+			scroll_y = list_element_h * lyrics_list.size();
+
 			// 新たな歌詞カードを追加
+			editing_lyrics_card_num = lyrics_list.size();
+
+			Timestamp begin = player.getPlayPosTime();
+			Timestamp end = player.convertToTimestamp(player.getPlayPosSec() + 3);
+			LyricsElement le = { begin.min*60+begin.sec, end.min*60+end.sec, U"" };
+
+			struct lyrics_with_timestamp lwt = { le, begin, end };
+			lyrics_list << lwt;
+
+			// 値の代入
+			tes_begin_min.text = Format(lyrics_list[editing_lyrics_card_num].time_begin.min);
+			tes_begin_sec.text = U"{:0>2}"_fmt(lyrics_list[editing_lyrics_card_num].time_begin.sec);
+			tes_end_min.text = Format(lyrics_list[editing_lyrics_card_num].time_end.min);
+			tes_end_sec.text = U"{:0>2}"_fmt(lyrics_list[editing_lyrics_card_num].time_end.sec);
+			tes_lyrics.text = lyrics_list[editing_lyrics_card_num].lyrics.lyrics;
 		}
+		onAnyButton |= onAddButton;
 
 		// 再生処理を継続
 		player.playing();

@@ -61,7 +61,7 @@ Lyrics::Lyrics(String path) {
 }
 
 // 歌詞の取り込み
-void Lyrics::add_lyric(double begin, double end, String str) {
+int Lyrics::add_lyric(double begin, double end, String str) {
 	// 新しいLyricsElementを生成
 	LyricsElement new_lyric;
 	new_lyric.begin = begin;
@@ -82,6 +82,8 @@ void Lyrics::add_lyric(double begin, double end, String str) {
 	if (!is_valid) {
 		is_valid = true;
 	}
+
+	return t;
 }
 
 // 歌詞の取得
@@ -105,12 +107,12 @@ void Lyrics::del_lyric(int lyric_num) {
 }
 
 // 歌詞設定の変更
-void Lyrics::set_lyric(int lyric_num, double begin, double end, String str) {
+int Lyrics::set_lyric(int lyric_num, double begin, double end, String str) {
 	// 一旦削除
 	del_lyric(lyric_num);
 
 	// もう一度追加
-	add_lyric(begin, end, str);
+	return add_lyric(begin, end, str);
 }
 
 // 現在の歌詞のインデックス値を取得
