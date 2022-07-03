@@ -359,6 +359,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 	// リスト表示用RenderTexture
 	RenderTexture listview_texture(Scene::Width(), Scene::Height() - 100, Color(DEFAULT_BACKGROUND_COLOR));
 	RenderTexture title_texture(250, 40, Color(DEFAULT_BACKGROUND_COLOR));
+	RenderTexture input_texture(Scene::Width() - 40 - 35, 40);
 	Mat3x2 mat, mat_mouse, mat_title;
 	double scroll_y = 0.0, scroll_y_before = 0.0;
 	const int list_element_h = 80;
@@ -492,23 +493,33 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 				// 編集中の場合
 				if (editing_lyrics_card_num == i) {
 					// 歌詞の有効範囲の設定項目
-					SimpleGUI::TextBox(tes_begin_min, Vec2(50, list_element_margin * i), 40);
-					FontAsset(U"middle")(U":").draw(Arg::center(50 + 40*1 + 5*1, list_element_margin * i + 15), Color(font_color));
-					SimpleGUI::TextBox(tes_begin_sec, Vec2(50 + 40*1 + 5*2, list_element_margin * i), 40);
+					SimpleGUI::TextBox(tes_begin_min, Vec2(40, list_element_margin * i), 40);
+					FontAsset(U"middle")(U":").draw(Arg::center(40 + 40*1 + 5*1, list_element_margin * i + 15), Color(font_color));
+					SimpleGUI::TextBox(tes_begin_sec, Vec2(40 + 40*1 + 5*2, list_element_margin * i), 40);
 
-					FontAsset(U"middle")(U"～").draw(Arg::center(50 + 40*2 + 5*2 + 15*1, list_element_margin * i + 15), Color(font_color));
+					FontAsset(U"middle")(U"～").draw(Arg::center(40 + 40*2 + 5*2 + 15*1, list_element_margin * i + 15), Color(font_color));
 
-					SimpleGUI::TextBox(tes_end_min, Vec2(50 + 40*2 + 5*2 + 15*2, list_element_margin * i), 40);
-					FontAsset(U"middle")(U":").draw(Arg::center(50 + 40*3 + 5*3 + 15*2, list_element_margin * i + 15), Color(font_color));
-					SimpleGUI::TextBox(tes_end_sec, Vec2(50 + 40*3 + 5*4 + 15*2, list_element_margin * i), 40);
+					SimpleGUI::TextBox(tes_end_min, Vec2(40 + 40*2 + 5*2 + 15*2, list_element_margin * i), 40);
+					FontAsset(U"middle")(U":").draw(Arg::center(40 + 40*3 + 5*3 + 15*2, list_element_margin * i + 15), Color(font_color));
+					SimpleGUI::TextBox(tes_end_sec, Vec2(40 + 40*3 + 5*4 + 15*2, list_element_margin * i), 40);
 
 					// 歌詞の設定
-					SimpleGUI::TextBox(tes_lyrics, Vec2(50, list_element_margin * i + 40), background_rect.size.x - 50);
+					Mat3x2 mat2 = Mat3x2::Translate(0, -10 + scroll_y);
+					Mat3x2 mat_mouse2 = Mat3x2::Translate(40, list_element_margin * i + 40 + scroll_y);
+					{
+						const ScopedRenderTarget2D target(input_texture);
+						input_texture.clear(DEFAULT_BACKGROUND_COLOR);
+
+						const Transformer2D t(mat2, mat_mouse2);
+					
+						SimpleGUI::TextBox(tes_lyrics, Vec2(2, 2), background_rect.size.x - 40);
+					}
+					input_texture.draw(40 - 2, list_element_margin * i + 40 - 2);
 
 					// 枠外がクリックされたら設定を反映
 					if (!background_rect.leftPressed() && MouseL.down()) {
-						double begin_double = Parse<double>(tes_begin_min.text) * 60 + Parse<double>(tes_begin_sec.text);
-						double end_double = Parse<double>(tes_end_min.text) * 60 + Parse<double>(tes_end_sec.text);
+						double begin_double = atof(tes_begin_min.text.toUTF8().c_str()) * 60 + atof(tes_begin_sec.text.toUTF8().c_str());
+						double end_double = atof(tes_end_min.text.toUTF8().c_str()) * 60 + atof(tes_end_sec.text.toUTF8().c_str());
 						int new_lyric_index = lyrics_obj->set_lyric(editing_lyrics_card_num, begin_double, end_double, tes_lyrics.text);
 
 						// リストを再取得
@@ -544,7 +555,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 		}
 		listview_texture.draw(0, 150);
 
-		// 歌詞ボタン
+		// 歌詞追加ボタン
 		onAddButton = false;
 		if (NeumorphismUI::CircleButton(fileopen_button_pos, 30, fileopen_icon, onAddButton)) {
 			// 末尾に移動
@@ -555,7 +566,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
 			Timestamp begin = player.getPlayPosTime();
 			Timestamp end = player.convertToTimestamp(player.getPlayPosSec() + 3);
-			LyricsElement le = { begin.min*60+begin.sec, end.min*60+end.sec, U"" };
+			LyricsElement le = { (double)begin.min*60+begin.sec, (double)end.min*60+end.sec, U"" };
 
 			struct lyrics_with_timestamp lwt = { le, begin, end };
 			lyrics_list << lwt;
