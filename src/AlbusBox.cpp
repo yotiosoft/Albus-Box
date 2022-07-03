@@ -516,7 +516,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
 					// 歌詞の設定
 					Mat3x2 mat2 = Mat3x2::Translate(0, -10 + scroll_y);
-					Mat3x2 mat_mouse2 = Mat3x2::Translate(40, list_element_margin * i + 40 + scroll_y);
+					Mat3x2 mat_mouse2 = Mat3x2::Translate(40, list_element_margin * i + 40);
 					{
 						const ScopedRenderTarget2D target(input_texture);
 						input_texture.clear(DEFAULT_BACKGROUND_COLOR);
