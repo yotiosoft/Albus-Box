@@ -468,9 +468,15 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 			const Transformer2D t(mat, mat_mouse);
 
 			for (int i = 0; i < lyrics_list.size(); i++) {
+				// ボタンの有効・無効
+				bool button_enable = true;
+				if (110 - scroll_y + list_element_margin * i + list_element_h / 2 < 90) {
+					button_enable = false;
+				}
+				
 				// 土台
 				Rect background_rect(20, list_element_margin * i, Scene::Width() - 40, list_element_h);
-				if (!onAddButton && background_rect.mouseOver() && editing_lyrics_card_num != i) {
+				if (button_enable && !onAddButton && background_rect.mouseOver() && editing_lyrics_card_num != i) {
 					NeumorphismUI::NeumorphismRect(20, list_element_margin * i, Scene::Width() - 40, list_element_h, false, Color(250, 250, 250));
 					Cursor::RequestStyle(CursorStyle::Hand);
 
@@ -491,7 +497,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 				}
 
 				// 編集中の場合
-				if (editing_lyrics_card_num == i) {
+				if (button_enable && editing_lyrics_card_num == i) {
 					// 歌詞の有効範囲の設定項目
 					SimpleGUI::TextBox(tes_begin_min, Vec2(40, list_element_margin * i), 40);
 					FontAsset(U"middle")(U":").draw(Arg::center(40 + 40*1 + 5*1, list_element_margin * i + 15), Color(font_color));
@@ -544,7 +550,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 					}
 				}
 				// それ以外
-				else {
+				else if (button_enable) {
 					// 歌詞の有効範囲の表示
 					FontAsset(U"small")(U"{}:{:0>2} ～ {}:{:0>2}"_fmt(lyrics_list[i].time_begin.min, lyrics_list[i].time_begin.sec, lyrics_list[i].time_end.min, lyrics_list[i].time_end.sec)).draw(50, list_element_margin * i + 10, Color(font_color));
 

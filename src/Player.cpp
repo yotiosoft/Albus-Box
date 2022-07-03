@@ -564,8 +564,12 @@ Lyrics* Player::getLyricsObj() {
 	if (isOpened() && has_lyrics[current_track]) {
 		return &lyrics[audio_files[current_track].hash];
 	}
+	
+	// 存在しない場合は新規作成
+	has_lyrics[current_track] = true;
+	lyrics[audio_files[current_track].hash] = Lyrics();
 
-	return nullptr;
+	return &lyrics[audio_files[current_track].hash];
 }
 
 PlayerStatus::Type Player::getStatus() {
