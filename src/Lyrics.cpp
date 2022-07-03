@@ -97,6 +97,22 @@ Array<LyricsElement> Lyrics::get_lyrics_list() {
 	return lyrics_array;
 }
 
+// 歌詞の削除
+void Lyrics::del_lyric(int lyric_num) {
+	if (lyric_num < lyrics_array.size()) {
+		lyrics_array.remove_at(lyric_num);
+	}
+}
+
+// 歌詞設定の変更
+void Lyrics::set_lyric(int lyric_num, double begin, double end, String str) {
+	// 一旦削除
+	del_lyric(lyric_num);
+
+	// もう一度追加
+	add_lyric(begin, end, str);
+}
+
 // 現在の歌詞のインデックス値を取得
 int Lyrics::get_lyrics_index(double time_samples) {
 	if (current_index >= 0) {

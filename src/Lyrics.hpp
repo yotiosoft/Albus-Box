@@ -32,6 +32,12 @@ public:
 	// 歌詞の取り込み（設定画面から）
 	void add_lyric(double begin, double end, String str);
 
+	// 歌詞の削除
+	void del_lyric(int lyric_num);
+
+	// 歌詞設定の変更
+	void set_lyric(int lyric_num, double begin, double end, String str);
+
 	// 歌詞の取得
 	String get_lyrics(double time_samples);
 	Array<LyricsElement> get_lyrics_list();
