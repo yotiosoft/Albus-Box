@@ -179,3 +179,24 @@ double Lyrics::get_begin_time() {
 double Lyrics::get_end_time() {
 	return current_lyrics->end;
 }
+
+// 歌詞ファイルを保存
+bool Lyrics::save_lyrics(String filepath) {
+	JSON j_lyrics_whole;
+
+	j_lyrics_whole[U"saved_release_num"] = RELEASE_NUM;
+
+	Array<JSON> j_lyrics_arg;
+
+	for (auto lyrics_element : lyrics_array) {
+		JSON el;
+		el[U"begin"] = lyrics_element.begin;
+		el[U"end"] = lyrics_element.end;
+		el[U"str"] = lyrics_element.lyrics;
+		j_lyrics_arg << el;
+	}
+
+	j_lyrics_whole[U"lyrics"] = j_lyrics_arg;
+
+	return j_lyrics_whole.save(filepath);
+}

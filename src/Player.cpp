@@ -572,6 +572,14 @@ Lyrics* Player::getLyricsObj() {
 	return &lyrics[audio_files[current_track].hash];
 }
 
+bool Player::saveLyrics() {
+	if (isOpened() && has_lyrics[current_track]) {
+		return lyrics[audio_files[current_track].hash].save_lyrics(U"{}/{}.lyrics"_fmt(specific::getLyricsDirPath(), audio_files[current_track].hash));
+	}
+
+	return false;
+}
+
 PlayerStatus::Type Player::getStatus() {
 	return status;
 }

@@ -470,7 +470,12 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 			for (int i = 0; i < lyrics_list.size(); i++) {
 				// ボタンの有効・無効
 				bool button_enable = true;
-				if (110 - scroll_y + list_element_margin * i + list_element_h / 2 < 90) {
+				bool view_enable = true;
+				if (150 - scroll_y + list_element_margin * i + list_element_h / 2 < 90) {
+					button_enable = false;
+					view_enable = false;
+				}
+				if (150 - scroll_y + list_element_margin * i + list_element_h > Scene::Height()) {
 					button_enable = false;
 				}
 				
@@ -552,11 +557,15 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 						// 未編集状態に
 						editing_lyrics_card_num = -1;
 
+						// 保存
+						// ToDo: 保存失敗時にエラーを表示
+						player.saveLyrics();
+
 						break;
 					}
 				}
 				// それ以外
-				else if (button_enable) {
+				else if (view_enable) {
 					// 歌詞の有効範囲の表示
 					FontAsset(U"small")(U"{}:{:0>2} ～ {}:{:0>2}"_fmt(lyrics_list[i].time_begin.min, lyrics_list[i].time_begin.sec, lyrics_list[i].time_end.min, lyrics_list[i].time_end.sec)).draw(50, list_element_margin * i + 10, Color(font_color));
 
