@@ -139,6 +139,9 @@ public:
 	String getLyrics();
 	int getLyricsDisplayAlphaColor();
 	Lyrics* getLyricsObj();
+
+	// 歌詞を保存
+	bool saveLyrics();
 	
 	// 時分で曲の長さを返す
 	Timestamp getTotalTime();

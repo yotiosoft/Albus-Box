@@ -48,6 +48,9 @@ public:
 	// 歌詞の始点からの経過時間と終点までの残り時間
 	double get_begin_time();
 	double get_end_time();
+
+	// 歌詞ファイルを保存
+	bool save_lyrics(String filepath);
 	
 private:
 	// 歌詞配列
