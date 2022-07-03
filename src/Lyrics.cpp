@@ -101,6 +101,10 @@ Array<LyricsElement> Lyrics::get_lyrics_list() {
 
 // 歌詞の削除
 void Lyrics::del_lyric(int lyric_num) {
+	if (lyrics_array.isEmpty()) {
+		return;
+	}
+
 	if (lyric_num < lyrics_array.size()) {
 		lyrics_array.remove_at(lyric_num);
 	}
