@@ -415,6 +415,9 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 			return false;
 		}
 
+		// 歌詞カード操作無効エリア
+		Rect no_cards_area(0, 0, Scene::Width(), 150);
+
 		// 画面タイトル
 		FontAsset(U"title")(U"歌詞設定").draw(Arg::center(Scene::Width() / 2, 30), Color(font_color));
         
@@ -447,6 +450,9 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 		Timestamp now = player.getPlayPosTime();
 		Timestamp total = player.getTotalTime();
 		FontAsset(U"small")(U"{}:{:0>2} / {}:{:0>2}"_fmt(now.min, now.sec, total.min, total.sec)).draw(120, 125, Color(font_color));
+
+		// リスト外にマウスカーソルがある場合はリスト上への操作は無効
+		bool list_area_mouse_desable = no_cards_area.mouseOver();
 
 		// リストを表示
 		scroll_y += Mouse::Wheel() * 50;
@@ -481,7 +487,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 				
 				// 土台
 				Rect background_rect(20, list_element_margin * i, Scene::Width() - 40, list_element_h);
-				if (button_enable && !onAddButton && background_rect.mouseOver() && editing_lyrics_card_num != i) {
+				if (!list_area_mouse_desable && button_enable && !onAddButton && background_rect.mouseOver() && editing_lyrics_card_num != i) {
 					NeumorphismUI::NeumorphismRect(20, list_element_margin * i, Scene::Width() - 40, list_element_h, false, Color(250, 250, 250));
 					Cursor::RequestStyle(CursorStyle::Hand);
 
@@ -528,7 +534,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 					input_texture.draw(40 - 2, list_element_margin * i + 40 - 2);
 
 					// 枠外がクリックされたら設定を反映
-					if (!background_rect.leftPressed() && MouseL.down()) {
+					if (!list_area_mouse_desable && !background_rect.leftPressed() && MouseL.down()) {
 						double begin_double = atof(tes_begin_min.text.toUTF8().c_str()) * 60 + atof(tes_begin_sec.text.toUTF8().c_str());
 						double end_double = atof(tes_end_min.text.toUTF8().c_str()) * 60 + atof(tes_end_sec.text.toUTF8().c_str());
 						int new_lyric_index = lyrics_obj->set_lyric(editing_lyrics_card_num, begin_double, end_double, tes_lyrics.text);
@@ -580,7 +586,12 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 		onAddButton = false;
 		if (NeumorphismUI::CircleButton(fileopen_button_pos, 30, fileopen_icon, onAddButton)) {
 			// 末尾に移動
+			int before_scroll_y = scroll_y;
 			scroll_y = list_element_h * lyrics_list.size();
+			// 位置修正前の時点で歌詞カードが画面外に出ない場合はスクロールの必要なし
+			if (abs(scroll_y - before_scroll_y) < listview_texture.height()) {
+				scroll_y = before_scroll_y;
+			}
 
 			// 新たな歌詞カードを追加
 			editing_lyrics_card_num = lyrics_list.size();
