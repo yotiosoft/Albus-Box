@@ -477,11 +477,17 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 				}
 
 				// クリックされたら編集中の歌詞に指定
+				bool just_click = false;
 				if (background_rect.leftPressed()) {
 					editing_lyrics_card_num = i;
-				}
-				else if (editing_lyrics_card_num == i && MouseL.down()) {
-					editing_lyrics_card_num = -1;
+					just_click = true;
+
+					// 値の代入
+					tes_begin_min.text = Format(lyrics_list[editing_lyrics_card_num].time_begin.min);
+					tes_begin_sec.text = Format(lyrics_list[editing_lyrics_card_num].time_begin.sec);
+					tes_end_min.text = Format(lyrics_list[editing_lyrics_card_num].time_end.min);
+					tes_end_sec.text = Format(lyrics_list[editing_lyrics_card_num].time_end.sec);
+					tes_lyrics.text = lyrics_list[editing_lyrics_card_num].lyrics.lyrics;
 				}
 
 				// 編集中の場合
@@ -499,6 +505,27 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
 					// 歌詞の設定
 					SimpleGUI::TextBox(tes_lyrics, Vec2(50, list_element_margin * i + 40), background_rect.size.x - 50);
+
+					// 枠外がクリックされたら設定を反映
+					if (!just_click && MouseL.down()) {
+						double begin_double = Parse<double>(tes_begin_min.text) * 60 + Parse<double>(tes_begin_sec.text);
+						double end_double = Parse<double>(tes_end_min.text) * 60 + Parse<double>(tes_end_sec.text);
+						lyrics_obj->set_lyric(editing_lyrics_card_num, begin_double, end_double, tes_lyrics.text);
+
+						// リストを再取得
+						lyrics_list.clear();
+						for (LyricsElement lyrics_el : lyrics_obj->get_lyrics_list()) {
+							Timestamp begin = player.convertToTimestamp(lyrics_el.begin);
+							Timestamp end = player.convertToTimestamp(lyrics_el.end);
+
+							struct lyrics_with_timestamp lwt = { lyrics_el, begin, end };
+							lyrics_list << lwt;
+						}
+
+						editing_lyrics_card_num = -1;
+
+						break;
+					}
 				}
 				// それ以外
 				else {
@@ -512,12 +539,9 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 		}
 		listview_texture.draw(0, 150);
 
-		// ファイルを開くボタンを表示
+		// 歌詞ボタン
 		if (NeumorphismUI::CircleButton(fileopen_button_pos, 30, fileopen_icon, onAnyButton)) {
-			auto file_open = AudioFileOpen();
-			if (file_open.first) {
-				player.audioRegister(file_open.second);
-			}
+			// 新たな歌詞カードを追加
 		}
 
 		// 再生処理を継続
