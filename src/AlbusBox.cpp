@@ -347,9 +347,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 	// ボタンの位置
 	Point return_button_pos;
 	return_button_pos = Point(10, 10);
-	Point fileopen_button_pos = Point(Scene::Width() - 50, Scene::Height() - 50);
-	Point listopen_button_pos = Point(Scene::Width() / 2 - 30, 70);
-	Point save_button_pos = Point(Scene::Width() / 2 + 30, 70);
+	Point add_lyric_card_button_pos = Point(Scene::Width() - 50, Scene::Height() - 50);
 
 	// シークバー
 	double play_pos = 0.0;		// シークバーの初期値
@@ -469,8 +467,8 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 		scroll_y_before = scroll_y;
 
 		//NeumorphismUI::NeumorphismRect(20, 80, Scene::Width()-40, Scene::Height()-80-20, true);
-		mat = Mat3x2::Translate(0, 10 - scroll_y);
-		mat_mouse = Mat3x2::Translate(0, 150 - scroll_y);
+		mat = Mat3x2::Translate(0, -scroll_y);
+		mat_mouse = Mat3x2::Translate(0, 160 - scroll_y);
 		{
 			const ScopedRenderTarget2D target(listview_texture);
 			listview_texture.clear(DEFAULT_BACKGROUND_COLOR);
@@ -481,11 +479,11 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 				// ボタンの有効・無効
 				bool button_enable = true;
 				bool view_enable = true;
-				if (150 - scroll_y + list_element_margin * i + list_element_h / 2 < 90) {
+				if (160 - scroll_y + list_element_margin * i + list_element_h / 2 < 90) {
 					button_enable = false;
 					view_enable = false;
 				}
-				if (150 - scroll_y + list_element_margin * i + list_element_h > Scene::Height()) {
+				if (160 - scroll_y + list_element_margin * i + list_element_h > Scene::Height()) {
 					button_enable = false;
 				}
 				
@@ -525,7 +523,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 					SimpleGUI::TextBox(tes_end_sec, Vec2(40 + 40*3 + 5*4 + 15*2, list_element_margin * i), 40);
 
 					// 歌詞の設定
-					Mat3x2 mat2 = Mat3x2::Translate(0, -10 + scroll_y);
+					Mat3x2 mat2 = Mat3x2::Translate(0, scroll_y);
 					Mat3x2 mat_mouse2 = Mat3x2::Translate(40, list_element_margin * i + 40);
 					{
 						const ScopedRenderTarget2D target(input_texture);
@@ -536,6 +534,23 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 						SimpleGUI::TextBox(tes_lyrics, Vec2(2, 2), background_rect.size.x - 40);
 					}
 					input_texture.draw(40 - 2, list_element_margin * i + 40 - 2);
+
+					// 削除ボタン
+					if (NeumorphismUI::CircleButton(Scene::Width() - 40 - 10, list_element_margin * i + 20, 15, window_close_icon, onAddButton)) {
+						lyrics_obj->del_lyric(i);
+
+						// リストを再取得
+						lyrics_list.clear();
+						for (LyricsElement lyrics_el : lyrics_obj->get_lyrics_list()) {
+							Timestamp begin = player.convertToTimestamp(lyrics_el.begin);
+							Timestamp end = player.convertToTimestamp(lyrics_el.end);
+
+							struct lyrics_with_timestamp lwt = { lyrics_el, begin, end };
+							lyrics_list << lwt;
+						}
+
+						editing_lyrics_card_num = -1;
+					}
 
 					// 枠外がクリックされたら設定を反映
 					if (!list_area_mouse_desable && !background_rect.leftPressed() && MouseL.down()) {
@@ -584,11 +599,12 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 				}
 			}
 		}
-		listview_texture.draw(0, 150);
+		listview_texture.draw(0, 160);
 
 		// 歌詞追加ボタン
 		onAddButton = false;
-		if (NeumorphismUI::CircleButton(fileopen_button_pos, 30, fileopen_icon, onAddButton)) {
+		if (NeumorphismUI::CircleButton(add_lyric_card_button_pos, 30, fileopen_icon, onAddButton)) {
+			// 押されたとき：
 			// 末尾に移動
 			int before_scroll_y = scroll_y;
 			scroll_y = list_element_h * lyrics_list.size();
