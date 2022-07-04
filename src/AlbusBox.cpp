@@ -730,14 +730,16 @@ bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_
 		player.setLoop(loop_switch.draw());
 
 		// 歌詞設定画面
-		if (NeumorphismUI::RectButton(Vec2(icon_left_x, icon_top_y + 260), Vec2(150, 50), U"歌詞設定", button_font, onAnyButton, buttons_enable)) {
-			if (lyricsSetting(player, button_close_color, window_close_icon, font_color)) {
-				return true;
+		if (player.isOpened()) {
+			if (NeumorphismUI::RectButton(Vec2(icon_left_x, Scene::Height() - 100), Vec2(Scene::Width() - 100 - 20 - icon_left_x, 50), U"歌詞設定", button_font, onAnyButton, buttons_enable)) {
+				if (lyricsSetting(player, button_close_color, window_close_icon, font_color)) {
+					return true;
+				}
 			}
 		}
 
 		// バージョン情報
-		if (NeumorphismUI::RectButton(Vec2(Scene::Width() / 2 - 50/2, Scene::Height() - 100), Vec2(50, 50), info_icon, onAnyButton, buttons_enable)) {
+		if (NeumorphismUI::RectButton(Vec2(Scene::Width()-100, Scene::Height() - 100), Vec2(50, 50), info_icon, onAnyButton, buttons_enable)) {
 			if (VersionInformation(player, button_close_color, window_close_icon, font_color)) {
 				return true;
 			}
