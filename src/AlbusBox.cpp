@@ -35,20 +35,20 @@ pair<bool, FilePath> ImageFileOpen() {
 	return pair<bool, FilePath>(false, FilePath());
 }
 
-bool ExitButton(Color& button_close_color, Texture& window_close_icon, bool& onAnyButton) {
+bool ExitButton(Color& button_close_color, Texture& window_close_icon, bool& onAnyButton, bool enableButtons) {
 #if defined(_WIN32) || defined(_WIN64)
 		// 最前面表示ボタン
 		Font small_font = FontAsset(U"icon_font");
 		if (pin_window) {
-			NeumorphismUI::CircleSwitch(Scene::Width() - 70, 30, 15, pin_window, U"\U000F0404", small_font, onAnyButton);
+			NeumorphismUI::CircleSwitch(Scene::Width() - 70, 30, 15, pin_window, U"\U000F0404", small_font, onAnyButton, enableButtons);
 		}
 		else {
-			NeumorphismUI::CircleSwitch(Scene::Width() - 70, 30, 15, pin_window, U"\U000F0403", small_font, onAnyButton);
+			NeumorphismUI::CircleSwitch(Scene::Width() - 70, 30, 15, pin_window, U"\U000F0403", small_font, onAnyButton, enableButtons);
 		}
 		specific::pinWindow(pin_window);
 
 		// ウィンドウを閉じるボタン
-		if (NeumorphismUI::CircleButton(Scene::Width()-30, 30, 15, window_close_icon, onAnyButton)) {
+		if (NeumorphismUI::CircleButton(Scene::Width()-30, 30, 15, window_close_icon, onAnyButton, enableButtons)) {
 			return true;
 		}
 #endif
@@ -107,25 +107,27 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 		title_list = player.getTitleList();
 		before_playing = title_list.second;
 
+		bool buttons_enable = !player.willBeLoading();
+
 		// 画面上部のボタン群
 		// 閉じるボタン
-		if (ExitButton(button_close_color, window_close_icon, onAnyButton)) {
+		if (ExitButton(button_close_color, window_close_icon, onAnyButton, buttons_enable)) {
 			return true;
 		}
 		// もどる
-		if (NeumorphismUI::RectButton(return_button_pos, Vec2(40, 40), return_button_icon, onAnyButton)) {
+		if (NeumorphismUI::RectButton(return_button_pos, Vec2(40, 40), return_button_icon, onAnyButton, buttons_enable)) {
 			return false;
 		}
 
 		// リストを開くボタン
-		if (NeumorphismUI::CircleButton(listopen_button_pos, 20, listopen_button_icon, onAnyButton)) {
+		if (NeumorphismUI::CircleButton(listopen_button_pos, 20, listopen_button_icon, onAnyButton, buttons_enable)) {
 			pair<bool, FilePath> playlist = OpenPlayList();
 			if (playlist.first) {
 				player.loadPlayList(playlist.second);
 			}
 		}
 		// 保存ボタン
-		if (NeumorphismUI::CircleButton(save_button_pos, 20, save_button_icon, onAnyButton)) {
+		if (NeumorphismUI::CircleButton(save_button_pos, 20, save_button_icon, onAnyButton, buttons_enable)) {
 			player.savePlayList();
 		}
 
@@ -157,7 +159,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 				NeumorphismUI::NeumorphismRect(20, list_element_margin * i, Scene::Width()-40, list_element_h, false);
 
 				// ボタンの有効・無効
-				bool button_enable = true;
+				bool button_enable = buttons_enable;
 				if (110 - scroll_y + list_element_margin * i + list_element_h / 2 < 90) {
 					button_enable = false;
 				}
@@ -239,25 +241,25 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 		listview_texture.draw(0, 100);
 
 		// ファイルを開くボタンを表示
-		if (NeumorphismUI::CircleButton(fileopen_button_pos, 30, fileopen_icon, onAnyButton)) {
+		if (NeumorphismUI::CircleButton(fileopen_button_pos, 30, fileopen_icon, onAnyButton, buttons_enable)) {
 			auto file_open = AudioFileOpen();
 			if (file_open.first) {
 				player.audioRegister(file_open.second);
 			}
 		}
 
-		// 再生処理を継続
-		player.playing();
-
 		// ウィンドウの移動
 #if defined(_WIN32) || defined(_WIN64)
-		if (!onAnyButton) {
+		if (buttons_enable && !onAnyButton) {
 			specific::moveWindow(mouse_clicked, window_moving);
 			specific::setWindowStyle(0, 0, 400, 640, 40, 40, dpi_update);
 		}
 
 		dpi_update = !dpi_update;
 #endif
+
+		// 再生処理を継続
+		player.playing();
     }
     
 	return true;
@@ -282,14 +284,16 @@ bool VersionInformation(Player& player, Color& button_close_color, Texture& wind
 	
 	while (System::Update()) {
 		onAnyButton = false;
+
+		bool buttons_enable = !player.willBeLoading();
 		
 		// 画面上部のボタン群
 		// 閉じるボタン
-		if (ExitButton(button_close_color, window_close_icon, onAnyButton)) {
+		if (ExitButton(button_close_color, window_close_icon, onAnyButton, buttons_enable)) {
 			return true;
 		}
 		// もどる
-		if (NeumorphismUI::RectButton(return_button_pos, Vec2(40, 40), return_button_icon, onAnyButton)) {
+		if (NeumorphismUI::RectButton(return_button_pos, Vec2(40, 40), return_button_icon, onAnyButton, buttons_enable)) {
 			return false;
 		}
 
@@ -305,18 +309,18 @@ bool VersionInformation(Player& player, Color& button_close_color, Texture& wind
 
 		FontAsset(U"small")(U"©YotioSoft 2021 | Powered by OpenSiv3D").drawAt(Scene::Width() / 2, Scene::Height()-50, font_color);
 
-		// 再生処理を継続
-		player.playing();
-
 #if defined(_WIN32) || defined(_WIN64)
 		// ウィンドウの移動
-		if (!onAnyButton) {
+		if (!onAnyButton && buttons_enable) {
 			specific::moveWindow(mouse_clicked, window_moving);
 			specific::setWindowStyle(0, 0, 400, 640, 40, 40, dpi_update);
 		}
 
 		dpi_update = !dpi_update;
 #endif
+
+		// 再生処理を継続
+		player.playing();
     }
         
 	return true;
@@ -400,8 +404,8 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 		onAnyButton = false;
 
 		// 画面上部のボタン群
-		// 閉じるボタン
-		if (ExitButton(button_close_color, window_close_icon, onAnyButton)) {
+		// 閉じるボタン (常に有効; この画面内ではプレイヤーによる自動読み込みがないため)
+		if (ExitButton(button_close_color, window_close_icon, onAnyButton, true)) {
 			// 自動で曲の遷移を有効化
 			player.setAutoMoveToNext(true);
 
@@ -612,9 +616,6 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 		}
 		onAnyButton |= onAddButton;
 
-		// 再生処理を継続
-		player.playing();
-
 		// ウィンドウの移動
 #if defined(_WIN32) || defined(_WIN64)
 		if (!onAnyButton) {
@@ -624,6 +625,9 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
 		dpi_update = !dpi_update;
 #endif
+
+		// 再生処理を継続
+		player.playing();
 	}
 
 	// 自動で曲の遷移を有効化
@@ -671,14 +675,16 @@ bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_
 	
 	while (System::Update()) {
 		onAnyButton = false;
+
+		bool buttons_enable = !player.willBeLoading();
 		
 		// 画面上部のボタン群
 		// 閉じるボタン
-		if (ExitButton(button_close_color, window_close_icon, onAnyButton)) {
+		if (ExitButton(button_close_color, window_close_icon, onAnyButton, buttons_enable)) {
 			return true;
 		}
 		// もどる
-		if (NeumorphismUI::RectButton(return_button_pos, Vec2(40, 40), return_button_icon, onAnyButton)) {
+		if (NeumorphismUI::RectButton(return_button_pos, Vec2(40, 40), return_button_icon, onAnyButton, buttons_enable)) {
 			player.saveSettings();
 			return false;
 		}
@@ -704,31 +710,31 @@ bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_
 		player.setLoop(loop_switch.draw());
 
 		// 歌詞設定画面
-		if (NeumorphismUI::RectButton(Vec2(icon_left_x, icon_top_y + 260), Vec2(150, 50), U"歌詞設定", button_font, onAnyButton)) {
+		if (NeumorphismUI::RectButton(Vec2(icon_left_x, icon_top_y + 260), Vec2(150, 50), U"歌詞設定", button_font, onAnyButton, buttons_enable)) {
 			if (lyricsSetting(player, button_close_color, window_close_icon, font_color)) {
 				return true;
 			}
 		}
 
 		// バージョン情報
-		if (NeumorphismUI::RectButton(Vec2(Scene::Width() / 2 - 50/2, Scene::Height() - 100), Vec2(50, 50), info_icon, onAnyButton)) {
+		if (NeumorphismUI::RectButton(Vec2(Scene::Width() / 2 - 50/2, Scene::Height() - 100), Vec2(50, 50), info_icon, onAnyButton, buttons_enable)) {
 			if (VersionInformation(player, button_close_color, window_close_icon, font_color)) {
 				return true;
 			}
 		}
 
-		// 再生処理を継続
-		player.playing();
-		
 #if defined(_WIN32) || defined(_WIN64)
 		// ウィンドウの移動
-		if (!onAnyButton) {
+		if (buttons_enable && !onAnyButton) {
 			specific::moveWindow(mouse_clicked, window_moving);
 			specific::setWindowStyle(0, 0, 400, 640, 40, 40, dpi_update);
 		}
 
 		dpi_update = !dpi_update;
 #endif
+
+		// 再生処理を継続
+		player.playing();
 	}
 	return true;
 }
@@ -852,22 +858,32 @@ void AlbusBox() {
 	bool fft_update = true;
 	while (System::Update()) {
 		onAnyButton = false;
+
+		bool buttons_enable = !player.willBeLoading() && !file_open.first;
+
+#if defined(_WIN32) || defined(_WIN64)
+		// ウィンドウの移動
+		if (!onAnyButton && buttons_enable) {
+			specific::moveWindow(mouse_clicked, window_moving);
+			specific::setWindowStyle(0, 0, 400, 640, 40, 40, fft_update);
+		}
+#endif
 		
 		// 画面上部のボタン群
-		bool isExitButtonPushed = ExitButton(button_close_color, window_close_icon, onAnyButton);
+		bool isExitButtonPushed = ExitButton(button_close_color, window_close_icon, onAnyButton, buttons_enable);
 		if (isExitButtonPushed)
 			break;
 
 		// 画面上部のボタン群
 		// 設定へ画面遷移
-		if (NeumorphismUI::CircleButton(setting_button_pos, 20, setting_icon, onAnyButton)) {
+		if (NeumorphismUI::CircleButton(setting_button_pos, 20, setting_icon, onAnyButton, buttons_enable)) {
 			if (AlbusBoxSetting(player, button_close_color, window_close_icon, font_color)) {
 				break;		// 閉じるボタンが押されたらループを抜ける
 			}
 		}
 		
 		// 再生リスト
-		if (NeumorphismUI::CircleButton(playlist_button_pos, 20, playlist_icon, onAnyButton)) {
+		if (NeumorphismUI::CircleButton(playlist_button_pos, 20, playlist_icon, onAnyButton, buttons_enable)) {
 			if (playListView(player, button_close_color, window_close_icon, font_color)) {
 				break;		// 閉じるボタンが押されたらループを抜ける
 			}
@@ -884,17 +900,20 @@ void AlbusBox() {
 
 			file_open.first = false;
 		}
-		if (NeumorphismUI::CircleButton(fileopen_button_pos, 20, fileopen_icon, onAnyButton)) {
+		if (NeumorphismUI::CircleButton(fileopen_button_pos, 20, fileopen_icon, onAnyButton, buttons_enable)) {
 			file_open = AudioFileOpen();
 
 			if (file_open.first) {
 				FontAsset(U"middle")(U"Loading...").drawAt(Scene::Width() / 2, Scene::Height() / 3 + 170, font_color);
 			}
+
+			buttons_enable = false;
+			Cursor::RequestStyle(CursorStyle::Arrow);
 		}
 
 		// サムネイル
 		if (NeumorphismUI::NeumorphismCircle(Scene::Width() / 2, Scene::Height() / 3, thumbnail_size / 2 + 10, false)) {
-			if (player.isOpened()) {
+			if (player.isOpened() && buttons_enable) {
 				Cursor::RequestStyle(CursorStyle::Hand);
 
 				if (MouseL.down()) {
@@ -960,7 +979,7 @@ void AlbusBox() {
 
 		// タイトル
 		// タイトル部分のマウスオーバー時にタイトル部分を光らせる
-		if (title_rect.mouseOver() && Cursor::OnClientRect()) {
+		if (title_rect.mouseOver() && Cursor::OnClientRect() && buttons_enable) {
 			title_rect.draw(Color(255, 255, 255, 100));
 			Cursor::RequestStyle(CursorStyle::Hand);
 		}
@@ -1027,8 +1046,8 @@ void AlbusBox() {
 		FontAsset(U"small")(U"{}:{:0>2}"_fmt(length_time.min, length_time.sec)).draw(Arg::topRight = Point(Scene::Width() - 40, Scene::Height() / 2 + 140), font_color);
 
 		// トラック移動ボタン
-		prev_button_pressed = NeumorphismUI::CircleButton(Scene::Width() / 4 - 10, Scene::Height() - 100, 30, prev_icon, onAnyButton);
-		next_button_pressed = NeumorphismUI::CircleButton(Scene::Width() - Scene::Width() / 4 + 10, Scene::Height() - 100, 30, next_icon, onAnyButton);
+		prev_button_pressed = NeumorphismUI::CircleButton(Scene::Width() / 4 - 10, Scene::Height() - 100, 30, prev_icon, onAnyButton, buttons_enable);
+		next_button_pressed = NeumorphismUI::CircleButton(Scene::Width() - Scene::Width() / 4 + 10, Scene::Height() - 100, 30, next_icon, onAnyButton, buttons_enable);
 		
 		if (prev_button_pressed)
 			player.previous();
@@ -1036,7 +1055,7 @@ void AlbusBox() {
 			player.next();
 
 		// 再生/一時停止ボタン
-		NeumorphismUI::CircleSwitch(Scene::Width() / 2, Scene::Height() - 100, 40, playing, play_icon, pause_icon, onAnyButton);
+		NeumorphismUI::CircleSwitch(Scene::Width() / 2, Scene::Height() - 100, 40, playing, play_icon, pause_icon, onAnyButton, buttons_enable);
 		if (before_playing != playing) {
 			if (playing)
 				player.play();
@@ -1047,14 +1066,6 @@ void AlbusBox() {
 		}
 		
 		playing = player.playing();
-		
-#if defined(_WIN32) || defined(_WIN64)
-		// ウィンドウの移動
-		if (!onAnyButton) {
-			specific::moveWindow(mouse_clicked, window_moving);
-			specific::setWindowStyle(0, 0, 400, 640, 40, 40, fft_update);
-		}
-#endif
 
 		fft_update = !fft_update;
 	}
