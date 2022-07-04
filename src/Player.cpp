@@ -580,6 +580,13 @@ bool Player::saveLyrics() {
 	return false;
 }
 
+bool Player::willBeLoading() {
+	if (isOpened() && status == PlayerStatus::Play && !audio_files[current_track].audio->isPlaying()) {
+		return true;
+	}
+	return false;
+}
+
 PlayerStatus::Type Player::getStatus() {
 	return status;
 }

@@ -142,6 +142,10 @@ public:
 
 	// 歌詞を保存
 	bool saveLyrics();
+
+	// ファイルの読み込み中状態になるか？
+	// 注：必ず各フレームにおいてplayer.playing()より前に呼び出すこと
+	bool willBeLoading();
 	
 	// 時分で曲の長さを返す
 	Timestamp getTotalTime();
