@@ -8,7 +8,7 @@
 
 #define SIV3D_WINDOWS_HIGH_DPI
 
-#include <Siv3D.hpp> // OpenSiv3D v0.6.3
+#include <Siv3D.hpp> // OpenSiv3D v0.6.4
 #if defined(_WIN32) || defined(_WIN64)
 	#include <Siv3D/Windows/Windows.hpp>
 	#include <WinUser.h>
@@ -23,7 +23,7 @@
 #include "Structs.hpp"
 
 #define TITLE			U"Albus Box"
-#define VERSION			U"0.1.3"
+#define VERSION			U"0.2.0"
 #define RELEASE_NUM		4
 #define RANGE			1
 
