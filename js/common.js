@@ -6,7 +6,7 @@ $(function() {
     }
     else {*/
         $("#header").load("/header.html");
-        //$("#footer").load("/footer.html");
+        $("#footer").load("/footer.html");
     //}
     
     /*window.addEventListener('resize', function(){
