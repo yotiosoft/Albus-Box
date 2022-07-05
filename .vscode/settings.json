@@ -1,0 +1,6 @@
+{
+    "APP_NAME": "Albus-Box",
+    "files.associations": {
+        "*.ipp": "cpp"
+    }
+}
