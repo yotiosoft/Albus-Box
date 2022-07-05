@@ -359,7 +359,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 	pair<Array<String>, Array<bool>> title_list = player.getTitleList();
 
 	// リスト表示用RenderTexture
-	RenderTexture listview_texture(Scene::Width(), Scene::Height() - 100, Color(DEFAULT_BACKGROUND_COLOR));
+	RenderTexture listview_texture(Scene::Width(), Scene::Height() - 150, Color(DEFAULT_BACKGROUND_COLOR));
 	RenderTexture title_texture(250, 40, Color(DEFAULT_BACKGROUND_COLOR));
 	RenderTexture input_texture(Scene::Width() - 40 - 35, 40);
 	Mat3x2 mat, mat_mouse, mat_title;
@@ -487,7 +487,13 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 					button_enable = false;
 					view_enable = false;
 				}
-				if (listview_margin + listview_y - scroll_y + list_element_margin * i + list_element_h > Scene::Height()) {
+				if (Cursor::Pos().y - scroll_y < 0) {
+					button_enable = false;
+				}
+				if (listview_margin + listview_y - scroll_y + list_element_margin * i > Scene::Height()) {
+					button_enable = false;
+				}
+				if (Cursor::Pos().y - scroll_y > listview_texture.height()) {
 					button_enable = false;
 				}
 				
