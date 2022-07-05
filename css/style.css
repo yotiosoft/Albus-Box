@@ -30,6 +30,7 @@ body {
     margin-top: 30px;
 
     font-family: 'Noto Sans JP', sans-serif;
+<<<<<<< HEAD
 
     text-align: center;
 }
@@ -84,3 +85,7 @@ body {
 .switch_view p {
     text-align: left;
 }
+=======
+    font-size: larger;
+}
+>>>>>>> 2335518d7b88c3eb0563fc26ee23ec7bdc683522
