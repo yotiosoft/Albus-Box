@@ -74,6 +74,9 @@ body {
     display: none;
     margin-top: 30px;
     margin-bottom: 30px;
+    
+    justify-content: center;
+    align-items: center;
 }
 .switch_view.is_active {
     display: block;
@@ -83,4 +86,12 @@ body {
 }
 .switch_view p {
     text-align: left;
+}
+.switch_view picture source {
+    max-width: 300px;
+    margin-left: 30px;
+}
+.switch_view picture img {
+    max-width: 300px;
+    margin-left: 30px;
 }
