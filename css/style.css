@@ -1,5 +1,34 @@
 body {
     margin: 0px;
+    background-color: white;
+}
 
-    background-color: azure;
+.header_blank {
+    margin-top: 100px;
+}
+
+.content {
+    display: block;
+}
+
+.catch {
+    width: 75%;
+    border-radius: 10px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+.catch img {
+    border-radius: 10px;
+}
+
+.content .column {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-top: 30px;
+
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: larger;
 }
