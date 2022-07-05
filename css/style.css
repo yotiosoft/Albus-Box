@@ -1,0 +1,86 @@
+body {
+    margin: 0px;
+    background-color: white;
+}
+
+.header_blank {
+    margin-top: 100px;
+}
+
+.content {
+    display: block;
+}
+
+.catch {
+    width: 75%;
+    border-radius: 10px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+.catch img {
+    border-radius: 10px;
+}
+
+.content .column {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-top: 30px;
+
+    font-family: 'Noto Sans JP', sans-serif;
+
+    text-align: center;
+}
+.content .column .title {
+    font-size: 48px;
+    font-weight: bold;
+
+    text-align: center;
+}
+.content .column .text {
+    margin: 20px;
+
+    font-size: larger;
+    width: fit-content;
+
+    margin-left: auto;
+    margin-right: auto;
+    
+    text-align: left;
+}
+
+.content-select {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: larger;
+}
+.content-select .select-button {
+    margin-left: 10px;
+    margin-right: 10px;
+    color: gray;
+}
+.content-select .select-button.is_active {
+    border-bottom: 3px solid #00aaff;
+    color: black;
+}
+.content-select a {
+    text-decoration: none;
+}
+
+.switch_view {
+    display: none;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.switch_view.is_active {
+    display: block;
+
+    display: flex;
+    flex-wrap: wrap;
+}
+.switch_view p {
+    text-align: left;
+}
