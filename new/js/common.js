@@ -5,8 +5,8 @@ $(function() {
         $("#footer").load("/footer_m.html");
     }
     else {*/
-        $("#header").load("/header.html");
-        $("#footer").load("/footer.html");
+        $("#header").load("./header.html");
+        $("#footer").load("./footer.html");
     //}
     
     /*window.addEventListener('resize', function(){
