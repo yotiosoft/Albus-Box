@@ -102,30 +102,45 @@ a {
     display: none;
     margin-top: 30px;
     margin-bottom: 30px;
+
+    width: 100%;
     
-    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    
     align-items: center;
 }
 .switch_view.is_active {
-    display: block;
-
     display: flex;
     flex-wrap: wrap;
 }
-.switch_view .view_text {
+.switch_view .left {
     text-align: left;
     margin-bottom: 20px;
+
+    margin-right: auto;
 }
-.switch_view .view_text .small {
+.switch_view .left .small {
     font-size: small;
 }
-.switch_view .view_text .title {
+.switch_view .left .title {
     text-align: left;
     margin-bottom: 20px;
     font-size: xx-large;
 }
-.switch_view .between {
-    width: 50px;
+.switch_view .right {
+    text-align: left;
+    margin-bottom: 20px;
+
+    margin-left: auto;
+}
+.switch_view .right .small {
+    font-size: small;
+}
+.switch_view .right .title {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: xx-large;
 }
 .switch_view picture source {
     max-width: 300px;
