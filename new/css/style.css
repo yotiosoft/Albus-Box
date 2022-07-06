@@ -116,6 +116,9 @@ a {
     text-align: left;
     margin-bottom: 20px;
 }
+.switch_view .view_text .small {
+    font-size: small;
+}
 .switch_view .view_text .title {
     text-align: left;
     margin-bottom: 20px;
