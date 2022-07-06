@@ -271,6 +271,7 @@ bool VersionInformation(Player& player, Color& button_close_color, Texture& wind
 
 	// 画像
 	Texture albus_box_icon(U"{}/data/img/icon.png"_fmt(specific::getCurrentDir()));
+	Texture albus_box_title(U"{}/data/img/title.svg"_fmt(specific::getCurrentDir()));
 
 	// ボタンの位置
 	Point return_button_pos;
@@ -302,12 +303,11 @@ bool VersionInformation(Player& player, Color& button_close_color, Texture& wind
 
 		// バージョン情報
 		albus_box_icon.resized(200, 200).drawAt(Scene::Width() / 2, 200);
-
-		FontAsset(U"big")(U"Albus Box").drawAt(Scene::Width() / 2, 350, font_color);
+		albus_box_title.resized(200, 37).drawAt(Scene::Width() / 2, 350);
 
 		FontAsset(U"middle")(U"Version: {:>24}\nRelease Number: {:>8}"_fmt(VERSION, RELEASE_NUM)).drawAt(Scene::Width() / 2, 450, font_color);
 
-		FontAsset(U"small")(U"©YotioSoft 2021 | Powered by OpenSiv3D").drawAt(Scene::Width() / 2, Scene::Height()-50, font_color);
+		FontAsset(U"small")(U"© YotioSoft 2021-2022 | Developed with OpenSiv3D").drawAt(Scene::Width() / 2, Scene::Height()-50, font_color);
 
 #if defined(_WIN32) || defined(_WIN64)
 		// ウィンドウの移動
