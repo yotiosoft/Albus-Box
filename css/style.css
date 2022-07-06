@@ -27,7 +27,7 @@ body {
     margin-left: auto;
     margin-right: auto;
 
-    margin-top: 30px;
+    margin-top: 50px;
 
     font-family: 'Noto Sans JP', sans-serif;
 
@@ -50,6 +50,33 @@ body {
     
     text-align: left;
 }
+.content .column .text table {
+    font-size: medium;
+}
+
+table {
+    border-collapse: collapse;
+}
+table th {
+    border-top: solid 1px #aaaaaa;
+    border-bottom: solid 1px #aaaaaa;
+    padding: 5px;
+    text-align: center;
+}
+table td {
+    border-top: solid 1px #aaaaaa;
+    border-bottom: solid 1px #aaaaaa;
+    padding: 15px;
+}
+.license_table td {
+    border-top: solid 1px #aaaaaa;
+    border-bottom: solid 1px #aaaaaa;
+    
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
 
 .content-select {
     display: flex;
@@ -66,8 +93,9 @@ body {
     border-bottom: 3px solid #00aaff;
     color: black;
 }
-.content-select a {
+a {
     text-decoration: none;
+    color: #0088ee;
 }
 
 .switch_view {
@@ -87,6 +115,11 @@ body {
 .switch_view .view_text {
     text-align: left;
     margin-bottom: 20px;
+}
+.switch_view .view_text .title {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: xx-large;
 }
 .switch_view .between {
     width: 50px;
