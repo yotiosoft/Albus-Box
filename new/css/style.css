@@ -207,6 +207,9 @@ a {
     height: 100%;
 }
 
+.icontxt {
+    min-width: 100px;
+}
 .icontxt img {
     margin-top: 5px;
     margin-right: 10px;
