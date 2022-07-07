@@ -61,7 +61,11 @@ Lyrics::Lyrics(String path) {
 }
 
 // 歌詞の取り込み
+<<<<<<< HEAD
 int Lyrics::add_lyric(double begin, double end, String str) {
+=======
+void Lyrics::add_lyric(double begin, double end, String str) {
+>>>>>>> b3d7cfe906b3ca87edb851eaebec1cf175732728
 	// 新しいLyricsElementを生成
 	LyricsElement new_lyric;
 	new_lyric.begin = begin;
@@ -82,8 +86,11 @@ int Lyrics::add_lyric(double begin, double end, String str) {
 	if (!is_valid) {
 		is_valid = true;
 	}
+<<<<<<< HEAD
 
 	return t;
+=======
+>>>>>>> b3d7cfe906b3ca87edb851eaebec1cf175732728
 }
 
 // 歌詞の取得
@@ -95,6 +102,7 @@ String Lyrics::get_lyrics(double time_samples) {
 	return U"";
 }
 
+<<<<<<< HEAD
 Array<LyricsElement> Lyrics::get_lyrics_list() {
 	return lyrics_array;
 }
@@ -119,6 +127,8 @@ int Lyrics::set_lyric(int lyric_num, double begin, double end, String str) {
 	return add_lyric(begin, end, str);
 }
 
+=======
+>>>>>>> b3d7cfe906b3ca87edb851eaebec1cf175732728
 // 現在の歌詞のインデックス値を取得
 int Lyrics::get_lyrics_index(double time_samples) {
 	if (current_index >= 0) {
@@ -179,6 +189,7 @@ double Lyrics::get_begin_time() {
 double Lyrics::get_end_time() {
 	return current_lyrics->end;
 }
+<<<<<<< HEAD
 
 // 歌詞ファイルを保存
 bool Lyrics::save_lyrics(String filepath) {
@@ -200,3 +211,5 @@ bool Lyrics::save_lyrics(String filepath) {
 
 	return j_lyrics_whole.save(filepath);
 }
+=======
+>>>>>>> b3d7cfe906b3ca87edb851eaebec1cf175732728

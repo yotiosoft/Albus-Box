@@ -641,11 +641,33 @@
 			Gq9KOQ8u9DsbmrW4NyejQ8HteBjPu1kZlBQIM8jsaXA=
 			</data>
 		</dict>
+<<<<<<< HEAD
 		<key>data/img/title.svg</key>
 		<dict>
 			<key>hash2</key>
 			<data>
 			5Ksc6TB9rIZNN9msRWyE6HSIG6T4SUMVPtgranNRGcE=
+=======
+		<key>data/lyrics/10358632337751073711.lyrics</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Gj1oY2kew+cNT0GiDQ0vEE9hGePn3X+Ds6vaGVSqz7A=
+			</data>
+		</dict>
+		<key>data/lyrics/8284430559698233237.lyrics</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			BTc4Px0jMCFoT2FTYSxFxr0q5BKRjlQtariHfRgOs5Q=
+			</data>
+		</dict>
+		<key>data/settings/audio_profiles.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			/KQOs087QnJ3GcR8mgWPrGbFKDIxF5cc4n6btCVLke4=
+>>>>>>> b3d7cfe906b3ca87edb851eaebec1cf175732728
 			</data>
 		</dict>
 		<key>data/settings/settings.json</key>

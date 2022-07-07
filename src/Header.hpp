@@ -23,7 +23,11 @@
 #include "Structs.hpp"
 
 #define TITLE			U"Albus Box"
+<<<<<<< HEAD
 #define VERSION			U"0.2.0"
+=======
+#define VERSION			U"0.1.3"
+>>>>>>> b3d7cfe906b3ca87edb851eaebec1cf175732728
 #define RELEASE_NUM		4
 #define RANGE			1
 

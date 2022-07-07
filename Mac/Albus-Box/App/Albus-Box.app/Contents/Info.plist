@@ -31,7 +31,11 @@
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
+<<<<<<< HEAD
 	<string>13F100</string>
+=======
+	<string>13E500a</string>
+>>>>>>> b3d7cfe906b3ca87edb851eaebec1cf175732728
 	<key>DTPlatformName</key>
 	<string>macosx</string>
 	<key>DTPlatformVersion</key>
@@ -41,9 +45,15 @@
 	<key>DTSDKName</key>
 	<string>macosx12.3</string>
 	<key>DTXcode</key>
+<<<<<<< HEAD
 	<string>1341</string>
 	<key>DTXcodeBuild</key>
 	<string>13F100</string>
+=======
+	<string>1331</string>
+	<key>DTXcodeBuild</key>
+	<string>13E500a</string>
+>>>>>>> b3d7cfe906b3ca87edb851eaebec1cf175732728
 	<key>LSMinimumSystemVersion</key>
 	<string>10.15</string>
 	<key>NSCameraUsageDescription</key>

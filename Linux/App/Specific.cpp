@@ -54,4 +54,3 @@ void specific::moveWindow(Point& mouse_clicked, bool& window_moving) {
 void specific::pinWindow(bool temp) {
 	return;
 }
-

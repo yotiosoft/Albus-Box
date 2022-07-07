@@ -130,14 +130,18 @@ public:
 	// 再生位置を返す(フレーム)
 	int64 getPlayPosSample();
 
+<<<<<<< HEAD
 	// 秒数をTimestamp型に変更
 	Timestamp convertToTimestamp(double sec);
 
+=======
+>>>>>>> b3d7cfe906b3ca87edb851eaebec1cf175732728
 	// 現在の歌詞を返す
 	bool lyricsExist();
 	bool updateLyrics();
 	String getLyrics();
 	int getLyricsDisplayAlphaColor();
+<<<<<<< HEAD
 	Lyrics* getLyricsObj();
 
 	// 歌詞を保存
@@ -146,6 +150,8 @@ public:
 	// ファイルの読み込み中状態になるか？
 	// 注：必ず各フレームにおいてplayer.playing()より前に呼び出すこと
 	bool willBeLoading();
+=======
+>>>>>>> b3d7cfe906b3ca87edb851eaebec1cf175732728
 	
 	// 時分で曲の長さを返す
 	Timestamp getTotalTime();
@@ -199,7 +205,10 @@ private:
 	double volume;
 	bool show_wave;
 	bool loop;
+<<<<<<< HEAD
 	bool auto_move_to_next = true;
+=======
+>>>>>>> b3d7cfe906b3ca87edb851eaebec1cf175732728
 	bool lyrics_exist;
 	Array<bool> has_lyrics;
 	String current_lyrics, temp_lyrics, before_lyrics;
