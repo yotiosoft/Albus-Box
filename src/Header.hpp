@@ -23,8 +23,13 @@
 #include "Structs.hpp"
 
 #define TITLE			U"Albus Box"
-#define VERSION			U"0.1.2"
-#define RELEASE_NUM		3
+#define VERSION			U"0.1.3"
+#define RELEASE_NUM		4
 #define RANGE			1
 
 using namespace std;
+
+typedef struct Timestamp {
+	int min;
+	int sec;
+} Timestamp;

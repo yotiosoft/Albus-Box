@@ -10,6 +10,7 @@
 Player::Player() {
 	current_track = -1;
 	status = PlayerStatus::Stop;
+	lyrics_exist = false;
 	
 	loadSettings();
 	loadAudioProfiles();
@@ -29,6 +30,9 @@ void Player::audioRegister(FilePath audio_filepath) {
 
 	audio_files << new_audio_struct;
 	audio_files_path << audio_filepath;
+	has_lyrics << false;
+
+	openLyricsFile(audio_files.size()-1);
 }
 
 void Player::open(int num) {
@@ -48,6 +52,18 @@ void Player::openAndPlay(FilePath audio_filepath) {
 	stop();
 
 	play((int)audio_files.size() - 1);
+}
+
+void Player::openLyricsFile(int num) {
+	// ハッシュ値に対応する歌詞ファイルがlyricsディレクトリ内にあれば開く
+	String lyrics_filepath = U"{}/{}.lyrics"_fmt(specific::getLyricsDirPath(), audio_files[num].hash);
+	if (!has_lyrics[num] && FileSystem::Exists(lyrics_filepath)) {
+		lyrics[audio_files[num].hash] = Lyrics(lyrics_filepath);
+		has_lyrics[num] = true;
+	}
+	else {
+		has_lyrics[num] = false;
+	}
 }
 
 void Player::close(int num) {
@@ -446,18 +462,14 @@ int Player::getPlayPosSec() {
 	return audio_files[current_track].audio->posSec();
 }
 
-int Player::getPlayPosTimeMin() {
+Timestamp Player::getPlayPosTime() {
 	if (!isOpened()) {
-		return 0;
+		return Timestamp{ 0, 0 };
 	}
-	return (int)audio_files[current_track].audio->posSec() / 60;
-}
 
-int Player::getPlayPosTimeSec() {
-	if (!isOpened()) {
-		return 0;
-	}
-	return (int)audio_files[current_track].audio->posSec() % 60;
+	double pos_sec = audio_files[current_track].audio->posSec();
+	//Console << pos_sec;
+	return Timestamp{ (int)pos_sec / 60, (int)pos_sec % 60 };
 }
 
 double Player::getPlayPosNorm() {
@@ -474,18 +486,66 @@ int64 Player::getPlayPosSample() {
 	return audio_files[current_track].audio->posSample();
 }
 
-int Player::getTotalTimeMin() {
+Timestamp Player::getTotalTime() {
 	if (!isOpened()) {
-		return 0;
+		return Timestamp{ 0, 0 };
 	}
-	return (int)audio_files[current_track].audio->lengthSec() / 60;
+
+	double length_sec = audio_files[current_track].audio->lengthSec();
+	return Timestamp{ (int)length_sec / 60, (int)length_sec % 60 };
 }
 
-int Player::getTotalTimeSec() {
-	if (!isOpened()) {
+bool Player::lyricsExist() {
+	return has_lyrics[current_track] && isOpened();
+}
+
+bool Player::updateLyrics() {
+	if (!isOpened() || !has_lyrics[current_track]) {
+		lyrics_begin_time = -1.0;
+		lyrics_end_time = -1.0;
+		return false;
+	}
+	
+	if ((temp_lyrics = lyrics[audio_files[current_track].hash].get_lyrics(audio_files[current_track].audio->posSec())) != before_lyrics) {
+		current_lyrics = temp_lyrics;
+		before_lyrics = current_lyrics;
+		lyrics_begin_time = lyrics[audio_files[current_track].hash].get_begin_time();
+		lyrics_end_time = lyrics[audio_files[current_track].hash].get_end_time();
+		return true;
+	}
+
+	return false;
+}
+
+String Player::getLyrics() {
+	if (isOpened() && has_lyrics[current_track]) {
+		return current_lyrics;
+	}
+
+	return U"";
+}
+
+int Player::getLyricsDisplayAlphaColor() {
+	if (!isOpened() || !has_lyrics[current_track]) {
 		return 0;
 	}
-	return (int)audio_files[current_track].audio->lengthSec() % 60;
+
+	if (lyrics_begin_time < 0 || lyrics_end_time < 0) {
+		return 0;
+	}
+
+	double play_sec = audio_files[current_track].audio->posSec();
+	double trans_len = 0.2;
+
+	if (0.0 <= play_sec - lyrics_begin_time && play_sec - lyrics_begin_time <= trans_len) {
+		return (play_sec - lyrics_begin_time) * 255 / trans_len;
+	}
+
+	if (0.0 <= lyrics_end_time - play_sec && lyrics_end_time - play_sec <= trans_len) {
+		return (lyrics_end_time - play_sec) * 255 / trans_len;
+	}
+
+	return 255;
 }
 
 PlayerStatus::Type Player::getStatus() {

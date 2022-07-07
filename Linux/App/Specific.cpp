@@ -50,11 +50,7 @@ void specific::moveWindow(Point& mouse_clicked, bool& window_moving) {
 		window_moving = false;
 	}
 }
-<<<<<<< HEAD
 
 void specific::pinWindow(bool temp) {
 	return;
 }
-
-=======
->>>>>>> 91e140b74a6dba8e597354701dfd51319502aca4

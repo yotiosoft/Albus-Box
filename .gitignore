@@ -14,7 +14,9 @@
 *.log
 *.tlog
 *.dSYM
-Windows/Albus-Box/.vs/Albus-Box/v16/
+*.DS_Store
+*.lyrics
+Windows/Albus-Box/.vs/
 Windows/Albus-Box/Intermediate
 audio_profiles.json
 settings.json
@@ -48,9 +50,5 @@ DerivedData/
 /*.gcno
 
 ## Linux
-<<<<<<< HEAD
 Linux/App/Albus-Box
 Linux/App/data/setting
-=======
-Linux/App/Albus-Box
->>>>>>> 91e140b74a6dba8e597354701dfd51319502aca4

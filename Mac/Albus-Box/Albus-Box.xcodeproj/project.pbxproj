@@ -42,6 +42,7 @@
 		4B2770C1277CD4630020C77A /* NeumorphismUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B2770B9277CD4630020C77A /* NeumorphismUI.cpp */; };
 		4B2770C2277CD4630020C77A /* OtherFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B2770BA277CD4630020C77A /* OtherFunctions.cpp */; };
 		4B2770C3277CD4630020C77A /* AlbusBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B2770BD277CD4630020C77A /* AlbusBox.cpp */; };
+		4BA3D06828029F9400EF2CE3 /* Lyrics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BA3D06628029F9400EF2CE3 /* Lyrics.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +92,8 @@
 		4B2770BD277CD4630020C77A /* AlbusBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlbusBox.cpp; path = ../../../src/AlbusBox.cpp; sourceTree = "<group>"; };
 		4B2770BE277CD4630020C77A /* NeumorphismUI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NeumorphismUI.hpp; path = ../../../src/NeumorphismUI.hpp; sourceTree = "<group>"; };
 		4B2770BF277CD4630020C77A /* Structs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Structs.hpp; path = ../../../src/Structs.hpp; sourceTree = "<group>"; };
+		4BA3D06628029F9400EF2CE3 /* Lyrics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Lyrics.cpp; path = ../../../src/Lyrics.cpp; sourceTree = "<group>"; };
+		4BA3D06728029F9400EF2CE3 /* Lyrics.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Lyrics.hpp; path = ../../../src/Lyrics.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +157,8 @@
 		2C1778981CE0AA7C00BB8AD0 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				4BA3D06628029F9400EF2CE3 /* Lyrics.cpp */,
+				4BA3D06728029F9400EF2CE3 /* Lyrics.hpp */,
 				4B2770BD277CD4630020C77A /* AlbusBox.cpp */,
 				4B2770B7277CD4630020C77A /* AlbusBox.hpp */,
 				4B2770B8277CD4630020C77A /* ButtonEx.hpp */,
@@ -275,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BA3D06828029F9400EF2CE3 /* Lyrics.cpp in Sources */,
 				2C17789A1CE0AA7C00BB8AD0 /* Main.cpp in Sources */,
 				4B2770B1277CD41D0020C77A /* Specific.cpp in Sources */,
 				4B2770C0277CD4630020C77A /* Player.cpp in Sources */,
