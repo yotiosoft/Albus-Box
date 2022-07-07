@@ -642,8 +642,8 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 		}
 		onAnyButton |= onAddButton;
 
-		// ウィンドウの移動
 #if defined(_WIN32) || defined(_WIN64)
+		// ウィンドウの移動
 		if (!onAnyButton) {
 			specific::moveWindow(mouse_clicked, window_moving);
 			specific::setWindowStyle(0, 0, 400, 640, 40, 40, dpi_update);
