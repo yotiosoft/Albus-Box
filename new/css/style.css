@@ -112,12 +112,13 @@ a {
 }
 .switch_view.is_active {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
 }
 .switch_view .left {
     text-align: left;
     margin-bottom: 20px;
 
+    margin-left: auto;
     margin-right: auto;
 }
 .switch_view .left .small {
@@ -133,6 +134,7 @@ a {
     margin-bottom: 20px;
 
     margin-left: auto;
+    margin-right: auto;
 }
 .switch_view .right .small {
     font-size: small;
@@ -155,13 +157,11 @@ a {
     margin-bottom: 20px;
 }
 @media screen and (max-width: 850px) {
-    .switch_view .left.image {
-        margin-left: auto;
-        margin-right: auto;
+    .switch_view.is_active {
+        flex-direction: column;
     }
-    .switch_view .right.image {
-        margin-left: auto;
-        margin-right: auto;
+    .switch_view.reverse {
+        flex-direction: column-reverse;
     }
 }
 
