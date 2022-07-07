@@ -30,7 +30,6 @@ public:
 	Lyrics(String path);
 
 	// 歌詞の取り込み（設定画面から）
-<<<<<<< HEAD
 	int add_lyric(double begin, double end, String str);
 
 	// 歌詞の削除
@@ -42,12 +41,6 @@ public:
 	// 歌詞の取得
 	String get_lyrics(double time_samples);
 	Array<LyricsElement> get_lyrics_list();
-=======
-	void add_lyric(double begin, double end, String str);
-
-	// 歌詞の取得
-	String get_lyrics(double time_samples);
->>>>>>> b3d7cfe906b3ca87edb851eaebec1cf175732728
 
 	// 現在の歌詞のインデックス値を取得
 	int get_lyrics_index(double time_samples);
@@ -55,12 +48,9 @@ public:
 	// 歌詞の始点からの経過時間と終点までの残り時間
 	double get_begin_time();
 	double get_end_time();
-<<<<<<< HEAD
 
 	// 歌詞ファイルを保存
 	bool save_lyrics(String filepath);
-=======
->>>>>>> b3d7cfe906b3ca87edb851eaebec1cf175732728
 	
 private:
 	// 歌詞配列

@@ -477,11 +477,7 @@ Timestamp Player::getPlayPosTime() {
 
 	double pos_sec = audio_files[current_track].audio->posSec();
 	//Console << pos_sec;
-<<<<<<< HEAD
 	return convertToTimestamp(pos_sec);
-=======
-	return Timestamp{ (int)pos_sec / 60, (int)pos_sec % 60 };
->>>>>>> b3d7cfe906b3ca87edb851eaebec1cf175732728
 }
 
 double Player::getPlayPosNorm() {
@@ -504,7 +500,6 @@ Timestamp Player::getTotalTime() {
 	}
 
 	double length_sec = audio_files[current_track].audio->lengthSec();
-<<<<<<< HEAD
 	return convertToTimestamp(length_sec);
 }
 
@@ -512,11 +507,6 @@ Timestamp Player::convertToTimestamp(double sec) {
 	return Timestamp{ (int)sec / 60, (int)sec % 60 };
 }
 
-=======
-	return Timestamp{ (int)length_sec / 60, (int)length_sec % 60 };
-}
-
->>>>>>> b3d7cfe906b3ca87edb851eaebec1cf175732728
 bool Player::lyricsExist() {
 	return has_lyrics[current_track] && isOpened();
 }
@@ -549,7 +539,6 @@ String Player::getLyrics() {
 
 int Player::getLyricsDisplayAlphaColor() {
 	if (!isOpened() || !has_lyrics[current_track]) {
-<<<<<<< HEAD
 		return 0;
 	}
 
@@ -557,15 +546,6 @@ int Player::getLyricsDisplayAlphaColor() {
 		return 0;
 	}
 
-=======
-		return 0;
-	}
-
-	if (lyrics_begin_time < 0 || lyrics_end_time < 0) {
-		return 0;
-	}
-
->>>>>>> b3d7cfe906b3ca87edb851eaebec1cf175732728
 	double play_sec = audio_files[current_track].audio->posSec();
 	double trans_len = 0.2;
 
@@ -578,7 +558,6 @@ int Player::getLyricsDisplayAlphaColor() {
 	}
 
 	return 255;
-<<<<<<< HEAD
 }
 
 Lyrics* Player::getLyricsObj() {
@@ -606,8 +585,6 @@ bool Player::willBeLoading() {
 		return true;
 	}
 	return false;
-=======
->>>>>>> b3d7cfe906b3ca87edb851eaebec1cf175732728
 }
 
 PlayerStatus::Type Player::getStatus() {

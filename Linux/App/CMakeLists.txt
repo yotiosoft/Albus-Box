@@ -47,6 +47,8 @@ add_executable(Albus-Box
   ${PROJECT_SOURCE_DIR}/../../src/Header.hpp
   ${PROJECT_SOURCE_DIR}/../../src/Enums.hpp
   ${PROJECT_SOURCE_DIR}/../../src/ButtonEx.hpp
+  ${PROJECT_SOURCE_DIR}/../../src/Lyrics.hpp
+  ${PROJECT_SOURCE_DIR}/../../src/Lyrics.cpp
   ${PROJECT_SOURCE_DIR}/../../src/AlbusBox.hpp
   ${PROJECT_SOURCE_DIR}/../../src/AlbusBox.cpp
   )
