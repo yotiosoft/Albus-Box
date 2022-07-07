@@ -154,6 +154,16 @@ a {
     margin-right: auto;
     margin-bottom: 20px;
 }
+@media screen and (max-width: 850px) {
+    .switch_view .left.image {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .switch_view .right.image {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
 
 .download_button_wrapper {
     width: 100%;
