@@ -33,6 +33,10 @@ String specific::getAudioProfilesFilePath() {
 	return U"./data/settings/audio_profiles.json";
 }
 
+String specific::getLyricsDirPath() {
+	return U"./data/lyrics";
+}
+
 bool specific::setWindowStyle(int x1, int y1, int x2, int y2, int w, int h) {
 	return false;
 }
@@ -54,4 +58,3 @@ void specific::moveWindow(Point& mouse_clicked, bool& window_moving) {
 void specific::pinWindow(bool temp) {
 	return;
 }
-
