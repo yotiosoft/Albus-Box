@@ -483,7 +483,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 				// ボタンの有効・無効
 				bool button_enable = true;
 				bool mouse_on_top_of_window = false;
-				if (listview_margin + listview_y - scroll_y + list_element_margin * i + list_element_h / 2 < 150) {
+				if (listview_margin + listview_y - scroll_y + list_element_margin * i + list_element_h / 2 < 150 - 40) {
 					button_enable = false;
 				}
 				if (Cursor::Pos().y - scroll_y < 0) {
