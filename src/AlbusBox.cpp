@@ -482,19 +482,20 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 			for (int i = 0; i < lyrics_list.size(); i++) {
 				// ボタンの有効・無効
 				bool button_enable = true;
-				bool view_enable = true;
-				if (listview_margin + listview_y - scroll_y + list_element_margin * i + list_element_h / 2 < 90) {
+				bool mouse_on_top_of_window = false;
+				if (listview_margin + listview_y - scroll_y + list_element_margin * i + list_element_h / 2 < 150) {
 					button_enable = false;
-					view_enable = false;
 				}
 				if (Cursor::Pos().y - scroll_y < 0) {
 					button_enable = false;
+					mouse_on_top_of_window = true;
 				}
 				if (listview_margin + listview_y - scroll_y + list_element_margin * i > Scene::Height()) {
 					button_enable = false;
 				}
 				if (Cursor::Pos().y - scroll_y > listview_texture.height()) {
 					button_enable = false;
+					mouse_on_top_of_window = true;
 				}
 				
 				// 土台
@@ -520,46 +521,52 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 				}
 
 				// 編集中の場合
-				if (button_enable && editing_lyrics_card_num == i) {
+				if ((button_enable || mouse_on_top_of_window) && editing_lyrics_card_num == i) {
 					// 歌詞の有効範囲の設定項目
-					SimpleGUI::TextBox(tes_begin_min, Vec2(40, listview_margin + list_element_margin * i), 40);
-					FontAsset(U"middle")(U":").draw(Arg::center(40 + 40*1 + 5*1, listview_margin + list_element_margin * i + 15), Color(font_color));
-					SimpleGUI::TextBox(tes_begin_sec, Vec2(40 + 40*1 + 5*2, listview_margin + list_element_margin * i), 40);
+					if (listview_margin + list_element_margin * i - scroll_y >= -50) {
+						SimpleGUI::TextBox(tes_begin_min, Vec2(40, listview_margin + list_element_margin * i), 40);
+						FontAsset(U"middle")(U":").draw(Arg::center(40 + 40*1 + 5*1, listview_margin + list_element_margin * i + 15), Color(font_color));
+						SimpleGUI::TextBox(tes_begin_sec, Vec2(40 + 40*1 + 5*2, listview_margin + list_element_margin * i), 40);
 
-					FontAsset(U"middle")(U"～").draw(Arg::center(40 + 40*2 + 5*2 + 15*1, listview_margin + list_element_margin * i + 15), Color(font_color));
+						FontAsset(U"middle")(U"～").draw(Arg::center(40 + 40*2 + 5*2 + 15*1, listview_margin + list_element_margin * i + 15), Color(font_color));
 
-					SimpleGUI::TextBox(tes_end_min, Vec2(40 + 40*2 + 5*2 + 15*2, listview_margin + list_element_margin * i), 40);
-					FontAsset(U"middle")(U":").draw(Arg::center(40 + 40*3 + 5*3 + 15*2, listview_margin + list_element_margin * i + 15), Color(font_color));
-					SimpleGUI::TextBox(tes_end_sec, Vec2(40 + 40*3 + 5*4 + 15*2, listview_margin + list_element_margin * i), 40);
+						SimpleGUI::TextBox(tes_end_min, Vec2(40 + 40*2 + 5*2 + 15*2, listview_margin + list_element_margin * i), 40);
+						FontAsset(U"middle")(U":").draw(Arg::center(40 + 40*3 + 5*3 + 15*2, listview_margin + list_element_margin * i + 15), Color(font_color));
+						SimpleGUI::TextBox(tes_end_sec, Vec2(40 + 40*3 + 5*4 + 15*2, listview_margin + list_element_margin * i), 40);
+					}
 
 					// 歌詞の設定
-					Mat3x2 mat2 = Mat3x2::Translate(0, scroll_y);
-					Mat3x2 mat_mouse2 = Mat3x2::Translate(40, listview_margin + list_element_margin * i + 40);
-					{
-						const ScopedRenderTarget2D target(input_texture);
-						input_texture.clear(DEFAULT_BACKGROUND_COLOR);
+					if (listview_margin + list_element_margin * i + 40 - scroll_y >= -50) {
+						Mat3x2 mat2 = Mat3x2::Translate(0, scroll_y);
+						Mat3x2 mat_mouse2 = Mat3x2::Translate(40, listview_margin + list_element_margin * i + 40);
+						{
+							const ScopedRenderTarget2D target(input_texture);
+							input_texture.clear(DEFAULT_BACKGROUND_COLOR);
 
-						const Transformer2D t(mat2, mat_mouse2);
-					
-						SimpleGUI::TextBox(tes_lyrics, Vec2(2, 2), background_rect.size.x - 40);
+							const Transformer2D t(mat2, mat_mouse2);
+						
+							SimpleGUI::TextBox(tes_lyrics, Vec2(2, 2), background_rect.size.x - 40);
+						}
+						input_texture.draw(40 - 2, listview_margin + list_element_margin * i + 40 - 2);
 					}
-					input_texture.draw(40 - 2, listview_margin + list_element_margin * i + 40 - 2);
 
 					// 削除ボタン
-					if (NeumorphismUI::CircleButton(Scene::Width() - 40 - 10, listview_margin + list_element_margin * i + 20, 15, window_close_icon, onAddButton)) {
-						lyrics_obj->del_lyric(i);
+					if (listview_margin + list_element_margin * i + 20 + 15 - scroll_y >= -50) {
+						if (NeumorphismUI::CircleButton(Scene::Width() - 40 - 10, listview_margin + list_element_margin * i + 20, 15, window_close_icon, onAddButton)) {
+							lyrics_obj->del_lyric(i);
 
-						// リストを再取得
-						lyrics_list.clear();
-						for (LyricsElement lyrics_el : lyrics_obj->get_lyrics_list()) {
-							Timestamp begin = player.convertToTimestamp(lyrics_el.begin);
-							Timestamp end = player.convertToTimestamp(lyrics_el.end);
+							// リストを再取得
+							lyrics_list.clear();
+							for (LyricsElement lyrics_el : lyrics_obj->get_lyrics_list()) {
+								Timestamp begin = player.convertToTimestamp(lyrics_el.begin);
+								Timestamp end = player.convertToTimestamp(lyrics_el.end);
 
-							struct lyrics_with_timestamp lwt = { lyrics_el, begin, end };
-							lyrics_list << lwt;
+								struct lyrics_with_timestamp lwt = { lyrics_el, begin, end };
+								lyrics_list << lwt;
+							}
+
+							editing_lyrics_card_num = -1;
 						}
-
-						editing_lyrics_card_num = -1;
 					}
 
 					// 枠外がクリックされたら設定を反映
@@ -600,7 +607,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 					}
 				}
 				// それ以外
-				else if (view_enable) {
+				else {
 					// 歌詞の有効範囲の表示
 					FontAsset(U"small")(U"{}:{:0>2} ～ {}:{:0>2}"_fmt(lyrics_list[i].time_begin.min, lyrics_list[i].time_begin.sec, lyrics_list[i].time_end.min, lyrics_list[i].time_end.sec)).draw(50, listview_margin + list_element_margin * i + 10, Color(font_color));
 
