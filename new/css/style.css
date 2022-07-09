@@ -220,3 +220,14 @@ a {
                  -5px -5px 10px #c8c8c8;
     border-radius: 15px;
 }
+.with_shadow.no_radius {
+    box-shadow:  5px 5px 10px #c8c8c8,
+                 -5px -5px 10px #c8c8c8;
+}
+
+.os_img {
+    display: none;
+}
+.os_img.is_active {
+    display: block;
+}
