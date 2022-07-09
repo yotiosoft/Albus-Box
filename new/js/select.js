@@ -11,14 +11,14 @@ function switch_to_windows() {
     let selected_view = document.getElementById("switch_view_windows");
     selected_view.classList.add("is_active");
 
-    let current_imgs = document.getElementsByClassName("os_img is_active");
+    let current_imgs = Array.prototype.slice.call(document.getElementsByClassName("os_img is_active"));
     if (current_imgs != null) {
         for (var current_img of current_imgs) {
             current_img.classList.remove("is_active");
         }
     }
 
-    let selected_imgs = document.getElementsByClassName("os_img img_windows");
+    let selected_imgs = Array.prototype.slice.call(document.getElementsByClassName("os_img img_windows"));
     if (selected_imgs != null) {
         for (var selected_img of selected_imgs) {
             selected_img.classList.add("is_active");
@@ -39,14 +39,14 @@ function switch_to_macos() {
     let selected_view = document.getElementById("switch_view_macos");
     selected_view.classList.add("is_active");
 
-    let current_imgs = document.getElementsByClassName("os_img is_active");
+    let current_imgs = Array.prototype.slice.call(document.getElementsByClassName("os_img is_active"));
     if (current_imgs != null) {
         for (var current_img of current_imgs) {
             current_img.classList.remove("is_active");
         }
     }
 
-    let selected_imgs = document.getElementById("os_img img_macos");
+    let selected_imgs = Array.prototype.slice.call(document.getElementsByClassName("os_img img_macos"));
     if (selected_imgs != null) {
         for (var selected_img of selected_imgs) {
             selected_img.classList.add("is_active");
@@ -67,14 +67,15 @@ function switch_to_linux() {
     let selected_view = document.getElementById("switch_view_linux");
     selected_view.classList.add("is_active");
 
-    let current_imgs = document.getElementsByClassName("os_img is_active");
+    let current_imgs = Array.prototype.slice.call(document.getElementsByClassName("os_img is_active"));
     if (current_imgs != null) {
         for (var current_img of current_imgs) {
+            console.log(current_img);
             current_img.classList.remove("is_active");
         }
     }
 
-    let selected_imgs = document.getElementById("os_img img_linux");
+    let selected_imgs = Array.prototype.slice.call(document.getElementsByClassName("os_img img_linux"));
     if (selected_imgs != null) {
         for (var selected_img of selected_imgs) {
             selected_img.classList.add("is_active");
