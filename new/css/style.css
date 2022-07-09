@@ -119,6 +119,9 @@ a {
 
     margin-left: auto;
     margin-right: auto;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .switch_view .left .small {
     font-size: small;
@@ -133,6 +136,9 @@ a {
 
     margin-left: auto;
     margin-right: auto;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .switch_view .right .small {
     font-size: small;
