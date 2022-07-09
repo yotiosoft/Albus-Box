@@ -164,6 +164,14 @@ a {
     margin-top: -20px;
     margin-right: -20px;
 }
+.switch_view picture source.to_larger.no_move {
+    margin-top: 0px;
+    margin-right: 0px;
+}
+.switch_view picture img.to_larger.no_move {
+    margin-top: 0px;
+    margin-right: 0px;
+}
 .desctiption {
     min-width: 480px;
 }
