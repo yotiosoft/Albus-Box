@@ -116,7 +116,6 @@ a {
 }
 .switch_view .left {
     text-align: left;
-    margin-bottom: 20px;
 
     margin-left: auto;
     margin-right: auto;
@@ -131,7 +130,6 @@ a {
 }
 .switch_view .right {
     text-align: left;
-    margin-bottom: 20px;
 
     margin-left: auto;
     margin-right: auto;
@@ -158,6 +156,8 @@ a {
 }
 .switch_view picture source.to_larger {
     max-width: 350px;
+    margin-top: -20px;
+    margin-right: -20px;
 }
 .switch_view picture img.to_larger {
     max-width: 350px;
