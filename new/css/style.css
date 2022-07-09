@@ -156,6 +156,17 @@ a {
     margin-right: auto;
     margin-bottom: 20px;
 }
+.switch_view picture source.to_larger {
+    max-width: 350px;
+}
+.switch_view picture img.to_larger {
+    max-width: 350px;
+    margin-top: -20px;
+    margin-right: -20px;
+}
+.desctiption {
+    min-width: 480px;
+}
 @media screen and (max-width: 850px) {
     .switch_view.is_active {
         flex-direction: column;
