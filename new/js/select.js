@@ -1,3 +1,13 @@
+if (navigator.userAgent.indexOf("Win") != -1) {
+    switch_to_windows();
+}
+else if (navigator.userAgent.indexOf("Mac") != -1) {
+    switch_to_mac();
+}
+else if (navigator.userAgent.indexOf("Linux") != -1) {
+    switch_to_linux();
+}
+
 function switch_to_windows() {
     let current_option = document.getElementsByClassName("os_select is_active")[0];
     current_option.classList.remove("is_active");
