@@ -123,7 +123,9 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 		if (NeumorphismUI::CircleButton(listopen_button_pos, 20, listopen_button_icon, onAnyButton, buttons_enable)) {
 			pair<bool, FilePath> playlist = OpenPlayList();
 			if (playlist.first) {
-				player.loadPlayList(playlist.second);
+				if (!player.loadPlayList(playlist.second)) {
+					System::MessageBoxOK(U"プレイリストの読み込みに失敗しました。\n音声ファイルが読み込めません。");
+				}
 			}
 		}
 		// 保存ボタン
@@ -927,10 +929,14 @@ void AlbusBox() {
 		// ファイルを開く
 		if (file_open.first) {
 			if (FileSystem::Extension(file_open.second) == U"playlist") {
-				player.loadPlayList(file_open.second);
+				if (!player.loadPlayList(file_open.second)) {
+					System::MessageBoxOK(U"プレイリストの読み込みに失敗しました。\n音声ファイルが読み込めません。");
+				}
 			}
 			else {
-				player.openAndPlay(file_open.second);
+				if (!player.openAndPlay(file_open.second)) {
+					System::MessageBoxOK(U"音声ファイルが存在しないか壊れています。");
+				}
 			}
 
 			file_open.first = false;
