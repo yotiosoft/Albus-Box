@@ -512,9 +512,9 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
 						// 値の代入
 						tes_begin_min.text = Format(lyrics_list[editing_lyrics_card_num].time_begin.min);
-						tes_begin_sec.text = Format(lyrics_list[editing_lyrics_card_num].time_begin.sec);
+						tes_begin_sec.text = U"{:0>2}"_fmt(Format(lyrics_list[editing_lyrics_card_num].time_begin.sec));
 						tes_end_min.text = Format(lyrics_list[editing_lyrics_card_num].time_end.min);
-						tes_end_sec.text = Format(lyrics_list[editing_lyrics_card_num].time_end.sec);
+						tes_end_sec.text = U"{:0>2}"_fmt(Format(lyrics_list[editing_lyrics_card_num].time_end.sec));
 						tes_lyrics.text = lyrics_list[editing_lyrics_card_num].lyrics.lyrics;
 					}
 				}
