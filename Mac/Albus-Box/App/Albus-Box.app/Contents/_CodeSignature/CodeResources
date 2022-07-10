@@ -648,18 +648,46 @@
 			5Ksc6TB9rIZNN9msRWyE6HSIG6T4SUMVPtgranNRGcE=
 			</data>
 		</dict>
+		<key>data/lyrics/10358632337751073711 - コピー.lyrics</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			GV3KTkZWPCJ6n0JRwAe17Rywpc96m08lJ9iwKxGXJPw=
+			</data>
+		</dict>
 		<key>data/lyrics/10358632337751073711.lyrics</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			zK1pxZCAPpD/WkqWWuiYI+m0bW2wjZ+F0PTsfau+jmY=
+			4UkAYVUBuG9XbK4PsfyR7arpRyThonoV5weQid2ABrQ=
+			</data>
+		</dict>
+		<key>data/lyrics/2042310274855841075.lyrics</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			iF4PM54mGOrXhd+a3ZO78g8/8MjR94Z2CdRRsVplFyQ=
+			</data>
+		</dict>
+		<key>data/lyrics/6680249657095522466.lyrics</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			SEk0z1xQyC+ure4SzQIShsPdhjGSDUO1Td2iNofDQjs=
 			</data>
 		</dict>
 		<key>data/lyrics/8284430559698233237.lyrics</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			SXUkGz00gPY8R7NtNHM1eAevEWVeZ3isBtXG9Iyrm/E=
+			RuSohnbh9Iacs8n+ROwxJiyoY3PkvRD5rYyQXcqOSLk=
+			</data>
+		</dict>
+		<key>data/settings/audio_profiles.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			0y+wceAP2KHRUptXUbYfRqKHtY5ZyspjtxBQHjq173E=
 			</data>
 		</dict>
 		<key>data/settings/settings.json</key>
