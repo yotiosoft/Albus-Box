@@ -578,6 +578,11 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 							System::MessageBoxOK(U"表示時間が未入力です。");
 							continue;
 						}
+						const String r = U".*[^0-9].*";
+						if (RegExp(r).fullMatch(tes_begin_min.text) || RegExp(r).fullMatch(tes_begin_sec.text) || RegExp(r).fullMatch(tes_end_min.text) || RegExp(r).fullMatch(tes_end_sec.text)) {
+							System::MessageBoxOK(U"表示時間の入力に数字以外が含まれています。");
+							continue;
+						}
 
 						double begin_double = atof(tes_begin_min.text.toUTF8().c_str()) * 60 + atof(tes_begin_sec.text.toUTF8().c_str());
 						double end_double = atof(tes_end_min.text.toUTF8().c_str()) * 60 + atof(tes_end_sec.text.toUTF8().c_str());
