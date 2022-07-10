@@ -47,7 +47,7 @@
 
                 <div class="content-select">
                     <a href="javascript:switch_to_windows()">
-                        <div class="os_select select-button is_active" id="select_windows">Windows</div>
+                        <div class="os_select select-button" id="select_windows">Windows</div>
                     </a>
                     <a href="javascript:switch_to_macos()">
                         <div class="os_select select-button" id="select_macos">macOS</div>
@@ -57,7 +57,7 @@
                     </a>
                 </div>
                 
-                <div class="os_document switch_view is_active reverse" id="switch_view_windows">
+                <div class="os_document switch_view reverse" id="switch_view_windows">
                     <div class="left">
                         角丸ウィンドウが特徴のシンプルなプレイヤー。<br>
                         ニューモーフィズムUIを採用しており、直感的な操作が可能です。<br>
@@ -102,8 +102,8 @@
                     </div>
                     <div class="right">
                         <picture>
-                            <source type="image/webp" srcset="img/screenshot/mac.webp" />
-                            <img src="img/screenshot/mac.png" />
+                            <source type="image/webp" srcset="img/screenshot/mac.webp" class="to_larger" />
+                            <img src="img/screenshot/mac.png" class="to_larger" />
                         </picture>
                     </div>
                 </div>
@@ -142,14 +142,14 @@
                 </div>
 
                 <div class="switch_view is_active">
-                    <div class="left">
+                    <div class="left desctiption">
                         <div class="title">プレイリスト機能</div>
-                        プレイリストに曲を追加し、<br>
+                        プレイリストに曲を追加し、
                         お好みの順番でお楽しみいただけます。<br>
                         プレイリストは設定画面から編集可能。<br>
                         設定ファイルはどこでも好きな場所に保存できます。
                     </div>
-                    <div class="right os_img img_windows is_active">
+                    <div class="right os_img img_windows">
                         <picture>
                             <source type="image/webp" srcset="img/screenshot/windows/playlist.webp" class="with_shadow" />
                             <img src="img/screenshot/windows/playlist.png" class="with_shadow" />
@@ -157,8 +157,8 @@
                     </div>
                     <div class="right os_img img_macos">
                         <picture>
-                            <source type="image/webp" srcset="img/screenshot/mac/playlist.webp" />
-                            <img src="img/screenshot/mac/playlist.png" />
+                            <source type="image/webp" srcset="img/screenshot/mac/playlist.webp" class="to_larger no_move" />
+                            <img src="img/screenshot/mac/playlist.png" class="to_larger no_move" />
                         </picture>
                     </div>
                     <div class="right os_img img_linux">
@@ -170,7 +170,7 @@
                 </div>
 
                 <div class="switch_view reverse is_active">
-                    <div class="left os_img img_windows is_active">
+                    <div class="left os_img img_windows">
                         <picture>
                             <source type="image/webp" srcset="img/screenshot/windows/title.webp" class="with_shadow" />
                             <img src="img/screenshot/windows/title.png" class="with_shadow" />
@@ -178,8 +178,8 @@
                     </div>
                     <div class="left os_img img_macos">
                         <picture>
-                            <source type="image/webp" srcset="img/screenshot/mac/title.webp" />
-                            <img src="img/screenshot/mac/title.png" />
+                            <source type="image/webp" srcset="img/screenshot/mac/title.webp" class="to_larger no_move" />
+                            <img src="img/screenshot/mac/title.png" class="to_larger no_move" />
                         </picture>
                     </div>
                     <div class="left os_img img_linux">
@@ -188,7 +188,7 @@
                             <img src="img/screenshot/linux/title.png" class="with_shadow no_radius" />
                         </picture>
                     </div>
-                    <div class="right">
+                    <div class="right desctiption">
                         <div class="title">タイトル編集</div>
                         曲のタイトルを編集できます。<br>
                         タイトルを変更すると、プレイリストにも反映されます。<br>
@@ -198,14 +198,14 @@
                 </div>
                 
                 <div class="switch_view is_active">
-                    <div class="left">
+                    <div class="left desctiption">
                         <div class="title">サムネイル画像の設定</div>
                         楽曲ごとに別々のサムネイル画像を設定できます。<br>
                         サムネイル画像はサムネイル部分をクリックすることで設定可能。<br>
                         タイトル情報と同様、MD5ハッシュ値とともに保存しているため、<br>
                         音楽ファイルを別の場所に移してもサムネイル設定は保持されます。
                     </div>
-                    <div class="right os_img img_windows is_active">
+                    <div class="right os_img img_windows">
                         <picture>
                             <source type="image/webp" srcset="img/screenshot/windows/thumbnail.webp" class="with_shadow" />
                             <img src="img/screenshot/windows/thumbnail.png" class="with_shadow" />
@@ -213,8 +213,8 @@
                     </div>
                     <div class="right os_img img_macos">
                         <picture>
-                            <source type="image/webp" srcset="img/screenshot/mac/thumbnail.webp" />
-                            <img src="img/screenshot/mac/thumbnail.png" />
+                            <source type="image/webp" srcset="img/screenshot/mac/thumbnail.webp" class="to_larger no_move" />
+                            <img src="img/screenshot/mac/thumbnail.png" class="to_larger no_move" />
                         </picture>
                     </div>
                     <div class="right os_img img_linux">
@@ -226,7 +226,7 @@
                 </div>
 
                 <div class="switch_view reverse is_active">
-                    <div class="left os_img img_windows is_active">
+                    <div class="left os_img img_windows">
                         <picture>
                             <source type="image/webp" srcset="img/screenshot/windows/lyrics.webp" class="with_shadow" />
                             <img src="img/screenshot/windows/lyrics.png" class="with_shadow" />
@@ -234,8 +234,8 @@
                     </div>
                     <div class="left os_img img_macos">
                         <picture>
-                            <source type="image/webp" srcset="img/screenshot/mac/lyrics.webp" />
-                            <img src="img/screenshot/mac/lyrics.png" />
+                            <source type="image/webp" srcset="img/screenshot/mac/lyrics.webp" class="to_larger no_move" />
+                            <img src="img/screenshot/mac/lyrics.png" class="to_larger no_move" />
                         </picture>
                     </div>
                     <div class="left os_img img_linux">
@@ -244,7 +244,7 @@
                             <img src="img/screenshot/linux/lyrics.png" class="with_shadow no_radius" />
                         </picture>
                     </div>
-                    <div class="right">
+                    <div class="right desctiption">
                         <div class="title">歌詞表示機能</div>
                         楽曲の歌詞を表示できます。<br>
                         歌詞の編集画面が備わっており、<br>

@@ -116,10 +116,12 @@ a {
 }
 .switch_view .left {
     text-align: left;
-    margin-bottom: 20px;
 
     margin-left: auto;
     margin-right: auto;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .switch_view .left .small {
     font-size: small;
@@ -131,10 +133,12 @@ a {
 }
 .switch_view .right {
     text-align: left;
-    margin-bottom: 20px;
 
     margin-left: auto;
     margin-right: auto;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .switch_view .right .small {
     font-size: small;
@@ -155,6 +159,27 @@ a {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
+}
+.switch_view picture source.to_larger {
+    max-width: 350px;
+    margin-top: -20px;
+    margin-right: -20px;
+}
+.switch_view picture img.to_larger {
+    max-width: 350px;
+    margin-top: -20px;
+    margin-right: -20px;
+}
+.switch_view picture source.to_larger.no_move {
+    margin-top: 0px;
+    margin-right: 0px;
+}
+.switch_view picture img.to_larger.no_move {
+    margin-top: 0px;
+    margin-right: 0px;
+}
+.desctiption {
+    min-width: 480px;
 }
 @media screen and (max-width: 850px) {
     .switch_view.is_active {
