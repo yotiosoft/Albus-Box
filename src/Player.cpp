@@ -20,38 +20,47 @@ Player::Player() {
 	current_track_thumbnail_texture = &default_thumbnail_texture;
 }
 
-void Player::audioRegister(FilePath audio_filepath) {
+bool Player::audioRegister(FilePath audio_filepath) {
+	if (!FileSystem::Exists(audio_filepath)) {
+		return false;
+	}
+
 	uint64 new_audio_hash = MD5::FromFile(audio_filepath).hash();
 	AudioStruct new_audio_struct{ new_audio_hash, nullptr, audio_filepath };
-
-	if (!FileSystem::Exists(audio_filepath)) {
-		return;
-	}
 
 	audio_files << new_audio_struct;
 	audio_files_path << audio_filepath;
 	has_lyrics << false;
 
 	openLyricsFile(audio_files.size()-1);
+
+	return true;
 }
 
-void Player::open(int num) {
-	Audio* new_audio_file = new Audio(audio_files[num].file_path);
+bool Player::open(int num) {
+	Audio* new_audio_file;
 
 	if (!FileSystem::Exists(audio_files[num].file_path)) {
-		return;
+		return false;
 	}
+
+	new_audio_file = new Audio(audio_files[num].file_path);
 
 	audio_files[num].audio = new_audio_file;
 	audio_files[num].isOpened = true;
+
+	return true;
 }
 
-void Player::openAndPlay(FilePath audio_filepath) {
-	audioRegister(audio_filepath);
+bool Player::openAndPlay(FilePath audio_filepath) {
+	bool audio_enable = audioRegister(audio_filepath);
 
-	stop();
-
-	play((int)audio_files.size() - 1);
+	if (audio_enable) {
+		stop();
+		play((int)audio_files.size() - 1);
+	}
+	
+	return audio_enable;
 }
 
 void Player::openLyricsFile(int num) {
@@ -700,7 +709,7 @@ void Player::saveAudioProfiles() {
 	audio_profiles.save(specific::getAudioProfilesFilePath());
 }
 
-void Player::loadPlayList(FilePath playlist_filepath) {
+bool Player::loadPlayList(FilePath playlist_filepath) {
 	JSON playlist = JSON::Load(playlist_filepath);
 
 	if (isOpened()) {
@@ -713,13 +722,18 @@ void Player::loadPlayList(FilePath playlist_filepath) {
 	}
 
 	// プレイリスト読み込み
+	bool playlist_loaded = false;
 	for (auto audio_filepath : playlist[U"list"].arrayView()) {
-		audioRegister(audio_filepath.getString());
+		playlist_loaded |= audioRegister(audio_filepath.getString());
 	}
 
 	// 最初の曲を再生
-	move(0);
-	play();
+	if (playlist_loaded) {
+		move(0);
+		play();
+	}
+
+	return playlist_loaded;
 }
 
 void Player::savePlayList() {

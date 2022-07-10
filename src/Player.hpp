@@ -44,9 +44,9 @@ public:
 	Player();
 	
 	// 曲を開く
-	void audioRegister(FilePath audio_filepath);
-	void open(int num);
-	void openAndPlay(FilePath audio_filepath);
+	bool audioRegister(FilePath audio_filepath);
+	bool open(int num);
+	bool openAndPlay(FilePath audio_filepath);
 
 	//　曲を閉じる
 	void close(int num);
@@ -180,7 +180,7 @@ public:
 	void saveAudioProfiles();
 
 	// プレイリストを読み込み
-	void loadPlayList(FilePath playlist_filepath);
+	bool loadPlayList(FilePath playlist_filepath);
 
 	// プレイリストを保存
 	void savePlayList();
