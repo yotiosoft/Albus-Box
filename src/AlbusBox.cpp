@@ -573,8 +573,16 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
 					// 枠外がクリックされたら設定を反映
 					if (!list_area_mouse_desable && !background_rect.leftPressed() && MouseL.down()) {
+						// 入力チェック
+						if (tes_begin_min.text.length() == 0 || tes_begin_sec.text.length() == 0 || tes_end_min.text.length() == 0 || tes_end_sec.text.length() == 0) {
+							System::MessageBoxOK(U"表示時間が未入力です。");
+							continue;
+						}
+
 						double begin_double = atof(tes_begin_min.text.toUTF8().c_str()) * 60 + atof(tes_begin_sec.text.toUTF8().c_str());
 						double end_double = atof(tes_end_min.text.toUTF8().c_str()) * 60 + atof(tes_end_sec.text.toUTF8().c_str());
+
+						// 歌詞リストに追加
 						int new_lyric_index = lyrics_obj->set_lyric(editing_lyrics_card_num, begin_double, end_double, tes_lyrics.text);
 
 						// リストを再取得
