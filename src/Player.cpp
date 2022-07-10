@@ -43,8 +43,13 @@ bool Player::open(int num) {
 	if (!FileSystem::Exists(audio_files[num].file_path)) {
 		return false;
 	}
-
+	
 	new_audio_file = new Audio(audio_files[num].file_path);
+
+	if (new_audio_file->isEmpty()) {
+		delete new_audio_file;
+		return false;
+	}
 
 	audio_files[num].audio = new_audio_file;
 	audio_files[num].isOpened = true;
@@ -723,12 +728,24 @@ bool Player::loadPlayList(FilePath playlist_filepath) {
 
 	// プレイリスト読み込み
 	bool playlist_loaded = false;
+	Array<String> load_fault_list;
 	for (auto audio_filepath : playlist[U"list"].arrayView()) {
-		playlist_loaded |= audioRegister(audio_filepath.getString());
+		bool load_ret;
+		String file_path = audio_filepath.getString();
+
+		if (!(load_ret = audioRegister(file_path))) {
+			load_fault_list << file_path;
+		}
+
+		playlist_loaded |= load_ret;
 	}
 
 	// 最初の曲を再生
 	if (playlist_loaded) {
+		for (auto fault_file : load_fault_list) {
+			System::MessageBoxOK(U"以下のファイルの読み込みに失敗しました。プレイリストのファイルパスが間違っているか、ファイルが壊れている可能性があります。\n\n{}"_fmt(fault_file));
+		}
+
 		move(0);
 		play();
 	}
