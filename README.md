@@ -6,7 +6,7 @@ Player application for Windows / macOS / Linux(Debian). The concept is a simple 
 | -------- | ------------------------ | ---------------- | --------------------------------------- |
 | Windows  | Windows 10 or later      | OpenSiv3D v0.6.4 | ``Windows/Albus-Box/App/Albus-Box.exe`` |
 | macOS    | macOS 10.15 or later     | OpenSiv3D v0.6.4 | ``Mac/Albus-Box/App/Albus-Box.app``     |
-| Linux    | Ubuntu 20.04 / Debian 10 | OpenSiv3D v0.6.3 | Not attached (please compile yourself)  |
+| Linux    | Ubuntu 20.04 / Debian 10 | OpenSiv3D v0.6.4 | Not attached (please compile yourself)  |
 
 
 
@@ -18,15 +18,16 @@ Player application for Windows / macOS / Linux(Debian). The concept is a simple 
   - IDE : Visual Studio 2022
   - SDK：OpenSiv3D v0.6.4
 - for macOS
-  - OS : macOS 11.5.2 Big Sur
+  - M1 MacBook Air 2020 (with Rosetta2)
+  - OS : macOS 12.2.1 Monterey
   - C++ compiler：Apple clang version 13.1.6
-  - IDE : Xcode 12.3
-  - SDK：OpenSiv3D v0.6.3
-
+  - IDE : Xcode 13.3
+  - SDK：OpenSiv3D v0.6.4
+  
 - for Linux
   - OS : Ubuntu 20.04 / Crostini on Chrome OS
   - C++ compiler：gcc
-  - SDK：OpenSiv3D v0.6.3
+  - SDK：OpenSiv3D v0.6.4
 ## Supported File Formats
 - Audio files:
   - mp3, wav, ogg, m4a
