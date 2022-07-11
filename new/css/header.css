@@ -32,18 +32,28 @@
 }
 
 #header_nav p {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
 
     padding: 10px;
     border-radius: 8px;
 
     font-family: 'Noto Sans JP', sans-serif;
     font-size: medium;
+
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
 }
 #header_nav p:hover {
     background-color: #00aaff;
     color: white;
+
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 #footer_wrapper {
