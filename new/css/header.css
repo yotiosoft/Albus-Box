@@ -14,9 +14,19 @@
     align-items: center;
 }
 
+#header_logo {
+    max-width: 50%;
+}
+
 #header_logo img {
     margin-left: 20px;
     height: 40px;
+}
+
+#header_nav {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 0px;
 }
 
 #footer_wrapper {
