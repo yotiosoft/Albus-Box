@@ -26,7 +26,17 @@
 #header_nav {
     display: flex;
     flex-wrap: wrap;
-    margin-right: 0px;
+
+    margin-right: 20px;
+    margin-left: auto;
+}
+
+#header_nav p {
+    margin-left: 10px;
+    margin-right: 10px;
+
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: medium;
 }
 
 #footer_wrapper {
