@@ -66,3 +66,9 @@
     font-family: 'Noto Sans JP', sans-serif;
     font-size: medium;
 }
+
+/* ページ内リンクのズレを修正 */
+.inpage_link {
+    margin-top: -60px;
+    padding-top: 60px;
+}
