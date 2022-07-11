@@ -35,8 +35,15 @@
     margin-left: 10px;
     margin-right: 10px;
 
+    padding: 10px;
+    border-radius: 8px;
+
     font-family: 'Noto Sans JP', sans-serif;
     font-size: medium;
+}
+#header_nav p:hover {
+    background-color: #00aaff;
+    color: white;
 }
 
 #footer_wrapper {
