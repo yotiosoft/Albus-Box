@@ -1,8 +1,9 @@
 #  Albus Box
 ## Summary
-Player application for Windows / macOS / Linux(Debian). The concept is a simple design in accordance with neumorphism.
+Player application for Windows / macOS / Linux(Debian).  
+The concept is a simple design in accordance with Neumorphism.
 
-| Plarform | Environment              | SDK              | Executable file                         |
+| Platform | Environment              | SDK              | Application file                        |
 | -------- | ------------------------ | ---------------- | --------------------------------------- |
 | Windows  | Windows 10 or later      | OpenSiv3D v0.6.4 | ``Windows/Albus-Box/App/Albus-Box.exe`` |
 | macOS    | macOS 10.15 or later     | OpenSiv3D v0.6.4 | ``Mac/Albus-Box/App/Albus-Box.app``     |
