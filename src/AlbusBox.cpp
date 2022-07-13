@@ -165,6 +165,14 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 				if (110 - scroll_y + list_element_margin * i + list_element_h / 2 < 90) {
 					button_enable = false;
 				}
+				if (Cursor::Pos().y + 10 - scroll_y < 0) {
+					button_enable = false;
+					//mouse_on_top_of_window = true;
+				}
+				if (Cursor::Pos().y + 10 - scroll_y > listview_texture.height()) {
+					button_enable = false;
+					//mouse_on_top_of_window = true;
+				}
 
 				// 再生・停止ボタン
 				if (title_list.second[i]) {	// 再生中
