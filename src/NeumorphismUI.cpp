@@ -770,8 +770,8 @@ namespace NeumorphismUI {
 		
 		// スライド中の動作
 		if (sliding) {
-			slidingCount += 0.2;
-			if (slidingCount > M_PI/2) {
+			slidingCount += 0.1;
+			if (slidingCount >= M_PI/2-0.6) {
 				slidingCount = 0;
 				sliding = false;
 			}
