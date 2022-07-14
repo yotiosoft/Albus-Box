@@ -10,7 +10,20 @@
             <div id="header_logo">
                 <img src="/img/logo/logo.svg" alt="logo">
             </div>
-    
+            
+            <script>
+                if (window.innerWidth <= 700 || navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
+                    $("#header_nav").css("display", "none");
+                }
+                window.addEventListener('resize', function(){
+                    if (window.innerWidth <= 700 || navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
+                        $("#header_nav").css("display", "none");
+                    }
+                    else {
+                        $("#header_nav").css("display", "flex");
+                    }
+                });
+            </script>
             <div id="header_nav">
                 <a href="#features"><p>特徴</p></a>
                 <a href="#specification"><p>対応形式</p></a>
