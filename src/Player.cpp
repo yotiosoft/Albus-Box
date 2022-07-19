@@ -71,7 +71,7 @@ bool Player::openAndPlay(FilePath audio_filepath) {
 void Player::openLyricsFile(int num) {
 	// ハッシュ値に対応する歌詞ファイルがlyricsディレクトリ内にあれば開く
 	String lyrics_filepath = U"{}/{}.lyrics"_fmt(specific::getLyricsDirPath(), audio_files[num].hash);
-	if (!has_lyrics[num] && FileSystem::Exists(lyrics_filepath)) {
+	if (FileSystem::Exists(lyrics_filepath)) {
 		lyrics[audio_files[num].hash] = Lyrics(lyrics_filepath);
 		has_lyrics[num] = true;
 	}
