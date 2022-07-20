@@ -154,7 +154,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 			const ScopedRenderTarget2D target(listview_texture);
 			listview_texture.clear(DEFAULT_BACKGROUND_COLOR);
 
-			const Transformer2D t(mat, mat_mouse);
+			const Transformer2D t(mat, mat_mouse); 
 
 			for (int i = 0; i < title_list.first.size(); i++) {
 				// 土台

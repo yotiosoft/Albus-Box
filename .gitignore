@@ -16,6 +16,7 @@
 *.dSYM
 *.DS_Store
 *.lyrics
+*(debug).exe
 Windows/Albus-Box/.vs/
 Windows/Albus-Box/Intermediate
 audio_profiles.json
