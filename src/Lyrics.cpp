@@ -48,7 +48,6 @@ Lyrics::Lyrics(String path) {
 	if (not j_lyrics_whole) {
 		return;
 	}
-	is_valid = true;
 
 	// 歌詞の読み込み
 	for (auto j_element : j_lyrics_whole[U"lyrics"].arrayView()) {
@@ -57,6 +56,11 @@ Lyrics::Lyrics(String path) {
 		String str = j_element[U"str"].getString();
 
 		add_lyric(begin, end, str);
+	}
+
+	if (lyrics_array.size() > 0) {
+		is_valid = true;
+		current_lyrics = &lyrics_array[0];
 	}
 }
 
@@ -121,6 +125,10 @@ int Lyrics::set_lyric(int lyric_num, double begin, double end, String str) {
 
 // 現在の歌詞のインデックス値を取得
 int Lyrics::get_lyrics_index(double time_samples) {
+	if (!is_valid) {
+		return -1;
+	}
+
 	if (current_index >= 0) {
 		if (current_lyrics->begin <= time_samples && current_lyrics->end > time_samples) {
             before_time = time_samples;
@@ -174,9 +182,17 @@ int Lyrics::get_lyrics_index(double time_samples) {
 
 // 歌詞の始点からの経過時間と終点までの残り時間
 double Lyrics::get_begin_time() {
+	if (current_lyrics == nullptr || !is_valid) {
+		return 0.0;
+	}
+
 	return current_lyrics->begin;
 }
 double Lyrics::get_end_time() {
+	if (current_lyrics == nullptr || !is_valid) {
+		return 0.0;
+	}
+
 	return current_lyrics->end;
 }
 
