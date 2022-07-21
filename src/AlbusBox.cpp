@@ -448,6 +448,26 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
 		// 画面タイトル
 		FontAsset(U"title")(U"歌詞設定").draw(Arg::center(Scene::Width() / 2, 30), Color(font_color));
+
+		// タイトル
+		DrawableText title_text = FontAsset(U"middle")(player.getTitle());
+		int title_w = title_text.region(120, 70).w;
+		int title_area_w = title_texture.width();
+		{
+			const ScopedRenderTarget2D target(title_texture);
+			title_texture.clear(Color(DEFAULT_BACKGROUND_COLOR));
+			if (title_area_w < title_w) {
+				mat = Mat3x2::Translate(-(count_for_music % ((int)title_w + title_area_w)) + title_area_w, 0);
+				{
+					const Transformer2D t(mat, TransformCursor::No);
+					title_text.draw(0, 0, font_color);
+				}
+			}
+			else {
+				title_text.draw(0, 0, font_color);
+			}
+		}
+		title_texture.draw(120, 70);
         
         // 再生ボタン、シークバー、タイトルを表示
         bool playing = player.playing();
@@ -469,27 +489,6 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
                 player.pause();
             }
         }
-
-        // タイトル
-		DrawableText title_text = FontAsset(U"middle")(player.getTitle());
-		int title_w = title_text.region(120, 70).w;
-		int title_area_w = title_texture.width();
-
-		{
-			const ScopedRenderTarget2D target(title_texture);
-			title_texture.clear(Color(DEFAULT_BACKGROUND_COLOR));
-			if (title_area_w < title_w) {
-				mat = Mat3x2::Translate(-(count_for_music % ((int)title_w + title_area_w)) + title_area_w, 0);
-				{
-					const Transformer2D t(mat, TransformCursor::No);
-					title_text.draw(0, 0, font_color);
-				}
-			}
-			else {
-				title_text.draw(0, 0, font_color);
-			}
-		}
-		title_texture.draw(120, 70);
 
 		// 再生位置を表示
 		Timestamp now = player.getPlayPosTime();
