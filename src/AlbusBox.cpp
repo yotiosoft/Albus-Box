@@ -380,7 +380,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
 	// リスト表示用RenderTexture
 	RenderTexture listview_texture(Scene::Width(), Scene::Height() - 150, Color(DEFAULT_BACKGROUND_COLOR));
-	RenderTexture title_texture(250, 40, Color(DEFAULT_BACKGROUND_COLOR));
+	RenderTexture title_texture(Scene::Width() - 120, 40, Color(DEFAULT_BACKGROUND_COLOR));
 	RenderTexture input_texture(Scene::Width() - 40 - 35, 40);
 	Mat3x2 mat, mat_mouse, mat_title;
 	double scroll_y = 0.0, scroll_y_before = 0.0;
@@ -473,10 +473,11 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
         // タイトル
 		DrawableText title_text = FontAsset(U"middle")(player.getTitle());
 		int title_w = title_text.region(120, 70).w;
-		int title_area_w = Scene::Width() - 120;
+		int title_area_w = title_texture.width();
 
 		{
 			const ScopedRenderTarget2D target(title_texture);
+			title_texture.clear(Color(DEFAULT_BACKGROUND_COLOR));
 			if (title_area_w < title_w) {
 				mat = Mat3x2::Translate(-(count_for_music % ((int)title_w + title_area_w)) + title_area_w, 0);
 				{
