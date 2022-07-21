@@ -207,16 +207,19 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 						Rect(0, 0, Scene::Width(), Scene::Height() - 100).draw(DEFAULT_BACKGROUND_COLOR);
 
 						DrawableText title_text = FontAsset(U"middle")(title_list.first[i]);
-						int title_w = title_text.region(0, 0).x;
+						int title_w = title_text.region(0, 0).w;
 						int title_x = 0;
 						if (title_w > title_texture.width()) {
-							title_x = -Scene::FrameCount() % (title_texture.width() + title_w);
-						}
+							title_x = -Scene::FrameCount() % title_texture.width();
 
-						mat = Mat3x2::Translate((title_w - title_texture.width()) / 2 - (count_for_music % ((int)title_w + Scene::Width())) + Scene::Width(), 0);
-						{
-							const Transformer2D t(mat, TransformCursor::No);
-							title_text.draw(title_x, 0, font_color);
+							mat = Mat3x2::Translate((title_w - title_texture.width()) / 2 - (count_for_music % ((int)title_w + title_texture.width())) + title_texture.width(), 0);
+							{
+								const Transformer2D t(mat, TransformCursor::No);
+								title_text.draw(0, 0, font_color);
+							}
+						}
+						else {
+							title_text.draw(0, 0, font_color);
 						}
 					}
 					title_texture.draw(120, list_element_margin * i + 10 - scroll_y);
@@ -1056,7 +1059,8 @@ void AlbusBox() {
 
 		// タイトルの表示
 		if (!file_open.first) {	// "Loading..."を表示していないときだけ
-			title_rect = FontAsset(U"middle")(player.getTitle()).region(Arg::center(Scene::Width() / 2, Scene::Height() / 3 + 170));
+			String title = player.getTitle();
+			title_rect = FontAsset(U"middle")(title).region(Arg::center(Scene::Width() / 2, Scene::Height() / 3 + 170));
 			if (title_rect != title_rect_before) {
 				title_rect_before = title_rect;
 				count_for_music = Scene::Width();
@@ -1065,11 +1069,11 @@ void AlbusBox() {
 				mat = Mat3x2::Translate((title_rect.w - Scene::Width()) / 2 - (count_for_music % ((int)title_rect.w + Scene::Width())) + Scene::Width(), 0);
 				{
 					const Transformer2D t(mat, TransformCursor::No);
-					FontAsset(U"middle")(player.getTitle()).drawAt(Scene::Width() / 2, Scene::Height() / 3 + 170, font_color);
+					FontAsset(U"middle")(title).drawAt(Scene::Width() / 2, Scene::Height() / 3 + 170, font_color);
 				}
 			}
 			else if (!editing_title) {
-				FontAsset(U"middle")(player.getTitle()).drawAt(Scene::Width() / 2, Scene::Height() / 3 + 170, font_color);
+				FontAsset(U"middle")(title).drawAt(Scene::Width() / 2, Scene::Height() / 3 + 170, font_color);
 			}
 		}
 		count_for_music++;
