@@ -183,6 +183,8 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 					if (target_audio != i) {
 						slider.setPosition(Point(120, list_element_margin * i + 50));
 						target_audio = i;
+
+						count_for_music = 0;
 					}
 
 					if (!slider.isSliderMoving()) {
@@ -208,10 +210,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 
 						DrawableText title_text = FontAsset(U"middle")(title_list.first[i]);
 						int title_w = title_text.region(0, 0).w;
-						int title_x = 0;
 						if (title_w > title_texture.width()) {
-							title_x = -Scene::FrameCount() % title_texture.width();
-
 							mat = Mat3x2::Translate(- (count_for_music % ((int)title_w + title_texture.width())) + title_texture.width(), 0);
 							{
 								const Transformer2D t(mat, TransformCursor::No);
