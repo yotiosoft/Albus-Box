@@ -200,7 +200,7 @@ void Player::previous() {
 	}
 	
 	// 現在再生中の曲の再生位置が1.0秒以上なら0.0秒に戻る
-	if (audio_files[current_track].audio->posSec() >= 1.0) {
+	if (audio_files[current_track].audio->posSec() >= 1==.0) {
 		audio_files[current_track].audio->seekTime(0.0);
 		return;
 	}

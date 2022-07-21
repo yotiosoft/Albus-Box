@@ -101,6 +101,8 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 	
 	bool onAnyButton, dpi_update = true;
 
+	int count_for_music = 0;
+
 	while (System::Update()) {
 		onAnyButton = false;
 		
@@ -207,11 +209,15 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 						DrawableText title_text = FontAsset(U"middle")(title_list.first[i]);
 						int title_w = title_text.region(0, 0).x;
 						int title_x = 0;
-						if (title_w > 250) {
-							title_x = -Scene::FrameCount() % title_w;
+						if (title_w > title_texture.width()) {
+							title_x = -Scene::FrameCount() % (title_texture.width() + title_w);
 						}
 
-						title_text.draw(title_x, 0, font_color);
+						mat = Mat3x2::Translate((title_w - Scene::Width()) / 2 - (count_for_music % ((int)title_w + Scene::Width())) + Scene::Width(), 0);
+						{
+							const Transformer2D t(mat, TransformCursor::No);
+							title_text.draw(title_x, 0, font_color);
+						}
 					}
 					title_texture.draw(120, list_element_margin * i + 10 - scroll_y);
 				}
@@ -270,6 +276,8 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 
 		// 再生処理を継続
 		player.playing();
+
+		count_for_music++;
     }
     
 	return true;
