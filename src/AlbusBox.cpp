@@ -101,7 +101,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 	
 	bool onAnyButton, dpi_update = true;
 
-	int count_for_music = 0;
+	int count_for_music = title_texture.width();
 
 	while (System::Update()) {
 		onAnyButton = false;
@@ -184,7 +184,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 						slider.setPosition(Point(120, list_element_margin * i + 50));
 						target_audio = i;
 
-						count_for_music = 0;
+						count_for_music = title_texture.width();
 					}
 
 					if (!slider.isSliderMoving()) {
@@ -422,7 +422,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 	const int listview_y = 150;
 	const int listview_margin = 10;
 
-	int count_for_music = 0;
+	int count_for_music = title_texture.width();
 
 	while (System::Update()) {
 		onAnyButton = false;
@@ -919,7 +919,7 @@ void AlbusBox() {
 	// 座標変換行列（タイトル用）
 	Mat3x2 mat = Mat3x2::Identity();
 	RectF title_rect, title_rect_before;
-	int count_for_music = 0;
+	int count_for_music = Scene::Width() - 50;
 
 	// タイトル編集用
 	TextEditState tes_title;
@@ -1082,7 +1082,7 @@ void AlbusBox() {
 			title_rect = FontAsset(U"middle")(title).region(Arg::center(Scene::Width() / 2, Scene::Height() / 3 + 170));
 			if (title_rect != title_rect_before) {
 				title_rect_before = title_rect;
-				count_for_music = Scene::Width();
+				count_for_music = Scene::Width() - 50;
 			}
 			if (title_rect.w > Scene::Width() && !editing_title) {
 				mat = Mat3x2::Translate((title_rect.w - Scene::Width()) / 2 - (count_for_music % ((int)title_rect.w + Scene::Width())) + Scene::Width(), 0);
