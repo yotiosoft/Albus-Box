@@ -212,7 +212,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 						if (title_w > title_texture.width()) {
 							title_x = -Scene::FrameCount() % title_texture.width();
 
-							mat = Mat3x2::Translate((title_w - title_texture.width()) / 2 - (count_for_music % ((int)title_w + title_texture.width())) + title_texture.width(), 0);
+							mat = Mat3x2::Translate(- (count_for_music % ((int)title_w + title_texture.width())) + title_texture.width(), 0);
 							{
 								const Transformer2D t(mat, TransformCursor::No);
 								title_text.draw(0, 0, font_color);
