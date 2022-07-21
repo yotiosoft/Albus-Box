@@ -422,6 +422,8 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 	const int listview_y = 150;
 	const int listview_margin = 10;
 
+	int count_for_music = 0;
+
 	while (System::Update()) {
 		onAnyButton = false;
 
@@ -470,7 +472,19 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
         // タイトル
 		DrawableText title_text = FontAsset(U"middle")(player.getTitle());
-		title_text.draw(120, 70, font_color);
+		int title_w = title_text.region(120, 70).w;
+		int title_area_w = Scene::Width() - 120;
+
+		if (title_area_w < title_w) {
+			mat = Mat3x2::Translate(-(count_for_music % ((int)title_w + title_area_w)) + title_area_w, 0);
+			{
+				const Transformer2D t(mat, TransformCursor::No);
+				title_text.draw(120, 70, font_color);
+			}
+		}
+		else {
+			title_text.draw(120, 70, font_color);
+		}
 
 		// 再生位置を表示
 		Timestamp now = player.getPlayPosTime();
@@ -694,6 +708,8 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
 		// 再生処理を継続
 		player.playing();
+
+		count_for_music++;
 	}
 
 	// 自動で曲の遷移を有効化
