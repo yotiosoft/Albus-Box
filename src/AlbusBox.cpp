@@ -475,12 +475,14 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 		int title_w = title_text.region(120, 70).w;
 		int title_area_w = Scene::Width() - 120;
 
+		const ScopedRenderTarget2D target(title_texture);
 		if (title_area_w < title_w) {
 			mat = Mat3x2::Translate(-(count_for_music % ((int)title_w + title_area_w)) + title_area_w, 0);
 			{
 				const Transformer2D t(mat, TransformCursor::No);
-				title_text.draw(120, 70, font_color);
+				title_text.draw(0, 0, font_color);
 			}
+			title_texture.draw(120, 70);
 		}
 		else {
 			title_text.draw(120, 70, font_color);
