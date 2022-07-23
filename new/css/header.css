@@ -35,7 +35,23 @@
     height: 30px;
 }
 
-#header_nav a {
+.no-backlight {
+    margin-left: 5px;
+    margin-right: 5px;
+
+    padding: 10px;
+    border-radius: 8px;
+
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: medium;
+    color: black;
+}
+.backlight {
     margin-left: 5px;
     margin-right: 5px;
 
@@ -56,7 +72,7 @@
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
 }
-#header_nav a:hover {
+.backlight:hover {
     background-color: #00aaff;
     color: white;
 
@@ -67,8 +83,8 @@
 }
 
 #righttop_logo {
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
 
     margin-top: auto;
     margin-bottom: auto;
