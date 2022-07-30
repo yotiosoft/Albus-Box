@@ -1043,15 +1043,15 @@ void AlbusBox() {
 						// 枠内に歌詞表示を収める
 						lyrics_str = player.getLyrics();
 						// 文字列の表示上の長さを取得
-						int region_w = lyrics_font(lyrics_str).region(0, 0).w;
+						int region_w = Min((int)lyrics_font(lyrics_str).region(0, 0).w, thumbnail_size);
 						// 枠の生成
 						int x = thumbnail_half_wh - region_w / 2;
-						lyrics_rect = Rect(x, thumbnail_half_wh - lyrics_font_half_h, region_w, thumbnail_size);
+						lyrics_rect = Rect(x, thumbnail_half_wh - lyrics_font_half_h, region_w + 5, thumbnail_size);
 					}
 
 					if (lyrics_str.size() > 0) {
 						int lyrics_display_count = player.getLyricsDisplayAlphaColor();
-						lyrics_font(lyrics_str).draw(lyrics_rect.drawFrame(10), Color(255, 255, 255, lyrics_display_count));
+						lyrics_font(lyrics_str).draw(lyrics_rect, Color(255, 255, 255, lyrics_display_count));
 					}
 				}
 
