@@ -1046,7 +1046,7 @@ void AlbusBox() {
 
 					if (lyrics_str.size() > 0) {
 						int lyrics_display_count = player.getLyricsDisplayAlphaColor();
-						lyrics_font(lyrics_str).draw(lyrics_rect.drawFrame(10), Color(255, 255, 255, lyrics_display_count));
+						lyrics_font(lyrics_str).draw(lyrics_rect.drawFrame(10).center(), Color(255, 255, 255, lyrics_display_count));
 					}
 				}
 
