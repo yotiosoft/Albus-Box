@@ -590,6 +590,7 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 
 					// 削除ボタン
 					if (listview_margin + list_element_margin * i + 20 + 15 - scroll_y >= -50) {
+						// もし、押されたら
 						if (NeumorphismUI::CircleButton(Scene::Width() - 40 - 10, listview_margin + list_element_margin * i + 20, 15, window_close_icon, onAddButton)) {
 							lyrics_obj->del_lyric(i);
 
@@ -604,6 +605,9 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 							}
 
 							editing_lyrics_card_num = -1;
+
+							// 保存
+							player.saveLyrics();
 						}
 					}
 
@@ -651,7 +655,6 @@ bool lyricsSetting(Player& player, Color& button_close_color, Texture& window_cl
 						editing_lyrics_card_num = -1;
 
 						// 保存
-						// ToDo: 保存失敗時にエラーを表示
 						player.saveLyrics();
 
 						break;
