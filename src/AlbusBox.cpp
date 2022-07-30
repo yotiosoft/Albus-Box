@@ -1043,7 +1043,8 @@ void AlbusBox() {
 						int region_w = lyrics_font(lyrics_str).region(0, 0).w;
 						// 枠内に歌詞表示を収める
 						lyrics_str = player.getLyrics();
-						lyrics_rect = Rect(thumbnail_half_wh - region_w, 0, thumbnail_size, thumbnail_size);
+						int x = thumbnail_half_wh - region_w;
+						lyrics_rect = Rect(x, 0, thumbnail_size - x, thumbnail_size);
 					}
 
 					if (lyrics_str.size() > 0) {
