@@ -777,10 +777,13 @@ void Player::free() {
 	stop();
 
 	// スレッド処理の無効化
-	for (auto it = threads.begin(); it != threads.end(); it++) {
-		it->second.detach();
+	if (!threads.empty()) {
+		for (auto it = threads.begin(); it != threads.end(); it++) {
+			it->second.detach();
+		}
+		
+		threads.clear();
 	}
-	threads.clear();
 	
 	// Audioの解放
 	for (auto af : audio_files) {
