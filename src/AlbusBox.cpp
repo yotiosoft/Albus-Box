@@ -1040,10 +1040,11 @@ void AlbusBox() {
 				// 歌詞を表示
 				if (player.lyricsExist()) {
 					if (player.updateLyrics()) {
-						// 文字列の表示上の長さを取得
-						int region_w = lyrics_font(lyrics_str).region(0, 0).w;
 						// 枠内に歌詞表示を収める
 						lyrics_str = player.getLyrics();
+						// 文字列の表示上の長さを取得
+						int region_w = lyrics_font(lyrics_str).region(0, 0).w;
+						// 枠の生成
 						int x = thumbnail_half_wh - region_w / 2;
 						lyrics_rect = Rect(x, thumbnail_half_wh - lyrics_font_half_h, region_w, thumbnail_size);
 					}
