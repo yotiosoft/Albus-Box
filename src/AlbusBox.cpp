@@ -1041,7 +1041,7 @@ void AlbusBox() {
 					if (player.updateLyrics()) {
 						// 枠内に歌詞表示を収める
 						lyrics_str = player.getLyrics();
-						lyrics_rect = Rect(Arg::center(thumbnail_half_wh, thumbnail_half_wh), thumbnail_size, thumbnail_size);
+						lyrics_rect = Rect(0, 0, thumbnail_size, thumbnail_size);
 					}
 
 					if (lyrics_str.size() > 0) {
