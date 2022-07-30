@@ -942,6 +942,7 @@ void AlbusBox() {
     const int thumbnail_height = thumbnail_texture.height();
     const int row_box_wh = box_size * 3 / 4;
 	const int thumbnail_half_wh = thumbnail_height / 2;
+	const int lyrics_font_half_h = FontAsset(U"small").height()/2;
 
 	bool fft_update = true;
 	while (System::Update()) {
@@ -1043,8 +1044,8 @@ void AlbusBox() {
 						int region_w = lyrics_font(lyrics_str).region(0, 0).w;
 						// 枠内に歌詞表示を収める
 						lyrics_str = player.getLyrics();
-						int x = thumbnail_half_wh / 2 - region_w / 2;
-						lyrics_rect = Rect(x, thumbnail_half_wh, region_w, thumbnail_size);
+						int x = thumbnail_half_wh - region_w / 2;
+						lyrics_rect = Rect(x, thumbnail_half_wh - lyrics_font_half_h, region_w, thumbnail_size);
 					}
 
 					if (lyrics_str.size() > 0) {
