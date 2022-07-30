@@ -1041,13 +1041,7 @@ void AlbusBox() {
 					if (player.updateLyrics()) {
 						// 枠内に歌詞表示を収める
 						lyrics_str = player.getLyrics();
-						RectF region = lyrics_font(lyrics_str).region(0, 0);
-						if (region.w > thumbnail_size) {
-							lyrics_rect = Rect(Arg::center(thumbnail_half_wh, thumbnail_half_wh), thumbnail_size, region.w / thumbnail_size * lyrics_font.fontSize());
-						}
-						else {
-							lyrics_rect = Rect(Arg::center(thumbnail_half_wh, thumbnail_half_wh), region.w + 2, region.h + 2);
-						}
+						lyrics_rect = Rect(Arg::center(thumbnail_half_wh, thumbnail_half_wh), thumbnail_size, thumbnail_size);
 					}
 
 					if (lyrics_str.size() > 0) {
