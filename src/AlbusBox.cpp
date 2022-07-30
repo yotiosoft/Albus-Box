@@ -1008,6 +1008,7 @@ void AlbusBox() {
 			if (player.isOpened() && buttons_enable) {
 				Cursor::RequestStyle(CursorStyle::Hand);
 
+				// クリックでサムネイル画像設定
 				if (MouseL.down()) {
 					pair<bool, FilePath> image_file_open = ImageFileOpen();
 					if (image_file_open.first) {
@@ -1038,6 +1039,7 @@ void AlbusBox() {
 				// 歌詞を表示
 				if (player.lyricsExist()) {
 					if (player.updateLyrics()) {
+						// 枠内に歌詞表示を収める
 						lyrics_str = player.getLyrics();
 						RectF region = lyrics_font(lyrics_str).region(0, 0);
 						if (region.w > thumbnail_size) {
@@ -1047,9 +1049,8 @@ void AlbusBox() {
 							lyrics_rect = Rect(Arg::center(thumbnail_half_wh, thumbnail_half_wh), region.w + 2, region.h + 2);
 						}
 					}
-					//lyrics_circle(lyrics_font.getTexture()).draw();
+
 					if (lyrics_str.size() > 0) {
-						//lyrics_rect.draw(Palette::Black);
 						int lyrics_display_count = player.getLyricsDisplayAlphaColor();
 						lyrics_font(lyrics_str).draw(lyrics_rect, Color(255, 255, 255, lyrics_display_count));
 					}
