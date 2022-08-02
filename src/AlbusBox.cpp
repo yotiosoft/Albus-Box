@@ -1045,12 +1045,15 @@ void AlbusBox() {
 						// 枠内に歌詞表示を収める
 						lyrics_str = player.getLyrics();
 						// 文字列の表示上の長さを取得
-						int region_w = Min((int)lyrics_font(lyrics_str).region(0, 0).w, thumbnail_size - 10);
+						int w = Min((int)lyrics_font(lyrics_str).region(0, 0).w, thumbnail_size - 10) + 5;
+						int line_h = (int)lyrics_font(lyrics_str).region(0, 0).h;
 						// 枠の生成
-						int x = thumbnail_half_wh - region_w / 2;
-						int h = (region_w + 5) / thumbnail_size + 1;
+						int x = thumbnail_half_wh - w / 2;
+
+						int h = (w / thumbnail_size + 1) * line_h;
 						int y = thumbnail_half_wh - h / 2;
-						lyrics_rect = Rect(x, y, region_w + 5, h);
+
+						lyrics_rect = Rect(x, y, w, h);
 					}
 
 					if (lyrics_str.size() > 0) {
