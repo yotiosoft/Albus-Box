@@ -17,6 +17,10 @@
 /* OS依存の定数など */
 #define OS						"Windows"	// OS
 
+#define WINDOW_WIDTH			400
+#define WINDOW_HEIGHT			640
+#define WINDOW_ROUNDRECT		40
+
 namespace specific {
 	void chdir(string dir);
 	String getCurrentDir();
