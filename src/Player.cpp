@@ -786,9 +786,13 @@ void Player::free() {
 	}
 	
 	// Audioの解放
-	for (auto af : audio_files) {
-		if (af.isOpened && af.audio != nullptr)
-			af.audio->release();
-		delete(af.audio);
+	if (!audio_files.isEmpty()) {
+		for (auto af : audio_files) {
+			if (af.isOpened && af.audio != nullptr)
+				af.audio->release();
+			delete(af.audio);
+		}
+
+		audio_files.clear();
 	}
 }
