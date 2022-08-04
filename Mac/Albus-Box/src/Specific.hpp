@@ -23,6 +23,10 @@
 /* OS依存の定数など */
 #define LINE_FEED_CODE			0		// 改行コードに用いる文字数
 
+#define WINDOW_WIDTH			400		// ウィンドウの幅
+#define WINDOW_HEIGHT			640		// ウィンドウの高さ
+#define WINDOW_ROUNDRECT_RADIUS	40		// ウィンドウの角の丸みの半径
+
 namespace specific {
 	String getCurrentDir();
 	String getFontsDir();

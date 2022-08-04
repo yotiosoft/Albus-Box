@@ -19,7 +19,7 @@
 
 #define WINDOW_WIDTH			400
 #define WINDOW_HEIGHT			640
-#define WINDOW_ROUNDRECT		40
+#define WINDOW_ROUNDRECT_RADIUS		40
 
 namespace specific {
 	void chdir(string dir);
