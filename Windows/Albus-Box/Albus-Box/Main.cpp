@@ -1,5 +1,5 @@
 ﻿#include <AlbusBox.hpp>
 
 void Main() {
-	AlbusBox();
+	window_init();
 }
