@@ -861,9 +861,6 @@ void window_init() {
 	FontAsset::Register(U"big", 36, Typeface::CJK_Regular_JP);
 	FontAsset::Register(U"title", 16, Typeface::Mplus_Bold);
 	FontAsset::Register(U"icon_font", 16, Typeface::Icon_MaterialDesign);
-
-	// AlbusBox main
-	AlbusBox();
 }
 
 void AlbusBox() {
