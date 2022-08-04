@@ -9,6 +9,7 @@
 #include "Lyrics.hpp"
 
 pair<bool, FilePath> AudioFileOpen();
+void window_init();
 void AlbusBox();
 
 #endif /* AlbusBox_hpp */

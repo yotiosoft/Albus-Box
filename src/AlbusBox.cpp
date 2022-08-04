@@ -841,15 +841,15 @@ void drawThumbnailTexture(Player& player, int thumbnail_size) {
 	}
 }
 
-void AlbusBox() {
+void window_init() {
 	Scene::SetBackground(DEFAULT_BACKGROUND_COLOR);
-    Window::Resize(400, 640);
-    
+	Window::Resize(400, 640);
+
 #if defined(_WIN32) || defined(_WIN64)
-    Window::SetStyle(WindowStyle::Frameless);
-    specific::setWindowStyle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_ROUNDRECT, WINDOW_ROUNDRECT, true);
+	Window::SetStyle(WindowStyle::Frameless);
+	specific::setWindowStyle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_ROUNDRECT, WINDOW_ROUNDRECT, true);
 #else
-    specific::setWindowStyle(0, 0, 400, 640, 40, 40);
+	specific::setWindowStyle(0, 0, 400, 640, 40, 40);
 #endif
 
 	// ウィンドウタイトル
@@ -862,6 +862,11 @@ void AlbusBox() {
 	FontAsset::Register(U"title", 16, Typeface::Mplus_Bold);
 	FontAsset::Register(U"icon_font", 16, Typeface::Icon_MaterialDesign);
 
+	// AlbusBox main
+	AlbusBox();
+}
+
+void AlbusBox() {
 	// プレイヤーの用意
 	Player player;
 
