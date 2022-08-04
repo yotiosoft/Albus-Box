@@ -847,7 +847,7 @@ void AlbusBox() {
     
 #if defined(_WIN32) || defined(_WIN64)
     Window::SetStyle(WindowStyle::Frameless);
-    specific::setWindowStyle(0, 0, 400, 640, 40, 40, true);
+    specific::setWindowStyle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_ROUNDRECT, WINDOW_ROUNDRECT, true);
 #else
     specific::setWindowStyle(0, 0, 400, 640, 40, 40);
 #endif
