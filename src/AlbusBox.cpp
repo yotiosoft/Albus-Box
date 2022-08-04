@@ -843,13 +843,13 @@ void drawThumbnailTexture(Player& player, int thumbnail_size) {
 
 void window_init() {
 	Scene::SetBackground(DEFAULT_BACKGROUND_COLOR);
-	Window::Resize(400, 640);
+	Window::Resize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 #if defined(_WIN32) || defined(_WIN64)
 	Window::SetStyle(WindowStyle::Frameless);
-	specific::setWindowStyle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_ROUNDRECT, WINDOW_ROUNDRECT, true);
+	specific::setWindowStyle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_ROUNDRECT_RADIUS, WINDOW_ROUNDRECT_RADIUS, true);
 #else
-	specific::setWindowStyle(0, 0, 400, 640, 40, 40);
+	specific::setWindowStyle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_ROUNDRECT_RADIUS, WINDOW_ROUNDRECT_RADIUS);
 #endif
 
 	// ウィンドウタイトル
