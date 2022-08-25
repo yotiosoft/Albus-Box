@@ -5,9 +5,9 @@ The concept is a simple design in accordance with Neumorphism.
 
 | Platform | Environment              | SDK              | Application file                        |
 | -------- | ------------------------ | ---------------- | --------------------------------------- |
-| Windows  | Windows 10 or later      | OpenSiv3D v0.6.4 | ``Windows/Albus-Box/App/Albus-Box.exe`` |
-| macOS    | macOS 10.15 or later     | OpenSiv3D v0.6.4 | ``Mac/Albus-Box/App/Albus-Box.app``     |
-| Linux    | Ubuntu 20.04 / Debian 10 | OpenSiv3D v0.6.4 | Not attached (please compile yourself)  |
+| Windows  | Windows 10 or later      | OpenSiv3D v0.6.5 | ``Windows/Albus-Box/App/Albus-Box.exe`` |
+| macOS    | macOS 10.15 or later     | OpenSiv3D v0.6.5 | ``Mac/Albus-Box/App/Albus-Box.app``     |
+| Linux    | Ubuntu 20.04 / Debian 10 | OpenSiv3D v0.6.5 | Not attached (please compile yourself)  |
 
 
 
@@ -17,18 +17,18 @@ The concept is a simple design in accordance with Neumorphism.
   - Windows SDK : 10.0
   - C++ compiler：Microsoft Visual C++ 2022
   - IDE : Visual Studio 2022
-  - SDK：OpenSiv3D v0.6.4
+  - SDK：OpenSiv3D v0.6.5
 - for macOS
   - M1 MacBook Air 2020 (with Rosetta2)
   - OS : macOS 12.2.1 Monterey
   - C++ compiler：Apple clang version 13.1.6
   - IDE : Xcode 13.3
-  - SDK：OpenSiv3D v0.6.4
+  - SDK：OpenSiv3D v0.6.5
   
 - for Linux
   - OS : Ubuntu 20.04 / Crostini on Chrome OS
   - C++ compiler：gcc
-  - SDK：OpenSiv3D v0.6.4
+  - SDK：OpenSiv3D v0.6.5
 ## Supported File Formats
 - Audio files:
   - mp3, wav, ogg, m4a
