@@ -55,53 +55,11 @@ Array<String> split(String str, String separator) {
 	return list;
 }
 
-void saveTextFile(string filePath, string str) {
-	ofstream ofs;
-	ofs.open(filePath, ios::out | ios::binary);
-	
-	ofs << str;
-}
-
 void addTextFile(string filePath, string str) {
 	ofstream ofs;
 	ofs.open(filePath, ios::out | ios::binary | ios::app);
 	
 	ofs << str;
-}
-
-void saveTextFile(string filePath, Array<string> strV) {
-	ofstream ofs;
-	ofs.open(filePath, ios::out | ios::binary);
-	
-	for (int i = 0; i < strV.size(); i++) {
-		ofs << strV[i] << endl;
-	}
-}
-
-void saveTextFile(string filePath, Array<FileStruct> fs) {
-	ofstream ofs;
-	ofs.open(filePath, ios::out | ios::binary);
-	
-	for (int i = 0; i < fs.size(); i++) {
-		ofs << fs[i].file_path << endl;
-		ofs << "    file_name   : " << fs[i].file_name << endl;
-		ofs << "    folder_path : " << fs[i].folder_path << endl;
-		ofs << "    folder_name : " << fs[i].folder_name << endl;
-	}
-}
-
-void saveTextFile(string filePath, FileStruct fs) {
-	ofstream ofs;
-	ofs.open(filePath, ios::out | ios::binary);
-	
-	ofs << fs.file_path << endl;
-	ofs << "    file_name   : " << fs.file_name << endl;
-	ofs << "    folder_path : " << fs.folder_path << endl;
-	ofs << "    folder_name : " << fs.folder_name << endl;
-}
-
-void debugInit() {
-	saveTextFile("log.txt", "");;
 }
 
 void debugLog(String str) {
