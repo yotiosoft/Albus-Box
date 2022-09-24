@@ -35,6 +35,7 @@ pair<bool, FilePath> ImageFileOpen() {
 	return pair<bool, FilePath>(false, FilePath());
 }
 
+// 閉じるボタンの表示
 bool ExitButton(Color& button_close_color, Texture& window_close_icon, bool& onAnyButton, bool enableButtons) {
 #if defined(_WIN32) || defined(_WIN64)
 		// 最前面表示ボタン
@@ -47,7 +48,7 @@ bool ExitButton(Color& button_close_color, Texture& window_close_icon, bool& onA
 		}
 		specific::pinWindow(pin_window);
 
-		// ウィンドウを閉じるボタン
+		// ウィンドウを閉じるボタンが押されたとき
 		if (NeumorphismUI::CircleButton(Scene::Width()-30, 30, 15, window_close_icon, onAnyButton, enableButtons)) {
 			return true;
 		}
@@ -285,6 +286,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 	return true;
 }
 
+// バージョン情報画面
 bool VersionInformation(Player& player, Color& button_close_color, Texture& window_close_icon, Color& font_color) {
 	// ボタン用アイコン
 	Texture return_button_icon{ Icon(IconFont::Return), 20 };		// 戻る
@@ -830,6 +832,7 @@ bool AlbusBoxSetting(Player& player, Color& button_close_color, Texture& window_
 	return true;
 }
 
+// サムネイル画像の描画
 void drawThumbnailTexture(Player& player, int thumbnail_size) {
 	Texture *thumbnail_texture = player.getThumbnailTexture();
 
@@ -841,6 +844,7 @@ void drawThumbnailTexture(Player& player, int thumbnail_size) {
 	}
 }
 
+// 起動時のウィンドウの初期化
 void window_init() {
 	Scene::SetBackground(DEFAULT_BACKGROUND_COLOR);
 	Window::Resize(WINDOW_WIDTH, WINDOW_HEIGHT);
