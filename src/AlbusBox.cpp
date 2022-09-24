@@ -2,6 +2,7 @@
 
 bool pin_window = false;
 
+// 音声ファイルを開く
 pair<bool, FilePath> AudioFileOpen() {
 	// ファイル選択ダイアログ
 	Array<FileFilter> ff = { {U"音声ファイルとプレイリスト", {U"mp3", U"ogg", U"wav", U"m4a", U"playlist"}} };
@@ -13,6 +14,7 @@ pair<bool, FilePath> AudioFileOpen() {
 	return pair<bool, FilePath>(false, FilePath());
 }
 
+// プレイリストファイルを開く
 pair<bool, FilePath> OpenPlayList() {
 	// ファイル選択ダイアログ
 	Array<FileFilter> ff = { {U"プレイリスト", {U"playlist"}} };
@@ -24,6 +26,7 @@ pair<bool, FilePath> OpenPlayList() {
 	return pair<bool, FilePath>(false, FilePath());
 }
 
+// 画像ファイルを開く
 pair<bool, FilePath> ImageFileOpen() {
 	// ファイル選択ダイアログ
 	Array<FileFilter> ff = { {U"画像ファイル", {U"png", U"jpg", U"jpeg", U"bmp", U"gif", U"tga", U"ppm", U"pgm", U"pbm", U"pnm", U"webp"}} };
