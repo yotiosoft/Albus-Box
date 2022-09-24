@@ -97,6 +97,7 @@ void Player::close(int num) {
 	audio_files[num].isOpened = false;
 }
 
+// num番目から前後含め3曲をメモリ上に読み込む
 void Player::openAudioFiles(int num) {
 	// 前後含め3曲分読み込み
 	for (int i = -RANGE; i <= RANGE; i++) {
@@ -108,6 +109,7 @@ void Player::openAudioFiles(int num) {
 	}
 }
 
+// num番目から前後含め3曲をメモリ上から解放する
 void Player::closeAudioFiles(int num) {
 	for (int i = 0; i < audio_files.size(); i++) {
 		if (audio_files[i].isOpened) {
@@ -120,10 +122,12 @@ void Player::closeAudioFiles(int num) {
 	}
 }
 
+// 現在の曲を再生する
 bool Player::play() {
 	return play(current_track);
 }
 
+// num番目の曲を再生する
 bool Player::play(int num) {
 	if (!isOpened()) {
 		return false;
@@ -142,6 +146,7 @@ bool Player::play(int num) {
 	return true;
 }
 
+// 最初から再生する
 bool Player::playFromBegin() {
 	return playFromBegin(current_track);
 }
