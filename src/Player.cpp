@@ -7,6 +7,7 @@
 
 #include "Player.hpp"
 
+// コンストラクタ
 Player::Player() {
 	current_track = -1;
 	status = PlayerStatus::Stop;
@@ -20,6 +21,7 @@ Player::Player() {
 	current_track_thumbnail_texture = &default_thumbnail_texture;
 }
 
+// 音声ファイルを登録
 bool Player::audioRegister(FilePath audio_filepath) {
 	if (!FileSystem::Exists(audio_filepath)) {
 		return false;
@@ -37,6 +39,7 @@ bool Player::audioRegister(FilePath audio_filepath) {
 	return true;
 }
 
+// num番目の曲を開く
 bool Player::open(int num) {
 	Audio* new_audio_file;
 
@@ -57,6 +60,7 @@ bool Player::open(int num) {
 	return true;
 }
 
+// 音声ファイルを開いて再生開始
 bool Player::openAndPlay(FilePath audio_filepath) {
 	bool audio_enable = audioRegister(audio_filepath);
 
@@ -68,6 +72,7 @@ bool Player::openAndPlay(FilePath audio_filepath) {
 	return audio_enable;
 }
 
+// num番目の歌詞ファイルを開く（なければ開かない）
 void Player::openLyricsFile(int num) {
 	// ハッシュ値に対応する歌詞ファイルがlyricsディレクトリ内にあれば開く
 	String lyrics_filepath = U"{}/{}.lyrics"_fmt(specific::getLyricsDirPath(), audio_files[num].hash);
@@ -82,6 +87,7 @@ void Player::openLyricsFile(int num) {
 	}
 }
 
+// num番目の音声ファイルをメモリ上から解放する
 void Player::close(int num) {
 	if (num < 0) {
 		return;
