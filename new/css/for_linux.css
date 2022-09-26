@@ -19,14 +19,7 @@ header {
 .content {
     display: block;
     margin: 0 auto;
-    width: 75%;
     min-width: 300px;
-}
-
-.content .column h1 {
-    font-size: 40px;
-    font-weight: bold;
-    text-align: center;
 }
 
 .catch {
@@ -42,6 +35,7 @@ header {
 
 .content .column {
     width: 75%;
+    min-width: 300px;
     margin-left: auto;
     margin-right: auto;
 
