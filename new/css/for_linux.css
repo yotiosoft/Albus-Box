@@ -18,9 +18,15 @@ header {
 
 .content {
     display: block;
-    width: fit-content;
-    margin-left: 0px;
-    margin-right: 0px;
+    margin: 0 auto;
+    width: 75%;
+    min-width: 300px;
+}
+
+.content .column h1 {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
 }
 
 .catch {
