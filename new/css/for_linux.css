@@ -19,7 +19,6 @@ header {
 .content {
     display: block;
     margin: 0 auto;
-    width: fit-content;
     min-width: 300px;
 }
 
@@ -36,18 +35,6 @@ header {
 
 .content .column {
     width: 75%;
-    min-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-
-    margin-top: 50px;
-
-    font-family: 'Noto Sans JP', sans-serif;
-
-    text-align: center;
-}
-.content .inner-column {
-    width: 100%;
     min-width: 300px;
     margin-left: auto;
     margin-right: auto;
@@ -79,9 +66,8 @@ header {
 .text {
     margin: 20px;
 
-    font-size: larger;
-    width: 800px;
-    max-width: 100%;
+    font-size: 20px;
+    width: fit-content;
 
     margin-left: auto;
     margin-right: auto;
