@@ -19,6 +19,7 @@ header {
 .content {
     display: block;
     margin: 0 auto;
+    width: fit-content;
     min-width: 300px;
 }
 
@@ -45,36 +46,49 @@ header {
 
     text-align: center;
 }
-.content .column .title {
+.content .inner-column {
+    width: 100%;
+    min-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-top: 50px;
+
+    font-family: 'Noto Sans JP', sans-serif;
+
+    text-align: center;
+}
+.title {
     font-size: 30px;
     font-weight: bold;
 
     text-align: center;
 }
-.content .column .title-big {
+.title-big {
     font-size: 40px;
     font-weight: bold;
 
     text-align: center;
 }
-.content .column .title-small {
+.title-small {
     font-size: 26px;
     font-weight: bold;
 
     text-align: left;
 }
-.content .column .text {
+.text {
     margin: 20px;
 
     font-size: larger;
-    width: fit-content;
+    width: 800px;
+    max-width: 100%;
 
     margin-left: auto;
     margin-right: auto;
     
     text-align: left;
 }
-.content .column .text table {
+.text table {
     font-size: medium;
 }
 
