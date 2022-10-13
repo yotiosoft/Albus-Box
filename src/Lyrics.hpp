@@ -23,8 +23,6 @@ typedef struct LyricsElement {
 
 class Lyrics {
 public:
-	void make_sample();
-
 	// コンストラクタ
 	Lyrics();
 	Lyrics(String path);
