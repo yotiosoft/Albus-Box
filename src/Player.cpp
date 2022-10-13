@@ -295,6 +295,8 @@ void Player::move(int num) {
 	// ファイルを開く
 	openAudioFiles(num);
 
+	status = PlayerStatus::ReadyToPlay;
+
 	if (threads.count(num) > 0) {
 		threads[num].join();
 		threads.erase(num);
@@ -302,8 +304,6 @@ void Player::move(int num) {
 
 	// 設定を反映
 	reflectSettings(current_track);
-
-	status = PlayerStatus::ReadyToPlay;
 
 	return;
 }
@@ -610,11 +610,22 @@ bool Player::saveLyrics() {
 	return false;
 }
 
+int ready_count = 2;
 bool Player::willBeLoading() {
-	if (isOpened() && (status == PlayerStatus::Play && !audio_files[current_track].audio->isPlaying() || status == PlayerStatus::ReadyToPlay)) {
-		status = PlayerStatus::Play;
+	if (isOpened() && status == PlayerStatus::Play && !audio_files[current_track].audio->isPlaying()) {
 		return true;
 	}
+
+	if (status == PlayerStatus::ReadyToPlay) {
+		if (ready_count > 0)
+			ready_count --;
+		if (ready_count == 0) {
+			ready_count = 2;
+			status = PlayerStatus::Play;
+		}
+		return true;
+	}
+
 	return false;
 }
 
