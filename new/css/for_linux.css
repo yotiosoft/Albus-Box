@@ -168,12 +168,13 @@ a {
 }
 
 .code {
-    background-color: dimgray;
-    border-radius: 10px;
+    background-color: #333;
+    border-radius: 5px;
     color: white;
 
     margin-top: 10px;
-    padding: 5px;
+    padding: 10px;
 
     font-family: 'Source Code Pro', monospace;
+    font-size: 14px;
 }
