@@ -136,7 +136,7 @@ namespace NeumorphismUI {
 				Cursor::RequestStyle(CursorStyle::Hand);
 				onCursor = true;
 			}
-			clicked = buttonRect.leftReleased() && !buttons_disabled;
+			clicked = buttonRect.leftReleased();
 		}
 		
 		// 押下時の表示
@@ -221,7 +221,7 @@ namespace NeumorphismUI {
 				Cursor::RequestStyle(CursorStyle::Hand);
 				onCursor = true;
 			}
-			clicked = buttonRect.leftReleased() && !buttons_disabled;
+			clicked = buttonRect.leftReleased();
 		}
 		
 		// 押下時の表示
@@ -487,7 +487,7 @@ namespace NeumorphismUI {
 				Cursor::RequestStyle(CursorStyle::Hand);
 				onCursor = true;
 			}
-			clicked = buttonCircle.leftReleased() && !buttons_disabled;
+			clicked = buttonCircle.leftReleased();
 		}
 		
 		// 押下時の表示
@@ -551,7 +551,7 @@ namespace NeumorphismUI {
 				Cursor::RequestStyle(CursorStyle::Hand);
 				onCursor = true;
 			}
-			clicked = buttonCircle.leftReleased() && !buttons_disabled;
+			clicked = buttonCircle.leftReleased();
 		}
 		
 		// 押下時の表示
@@ -842,7 +842,7 @@ namespace NeumorphismUI {
 	}
 	
 	bool Slider::isSliderLeftReleased() {
-		return sliderRect.leftReleased() && !buttons_disabled;
+		return sliderRect.leftReleased();
 	}
 	
 	// コンストラクタから呼び出す
@@ -871,9 +871,5 @@ namespace NeumorphismUI {
 		knobClicked = false;
 		sliding = false;
 		knobX = innerSize.x*value;
-	}
-
-	void set_buttons_effect(bool enable) {
-		buttons_disabled = !enable;
 	}
 }
