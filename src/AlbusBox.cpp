@@ -109,10 +109,6 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 
 	while (System::Update()) {
 		onAnyButton = false;
-
-		if (NeumorphismUI::buttons_disabled) {
-			NeumorphismUI::buttons_disabled = false;
-		}
 		
 		title_list = player.getTitleList();
 		before_playing = title_list.second;
@@ -131,7 +127,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 
 		// リストを開くボタン
 		if (NeumorphismUI::CircleButton(listopen_button_pos, 20, listopen_button_icon, onAnyButton, buttons_enable)) {
-			NeumorphismUI::buttons_disabled = true;
+			NeumorphismUI::set_buttons_effect(false);
 			pair<bool, FilePath> playlist = OpenPlayList();
 			if (playlist.first) {
 				if (!player.loadPlayList(playlist.second)) {
@@ -141,7 +137,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 		}
 		// 保存ボタン
 		if (NeumorphismUI::CircleButton(save_button_pos, 20, save_button_icon, onAnyButton, buttons_enable)) {
-			NeumorphismUI::buttons_disabled = true;
+			NeumorphismUI::set_buttons_effect(false);
 			player.savePlayList();
 		}
 
@@ -270,7 +266,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 
 		// ファイルを開くボタンを表示
 		if (NeumorphismUI::CircleButton(fileopen_button_pos, 30, fileopen_icon, onAnyButton, buttons_enable)) {
-			NeumorphismUI::buttons_disabled = true;
+			NeumorphismUI::set_buttons_effect(false);
 			auto file_open = AudioFileOpen();
 			if (file_open.first) {
 				player.audioRegister(file_open.second);
@@ -966,9 +962,7 @@ void AlbusBox() {
 	while (System::Update()) {
 		onAnyButton = false;
 
-		if (NeumorphismUI::buttons_disabled) {
-			NeumorphismUI::buttons_disabled = false;
-		}
+		NeumorphismUI::set_buttons_effect(true);
 
 		bool buttons_enable = !player.willBeLoading() && !file_open.first;
 
@@ -1016,7 +1010,7 @@ void AlbusBox() {
 			file_open.first = false;
 		}
 		if (NeumorphismUI::CircleButton(fileopen_button_pos, 20, fileopen_icon, onAnyButton, buttons_enable)) {
-			NeumorphismUI::buttons_disabled = true;
+			NeumorphismUI::set_buttons_effect(false);
 			file_open = AudioFileOpen();
 
 			if (file_open.first) {
