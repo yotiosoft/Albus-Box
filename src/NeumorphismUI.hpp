@@ -289,6 +289,9 @@ namespace NeumorphismUI {
 		// コンストラクタから呼び出す
 		void init(double argRet, int argPositionX, int argPositionY, int argSizeW, int argSizeH);
 	};
+
+	static bool buttons_disabled = false;
+	void set_buttons_effect(bool enable);
 }
 
 #endif /* NeumorphismUI_hpp */
