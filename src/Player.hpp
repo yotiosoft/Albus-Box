@@ -18,9 +18,10 @@
 
 namespace PlayerStatus {
 	enum Type {
-		Stop	= -1,
-		Pause	= 0,
-		Play	= 1
+		Stop,
+		Pause,
+		Play,
+		ReadyToPlay
 	};
 }
 
