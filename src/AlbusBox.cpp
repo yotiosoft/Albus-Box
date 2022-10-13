@@ -127,7 +127,6 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 
 		// リストを開くボタン
 		if (NeumorphismUI::CircleButton(listopen_button_pos, 20, listopen_button_icon, onAnyButton, buttons_enable)) {
-			NeumorphismUI::set_buttons_effect(false);
 			pair<bool, FilePath> playlist = OpenPlayList();
 			if (playlist.first) {
 				if (!player.loadPlayList(playlist.second)) {
@@ -137,7 +136,6 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 		}
 		// 保存ボタン
 		if (NeumorphismUI::CircleButton(save_button_pos, 20, save_button_icon, onAnyButton, buttons_enable)) {
-			NeumorphismUI::set_buttons_effect(false);
 			player.savePlayList();
 		}
 
@@ -961,8 +959,6 @@ void AlbusBox() {
 	while (System::Update()) {
 		onAnyButton = false;
 
-		NeumorphismUI::set_buttons_effect(true);
-
 		bool buttons_enable = !player.willBeLoading() && !file_open.first;
 
 #if defined(_WIN32) || defined(_WIN64)
@@ -1009,7 +1005,6 @@ void AlbusBox() {
 			file_open.first = false;
 		}
 		if (NeumorphismUI::CircleButton(fileopen_button_pos, 20, fileopen_icon, onAnyButton, buttons_enable)) {
-			NeumorphismUI::set_buttons_effect(false);
 			file_open = AudioFileOpen();
 
 			if (file_open.first) {
