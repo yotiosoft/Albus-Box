@@ -182,6 +182,8 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 					//mouse_on_top_of_window = true;
 				}
 
+				NeumorphismUI::set_buttons_effect(true);
+
 				// 再生・停止ボタン
 				if (title_list.second[i]) {	// 再生中
 					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h/2), 25, title_list.second[i], stop_icon, onAnyButton, button_enable);
@@ -232,7 +234,9 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 				else {		// 別の曲が再生中
 					NeumorphismUI::CircleSwitch(Vec2(70, list_element_margin * i + list_element_h / 2), 25, title_list.second[i], play_icon, onAnyButton, button_enable);
 
-					if (before_playing[i] != title_list.second[i]) {
+					if (before_playing[i] != title_list.second[i]) {	// 再生ボタンが押されたときの処理
+						NeumorphismUI::set_buttons_effect(false);
+						Console << NeumorphismUI::buttons_disabled;
 						if (target_audio >= 0) {
 							player.pause();
 							title_list.second[target_audio] = false;

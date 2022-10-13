@@ -874,12 +874,6 @@ namespace NeumorphismUI {
 	}
 
 	void set_buttons_effect(bool enable) {
-		if (!enable) {
-			buttons_disabled = 100;
-		}
-		else {
-			if (buttons_disabled > 0)
-				buttons_disabled -= 1;
-		}
+		buttons_disabled = !enable;
 	}
 }
