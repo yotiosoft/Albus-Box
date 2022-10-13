@@ -66,6 +66,12 @@ header {
 
     text-align: left;
 }
+.explain {
+    font-size: 18px;
+
+    text-align: left;
+    margin-top: 10px;
+}
 .text {
     margin: 20px;
 
