@@ -166,3 +166,12 @@ a {
 .os_img.is_active {
     display: block;
 }
+
+.code {
+    background-color: dimgray;
+    border-radius: 10px;
+    color: white;
+
+    margin-top: 10px;
+    padding: 5px;
+}
