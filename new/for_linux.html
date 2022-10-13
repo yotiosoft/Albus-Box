@@ -14,7 +14,7 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&family=Source+Code+Pro&display=swap" rel="stylesheet">
 
         <link rel="icon" type="image/png" href="./img/logo/icon.png">
     </head>
@@ -58,20 +58,50 @@
                         <div class="title-small">2. 依存環境の導入</div>
                         <div class="explain">
                             <a href="https://github.com/Siv3D/OpenSiv3D/blob/main/.github/workflows/ci.yml#L26-L49" target="_blank" rel="noopener noreferrer">こちら</a>を参考に、OpenSiv3Dのビルドに必要なパッケージをインストールします。<br>
-                            例: OpenSiv3D v0.6.5の場合<br>
+                            例: Ubuntu 22.04, OpenSiv3D v0.6.5の場合<br>
 
                             <div class="code">
-                                $ echo hello
+                                sudo add-apt-repository ppa:ubuntu-toolchain-r/test<br>
+                                sudo apt update<br>
+                                sudo apt install ninja-build<br>
+                                sudo apt install libasound2-dev<br>
+                                sudo apt install libavcodec-dev<br>
+                                sudo apt install libavformat-dev<br>
+                                sudo apt install libavutil-dev<br>
+                                sudo apt install libboost-dev<br>
+                                sudo apt install libcurl4-openssl-dev<br>
+                                sudo apt install libgtk-3-dev<br>
+                                sudo apt install libgif-dev<br>
+                                sudo apt install libglu1-mesa-dev<br>
+                                sudo apt install libharfbuzz-dev<br>
+                                sudo apt install libmpg123-dev<br>
+                                sudo apt install libopencv-dev<br>
+                                sudo apt install libopus-dev<br>
+                                sudo apt install libopusfile-dev<br>
+                                sudo apt install libsoundtouch-dev<br>
+                                sudo apt install libswresample-dev<br>
+                                sudo apt install libtiff-dev<br>
+                                sudo apt install libturbojpeg0-dev<br>
+                                sudo apt install libvorbis-dev<br>
+                                sudo apt install libwebp-dev<br>
+                                sudo apt install libxft-dev<br>
+                                sudo apt install uuid-dev<br>
+                                sudo apt install xorg-dev<br>
                             </div>
                         </div>
 
                     </div>
 
                     <div class="inner-column">
-                        <div class="title-small">3. OpenSiv3Dのビルド</div>
+                        <div class="title-small">3. OpenSiv3Dのcmakeファイルの作成</div>
                         <div class="explain">
-                            <a href="https://github.com/Siv3D/OpenSiv3D/blob/main/.github/workflows/ci.yml#L51-L60" target="_blank" rel="noopener noreferrer">こちら</a>を参考に、OpenSiv3Dのビルドに必要なパッケージをインストールします。<br>
+                            <a href="https://github.com/Siv3D/OpenSiv3D/blob/main/.github/workflows/ci.yml#L51-L60" target="_blank" rel="noopener noreferrer">こちら</a>を参考に、OpenSiv3Dのビルドに必要なcmakeファイルを作成します。<br>
                             例: OpenSiv3D v0.6.5の場合<br>
+
+                            <div class="code">
+                                mkdir build && cd build<br>
+                                cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..<br>
+                            </div>
                         </div>
 
                     </div>
@@ -81,6 +111,11 @@
                         <div class="explain">
                             <a href="https://github.com/Siv3D/OpenSiv3D/blob/main/.github/workflows/ci.yml#L51-L60" target="_blank" rel="noopener noreferrer">こちら</a>を参考に、OpenSiv3Dライブラリ（libSiv3d.a）をビルドします。<br>
                             例: OpenSiv3D v0.6.5の場合<br>
+
+                            <div class="code">
+                                cd ..<br>
+                                cmake --build build<br>
+                            </div>
                         </div>
 
                     </div>
@@ -90,6 +125,10 @@
                         <div class="explain">
                             <a href="https://github.com/Siv3D/OpenSiv3D/blob/main/.github/workflows/ci.yml#L65" target="_blank" rel="noopener noreferrer">こちら</a>を参考に、ビルドしたOpenSiv3Dライブラリをインストールします。<br>
                             例: OpenSiv3D v0.6.5の場合<br>
+
+                            <div class="code">
+                                sudo cmake --install build
+                            </div>
                         </div>
 
                     </div>
