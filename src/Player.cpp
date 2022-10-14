@@ -28,17 +28,13 @@ bool Player::audioRegister(FilePath audio_filepath, bool clear_list) {
 		return false;
 	}
 
-	bool clear = false;
 	if (clear_list && isOpened()) {
-		// 再生中の曲をストップ
-		stop();
-
 		// 現在のプレイリストをクリア
 		free();
 		audio_files.clear();
 		audio_files_path.clear();
 
-		clear = true;
+		current_track = 0;
 	}
 
 	uint64 new_audio_hash = MD5::FromFile(audio_filepath).hash();
@@ -49,9 +45,6 @@ bool Player::audioRegister(FilePath audio_filepath, bool clear_list) {
 	has_lyrics << false;
 
 	openLyricsFile(audio_files.size()-1);
-
-	if (clear)
-		playFromBegin(0);
 
 	return true;
 }
@@ -82,8 +75,8 @@ bool Player::openAndPlay(FilePath audio_filepath) {
 	bool audio_enable = audioRegister(audio_filepath, true);
 
 	if (audio_enable) {
-		stop();
-		play((int)audio_files.size() - 1);
+		move(0);
+		playFromBegin();
 	}
 	
 	return audio_enable;
@@ -347,7 +340,7 @@ bool Player::reflectSettings(int num) {
 	audio_files[num].audio->setVolume(volume);
 
 	// ループ設定の反映
-	audio_files[num].audio->setLoop(loop);
+	audio_files[num].audio->setLoop(false);
 
 	return true;
 }
