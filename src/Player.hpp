@@ -45,7 +45,7 @@ public:
 	Player();
 	
 	// 曲を開く
-	bool audioRegister(FilePath audio_filepath);
+	bool audioRegister(FilePath audio_filepath, bool clear_list);
 	bool open(int num);
 	bool openAndPlay(FilePath audio_filepath);
 

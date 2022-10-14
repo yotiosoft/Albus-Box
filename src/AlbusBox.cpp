@@ -266,7 +266,7 @@ bool playListView(Player& player, Color& button_close_color, Texture& window_clo
 		if (NeumorphismUI::CircleButton(fileopen_button_pos, 30, fileopen_icon, onAnyButton, buttons_enable)) {
 			auto file_open = AudioFileOpen();
 			if (file_open.first) {
-				player.audioRegister(file_open.second);
+				player.audioRegister(file_open.second, false);
 			}
 		}
 
@@ -1081,6 +1081,29 @@ void AlbusBox() {
 		else {
 			ScopedRenderTarget2D target(thumbnail_texture);
 			player.getThumbnailTexture()->drawAt(thumbnail_size / 2, thumbnail_size / 2);
+
+			// 歌詞を表示
+			if (player.lyricsExist()) {
+				if (player.updateLyrics()) {
+					// 枠内に歌詞表示を収める
+					lyrics_str = player.getLyrics();
+					// 文字列の表示上の長さを取得
+					int w = Min((int)lyrics_font(lyrics_str).region(0, 0).w, thumbnail_size - 10) + 5;
+					int line_h = (int)lyrics_font(lyrics_str).region(0, 0).h;
+					// 枠の生成
+					int x = thumbnail_half_wh - w / 2;
+
+					int h = (w / thumbnail_size + 1) * line_h;
+					int y = thumbnail_half_wh - h / 2;
+
+					lyrics_rect = Rect(x, y, w, h);
+				}
+
+				if (lyrics_str.size() > 0) {
+					int lyrics_display_count = player.getLyricsDisplayAlphaColor();
+					lyrics_font(lyrics_str).draw(lyrics_rect, Color(255, 255, 255, lyrics_display_count));
+				}
+			}
 		}
 
 		thumbnail_circle(thumbnail_texture(0, 0, thumbnail_size, thumbnail_size)).draw();

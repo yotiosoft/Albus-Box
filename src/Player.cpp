@@ -22,9 +22,23 @@ Player::Player() {
 }
 
 // 音声ファイルを登録
-bool Player::audioRegister(FilePath audio_filepath) {
+bool Player::audioRegister(FilePath audio_filepath, bool clear_list) {
 	if (!FileSystem::Exists(audio_filepath)) {
+		System::MessageBoxOK(U"以下のファイルの読み込みに失敗しました。ファイルパスが間違っているか、ファイルが壊れている可能性があります。\n\n{}"_fmt(audio_filepath));
 		return false;
+	}
+
+	bool clear = false;
+	if (clear_list && isOpened()) {
+		// 再生中の曲をストップ
+		stop();
+
+		// 現在のプレイリストをクリア
+		free();
+		audio_files.clear();
+		audio_files_path.clear();
+
+		clear = true;
 	}
 
 	uint64 new_audio_hash = MD5::FromFile(audio_filepath).hash();
@@ -35,6 +49,9 @@ bool Player::audioRegister(FilePath audio_filepath) {
 	has_lyrics << false;
 
 	openLyricsFile(audio_files.size()-1);
+
+	if (clear)
+		playFromBegin(0);
 
 	return true;
 }
@@ -62,7 +79,7 @@ bool Player::open(int num) {
 
 // 音声ファイルを開いて再生開始
 bool Player::openAndPlay(FilePath audio_filepath) {
-	bool audio_enable = audioRegister(audio_filepath);
+	bool audio_enable = audioRegister(audio_filepath, true);
 
 	if (audio_enable) {
 		stop();
@@ -243,23 +260,32 @@ void Player::next() {
 		return;
 	}
 	
-	if (current_track == 0 && audio_files.size() == 1 && loop) {	// 1曲しかリストに読み込まれていない場合
-		audio_files[current_track].audio->seekTime(0.0);					// 0.0秒に戻る
-		play();
-		return;
-	}
-	else if (current_track == 0 && audio_files.size() == 1 && !loop) {
-		audio_files[current_track].audio->seekTime(0.0);
-		pause();
-		return;
+	// 1曲しかリストに読み込まれていない場合
+	if (current_track == 0 && audio_files.size() == 1) {
+		if (loop) {
+			audio_files[current_track].audio->seekTime(0.0);					// 0.0秒に戻る
+			play();
+			return;
+		}
+		else {
+			audio_files[current_track].audio->seekTime(0.0);
+			pause();
+			return;
+		}
 	}
 	
+	// プレイリスト再生（複数の曲が読み込まれている）の場合
 	// 現在の曲をストップ
 	PlayerStatus::Type before_status = status;
 	stop();
 	
 	// 次の曲へ（現在の曲がリストの最後ならリストの先頭の曲へ）
 	move(current_track + 1);
+
+	// ループ再生無効の場合、最後の曲が終了したらストップ
+	if (!loop && current_track == 0) {
+		return;
+	}
 	
 	if (before_status == PlayerStatus::Play) {
 		// 再生
@@ -719,6 +745,8 @@ void Player::loadAudioProfiles() {
 		audio_files_profile[hash].artist_name = audio_profile[U"artist_name"].getString();
 		audio_files_profile[hash].thumbnail_image_filepath = audio_profile[U"thumbnail_image_filepath"].getString();
 	}
+
+	playFromBegin();
 }
 
 void Player::saveAudioProfiles() {
@@ -750,6 +778,7 @@ bool Player::loadPlayList(FilePath playlist_filepath) {
 		stop();
 
 		// 現在のプレイリストをクリア
+		free();
 		audio_files.clear();
 		audio_files_path.clear();
 	}
@@ -761,7 +790,7 @@ bool Player::loadPlayList(FilePath playlist_filepath) {
 		bool load_ret;
 		String file_path = audio_filepath.getString();
 
-		if (!(load_ret = audioRegister(file_path))) {
+		if (!(load_ret = audioRegister(file_path, false))) {
 			load_fault_list << file_path;
 		}
 
