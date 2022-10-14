@@ -66,6 +66,12 @@ header {
 
     text-align: left;
 }
+.explain {
+    font-size: 18px;
+
+    text-align: left;
+    margin-top: 10px;
+}
 .text {
     margin: 20px;
 
@@ -159,4 +165,16 @@ a {
 }
 .os_img.is_active {
     display: block;
+}
+
+.code {
+    background-color: #333;
+    border-radius: 5px;
+    color: white;
+
+    margin-top: 10px;
+    padding: 10px;
+
+    font-family: 'Source Code Pro', monospace;
+    font-size: 14px;
 }
