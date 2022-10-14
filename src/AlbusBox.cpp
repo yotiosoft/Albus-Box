@@ -955,7 +955,7 @@ void AlbusBox() {
     const int row_box_wh = box_size * 3 / 4;
 	const int thumbnail_half_wh = thumbnail_height / 2;
 
-	bool fft_update = true;
+	bool fft_update = true, first_loop = true;
 	while (System::Update()) {
 		onAnyButton = false;
 
@@ -963,7 +963,7 @@ void AlbusBox() {
 
 #if defined(_WIN32) || defined(_WIN64)
 		// ウィンドウの移動
-		if (!onAnyButton && buttons_enable) {
+		if (!onAnyButton && buttons_enable && !first_loop) {
 			specific::moveWindow(mouse_clicked, window_moving);
 			specific::setWindowStyle(0, 0, 400, 640, 40, 40, fft_update);
 		}
@@ -1202,6 +1202,7 @@ void AlbusBox() {
 		playing = player.playing();
 
 		fft_update = !fft_update;
+		first_loop = false;
 	}
 	
 	player.free();
