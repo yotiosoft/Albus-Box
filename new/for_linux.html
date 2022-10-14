@@ -50,7 +50,12 @@
                         <div class="title-small">1. OpenSiv3Dソースコードの入手</div>
                         <div class="explain">
                             <a href="https://github.com/Siv3D/OpenSiv3D" target="_blank" rel="noopener noreferrer">OpenSiv3D 公式リポジトリ</a>より、<br>
-                            最新版のソースコードをダウンロードまたは git clone します。
+                            最新版のソースコードをダウンロードまたは git clone します。<br>
+                            
+                            <div class="code">
+                                cd ~<br>
+                                git clone https://github.com/Siv3D/OpenSiv3D.git
+                            </div>
                         </div>
                     </div>
 
@@ -140,10 +145,48 @@
 
                 <div class="text">
                     <div class="inner-column">
-                        <div class="title-small">1. </div>
-                        <a href="https://github.com/Siv3D/OpenSiv3D" target="_blank" rel="noopener noreferrer">OpenSiv3D 公式リポジトリ</a>より、<br>
-                        最新版のソースコードをダウンロードまたはgit cloneします。
-                        https://github.com/YotioSoft/Albus-Box.git
+                        <div class="title-small">1. Albus Boxのクローン</div>
+                        <div class="explain">
+                            GitHubよりAlbus Boxのリポジトリを ~/OpenSiv3D/Linux/ にクローンします。<br>
+
+                            <div class="code">
+                                cd ~/OpenSiv3D/Linux/<br>
+                                git clone https://github.com/YotioSoft/Albus-Box.git
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="inner-column">
+                        <div class="title-small">2. cmake用configの作成</div>
+                        <div class="explain">
+                            Albus Boxのビルド用のconfigファイルを作成します。<br>
+
+                            <div class="code">
+                                cd Albus-Box/<br>
+                                mkdir build && cd build<br>
+                                cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="inner-column">
+                        <div class="title-small">3. ビルド</div>
+                        <div class="explain">
+                            Albus Boxをビルドします。<br>
+
+                            <div class="code">
+                                cd ../<br>
+                                cmake --build build
+                            </div>
+                            
+                            <br>
+                            ビルドが完了したらご利用可能になります。
+                            <div class="code">
+                                ./Albus-Box
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
