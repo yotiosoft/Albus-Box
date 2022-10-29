@@ -16,6 +16,16 @@ header {
     margin-bottom: 30px;
 }
 
+#footer_wrapper {
+    margin-top: 50px;
+    margin-bottom: 10px;
+
+    width: 100%;
+
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: medium;
+}
+
 .content {
     display: block;
     margin: 0 auto;
