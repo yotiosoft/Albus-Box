@@ -53,7 +53,7 @@ DerivedData/
 /*.gcno
 
 ## Linux
-Linux/App/Albus-Box
-Linux/App/data/setting
-Linux/App/data/lyrics
-
+Linux/AlbusBox
+Linux/data/setting
+Linux/data/lyrics
+Linux/build
