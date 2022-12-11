@@ -29,7 +29,6 @@ namespace specific {
 	String getLyricsDirPath();
 	String getFontsDir();
 
-	bool isCursorEntered(Vec2& before_cursor_pos);
 	void changeCursor();
 
 	double getDpiDist();

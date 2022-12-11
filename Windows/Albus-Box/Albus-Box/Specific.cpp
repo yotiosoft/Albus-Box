@@ -34,20 +34,6 @@ String specific::getLyricsDirPath() {
 	return U"./data/lyrics";
 }
 
-bool specific::isCursorEntered(Vec2& before_cursor_pos) {
-	Vec2 cursor_pos = Cursor::Pos();
-	if (before_cursor_pos.x < 0 || before_cursor_pos.y < 0 || before_cursor_pos.x > Scene::Size().x || before_cursor_pos.y > Scene::Size().y) {
-		if (cursor_pos.x >= 0 || cursor_pos.y >= 0 || cursor_pos.x <= Scene::Size().x || cursor_pos.y <= Scene::Size().y) {
-			Cursor::RequestStyle(CursorStyle::Hidden);
-
-			before_cursor_pos = cursor_pos;
-			return true;
-		}
-	}
-	before_cursor_pos = cursor_pos;
-	return false;
-}
-
 void specific::changeCursor() {
 	Cursor::RequestStyle(CursorStyle::Arrow);
 }
@@ -60,6 +46,7 @@ double specific::getDpiDist() {
 	return (double)GetDpiForWindow(hWnd) / DPI_STANDARD;
 }
 
+// ウィンドウスタイルの設定
 bool specific::setWindowStyle(int x1, int y1, int x2, int y2, int w, int h, bool update_dpi) {
 	// ウィンドウハンドルを取得（Siv3D）
 	if (hWnd == 0) {
@@ -81,6 +68,7 @@ bool specific::setWindowStyle(int x1, int y1, int x2, int y2, int w, int h, bool
 	return true;
 }
 
+// ウィンドウ最前面表示のON/OFF
 void specific::pinWindow(const bool pin) {
 	if (pin != before_pin_window) {
 		if (pin) {
@@ -99,7 +87,7 @@ void specific::moveWindow(Point& mouse_clicked, bool& window_moving) {
 		mouse_clicked = { (int)(Cursor::Pos().x * getDpiDist()), (int)(Cursor::Pos().y * getDpiDist()) };
 		window_moving = true;
 	}
-	else if (MouseL.pressed() && Window::GetState().focused && /*Cursor::GetRequestedStyle() == CursorStyle::Arrow && */window_moving) {
+	else if (MouseL.pressed() && Window::GetState().focused && window_moving) {
 		Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
 	}
 	else {
